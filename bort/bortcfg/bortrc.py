@@ -58,10 +58,11 @@ class Config:
 def load_config(path = BORTDRC):
     path = os.path.expanduser(path)
 
-    fp = open(path, 'r', encoding='utf-8')
+    with open(path, 'r', encoding='utf-8') as fp:
+        lines = fp.readlines()
     stack = [Config()]
 
-    for line in fp.readlines():
+    for line in lines:
         line = line.strip()
         if line.startswith('#') or line == '':
             continue

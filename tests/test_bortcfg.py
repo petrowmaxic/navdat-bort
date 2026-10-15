@@ -28,6 +28,9 @@ import bortcfg
 import applet
 from fake_bortd import FakeBortd
 
+# one fake daemon for the whole run: the abstract socket name is fixed
+SERVER = FakeBortd()
+
 
 def iterate(cond, timeout=5.0):
     """Run the GLib main loop until cond() is true."""
@@ -52,12 +55,6 @@ device fplan
 
 
 class ProtocolTest(unittest.TestCase):
-    def setUp(self):
-        self.server = FakeBortd()
-
-    def tearDown(self):
-        self.server.close()
-
     def test_list_get_session(self):
         client = bortd.BortClient()
         client.sync()
@@ -96,10 +93,6 @@ class GuiTest(unittest.TestCase):
         os.makedirs(os.path.join(HOME, '.bort'), exist_ok=True)
         with open(os.path.join(HOME, '.bort', 'bortdrc'), 'w') as fp:
             fp.write(BORTDRC)
-        self.server = FakeBortd()
-
-    def tearDown(self):
-        self.server.close()
 
     def test_config_window(self):
         proxy = bortd.BortProxy()
