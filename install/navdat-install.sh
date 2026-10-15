@@ -104,11 +104,14 @@ if [ "$ROLE" = root ]; then
         curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
              -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API$1"
     }
-    # файл релиза: ровно один Accept, иначе API отдаёт JSON или 415;
-    # curl не пересылает Authorization на другой хост при редиректе (S3)
+    # Файл релиза: ровно один Accept (иначе API отдаёт JSON или 415).
+    # API отвечает редиректом на хранилище файлов; по нему идём отдельным
+    # запросом без ключа, чтобы ключ не ушёл на чужой сервер.
     gh_download() {   # <url файла> <куда>
-        curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
-             -H "X-GitHub-Api-Version: 2022-11-28" -o "$2" "$1"
+        local loc
+        loc=$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
+                   -H "X-GitHub-Api-Version: 2022-11-28" -o "$2" -w '%{redirect_url}' "$1") || return 1
+        [ -z "$loc" ] || curl -fsSL -o "$2" "$loc"
     }
 
     step "Подготовка системы"
