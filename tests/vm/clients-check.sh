@@ -1,0 +1,90 @@
+#!/bin/sh
+# Запускается в x86-64 ВМ от пользователя navdat после установки настоящих
+# (перепакованных) пакетов NavDat. Проверяет без контейнера:
+#  1. каждому клиенту хватает библиотек (ldd с /opt/navdat/lib);
+#  2. настоящий bortd стартует в демо-режиме и отвечает по протоколу;
+#  3. каждый графический клиент из меню NavDat запускается в сеансе
+#     navdat-awesome и открывает окно.
+export XDG_RUNTIME_DIR=/tmp/xdg-navdat
+rm -rf "$XDG_RUNTIME_DIR"; mkdir -m 700 -p "$XDG_RUNTIME_DIR"
+cd "$HOME"
+pkill -x bortd 2>/dev/null || true
+rm -f /tmp/shot-5-*.png /tmp/clients.result /tmp/client-*.log
+FAIL=0
+
+echo "--- 1. библиотеки"
+for b in /usr/lib/navdat/bin/*; do
+    missing=$(LD_LIBRARY_PATH=/opt/navdat/lib ldd "$b" 2>&1 | grep -E 'not found|not a dynamic' || true)
+    if [ -n "$missing" ]; then
+        echo "FAIL $(basename "$b"): $missing"; FAIL=1
+    else
+        echo "ok   $(basename "$b")"
+    fi
+done
+
+# клиенты из ярлыков меню (кроме bortcfg/апплета/сессий)
+CLIENTS=$(grep -h '^Exec=' /usr/share/bort/applications/navdat-*.desktop \
+    | sed 's/^Exec=//' | grep -vE '^navdat-(bortcfg|applet)\b' | sort -u)
+
+cat > /tmp/bortd_query.py <<'EOF'
+import sys
+sys.path.insert(0, "/usr/share/bort/bortcfg")
+import bortd
+c = bortd.BortClient()
+c.sync()
+while not c._vars:
+    c.handle_input()
+print("vars=%d demo_mode=%s" % (len(c._vars), c["sys::demo_mode"].get(force=True)))
+if len(sys.argv) > 1 and sys.argv[1] == "stop":
+    c.stop(); c.sync()
+EOF
+
+echo "--- 2. bortd (демо-режим)"
+if ! bortd -d -D > /tmp/bortd.log 2>&1; then
+    echo "FAIL: bortd -d -D exited with error"; cat /tmp/bortd.log; exit 1
+fi
+sleep 3
+pgrep -u "$(id -u)" -x bortd >/dev/null || { echo "FAIL: bortd is not running"; cat /tmp/bortd.log; exit 1; }
+python3 /tmp/bortd_query.py || { echo "FAIL: bortd does not answer"; FAIL=1; }
+
+echo "--- 3. клиенты в сеансе navdat-awesome"
+echo "$CLIENTS" > /tmp/clients.list
+xvfb-run -a -s "-screen 0 1600x1000x24" sh -c '
+  dbus-launch --exit-with-session navdat-awesome-session > /tmp/awesome-clients.log 2>&1 &
+  sleep 10
+  n=0
+  while read -r cmd; do
+    [ -n "$cmd" ] || continue
+    n=$((n+1)); name=${cmd%% *}
+    before=$(awesome-client "return #client.get()" | awk "{print \$2}")
+    $cmd > /tmp/client-$name.log 2>&1 &
+    pid=$!
+    sleep 6
+    after=$(awesome-client "return #client.get()" | awk "{print \$2}")
+    title=$(awesome-client "local c=client.focus return c and (tostring(c.class)..\" / \"..tostring(c.name)) or \"-\"" | sed "s/^ *string //")
+    if kill -0 $pid 2>/dev/null; then alive=yes; else alive=no; fi
+    import -window root /tmp/shot-5-$n-$name.png
+    echo "$name alive=$alive windows:$before->$after focus=$title" >> /tmp/clients.result
+    kill $pid 2>/dev/null; sleep 1; kill -9 $pid 2>/dev/null
+  done < /tmp/clients.list
+  awesome-client "awesome.quit()"; sleep 1'
+
+cat /tmp/clients.result
+while read -r line; do
+    name=${line%% *}
+    case "$line" in
+        *alive=yes*) ;;
+        *) echo "FAIL: $name exited"; sed -n '1,15p' /tmp/client-$name.log; FAIL=1 ;;
+    esac
+    after=$(echo "$line" | sed -n 's/.*windows:\([0-9]*\)->\([0-9]*\).*/\2/p')
+    before=$(echo "$line" | sed -n 's/.*windows:\([0-9]*\)->.*/\1/p')
+    [ "${after:-0}" -gt "${before:-0}" ] || { echo "FAIL: $name opened no window"; FAIL=1; }
+done < /tmp/clients.result
+
+echo "--- bortd остановка"
+python3 /tmp/bortd_query.py stop >/dev/null 2>&1 || true
+sleep 2
+pgrep -x bortd >/dev/null && { echo "WARN: bortd still running, killing"; pkill -x bortd; }
+echo "--- bortd.log"; tail -20 /tmp/bortd.log
+
+[ $FAIL = 0 ] && echo "OK: all clients start without the container" || { echo "FAIL: see above"; exit 1; }

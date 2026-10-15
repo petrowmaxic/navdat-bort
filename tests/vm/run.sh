@@ -2,6 +2,9 @@
 # Локальная проверка порта в виртуальной машине Ubuntu 24.04 (QEMU, без Docker).
 #
 #   tests/vm/run.sh            поднять ВМ (если не запущена) и прогнать всё
+#   VM_ARCH=amd64 tests/vm/run.sh     x86-64 ВМ (на ARM-хосте — эмуляция TCG, медленно)
+#   NAVDAT_DEBS=<каталог> ...         ещё и настоящие закрытые пакеты NavDat:
+#                                     перепаковка, bortd в демо-режиме, все клиенты (только amd64)
 #   tests/vm/run.sh ssh [cmd]  зайти в ВМ
 #   tests/vm/run.sh stop       выключить ВМ
 #
@@ -10,25 +13,36 @@
 # пользователя navdat, открытие меню и bortcfg, скриншоты в $VM_DIR/shots.
 #
 # Нужно: qemu (brew install qemu на macOS или qemu-system-* на Linux), curl, rsync.
-# Образ и диск ВМ лежат в $VM_DIR (по умолчанию ~/.cache/navdat-vm).
+# Образ и диск ВМ лежат в $VM_DIR (по умолчанию ~/.cache/navdat-vm-<arch>).
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
-VM_DIR=${VM_DIR:-$HOME/.cache/navdat-vm}
+NAVDAT_DEBS=${NAVDAT_DEBS:+$(cd "$NAVDAT_DEBS" && pwd)}
+
+case "$(uname -m)" in
+    arm64|aarch64) HOST_ARCH=arm64 ;;
+    *)             HOST_ARCH=amd64 ;;
+esac
+ARCH=${VM_ARCH:-$HOST_ARCH}
+case "$ARCH" in
+    arm64) QEMU=qemu-system-aarch64; MACHINE=virt; FW_NAME=edk2-aarch64-code.fd ;;
+    amd64) QEMU=qemu-system-x86_64;  MACHINE=q35;  FW_NAME= ;;   # SeaBIOS
+    *)     echo "unsupported VM_ARCH=$ARCH" >&2; exit 1 ;;
+esac
+if [ "$ARCH" != "$HOST_ARCH" ]; then
+    ACCEL="tcg,thread=multi"; CPU=max
+else
+    case "$(uname -s)" in Darwin) ACCEL=hvf ;; *) ACCEL=kvm ;; esac
+    CPU=host
+fi
+if [ -n "$NAVDAT_DEBS" ] && [ "$ARCH" != amd64 ]; then
+    echo "NAVDAT_DEBS needs an amd64 VM (VM_ARCH=amd64)" >&2; exit 1
+fi
+
+VM_DIR=${VM_DIR:-$HOME/.cache/navdat-vm-$ARCH}
 PORT=${VM_SSH_PORT:-2222}
 mkdir -p "$VM_DIR"
 cd "$VM_DIR"
-
-case "$(uname -m)" in
-    arm64|aarch64) ARCH=arm64; QEMU=qemu-system-aarch64
-                   MACHINE=virt; FW_NAME=edk2-aarch64-code.fd ;;
-    *)             ARCH=amd64; QEMU=qemu-system-x86_64
-                   MACHINE=q35; FW_NAME=edk2-x86_64-code.fd ;;
-esac
-case "$(uname -s)" in
-    Darwin) ACCEL=hvf ;;
-    *)      ACCEL=kvm ;;
-esac
 
 SSH_OPTS=(-q -i "$VM_DIR/id_vm" -p "$PORT" -o StrictHostKeyChecking=no
           -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3)
@@ -58,7 +72,7 @@ prepare() {
             genisoimage -quiet -output seed.iso -volid cidata -joliet -rock seed/user-data seed/meta-data
         fi
     fi
-    if [ ! -f efi-code.fd ]; then
+    if [ -n "$FW_NAME" ] && [ ! -f efi-code.fd ]; then
         local fw
         fw=$(ls "$(dirname "$(command -v $QEMU)")"/../share/qemu/$FW_NAME /usr/share/qemu/$FW_NAME 2>/dev/null | head -n1)
         cp "$fw" efi-code.fd
@@ -69,15 +83,16 @@ prepare() {
 start() {
     vssh true 2>/dev/null && return
     prepare
-    $QEMU -machine $MACHINE,accel=$ACCEL -cpu host -smp 4 -m 4096 \
-        -drive if=pflash,format=raw,file=efi-code.fd,readonly=on \
-        -drive if=pflash,format=raw,file=efi-vars.fd \
+    local fw=()
+    [ -n "$FW_NAME" ] && fw=(-drive if=pflash,format=raw,file=efi-code.fd,readonly=on
+                             -drive if=pflash,format=raw,file=efi-vars.fd)
+    $QEMU -machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 "${fw[@]}" \
         -drive if=virtio,format=qcow2,file=disk.qcow2 \
         -drive if=virtio,format=raw,file=seed.iso,readonly=on \
         -netdev user,id=n0,hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0 \
         -display none -serial file:serial.log -monitor none -daemonize -pidfile qemu.pid
     echo "waiting for VM..."
-    for _ in $(seq 1 90); do vssh 'cloud-init status --wait >/dev/null' 2>/dev/null && return; sleep 5; done
+    for _ in $(seq 1 360); do vssh 'cloud-init status --wait >/dev/null' 2>/dev/null && return; sleep 5; done
     echo "VM did not come up, see $VM_DIR/serial.log" >&2; exit 1
 }
 
@@ -99,9 +114,20 @@ rsync -a --delete --exclude .git --exclude '*.deb' --exclude dist --exclude .DS_
 echo "== bortcfg unit tests"
 vssh 'cd navdat-bort && xvfb-run -a dbus-launch --exit-with-session python3 -m unittest discover -s tests -v 2>&1 | tee /tmp/test.log | grep -E "\.\.\. |^Ran|^OK|^FAILED"; ! grep -E "Gtk-(WARNING|CRITICAL)|^FAILED" /tmp/test.log'
 
+if [ -n "$NAVDAT_DEBS" ]; then
+    echo "== sync proprietary packages"
+    rsync -a --delete --include '*.deb' --exclude '*' -e "ssh ${SSH_OPTS[*]}" \
+        "$NAVDAT_DEBS/" ubuntu@127.0.0.1:navdat-debs/
+fi
+
 echo "== build and install packages"
-vssh 'set -e; cd navdat-bort; rm -rf dist; packaging/build-debs.sh dist >/dev/null
-  if ! dpkg -s navdat-bortd >/dev/null 2>&1; then
+vssh "REAL=${NAVDAT_DEBS:+1}"'; set -e; cd navdat-bort; rm -rf dist; packaging/build-debs.sh dist >/dev/null
+  if [ -n "$REAL" ]; then
+    packaging/repack-proprietary.sh ~/navdat-debs dist
+    if dpkg -s navdat-bortd 2>/dev/null | grep -q "Version: 0.0.0~stub"; then
+      sudo dpkg --purge --force-depends navdat-bortd >/dev/null
+    fi
+  elif ! dpkg -s navdat-bortd >/dev/null 2>&1; then
     d=$(mktemp -d); mkdir $d/DEBIAN
     printf "Package: navdat-bortd\nVersion: 0.0.0~stub\nArchitecture: all\nMaintainer: test <test@localhost>\nDescription: test stub for the proprietary bortd\n" > $d/DEBIAN/control
     dpkg-deb --root-owner-group -b $d /tmp/navdat-bortd-stub.deb >/dev/null
@@ -110,6 +136,7 @@ vssh 'set -e; cd navdat-bort; rm -rf dist; packaging/build-debs.sh dist >/dev/nu
   sudo dpkg -i dist/*.deb >/dev/null 2>&1 || true
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y -qq --no-install-recommends >/dev/null
   dpkg -l "navdat-*" | awk "/^ii/ {print \$2, \$3}"
+  dpkg -l "navdat-*" | awk "/^i[^i]|^[^i]/ && /navdat/ {print \"NOT INSTALLED:\", \$1, \$2; bad=1} END {exit bad}"
   getent passwd navdat; sudo passwd -S navdat'
 
 echo "== X session as navdat"
@@ -118,6 +145,12 @@ vssh 'chmod 755 /tmp/session-check.sh; sudo -iu navdat /tmp/session-check.sh'
 echo "== status indicators (passive)"
 scp "${SCP_OPTS[@]}" "$ROOT/tests/vm/indicators-check.sh" ubuntu@127.0.0.1:/tmp/
 vssh 'chmod 755 /tmp/indicators-check.sh; sudo -iu navdat /tmp/indicators-check.sh'
+
+if [ -n "$NAVDAT_DEBS" ]; then
+    echo "== proprietary clients and bortd (demo mode)"
+    scp "${SCP_OPTS[@]}" "$ROOT/tests/vm/clients-check.sh" ubuntu@127.0.0.1:/tmp/
+    vssh 'chmod 755 /tmp/clients-check.sh; sudo -iu navdat /tmp/clients-check.sh'
+fi
 
 mkdir -p shots
 scp -q "${SCP_OPTS[@]}" 'ubuntu@127.0.0.1:/tmp/shot-*.png' shots/
