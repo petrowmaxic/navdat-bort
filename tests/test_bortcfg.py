@@ -142,6 +142,15 @@ class GuiTest(unittest.TestCase):
         self.assertEqual(len(saved.get_key('device')), len(bortcfg.devices) + 1)
         window.window.destroy()
 
+    def test_window_from_connected_proxy(self):
+        """Окно из апплета: proxy уже подключён и получил список переменных."""
+        proxy = bortd.BortProxy()
+        proxy.start()
+        iterate(lambda: proxy.client is not None and proxy.client._vars)
+        window = bortcfg.BortConfigWindow(proxy=proxy)
+        iterate(lambda: 'demo' in window.xml.label_state.get_label())
+        window.window.destroy()
+
     def test_applet(self):
         proxy = bortd.BortProxy()
         app = applet.BortApplet(proxy=proxy)

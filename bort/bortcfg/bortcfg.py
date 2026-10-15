@@ -1321,6 +1321,7 @@ class BortConfigWindow:
         self.read_config()
 
         self.client = None
+        self.demo_mode = None
         if proxy == None:
             proxy = bortd.BortProxy()
 
@@ -1332,6 +1333,10 @@ class BortConfigWindow:
 
         if proxy.client:
             self.on_connected(proxy, proxy.client)
+            # proxy (например, из апплета) уже получил список переменных до
+            # создания окна, и event-list больше не придёт
+            if proxy.client._vars:
+                self.on_event_list(proxy, proxy.client)
         else:
             self.on_disconnected(proxy)
 
@@ -1342,7 +1347,7 @@ class BortConfigWindow:
         client.notify(self.demo_mode)
 
     def on_event_set(self, proxy, client, ids):
-        if self.demo_mode.id in ids:
+        if self.demo_mode is not None and self.demo_mode.id in ids:
             demo_mode = self.demo_mode.get()
             if demo_mode:
                 state = _('Bord daemon is running in demo mode')
@@ -1619,23 +1624,26 @@ def StartDaemon(demo_mode = False):
     if demo_mode:
         args.append('-D')
 
-    (p_r, p_w) = os.pipe()
-
-    # bortd -d forks into background, so wait only for the parent process
-    # and read whatever it reported, without waiting for EOF.
-    try:
-        proc = subprocess.Popen(args, executable=path,
-                                stdin=subprocess.DEVNULL, stdout=p_w,
-                                stderr=p_w, close_fds=True)
-        status = proc.wait()
-    except OSError as e:
-        os.write(p_w, str(e).encode())
-        status = 1
-    finally:
-        os.close(p_w)
-
-    data = os.read(p_r, 4096).decode('utf-8', 'replace')
-    os.close(p_r)
+    # bortd -d forks into background and the daemon keeps writing to the
+    # stdout/stderr it inherited. A pipe that we close after reading would
+    # hit the daemon with SIGPIPE later, so its output goes to a log file.
+    logpath = os.path.expanduser('~/.bort/bortd.log')
+    os.makedirs(os.path.dirname(logpath), exist_ok=True)
+    with open(logpath, 'ab') as log:
+        start = log.tell()
+        try:
+            proc = subprocess.Popen(args, executable=path,
+                                    stdin=subprocess.DEVNULL, stdout=log,
+                                    stderr=log, close_fds=True)
+            status = proc.wait()
+            data = None
+        except OSError as e:
+            status = 1
+            data = str(e)
+    if data is None:
+        with open(logpath, 'rb') as log:
+            log.seek(start)
+            data = log.read(4096).decode('utf-8', 'replace')
 
     if status:
         dlg = message_dialog(None, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK)
