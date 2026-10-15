@@ -31,6 +31,7 @@ local default_theme_icons = {
 -- End of configuration
 
 local awful = require("awful")
+local gears = require("gears")
 local wibox = require("wibox")
 local math = require("math")
 
@@ -74,7 +75,7 @@ function pulseaudio_widget.new(pulseaudio, options)
 
    -- register mouse button actions
    self:buttons(
-      awful.util.table.join(
+      gears.table.join(
          awful.button({ }, 1, pulseaudio.VolumeToggleMute),
          awful.button({ }, 3, self.LaunchMixer),
          awful.button({ }, 4, pulseaudio.VolumeUp),

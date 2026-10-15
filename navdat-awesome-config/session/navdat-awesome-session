@@ -1,0 +1,12 @@
+#!/bin/sh
+# X-сеанс NavDat для LightDM: awesome без gnome-session.
+export XDG_CURRENT_DESKTOP=Navdat
+export XDG_SESSION_DESKTOP=navdat-awesome
+export XDG_CONFIG_DIRS="/etc/xdg/xdg-navdat-awesome:${XDG_CONFIG_DIRS:-/etc/xdg}"
+
+# ключи и ssh-agent, если установлен gnome-keyring
+command -v gnome-keyring-daemon >/dev/null 2>&1 && \
+    eval "$(gnome-keyring-daemon --start --components=secrets,ssh)" && \
+    export SSH_AUTH_SOCK
+
+exec awesome

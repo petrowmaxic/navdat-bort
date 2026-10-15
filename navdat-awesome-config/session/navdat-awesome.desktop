@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Navdat Awesome
+Comment=Navdat session
+Exec=navdat-awesome-session
+TryExec=awesome
+Type=Application
+DesktopNames=Navdat

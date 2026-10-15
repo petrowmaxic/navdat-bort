@@ -69,7 +69,7 @@ local settings = load_settings(
 
 -- @DOC_LOAD_THEME@
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 beautiful.tooltip_border_color = "#ff0000"
 beautiful.tooltip_bg = "#aaaaaa"
@@ -144,13 +144,13 @@ local function create_menu()
             separator,
             { "Настройки", function ()
                     awful.spawn.with_shell(
-                        "XDG_CURRENT_DESKTOP=Unity unity-control-center")
+                        "XDG_CURRENT_DESKTOP=GNOME gnome-control-center")
                 end
             },
             separator,
             { "Документация", "navdat-help" },
             { "Клавиши", hotkeys_popup.show_help },
-            { "Выход", "navdat-session-quit" }
+            { "Выход", utils.quit_session }
         },
         theme = {
             border_width = 1,
@@ -175,7 +175,7 @@ mylauncher = awful.widget.launcher({
 
 quakeconsole = quake{
     height = 0.3,
-    keys = awful.util.table.join(
+    keys = gears.table.join(
         awful.key({ modkey }, "Down", function (c)
             quakeconsole:incHeight(c, 0.1)
         end),
@@ -213,7 +213,7 @@ local function mypromptbox_run ()
    if mypromptbox then
       mypromptbox:run()
    else
-      awful.spawn("gnome-panel-control --run-dialog")
+      awful.spawn("rofi -show run")
    end
 end
 
@@ -238,7 +238,7 @@ end)
 
 -- {{{ Mouse bindings
 -- @DOC_ROOT_BUTTONS@
-root.buttons(awful.util.table.join(
+root.buttons(gears.table.join(
     awful.button({ }, 1, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
@@ -247,7 +247,7 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 -- @DOC_GLOBAL_KEYBINDINGS@
-globalkeys = awful.util.table.join(
+globalkeys = gears.table.join(
     -- Awesome keys
     awful.key(
         { modkey }, "s",
@@ -425,7 +425,7 @@ local function shift_with_client(c, step)
 end
 
 -- @DOC_CLIENT_KEYBINDINGS@
-clientkeys = awful.util.table.join(
+clientkeys = gears.table.join(
     awful.key(
         { modkey }, "f",
         function (c)
@@ -495,7 +495,7 @@ clientkeys = awful.util.table.join(
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
+    globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key(
             { modkey }, "#" .. i + 9,
@@ -549,7 +549,7 @@ local function _raise_and(func)
 end
 
 
-clientbuttons = awful.util.table.join(
+clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, _raise_and(awful.mouse.client.move)),
     awful.button({ modkey }, 3, _raise_and(awful.mouse.client.resize)),
@@ -719,3 +719,7 @@ gears.timer {
         end
     end
 }
+
+-- Session autostart (picom, XDG autostart, ~/.navdatrc).
+-- startup.sh runs only once per login even if awesome is restarted.
+awful.spawn.with_shell(gears.filesystem.get_configuration_dir() .. "startup.sh")

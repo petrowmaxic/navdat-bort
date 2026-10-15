@@ -1,0 +1,6 @@
+sys::datadir /home/navdat/data/
+device fe
+{
+    src bind unix /tmp/.bort-0
+}
+device fplan

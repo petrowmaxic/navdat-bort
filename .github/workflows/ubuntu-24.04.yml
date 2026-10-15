@@ -1,0 +1,58 @@
+name: Ubuntu 24.04
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            python3-gi gir1.2-gtk-3.0 xvfb xauth dbus-x11 adwaita-icon-theme \
+            awesome awesome-extra dpkg-dev
+
+      - name: bortcfg tests (GTK 3 under Xvfb)
+        run: |
+          set -o pipefail
+          xvfb-run -a dbus-launch --exit-with-session \
+            python3 -m unittest discover -s tests -v 2>&1 | tee test.log
+          if grep -E 'Gtk-(WARNING|CRITICAL)|GLib-GObject-(WARNING|CRITICAL)' test.log; then
+            echo "::error::GTK warnings during tests"; exit 1
+          fi
+
+      - name: Build packages
+        run: packaging/build-debs.sh dist
+
+      - name: Install packages
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            ./dist/navdat-help_*.deb ./dist/navdat-awesome-config_*.deb ./dist/navdat-user_*.deb
+          sudo dpkg -i --force-depends ./dist/navdat-bortcfg_*.deb
+          getent passwd navdat
+          sudo passwd -S navdat
+          sudo ls -la /home/navdat /home/navdat/.config
+
+      - name: awesome config check
+        run: |
+          export HOME=$(mktemp -d)
+          mkdir -p $HOME/.config
+          ln -s /usr/share/navdat-awesome-config $HOME/.config/awesome
+          awesome -k
+          set +e
+          xvfb-run -a dbus-launch --exit-with-session timeout 10 awesome > awesome.log 2>&1
+          set -e
+          cat awesome.log
+          if grep -iE 'error|attempt to|stack traceback' awesome.log; then
+            echo "::error::awesome reported errors"; exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: navdat-debs-noble
+          path: dist/*.deb

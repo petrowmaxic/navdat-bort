@@ -1,0 +1,7 @@
+#!/bin/sh
+
+QUESTION="Do you really want to quit?"
+
+if zenity --question --title "Confirmation" --text "$QUESTION"; then
+   awesome-client 'awesome.quit()'
+fi

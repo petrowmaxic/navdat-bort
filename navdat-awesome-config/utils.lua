@@ -1,8 +1,5 @@
 local awful = require("awful")
 
-require("awful.dbus")
-local dbus = dbus
-
 local utils = {}
 
 function utils.switch_tag(s, step)
@@ -13,27 +10,24 @@ function utils.switch_tag(s, step)
 end
 
 function utils.lock_screen()
-   awful.spawn("gnome-screensaver-command --lock")
+   -- force english before the greeter shows up
+   awesome.xkb_set_layout_group(0)
+   awful.spawn("dm-tool lock")
 end
 
 function utils.quit_session()
-   awful.spawn("gnome-session-quit")
+   awful.spawn.easy_async(
+      {"zenity", "--question", "--title", "Confirmation",
+       "--text", "Do you really want to quit?"},
+      function (_, _, _, exit_code)
+         if exit_code == 0 then
+            awesome.quit()
+         end
+   end)
 end
 
 function utils.suspend()
    awful.spawn("systemctl -i suspend")
 end
 
--- force english
-dbus.add_match("session", "interface='org.gnome.ScreenSaver'")
-dbus.connect_signal(
-   "org.gnome.ScreenSaver",
-   function(...)
-      local data = {...}
-      if data[1].member == "ActiveChanged" then
-         print('locking')
-         awesome.xkb_set_layout_group(0)
-      end
-   end
-)
 return utils

@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 local wibox = require("wibox")
 local utils = require("utils")
 local battery = require("battery")
@@ -10,7 +11,7 @@ local mywibar = {}
 
 -- Create a wibox for each screen and add it
 -- @TAGLIST_BUTTON@
-local taglist_buttons = awful.util.table.join(
+local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
@@ -32,7 +33,7 @@ local taglist_buttons = awful.util.table.join(
 -- Create a textclock widget
 local mytextclock = wibox.widget.textclock(" %a %b %d, %H:%M:%S ", 1)
 mytextclock:buttons(
-    awful.util.table.join(
+    gears.table.join(
         awful.button({ }, 1, function ()
             awful.spawn("gsimplecal")
         end)
@@ -78,9 +79,7 @@ function mywibar.create_wibar(s)
 
     local volumewidget = pulseaudio_widget(pulseaudio, {
         mixer = function ()
-            awful.spawn.with_shell(
-                "XDG_CURRENT_DESKTOP=Unity unity-control-center sound"
-            )
+            awful.spawn("pavucontrol")
         end
     })
     local volumewidget_tooltip = awful.tooltip({
@@ -101,7 +100,7 @@ function mywibar.create_wibar(s)
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(
-        awful.util.table.join(
+        gears.table.join(
             awful.button({ }, 1, function () awful.layout.inc( 1) end),
             awful.button({ }, 3, function () awful.layout.inc(-1) end),
             awful.button({ }, 4, function () awful.layout.inc( 1) end),

@@ -1,0 +1,67 @@
+#!/bin/sh
+# postinst for navdat-user
+#
+# Creates the "navdat" operator account WITHOUT a password. The administrator
+# must set one after installation:  sudo passwd navdat
+
+set -e
+
+GROUPS="adm cdrom audio dip video plugdev users netdev dialout sudo"
+NAVDAT_USER="navdat"
+NAVDAT_HOME="/home/navdat"
+NAVDAT_UID=2111
+SKEL=/usr/share/navdat-user/skel
+
+case "$1" in
+    configure)
+    if ! getent passwd $NAVDAT_USER > /dev/null 2>&1; then
+        adduser --uid $NAVDAT_UID -q \
+                --disabled-password \
+                --home $NAVDAT_HOME \
+                --gecos "Navdat operator" \
+                $NAVDAT_USER
+        echo "navdat-user: account '$NAVDAT_USER' created without password," \
+             "set it with: sudo passwd $NAVDAT_USER"
+    fi
+
+    for group in $GROUPS; do
+        adduser "$NAVDAT_USER" $group > /dev/null 2>&1 || true
+    done
+
+    # copy skeleton files that the operator does not have yet
+    (cd $SKEL && find . -type f) | while read -r f; do
+        if [ ! -e "$NAVDAT_HOME/$f" ]; then
+            install -D -m 644 "$SKEL/$f" "$NAVDAT_HOME/$f"
+        fi
+    done
+    chmod 755 "$NAVDAT_HOME/.navdatrc"
+
+    mkdir -p "$NAVDAT_HOME/.config/menus" "$NAVDAT_HOME/data"
+    [ -e "$NAVDAT_HOME/.config/awesome" ] || \
+        ln -s /usr/share/navdat-awesome-config "$NAVDAT_HOME/.config/awesome"
+    [ -e "$NAVDAT_HOME/.config/applications" ] || \
+        ln -s /usr/share/bort/applications "$NAVDAT_HOME/.config/applications"
+    [ -e "$NAVDAT_HOME/.config/menus/applications.menu" ] || \
+        ln -s /usr/share/bort/menus/navdat-applications.menu \
+              "$NAVDAT_HOME/.config/menus/applications.menu"
+
+    chown -R "$NAVDAT_USER:$NAVDAT_USER" "$NAVDAT_HOME"
+
+    # default session for LightDM
+    mkdir -p /var/lib/AccountsService/users
+    if [ ! -e /var/lib/AccountsService/users/$NAVDAT_USER ]; then
+        printf '[User]\nXSession=navdat-awesome\nSystemAccount=false\n' \
+            > /var/lib/AccountsService/users/$NAVDAT_USER
+    fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

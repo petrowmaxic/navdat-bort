@@ -24,8 +24,9 @@ local pulseaudio = {
    mute = false
 }
 
-local cmd = "pacmd"
-local default_sink = ""
+-- pactl работает и с PulseAudio, и с PipeWire (pipewire-pulse) в Ubuntu 22.04+
+local cmd = "pactl"
+local default_sink = "@DEFAULT_SINK@"
 local default_increment = 0.10
 local timer_timeout = 2.0
 
@@ -38,30 +39,14 @@ function pulseaudio.register_callback(callback)
 end
 
 local function UpdateStateFromOutput(out)
-   -- get the default sink
-   default_sink = string.match(out, "set%-default%-sink ([^\n]+)")
-
-   if default_sink == nil then
-      default_sink = ""
+   -- "Volume: front-left: 65536 / 100% / 0.00 dB, ..." -- берём первый канал
+   local value = string.match(out, "Volume:%s*[%w%-]+:%s*(%d+)%s*/")
+   if value == nil then
       return false
    end
+   pulseaudio.Volume = tonumber(value) / 0x10000
 
-   -- retreive volume of default sink
-   for sink, value in string.gmatch(out, "set%-sink%-volume ([^%s]+) (0x%x+)") do
-      if sink == default_sink then
-         pulseaudio.Volume = tonumber(value) / 0x10000
-      end
-   end
-
-   -- retreive mute state of default sink
-   local m
-   for sink, value in string.gmatch(out, "set%-sink%-mute ([^%s]+) (%a+)") do
-      if sink == default_sink then
-         m = value
-      end
-   end
-
-   pulseaudio.Mute = m == "yes"
+   pulseaudio.Mute = string.match(out, "Mute:%s*(%a+)") == "yes"
 
    for i, callback in ipairs(update_callbacks) do
       callback()
@@ -69,12 +54,14 @@ local function UpdateStateFromOutput(out)
 end
 
 function pulseaudio.UpdateState()
-    awful.spawn.easy_async(cmd .. " dump", function (stdout)
+    awful.spawn.easy_async_with_shell(
+        cmd .. " get-sink-volume " .. default_sink .. "; " ..
+        cmd .. " get-sink-mute " .. default_sink, function (stdout)
         UpdateStateFromOutput(stdout)
     end)
 end
 
--- Run pacmd
+-- Run pactl
 local function pacmd_run(command)
     awful.spawn.easy_async(command, function ()
         pulseaudio.UpdateState()
@@ -94,7 +81,7 @@ function pulseaudio.SetVolume(vol)
     -- set…
     pacmd_run(
         cmd .. " set-sink-volume " .. default_sink ..
-        " " .. string.format("0x%x", math.floor(vol)))
+        " " .. string.format("%d", math.floor(vol)))
 end
 
 function pulseaudio.IncVolumeBy(increment)

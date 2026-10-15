@@ -1,0 +1,21 @@
+#!/bin/sh
+
+prefix=/usr
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+NAVDAT_HELP_DIR=${datadir}/navdat/help
+NAVDAT_HELP_HTML_DIR=${NAVDAT_HELP_DIR}/html
+
+anchor=""
+if [ "x$1" != "x" ]; then
+    anchor="#$1"
+fi
+
+for lang in $LANGUAGE $LC_ALL $LC_MESSAGES $LANG en ru; do
+    lang=$(echo $lang | cut -c 1-2)
+    index=${NAVDAT_HELP_HTML_DIR}/$lang/index.html
+    if [ -e $index ]; then
+        xdg-open file://$index$anchor
+        break
+    fi
+done

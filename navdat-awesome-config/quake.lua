@@ -19,7 +19,7 @@
 --                              screen = s })
 -- end
 
--- config.keys.global = awful.util.table.join(
+-- config.keys.global = gears.table.join(
 --    config.keys.global,
 --    awful.key({ modkey }, "`",
 --       function () quakeconsole[mouse.screen]:toggle() end)
@@ -32,6 +32,7 @@
 local setmetatable = setmetatable
 local string = string
 local awful  = require("awful")
+local gears  = require("gears")
 local naughty = naughty
 local math = require("math")
 local os = { time = os.time }
@@ -125,7 +126,7 @@ function QuakeConsole:show(client)
     self:updateGeometry(client)
 
     -- This is not a normal window, don't apply any specific keyboard stuff
-    client:buttons(awful.util.table.join(
+    client:buttons(gears.table.join(
         awful.button({ }, 1, function (client)
             client:raise()
             capi.client.focus = client
