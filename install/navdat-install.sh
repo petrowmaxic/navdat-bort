@@ -107,10 +107,20 @@ if [ "$ROLE" = root ]; then
     WORK=$(mktemp -d)
     trap 'rm -rf "$WORK"' EXIT
     export DEBIAN_FRONTEND=noninteractive
-    GH_TOKEN=$NAVDAT_GH_TOKEN
+
+    # Ключ и пароль оператора приходят файлом (права 600), а не через
+    # окружение: иначе они видны всем дочерним процессам, включая apt и
+    # скрипты пакетов. Файл удаляется сразу после чтения.
+    GH_TOKEN=; OP_PW=
+    { IFS= read -r GH_TOKEN; IFS= read -r OP_PW; } < "$NAVDAT_SECRETS" || true
+    rm -f "$NAVDAT_SECRETS"
+    [ -n "$OP_PW" ] || die "Не передан пароль оператора."
+    # ключ в заголовке из файла: в аргументах curl его видно через ps
+    AUTH=$WORK/auth-header
+    ( umask 077; printf 'Authorization: Bearer %s\n' "$GH_TOKEN" > "$AUTH" )
 
     gh_api() {
-        curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+        curl -fsSL -H @"$AUTH" -H "Accept: application/vnd.github+json" \
              -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API$1"
     }
     # Файл релиза: ровно один Accept (иначе API отдаёт JSON или 415).
@@ -118,7 +128,7 @@ if [ "$ROLE" = root ]; then
     # запросом без ключа, чтобы ключ не ушёл на чужой сервер.
     gh_download() {   # <url файла> <куда>
         local loc
-        loc=$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
+        loc=$(curl -fsS -H @"$AUTH" -H "Accept: application/octet-stream" \
                    -H "X-GitHub-Api-Version: 2022-11-28" -o "$2" -w '%{redirect_url}' "$1") || return 1
         [ -z "$loc" ] || curl -fsSL -o "$2" "$loc"
     }
@@ -161,7 +171,7 @@ EOF
         say "  $name"
         gh_download "$url" "$WORK/debs/$name" 2>>"$LOG" || die "Не удалось скачать $name."
     done < "$WORK/assets.txt"
-    unset GH_TOKEN NAVDAT_GH_TOKEN
+    rm -f "$AUTH"; GH_TOKEN=
     [ -f "$WORK/debs/SHA256SUMS" ] || die "В релизе нет SHA256SUMS."
     (cd "$WORK/debs" && sha256sum -c --quiet SHA256SUMS) >>"$LOG" 2>&1 \
         || die "Контрольные суммы закрытых пакетов не совпали."
@@ -183,8 +193,8 @@ EOF
     fi
 
     step "Настройка оператора и входа в систему"
-    printf 'navdat:%s\n' "$NAVDAT_PASSWORD" | chpasswd || die "Не удалось задать пароль оператора."
-    unset NAVDAT_PASSWORD
+    printf 'navdat:%s\n' "$OP_PW" | chpasswd || die "Не удалось задать пароль оператора."
+    OP_PW=
     mkdir -p /etc/lightdm/lightdm.conf.d
     {
         echo "[Seat:*]"
@@ -217,6 +227,22 @@ if [ "$(dpkg --print-architecture)" != amd64 ]; then
     die "Нужен компьютер x86-64 (amd64): закрытые программы NavDat существуют только для этой архитектуры."
 fi
 if [ -n "$BUNDLE" ]; then
+    # пакеты комплекта собраны под конкретный выпуск Ubuntu: смешивать их с
+    # другим выпуском нельзя (apt поставит чужие библиотеки поверх системных)
+    B_VERSION=; B_ARCH=
+    if [ -f "$(dirname "$BUNDLE")/release" ]; then
+        . "$(dirname "$BUNDLE")/release"
+        B_VERSION=${VERSION_ID_BUNDLE:-}; B_ARCH=${ARCH_BUNDLE:-}
+    else
+        n=$(basename "$(dirname "$BUNDLE")")      # navdat-offline-<версия>-<arch>
+        B_VERSION=$(echo "$n" | sed -n 's/^navdat-offline-\([0-9.]*\)-.*/\1/p')
+        B_ARCH=${n##*-}
+    fi
+    if [ "$B_VERSION" != "$VERSION_ID" ] || [ "$B_ARCH" != amd64 ]; then
+        die "Этот офлайн-комплект собран для Ubuntu ${B_VERSION:-?} ${B_ARCH:-?}, а здесь Ubuntu $VERSION_ID amd64. Нужен комплект для этой версии Ubuntu."
+    fi
+fi
+if [ -n "$BUNDLE" ]; then
 ui_info "Мастер установит бортовую программу NavDat из офлайн-комплекта.
 Интернет не нужен.
 
@@ -241,17 +267,24 @@ ui_info "Мастер установит бортовую программу Nav
 fi
 
 check_credentials() {   # $1 логин, $2 ключ
-    local login
-    login=$(curl -fsSL -H "Authorization: Bearer $2" -H "Accept: application/vnd.github+json" \
+    local login hdr rc=0
+    # ключ в заголовке из файла с правами 600: в аргументах curl его видно через ps
+    hdr=$(mktemp -p "${XDG_RUNTIME_DIR:-$HOME}" .navdat-auth.XXXXXX)
+    printf 'Authorization: Bearer %s\n' "$2" > "$hdr"
+    login=$(curl -fsSL -H @"$hdr" -H "Accept: application/vnd.github+json" \
                  "$GITHUB_API/user" 2>>"$LOG" \
             | python3 -c 'import json,sys; print(json.load(sys.stdin).get("login",""))' 2>>"$LOG") \
-        || return 1
-    if [ "${login,,}" != "${1,,}" ]; then
+        || rc=1
+    if [ $rc = 0 ] && [ "${login,,}" != "${1,,}" ]; then
         say "key belongs to '$login', not '$1'"
-        return 1
+        rc=1
     fi
-    curl -fsSL -o /dev/null -H "Authorization: Bearer $2" -H "Accept: application/vnd.github+json" \
-         "$GITHUB_API/repos/$PRIVATE_REPO/releases/tags/$RELEASE_TAG" 2>>"$LOG"
+    if [ $rc = 0 ]; then
+        curl -fsSL -o /dev/null -H @"$hdr" -H "Accept: application/vnd.github+json" \
+             "$GITHUB_API/repos/$PRIVATE_REPO/releases/tags/$RELEASE_TAG" 2>>"$LOG" || rc=1
+    fi
+    rm -f "$hdr"
+    return $rc
 }
 
 GH_LOGIN=${NAVDAT_GH_LOGIN:-}
@@ -284,8 +317,12 @@ case "${NAVDAT_AUTOLOGIN:-ask}" in
            AUTOLOGIN=yes; else AUTOLOGIN=no; fi ;;
 esac
 
-# ответы передаются второму этапу через окружение sudo -E
-export NAVDAT_GH_TOKEN=$GH_TOKEN NAVDAT_PASSWORD=$OP_PASSWORD NAVDAT_AUTOLOGIN=$AUTOLOGIN
+# Несекретные ответы передаются второму этапу через окружение sudo -E,
+# ключ и пароль - файлом с правами 600, который root читает и удаляет.
+export NAVDAT_SECRETS=$(mktemp -p "${XDG_RUNTIME_DIR:-$HOME}" .navdat-secrets.XXXXXX)
+printf '%s\n%s\n' "$GH_TOKEN" "$OP_PASSWORD" > "$NAVDAT_SECRETS"
+unset NAVDAT_GH_TOKEN NAVDAT_PASSWORD GH_TOKEN OP_PASSWORD
+export NAVDAT_AUTOLOGIN=$AUTOLOGIN
 export NAVDAT_PUBLIC_REPO=$PUBLIC_REPO NAVDAT_REF NAVDAT_PRIVATE_REPO=$PRIVATE_REPO \
        NAVDAT_RELEASE_TAG=$RELEASE_TAG NAVDAT_GITHUB_API=$GITHUB_API NAVDAT_SOURCE_URL=$SOURCE_URL
 # не в /tmp: fs.protected_regular запрещает root дописывать чужие файлы
@@ -309,12 +346,13 @@ run_root() {  # запускает второй этап; пароль sudo сп
 
 say "== Установка"
 if [ "$UI" = zenity ]; then
-    tail -f "$NAVDAT_PROGRESS" | zenity --progress --title "$TITLE" --width 460 \
+    # --pid: tail завершится вместе с мастером ($! - это PID zenity, а не tail)
+    tail -f --pid=$$ "$NAVDAT_PROGRESS" | zenity --progress --title "$TITLE" --width 460 \
         --pulsate --auto-close --no-cancel 2>/dev/null &
     PROGRESS_PID=$!
-    trap 'pkill -P $PROGRESS_PID 2>/dev/null; kill $PROGRESS_PID 2>/dev/null; rm -f "$NAVDAT_PROGRESS"' EXIT
+    trap 'kill $PROGRESS_PID 2>/dev/null; rm -f "$NAVDAT_PROGRESS" "$NAVDAT_SECRETS"' EXIT
 else
-    trap 'rm -f "$NAVDAT_PROGRESS"' EXIT
+    trap 'rm -f "$NAVDAT_PROGRESS" "$NAVDAT_SECRETS"' EXIT
 fi
 
 if run_root; then
@@ -323,7 +361,7 @@ else
     RESULT=$?
 fi
 [ "$UI" = zenity ] && echo 100 >> "$NAVDAT_PROGRESS"
-unset NAVDAT_GH_TOKEN NAVDAT_PASSWORD GH_TOKEN OP_PASSWORD
+rm -f "$NAVDAT_SECRETS"
 [ "$RESULT" = 0 ] || die "Установка прервалась."
 
 case "${NAVDAT_REBOOT:-ask}" in

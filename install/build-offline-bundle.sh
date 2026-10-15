@@ -54,6 +54,8 @@ cp "$WORK"/archives/*.deb "$WORK"/navdat/*.deb "$BUNDLE/repo/"
 (cd "$BUNDLE/repo" && dpkg-scanpackages --multiversion . /dev/null > Packages 2>/dev/null \
     && gzip -9k Packages && sha256sum *.deb > SHA256SUMS)
 install -m 755 "$ROOT/install/navdat-install.sh" "$BUNDLE/"
+# выпуск Ubuntu, под который собран комплект: мастер не даст поставить его на другой
+printf 'VERSION_ID_BUNDLE=%s\nARCH_BUNDLE=%s\n' "$VERSION_ID" "$(dpkg --print-architecture)" > "$BUNDLE/release"
 cat > "$BUNDLE/README.txt" <<EOF
 Офлайн-комплект NavDat для Ubuntu $VERSION_ID ($(dpkg --print-architecture)).
 
