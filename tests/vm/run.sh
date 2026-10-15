@@ -127,7 +127,7 @@ case "${1:-run}" in
         rsync -a --delete --include '*.deb' --exclude '*' -e "ssh ${SSH_OPTS[*]}" \
             "$NAVDAT_DEBS/" ubuntu@127.0.0.1:navdat-debs/
         echo "== build offline bundle"
-        vssh 'cd navdat-bort && rm -rf ~/bundle-out && sudo install/build-offline-bundle.sh ~/navdat-debs ~/bundle-out'
+        vssh 'cd navdat-bort && sudo rm -rf ~/bundle-out && sudo install/build-offline-bundle.sh ~/navdat-debs ~/bundle-out'
         mkdir -p bundle
         scp "${SCP_OPTS[@]}" 'ubuntu@127.0.0.1:bundle-out/*.tar' bundle/
         ls -la bundle
