@@ -37,62 +37,86 @@
   и libFOX. Сами бинарники лежат в `/usr/lib/navdat/bin`, а
   `/usr/bin/navdat-*` — обёртки, которые подключают эти библиотеки.
 
-## Установка на Ubuntu 24.04
+## Установка на новый ноутбук
 
-Закрытые deb-пакеты NavDat 0.2.12 в репозиторий не входят. Положите их в
-отдельный каталог, например `~/navdat-debs`.
+Нужен ноутбук x86-64 с Ubuntu 24.04 или новее и интернетом. Закрытые
+программы NavDat существуют только под x86-64, на ARM (Raspberry Pi)
+не работают.
+
+### Оператору
+
+Скачать мастер и запустить его под своей учётной записью (с правами
+администратора):
 
 ```bash
-sudo apt install dpkg-dev curl
+wget https://raw.githubusercontent.com/petrowmaxic/navdat-bort/port/ubuntu-24.04/install/navdat-install.sh
+```
+
+```bash
+bash navdat-install.sh
+```
+
+Мастер по очереди спросит:
+
+1. логин GitHub и ключ доступа к закрытым пакетам NavDat (выдаёт администратор);
+2. новый пароль для оператора `navdat`, дважды;
+3. входить ли автоматически при включении;
+4. пароль администратора этого ноутбука.
+
+Дальше всё ставится само: закрытые пакеты, открытые пакеты из этого
+репозитория, библиотеки совместимости, пользователь `navdat`, сеанс
+«Navdat Awesome» и менеджер входа LightDM. Журнал пишется в
+`~/navdat-install.log`; ключ доступа и пароли в него не попадают. В конце
+мастер предложит перезагрузку.
+
+### Администратору (один раз)
+
+Закрытые пакеты NavDat 0.2.12 хранятся в приватном репозитории
+`petrowmaxic/navdat-bort-private`, в релизе `navdat-0.2.12`. Создать его из
+каталога с оригинальными deb (`bortNFVSEGEI/bortNFVSEGEI`):
+
+```bash
+gh repo create petrowmaxic/navdat-bort-private --private --add-readme
+```
+
+```bash
+cd bortNFVSEGEI/bortNFVSEGEI && shasum -a 256 *.deb > SHA256SUMS
+```
+
+```bash
+gh release create navdat-0.2.12 --repo petrowmaxic/navdat-bort-private --title "NavDat 0.2.12" --notes "Оригинальные пакеты для navdat-install.sh" *.deb SHA256SUMS
+```
+
+Ключ доступа для ноутбуков: GitHub → Settings → Developer settings →
+Personal access tokens → Fine-grained tokens → Generate new token.
+
+- Repository access: только `petrowmaxic/navdat-bort-private`.
+- Permissions → Contents: Read-only.
+- Срок действия — по вашей политике.
+
+Оператору сообщаются логин учётной записи, создавшей ключ, и сам ключ.
+
+### Вручную, без мастера
+
+```bash
 packaging/build-debs.sh dist
+```
+
+```bash
 packaging/repack-proprietary.sh ~/navdat-debs dist
+```
+
+```bash
 sudo apt install ./dist/*.deb
+```
+
+```bash
 sudo passwd navdat
 ```
 
-`repack-proprietary.sh` при этом скачивает из архива Ubuntu 16.04
-библиотеки для `navdat-compat`. Версии и SHA256 зафиксированы в
+`repack-proprietary.sh` скачивает из архива Ubuntu 16.04 библиотеки для
+`navdat-compat`. Их версии и SHA256 зафиксированы в
 `packaging/build-compat.sh`.
-
-После перезагрузки в LightDM выберите сеанс **Navdat Awesome**.
-
-## Мастер установки (не реализован, план)
-
-Цель: пользователь скачивает один файл на свежем ноутбуке с последней Ubuntu
-(сейчас 26.04 LTS), запускает его, вводит логин и пароль, и после этого всё
-работает.
-
-Как должен работать `navdat-install.sh`:
-
-1. Проверить систему: Ubuntu 24.04 или новее, архитектура **x86-64**.
-   Закрытые `bortd` и клиенты существуют только под x86-64. Исходников нет,
-   и переписывать `bortd` решено не делать, поэтому ARM (Raspberry Pi) не
-   поддерживается.
-2. Запросить через zenity (или в терминале без графики):
-   - логин и пароль репозитория «Геотехнологий» `dist.gtcomp.ru`. Они
-     сохраняются в `/etc/apt/auth.conf.d/navdat.conf` с правами 600, а не в
-     URL, как было в старой инструкции;
-   - пароль для пользователя-оператора `navdat`;
-   - нужен ли автоматический вход оператора.
-3. Скачать из `dist.gtcomp.ru/navdat-xenial-<логин>` закрытые пакеты 0.2.12 и
-   перепаковать их `packaging/repack-proprietary.sh`.
-4. Скачать исходники этого репозитория и собрать открытые пакеты
-   `packaging/build-debs.sh`.
-5. Установить всё вместе с зависимостями и создать пользователя `navdat`
-   с введённым паролем.
-6. Сделать LightDM менеджером входа вместо GDM: GDM в новых GNOME не
-   запускает X11-сеансы. Выбрать для `navdat` сеанс «Navdat Awesome» и
-   перезагрузить ноутбук.
-
-Что известно и что не проверено:
-
-- Структура репозитория `dist.gtcomp.ru` неизвестна: из среды разработки он
-  был недоступен (HTTP 503 через прокси). Без рабочего логина и пароля шаг 3
-  проверить нельзя.
-- Все остальные шаги по отдельности проверены на Ubuntu 24.04: на arm64 и
-  на x86-64 с настоящими закрытыми пакетами (см. «Проверка»). На 26.04 не
-  проверялись.
-- Для 26.04 нужно отдельно проверить наличие `awesome`, GTK2 и libglade2.
 
 ## Проверка
 
