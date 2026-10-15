@@ -93,6 +93,9 @@ class Converter:
             if inner is not None:
                 action_widgets += self.convert_widget(inner)
 
+        if cls == 'GtkNotebook':
+            self.simplify_tabs(w)
+
         if cls in ('GtkDialog', 'GtkAboutDialog', 'GtkMessageDialog'):
             if action_widgets:
                 el = ET.SubElement(w, 'action-widgets')
@@ -101,6 +104,37 @@ class Converter:
                                   {'response': response}).text = widget_id
             return []
         return action_widgets
+
+    @staticmethod
+    def simplify_tabs(notebook):
+        """GTK 3 warns "Overriding tab label" for every <child type="tab">
+        after a visible page. Plain text labels become the page's tab_label
+        packing property instead."""
+        page = None
+        for child in list(notebook.findall('child')):
+            if child.get('type') != 'tab':
+                page = child
+                continue
+            label = child.find('object')
+            text = prop(label, 'label')
+            names = {p.get('name') for p in label.findall('property')}
+            if (page is None or label.get('class') != 'GtkLabel' or text is None
+                    or not names <= {'visible', 'can_focus', 'label'}
+                    or len(label) != len(names)):
+                continue
+            packing = page.find('packing')
+            if packing is None:
+                packing = ET.SubElement(page, 'packing')
+            tab = ET.SubElement(packing, 'property', {'name': 'tab_label'})
+            if text.get('translatable'):
+                tab.set('translatable', text.get('translatable'))
+            tab.text = text.text
+            tab_packing = child.find('packing')
+            if tab_packing is not None:
+                for p in tab_packing.findall('property'):
+                    if p.get('name') in ('tab_fill', 'tab_expand'):
+                        packing.append(p)
+            notebook.remove(child)
 
     def convert(self, tree):
         root = tree.getroot()

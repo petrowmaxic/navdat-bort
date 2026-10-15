@@ -1063,14 +1063,8 @@
                   </packing>
                 </child>
               </object>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label9">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Data source</property>
-              </object>
               <packing>
+                <property name="tab_label" translatable="yes">Data source</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -1102,16 +1096,7 @@
               </object>
               <packing>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="labelAdis">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Adis16365</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
+                <property name="tab_label" translatable="yes">Adis16365</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -1143,16 +1128,7 @@
               </object>
               <packing>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label13">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Teplovisor</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
+                <property name="tab_label" translatable="yes">Teplovisor</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -1341,16 +1317,7 @@
               </object>
               <packing>
                 <property name="position">2</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">GT-MAG</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">GT-MAG</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -1733,16 +1700,7 @@
               </object>
               <packing>
                 <property name="position">2</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label6">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">GRS410</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">GRS410</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -1865,16 +1823,7 @@
               <packing>
                 <property name="position">2</property>
                 <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label126">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">GSA2000</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">GSA2000</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2058,16 +2007,7 @@
               <packing>
                 <property name="position">2</property>
                 <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label_parsek10">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Parsek</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">Parsek</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2586,16 +2526,7 @@
               </object>
               <packing>
                 <property name="position">2</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label_fluxgate">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Fluxgate</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">Fluxgate</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2646,16 +2577,7 @@
               </object>
               <packing>
                 <property name="position">4</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label5678">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">FreeFlightRA</property>
-              </object>
-              <packing>
-                <property name="position">4</property>
+                <property name="tab_label" translatable="yes">FreeFlightRA</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2716,16 +2638,7 @@
               </object>
               <packing>
                 <property name="position">4</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label_mp71910">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">MP719</property>
-              </object>
-              <packing>
-                <property name="position">2</property>
+                <property name="tab_label" translatable="yes">MP719</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2776,16 +2689,7 @@
               </object>
               <packing>
                 <property name="position">4</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label4567">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">SmartmicroRA</property>
-              </object>
-              <packing>
-                <property name="position">4</property>
+                <property name="tab_label" translatable="yes">SmartmicroRA</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2851,16 +2755,7 @@
               </object>
               <packing>
                 <property name="position">4</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label567">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">EM4H</property>
-              </object>
-              <packing>
-                <property name="position">4</property>
+                <property name="tab_label" translatable="yes">EM4H</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2931,16 +2826,7 @@
               </object>
               <packing>
                 <property name="position">3</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label14">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Koleso</property>
-              </object>
-              <packing>
-                <property name="position">3</property>
+                <property name="tab_label" translatable="yes">Koleso</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -2994,16 +2880,7 @@
               </object>
               <packing>
                 <property name="position">4</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label21">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Arrow</property>
-              </object>
-              <packing>
-                <property name="position">4</property>
+                <property name="tab_label" translatable="yes">Arrow</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -3053,16 +2930,7 @@
               </object>
               <packing>
                 <property name="position">5</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label23">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Novatel commands</property>
-              </object>
-              <packing>
-                <property name="position">5</property>
+                <property name="tab_label" translatable="yes">Novatel commands</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -3112,16 +2980,7 @@
               </object>
               <packing>
                 <property name="position">6</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label1210">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">GRIL commands</property>
-              </object>
-              <packing>
-                <property name="position">6</property>
+                <property name="tab_label" translatable="yes">GRIL commands</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -3172,16 +3031,7 @@
               <packing>
                 <property name="position">7</property>
                 <property name="tab_fill">False</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel" id="label2210">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">ADC</property>
-              </object>
-              <packing>
-                <property name="position">7</property>
+                <property name="tab_label" translatable="yes">ADC</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
