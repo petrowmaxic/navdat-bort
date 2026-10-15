@@ -27,10 +27,18 @@ CLIENTS=$(grep -h '^Exec=' /usr/share/bort/applications/navdat-*.desktop \
     | sed 's/^Exec=//' | grep -vE '^navdat-(bortcfg|applet)\b' | sort -u)
 
 cat > /tmp/bortd_query.py <<'EOF'
-import sys
+import sys, time
 sys.path.insert(0, "/usr/share/bort/bortcfg")
 import bortd
-c = bortd.BortClient()
+# bortd со многими приборами (и под эмуляцией) открывает сокет не сразу
+for _ in range(60):
+    try:
+        c = bortd.BortClient()
+        break
+    except OSError:
+        time.sleep(1)
+else:
+    sys.exit("bortd socket did not appear in 60 s")
 c.sync()
 while not c._vars:
     c.handle_input()
@@ -59,7 +67,7 @@ echo "--- 2. bortd (демо-режим, все типы приборов)"
 if ! bortd -d -D > /tmp/bortd.log 2>&1; then
     echo "FAIL: bortd -d -D exited with error"; cat /tmp/bortd.log; exit 1
 fi
-sleep 3
+sleep 1
 pgrep -u "$(id -u)" -x bortd >/dev/null || { echo "FAIL: bortd is not running"; cat /tmp/bortd.log; exit 1; }
 python3 /tmp/bortd_query.py || { echo "FAIL: bortd does not answer"; FAIL=1; }
 
@@ -99,8 +107,12 @@ done < /tmp/clients.result
 
 echo "--- bortd остановка"
 python3 /tmp/bortd_query.py stop >/dev/null 2>&1 || true
-sleep 2
-pgrep -x bortd >/dev/null && { echo "WARN: bortd still running, killing"; pkill -x bortd; }
+for _ in $(seq 1 30); do pgrep -x bortd >/dev/null || break; sleep 1; done
+if pgrep -x bortd >/dev/null; then
+    echo "FAIL: bortd did not stop on CMD_STOP"; pkill -x bortd; FAIL=1
+else
+    echo "bortd stopped by CMD_STOP"
+fi
 echo "--- bortd.log"; tail -20 /tmp/bortd.log
 
 [ $FAIL = 0 ] && echo "OK: all clients start without the container" || { echo "FAIL: see above"; exit 1; }
