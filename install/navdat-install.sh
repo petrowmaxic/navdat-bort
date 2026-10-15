@@ -27,6 +27,15 @@ GITHUB_API=${NAVDAT_GITHUB_API:-https://api.github.com}
 SOURCE_URL=${NAVDAT_SOURCE_URL:-https://codeload.github.com/$PUBLIC_REPO/tar.gz/$NAVDAT_REF}
 TITLE="Установка NavDat"
 ROLE=${1:-user}            # user | root (второй этап, запускается самим мастером)
+SELF=$(readlink -f "$0")
+
+# Офлайн-комплект: рядом с мастером лежит repo/ с пакетами и зависимостями
+# (собирается install/build-offline-bundle.sh). Тогда интернет не нужен.
+BUNDLE=${NAVDAT_BUNDLE:-}
+if [ -z "$BUNDLE" ] && [ -f "$(dirname "$SELF")/repo/Packages" ]; then
+    BUNDLE=$(dirname "$SELF")/repo
+fi
+export NAVDAT_BUNDLE=$BUNDLE
 
 if [ "$ROLE" = user ]; then
     export NAVDAT_LOG=${NAVDAT_LOG:-$HOME/navdat-install.log}
@@ -114,6 +123,23 @@ if [ "$ROLE" = root ]; then
         [ -z "$loc" ] || curl -fsSL -o "$2" "$loc"
     }
 
+    if [ -n "$NAVDAT_BUNDLE" ]; then
+        step "Проверка офлайн-комплекта"
+        (cd "$NAVDAT_BUNDLE" && sha256sum -c --quiet SHA256SUMS) >>"$LOG" 2>&1 \
+            || die "Комплект повреждён: контрольные суммы пакетов не совпали."
+        REPO=$NAVDAT_BUNDLE
+        case "$REPO" in *" "*) cp -r "$REPO" "$WORK/repo"; REPO=$WORK/repo ;; esac
+        echo "lightdm shared/default-x-display-manager select lightdm" | debconf-set-selections
+        # только локальный репозиторий; системные источники apt не трогаем
+        mkdir -p "$WORK/lists/partial"
+        echo "deb [trusted=yes] file:$REPO ./" > "$WORK/offline.list"
+        APT_OFF=(-o Dir::Etc::SourceList="$WORK/offline.list" -o Dir::Etc::SourceParts=/nonexistent
+                 -o Dir::State::Lists="$WORK/lists" -o APT::Sandbox::User=root)
+        step "Установка пакетов из комплекта (несколько минут)"
+        apt-get "${APT_OFF[@]}" update -qq >>"$LOG" 2>&1 || die "Не удалось прочитать комплект."
+        apt-get "${APT_OFF[@]}" install -y -q navdat-full navdat-user >>"$LOG" 2>&1 \
+            || die "Установка пакетов из комплекта не удалась."
+    else
     step "Подготовка системы"
     apt-get update -qq >>"$LOG" 2>&1 || die "apt-get update не удался. Проверьте интернет."
     apt-get install -y -qq curl ca-certificates dpkg-dev python3 >>"$LOG" 2>&1 \
@@ -154,6 +180,7 @@ EOF
 
     step "Установка пакетов (несколько минут)"
     apt-get install -y -q "$WORK"/dist/*.deb >>"$LOG" 2>&1 || die "Установка пакетов не удалась."
+    fi
 
     step "Настройка оператора и входа в систему"
     printf 'navdat:%s\n' "$NAVDAT_PASSWORD" | chpasswd || die "Не удалось задать пароль оператора."
@@ -176,7 +203,11 @@ EOF
 fi
 
 # ================================================================ этап user
-say "NavDat installer: $PUBLIC_REPO@$NAVDAT_REF, packages $PRIVATE_REPO@$RELEASE_TAG"
+if [ -n "$BUNDLE" ]; then
+    say "NavDat installer: offline bundle $BUNDLE"
+else
+    say "NavDat installer: $PUBLIC_REPO@$NAVDAT_REF, packages $PRIVATE_REPO@$RELEASE_TAG"
+fi
 
 . /etc/os-release
 if [ "${ID:-}" != ubuntu ] || ! printf '%s\n%s\n' 24.04 "${VERSION_ID:-0}" | sort -V -C; then
@@ -185,6 +216,16 @@ fi
 if [ "$(dpkg --print-architecture)" != amd64 ]; then
     die "Нужен компьютер x86-64 (amd64): закрытые программы NavDat существуют только для этой архитектуры."
 fi
+if [ -n "$BUNDLE" ]; then
+ui_info "Мастер установит бортовую программу NavDat из офлайн-комплекта.
+Интернет не нужен.
+
+Понадобятся:
+ • пароль для оператора navdat;
+ • пароль администратора этого компьютера.
+
+После установки компьютер нужно перезагрузить."
+else
 command -v curl >/dev/null && command -v python3 >/dev/null \
     || die "Нужны curl и python3 (sudo apt install curl python3)."
 
@@ -197,6 +238,7 @@ ui_info "Мастер установит бортовую программу Nav
  • подключение к интернету.
 
 После установки компьютер нужно перезагрузить."
+fi
 
 check_credentials() {   # $1 логин, $2 ключ
     local login
@@ -215,6 +257,7 @@ check_credentials() {   # $1 логин, $2 ключ
 GH_LOGIN=${NAVDAT_GH_LOGIN:-}
 GH_TOKEN=${NAVDAT_GH_TOKEN:-}
 for attempt in 1 2 3; do
+    [ -n "$BUNDLE" ] && break       # офлайн: пакеты уже в комплекте
     [ -n "$GH_LOGIN" ] || GH_LOGIN=$(ui_entry "Логин GitHub:")
     [ -n "$GH_TOKEN" ] || GH_TOKEN=$(ui_secret "Ключ доступа GitHub для $GH_LOGIN:")
     if check_credentials "$GH_LOGIN" "$GH_TOKEN"; then break; fi
@@ -223,7 +266,7 @@ for attempt in 1 2 3; do
     [ "$attempt" = 3 ] && die "Не удалось войти в GitHub."
     GH_LOGIN=; GH_TOKEN=
 done
-say "GitHub access ok for $GH_LOGIN"
+[ -n "$BUNDLE" ] || say "GitHub access ok for $GH_LOGIN"
 
 OP_PASSWORD=${NAVDAT_PASSWORD:-}
 while [ -z "$OP_PASSWORD" ]; do
@@ -248,7 +291,6 @@ export NAVDAT_PUBLIC_REPO=$PUBLIC_REPO NAVDAT_REF NAVDAT_PRIVATE_REPO=$PRIVATE_R
 # не в /tmp: fs.protected_regular запрещает root дописывать чужие файлы
 # в каталогах со sticky-битом
 export NAVDAT_PROGRESS=$(mktemp -p "${XDG_RUNTIME_DIR:-$HOME}" .navdat-progress.XXXXXX)
-SELF=$(readlink -f "$0")
 
 run_root() {  # запускает второй этап; пароль sudo спрашивается до трёх раз
     if [ "$(id -u)" = 0 ]; then bash "$SELF" root; return; fi
