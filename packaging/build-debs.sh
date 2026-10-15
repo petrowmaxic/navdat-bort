@@ -13,6 +13,10 @@ WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 
 MAINTAINER="NavDat port <navdat@localhost>"
+# Отметка сборки в версии: каждая новая сборка новее предыдущей, и apt
+# ставит её поверх уже установленной (иначе та же версия пропускается).
+export NAVDAT_BUILD=${NAVDAT_BUILD:-$(date -u +%Y%m%d%H%M%S)}
+B="+b$NAVDAT_BUILD"
 
 # control <pkg> <version> <arch> <depends> <description> [recommends]
 control() {
@@ -42,7 +46,7 @@ build() {
 
 # --- navdat-bortcfg ---------------------------------------------------------
 P=navdat-bortcfg
-control $P 0.3.0 all \
+control $P 0.3.0$B all \
     "python3, python3-gi, gir1.2-gtk-3.0, navdat-bortd" \
     "Navdat - configuration manager (Python 3 / GTK 3)" \
     "navdat-help"
@@ -59,7 +63,7 @@ build $P
 
 # --- navdat-help ------------------------------------------------------------
 P=navdat-help
-control $P 0.3.0 all "xdg-utils" "Navdat documentation in HTML format"
+control $P 0.3.0$B all "xdg-utils" "Navdat documentation in HTML format"
 install -d "$WORK/$P/usr/share/navdat" "$WORK/$P/usr/bin"
 cp -R "$ROOT/navdat/help" "$WORK/$P/usr/share/navdat/"
 install -m 755 "$ROOT/navdat/bin/navdat-help" "$WORK/$P/usr/bin/"
@@ -67,7 +71,7 @@ build $P
 
 # --- navdat-awesome-config --------------------------------------------------
 P=navdat-awesome-config
-control $P 0.1.0 all \
+control $P 0.1.0$B all \
     "awesome (>= 4.3), awesome-extra, ubuntu-mono, librsvg2-common, picom, dex, zenity, rofi, pavucontrol, pulseaudio-utils, network-manager-gnome, lightdm, lightdm-gtk-greeter | lightdm-greeter, xserver-xorg, x11-xserver-utils" \
     "Navdat Awesome WM configuration files" \
     "navdat-bortcfg, navdat-help, gnome-control-center, gnome-terminal, nautilus, gsimplecal, xbacklight, gnome-keyring"
@@ -82,7 +86,7 @@ build $P
 
 # --- navdat-user ------------------------------------------------------------
 P=navdat-user
-control $P 0.7.0 all "adduser, navdat-awesome-config, lightdm, mc, vim-nox" \
+control $P 0.7.0$B all "adduser, navdat-awesome-config, lightdm, mc, vim-nox" \
     "Navdat system operator user" "navdat-full"
 install -d "$WORK/$P/usr/share/navdat-user"
 cp -R "$ROOT/packaging/navdat-user/skel" "$WORK/$P/usr/share/navdat-user/"

@@ -68,7 +68,7 @@ done
 
 cat > "$WORK/$P/DEBIAN/control" <<EOF
 Package: $P
-Version: 1.0
+Version: 1.0+b${NAVDAT_BUILD:-$(date -u +%Y%m%d%H%M%S)}
 Architecture: amd64
 Maintainer: NavDat port <navdat@localhost>
 Depends: libc6, libstdc++6, libgcc-s1, zlib1g, libglib2.0-0t64 | libglib2.0-0, libfontconfig1, libfreetype6, libsm6, libice6, libxi6, libxrender1, libxext6, libx11-6, libxt6t64 | libxt6, libxau6, libgl1

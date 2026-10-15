@@ -19,12 +19,15 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 OUT=$(mkdir -p "${2:-$ROOT/dist}" && cd "${2:-$ROOT/dist}" && pwd)
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
+# отметка сборки в версии, как в build-debs.sh: новая перепаковка ставится
+# поверх старой (иначе исправления обёрток не доходят до ноутбуков)
+export NAVDAT_BUILD=${NAVDAT_BUILD:-$(date -u +%Y%m%d%H%M%S)}
 
 repack() {   # repack <deb> <hook>
     local deb=$1 dir
     dir=$WORK/$(basename "$deb" .deb)
     dpkg-deb -R "$deb" "$dir"
-    sed -i -E 's/^(Version: .*)$/\1+noble1/' "$dir/DEBIAN/control"
+    sed -i -E "s/^(Version: .*)\$/\\1+noble1.b$NAVDAT_BUILD/" "$dir/DEBIAN/control"
     "$2" "$dir"
     rm -f "$dir/DEBIAN/md5sums"
     dpkg-deb --root-owner-group --build "$dir" "$OUT" >/dev/null
