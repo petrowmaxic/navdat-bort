@@ -68,7 +68,7 @@ build $P
 # --- navdat-awesome-config --------------------------------------------------
 P=navdat-awesome-config
 control $P 0.1.0 all \
-    "awesome (>= 4.3), awesome-extra, ubuntu-mono, librsvg2-common, picom, dex, zenity, rofi, pavucontrol, pulseaudio-utils, network-manager-gnome, lightdm, x11-xserver-utils" \
+    "awesome (>= 4.3), awesome-extra, ubuntu-mono, librsvg2-common, picom, dex, zenity, rofi, pavucontrol, pulseaudio-utils, network-manager-gnome, lightdm, lightdm-gtk-greeter | lightdm-greeter, xserver-xorg, x11-xserver-utils" \
     "Navdat Awesome WM configuration files" \
     "navdat-bortcfg, navdat-help, gnome-control-center, gnome-terminal, nautilus, gsimplecal, xbacklight, gnome-keyring"
 A=$WORK/$P/usr/share/navdat-awesome-config
