@@ -5,6 +5,10 @@
 #   VM_ARCH=amd64 tests/vm/run.sh     x86-64 ВМ (на ARM-хосте — эмуляция TCG, медленно)
 #   NAVDAT_DEBS=<каталог> ...         ещё и настоящие закрытые пакеты NavDat:
 #                                     перепаковка, bortd в демо-режиме, все клиенты (только amd64)
+#   VM_ARCH=amd64 NAVDAT_DEBS=<каталог> tests/vm/run.sh install
+#                              мастер установки на ЧИСТОЙ ВМ (отдельный VM_DIR):
+#                              имитация GitHub, ответы как у человека, перезагрузка,
+#                              проверка автовхода в сеанс Navdat Awesome
 #   tests/vm/run.sh ssh [cmd]  зайти в ВМ
 #   tests/vm/run.sh stop       выключить ВМ
 #
@@ -100,7 +104,28 @@ case "${1:-run}" in
     ssh)  shift; start; vssh "$@"; exit ;;
     stop) [ -f qemu.pid ] && kill "$(cat qemu.pid)" && rm -f qemu.pid; exit ;;
     run)  ;;
-    *)    sed -n '2,13p' "$0"; exit 1 ;;
+    install)
+        [ -n "$NAVDAT_DEBS" ] || { echo "install needs NAVDAT_DEBS" >&2; exit 1; }
+        start
+        echo "== copy installer and packages"
+        scp "${SCP_OPTS[@]}" "$ROOT/install/navdat-install.sh" "$ROOT/tests/vm/fake_github.py" \
+            "$ROOT/tests/vm/install-check.sh" ubuntu@127.0.0.1:/tmp/
+        rsync -a --delete --include '*.deb' --exclude '*' -e "ssh ${SSH_OPTS[*]}" \
+            "$NAVDAT_DEBS/" ubuntu@127.0.0.1:navdat-debs/
+        echo "== run installer"
+        vssh 'bash /tmp/install-check.sh install'
+        echo "== reboot"
+        vssh 'sudo systemctl reboot' || true
+        sleep 20
+        for _ in $(seq 1 120); do vssh true 2>/dev/null && break; sleep 5; done
+        echo "== verify after reboot"
+        scp "${SCP_OPTS[@]}" "$ROOT/tests/vm/install-check.sh" ubuntu@127.0.0.1:/tmp/
+        vssh 'bash /tmp/install-check.sh verify'
+        mkdir -p shots
+        scp "${SCP_OPTS[@]}" ubuntu@127.0.0.1:/tmp/shot-install.png shots/ || true
+        echo "screenshots: $VM_DIR/shots"
+        exit ;;
+    *)    sed -n '2,17p' "$0"; exit 1 ;;
 esac
 
 start
