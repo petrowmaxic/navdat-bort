@@ -11,7 +11,6 @@
 | `navdat/` | Справка (DocBook XML и HTML, ru/en) и `navdat-help` |
 | `navdat-awesome-config/` | Конфигурация awesome WM рабочего места оператора и X-сеанс `navdat-awesome` |
 | `packaging/` | Сборка deb-пакетов для 24.04 и перепаковка закрытых пакетов |
-| `legacy/` | Контейнер Ubuntu 16.04 для закрытых клиентов на Qt4 |
 | `tools/glade2builder.py` | Конвертер libglade → GtkBuilder |
 | `tests/` | Тесты bortcfg с фейковым `bortd` |
 
@@ -32,9 +31,11 @@
 - **bortd** (закрытый бинарник) зависит только от glibc и libstdc++ и работает
   на 24.04 нативно. В пакете исправлена зависимость `libgcc1` → `libgcc-s1`.
 - **Клиенты** (`navdat-arrow`, `navdat-specview`, `navdat-tvpanel` и др.)
-  собраны под Qt4, Qwt и libglade2, которых в 24.04 нет. Поэтому они
-  запускаются в контейнере Ubuntu 16.04 через `navdat-legacy`. Ярлыки, меню и
-  иконки ставятся на хост, а `/usr/bin/navdat-*` становятся обёртками.
+  работают нативно, без контейнера. 15 из 21 клиента используют GTK2 и
+  libglade, а они есть в 24.04. Для остальных пакет `navdat-compat` кладёт в
+  `/opt/navdat/lib` библиотеки из Ubuntu 16.04: Qt4, Qwt, libpng12, libaudio
+  и libFOX. Сами бинарники лежат в `/usr/lib/navdat/bin`, а
+  `/usr/bin/navdat-*` — обёртки, которые подключают эти библиотеки.
 
 ## Установка на Ubuntu 24.04
 
@@ -42,18 +43,16 @@
 отдельный каталог, например `~/navdat-debs`.
 
 ```bash
-sudo apt install dpkg-dev podman
+sudo apt install dpkg-dev curl
 packaging/build-debs.sh dist
 packaging/repack-proprietary.sh ~/navdat-debs dist
 sudo apt install ./dist/*.deb
 sudo passwd navdat
 ```
 
-Образ контейнера для клиентов собирается один раз, от имени пользователя `navdat`:
-
-```bash
-navdat-legacy build ~/navdat-debs
-```
+`repack-proprietary.sh` при этом скачивает из архива Ubuntu 16.04
+библиотеки для `navdat-compat`. Версии и SHA256 зафиксированы в
+`packaging/build-compat.sh`.
 
 После перезагрузки в LightDM выберите сеанс **Navdat Awesome**.
 
@@ -79,9 +78,8 @@ navdat-legacy build ~/navdat-debs
    перепаковать их `packaging/repack-proprietary.sh`.
 4. Скачать исходники этого репозитория и собрать открытые пакеты
    `packaging/build-debs.sh`.
-5. Установить всё вместе с зависимостями, собрать контейнер для клиентов
-   (`navdat-legacy build`), создать пользователя `navdat` с введённым
-   паролем.
+5. Установить всё вместе с зависимостями и создать пользователя `navdat`
+   с введённым паролем.
 6. Сделать LightDM менеджером входа вместо GDM: GDM в новых GNOME не
    запускает X11-сеансы. Выбрать для `navdat` сеанс «Navdat Awesome» и
    перезагрузить ноутбук.
@@ -94,8 +92,7 @@ navdat-legacy build ~/navdat-debs
 - Все остальные шаги по отдельности проверены на Ubuntu 24.04 arm64
   (`tests/vm/run.sh`). На 26.04 и на x86-64 с настоящим `bortd` не
   проверялись.
-- Для 26.04 нужно отдельно проверить наличие `awesome`, `podman` и
-  контейнера Ubuntu 16.04 (репозиторий xenial).
+- Для 26.04 нужно отдельно проверить наличие `awesome`, GTK2 и libglade2.
 
 ## Проверка
 
@@ -118,5 +115,6 @@ tests/vm/run.sh
 - собирает и ставит пакеты;
 - запускает awesome с конфигом и проверяет, что нет ошибок.
 
-Работа с реальным `bortd`, приборами и контейнером клиентов в CI не
-проверяется, потому что для этого нужны закрытые пакеты.
+Работа с реальным `bortd` и клиентами в CI не проверяется, потому что для
+этого нужны закрытые пакеты. Локально её проверяет `tests/vm/run.sh` с
+`NAVDAT_DEBS=<каталог с оригинальными deb>` на x86-64 ВМ.

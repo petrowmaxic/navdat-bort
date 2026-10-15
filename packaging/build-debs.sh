@@ -4,7 +4,7 @@
 #   packaging/build-debs.sh [каталог-для-пакетов]   (по умолчанию dist/)
 #
 # Собираются: navdat-bortcfg, navdat-help, navdat-awesome-config,
-# navdat-user, navdat-legacy. Нужен только dpkg-deb.
+# navdat-user. Нужен только dpkg-deb.
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -87,15 +87,6 @@ control $P 0.7.0 all "adduser, navdat-awesome-config, lightdm, mc, vim-nox" \
 install -d "$WORK/$P/usr/share/navdat-user"
 cp -R "$ROOT/packaging/navdat-user/skel" "$WORK/$P/usr/share/navdat-user/"
 install -m 755 "$ROOT/packaging/navdat-user/postinst" "$WORK/$P/DEBIAN/postinst"
-build $P
-
-# --- navdat-legacy ----------------------------------------------------------
-P=navdat-legacy
-control $P 0.1.0 all "podman" \
-    "Run proprietary Ubuntu 16.04 NavDat clients in a container"
-install -d "$WORK/$P/usr/share/navdat-legacy" "$WORK/$P/usr/bin"
-install -m 644 "$ROOT/legacy/Containerfile" "$WORK/$P/usr/share/navdat-legacy/"
-install -m 755 "$ROOT/legacy/navdat-legacy" "$WORK/$P/usr/bin/"
 build $P
 
 ls -1 "$OUT"
