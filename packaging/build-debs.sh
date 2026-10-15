@@ -34,6 +34,8 @@ control() {
 build() {
     find "$WORK/$1" -name __pycache__ -prune -exec rm -rf {} +
     find "$WORK/$1" -name .DS_Store -delete
+    # права из рабочей копии (например 600 на macOS) не должны попасть в пакет
+    chmod -R u=rwX,go=rX "$WORK/$1"
     dpkg-deb --root-owner-group --build "$WORK/$1" "$OUT" >/dev/null
     echo "built $1"
 }
@@ -66,7 +68,7 @@ build $P
 # --- navdat-awesome-config --------------------------------------------------
 P=navdat-awesome-config
 control $P 0.1.0 all \
-    "awesome (>= 4.3), awesome-extra, picom, dex, zenity, rofi, pavucontrol, pulseaudio-utils, network-manager-gnome, lightdm, x11-xserver-utils" \
+    "awesome (>= 4.3), awesome-extra, ubuntu-mono, librsvg2-common, picom, dex, zenity, rofi, pavucontrol, pulseaudio-utils, network-manager-gnome, lightdm, x11-xserver-utils" \
     "Navdat Awesome WM configuration files" \
     "navdat-bortcfg, navdat-help, gnome-control-center, gnome-terminal, nautilus, gsimplecal, xbacklight, gnome-keyring"
 A=$WORK/$P/usr/share/navdat-awesome-config

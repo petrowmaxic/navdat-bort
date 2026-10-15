@@ -5,34 +5,35 @@ local wibox = require("wibox")
 
 local vicious = require("vicious")
 
+-- ubuntu-mono 24.04: battery icons are named unity-battery-*
 local icondir_base = "/usr/share/icons/ubuntu-mono-dark/status/22/"
 local battery_icons = {
     ["charged"] =
-        icondir_base .. "battery-charged.svg",
+        icondir_base .. "unity-battery-charged.svg",
     ["charging-000"] =
-        icondir_base .. "battery-000-charging.svg",
+        icondir_base .. "unity-battery-000-charging.svg",
     ["charging-020"] =
-        icondir_base .. "battery-020-charging.svg",
+        icondir_base .. "unity-battery-020-charging.svg",
     ["charging-040"] =
-        icondir_base .. "battery-040-charging.svg",
+        icondir_base .. "unity-battery-040-charging.svg",
     ["charging-060"] =
-        icondir_base .. "battery-060-charging.svg",
+        icondir_base .. "unity-battery-060-charging.svg",
     ["charging-080"] =
-        icondir_base .. "battery-080-charging.svg",
+        icondir_base .. "unity-battery-080-charging.svg",
     ["charging-100"] =
-        icondir_base .. "battery-100-charging.svg",
+        icondir_base .. "unity-battery-100-charging.svg",
     ["discharging-000"] =
-        icondir_base .. "battery-000.svg",
+        icondir_base .. "unity-battery-000.svg",
     ["discharging-020"] =
-        icondir_base .. "battery-020.svg",
+        icondir_base .. "unity-battery-020.svg",
     ["discharging-040"] =
-        icondir_base .. "battery-040.svg",
+        icondir_base .. "unity-battery-040.svg",
     ["discharging-060"] =
-        icondir_base .. "battery-060.svg",
+        icondir_base .. "unity-battery-060.svg",
     ["discharging-080"] =
-        icondir_base .. "battery-080.svg",
+        icondir_base .. "unity-battery-080.svg",
     ["discharging-100"] =
-        icondir_base .. "battery-100.svg"
+        icondir_base .. "unity-battery-100.svg"
 }
 
 local iconkey_fmt = {

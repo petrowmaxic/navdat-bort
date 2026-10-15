@@ -1,3 +1,7 @@
+-- awesome 4.3 in Ubuntu 22.04+ runs on Lua 5.3, where the Lua 5.1 global
+-- unpack (used by redflat and battery.lua) is gone
+unpack = unpack or table.unpack
+
 -- @DOC_REQUIRE_SECTION@
 -- Standard awesome library
 local gears = require("gears")

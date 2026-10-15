@@ -6,10 +6,7 @@ STAMP="${XDG_RUNTIME_DIR:-/tmp}/navdat-autostart.$(id -u)"
 [ -e "$STAMP" ] && exit 0
 touch "$STAMP"
 
-# композитный менеджер (замена compton)
-command -v picom >/dev/null 2>&1 && picom -b
-
-# XDG autostart: navdat-applet, nm-applet и т.п.
+# XDG autostart: navdat-applet, nm-applet, picom (замена compton) и т.п.
 command -v dex >/dev/null 2>&1 && dex --autostart --environment Navdat &
 
 SCRIPT_PATH=$HOME/.navdatrc

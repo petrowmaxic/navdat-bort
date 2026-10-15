@@ -37,11 +37,11 @@ case "$1" in
     chmod 755 "$NAVDAT_HOME/.navdatrc"
 
     mkdir -p "$NAVDAT_HOME/.config/menus" "$NAVDAT_HOME/data"
-    [ -e "$NAVDAT_HOME/.config/awesome" ] || \
+    [ -e "$NAVDAT_HOME/.config/awesome" ] || [ -L "$NAVDAT_HOME/.config/awesome" ] || \
         ln -s /usr/share/navdat-awesome-config "$NAVDAT_HOME/.config/awesome"
-    [ -e "$NAVDAT_HOME/.config/applications" ] || \
+    [ -e "$NAVDAT_HOME/.config/applications" ] || [ -L "$NAVDAT_HOME/.config/applications" ] || \
         ln -s /usr/share/bort/applications "$NAVDAT_HOME/.config/applications"
-    [ -e "$NAVDAT_HOME/.config/menus/applications.menu" ] || \
+    [ -e "$NAVDAT_HOME/.config/menus/applications.menu" ] || [ -L "$NAVDAT_HOME/.config/menus/applications.menu" ] || \
         ln -s /usr/share/bort/menus/navdat-applications.menu \
               "$NAVDAT_HOME/.config/menus/applications.menu"
 

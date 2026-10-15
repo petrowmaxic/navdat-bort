@@ -590,8 +590,9 @@ function menu.new(args, parent)
 	_menu.wibox:set_widget(_menu.layout)
 
 	-- set size
-	_menu.wibox.width = _menu.theme.width
-	_menu.wibox.height = _menu.add_size
+	-- awesome 4.3 rejects zero-sized wiboxes (empty submenu)
+	_menu.wibox.width = math.max(_menu.theme.width, 1)
+	_menu.wibox.height = math.max(_menu.add_size, 1)
 
 	-- Set menu autohide timer
 	------------------------------------------------------------
