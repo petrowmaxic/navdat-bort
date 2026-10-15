@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Sattelite table
+Name[ru]=Таблица спутников
+Comment=Sattelite pannel
+Comment[ru]=Панель спутников
+Exec=navdat-jst --new
+Icon=navdat-jst
+Terminal=false
+Type=Application
+Categories=Navigation;

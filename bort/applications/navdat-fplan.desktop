@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=UTF-8
+Name=Flight Plan
+Name[ru]=Полётное задание
+Comment=Flight plan pannel
+Comment[ru]=Панель полётного задания
+Exec=navdat-fplan --new
+Icon=navdat-fplan
+Terminal=false
+Type=Application
+Categories=Navigation;

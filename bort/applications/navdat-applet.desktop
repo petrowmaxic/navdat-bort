@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Bort daemon control applet
+Name[ru]=Апплет управления бортовым сервером
+Exec=navdat-applet
+Terminal=0
+Type=Application
+Categories=Bort;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

@@ -1,0 +1,1412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.docbook.org/xml/4.3/docbookx.dtd">
+<article id="navdat-book" lang="en"><articleinfo><title lang="en">Data acquisition system "NavDat"</title><authorgroup><author><firstname/><surname/><affiliation><orgname lang="en">"GeoTechnologies"</orgname><address format="linespecific"><email>gp@geotechnologies-rus.com</email></address></affiliation></author></authorgroup><copyright><year>2006-2018</year><holder>GeoTechnologies</holder></copyright><legalnotice id="legalnotice"><para>
+    Site: <ulink url="http://www.geotechnologies-rus.com/">http://www.geotechnologies-rus.com/</ulink>
+  </para><para>
+    E-Mail: <ulink url="mailto: gp@geotechnologies-rus.com">info@geotechnologies-rus.com</ulink>
+  </para></legalnotice></articleinfo><sect1 id="intro"><title lang="en"> Software purpose and main functions</title><para lang="en">
+    "NavDat" is software solution for survey computational tasks adapted for IBM PC compatible on-board computer.</para><para lang="en">
+    "NavDat" main functions are:
+  </para><itemizedlist lang="en"><listitem>
+      Navigation support. Based on modern satellite navigation technology "NavDat" provides real-time registration
+      of navigation parameters, automatic solution of wide range of navigation tasks,
+      routing control through pilot's indicator, and interactive control of a flight plan. 
+    </listitem><listitem>
+      Interaction with on-board geophysical hardware. Using on-board computer interface "NavDat"
+      provides data and command exchange between all devices to guarantee data integrity.
+    </listitem><listitem>
+      Data saving. Data are recorded on a hard drive of an on-board computer.
+    </listitem><listitem>
+      User interface. Software provides full control of interaction with hardware.
+    </listitem></itemizedlist><para lang="en">
+    "NavDat" is designed in such a way that only one technician is able to provide navigation and
+    survey control. Program work was organized in a way to prevent fatal data loss or damage
+    by reason of technician mistakes.
+  </para><para lang="en">
+    Hardware platform for "NavDat" is <ulink url="http://en.wikipedia.org/wiki/IA-64">IA-64</ulink> compatible computer with Operating System <ulink url="http://www.gnu.org">GNU/Linux</ulink>.
+  </para></sect1><sect1 id="installation"><title lang="en">Program installation</title><para lang="en">
+    "NavDat" is delivered as a software package from <ulink url="http://geotechnologies-rus.com/en/main_en.html">Geotechnologies</ulink>
+	server. The package is created to be used on GNU/Linux system
+    <ulink url="http://ubuntu.com">Ubuntu 16.04.3 LTS</ulink>.
+    First, you should install 64-bit Ubuntu Operating System, installation guide could be found here:
+    <ulink url="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</ulink>.
+  Second, start <ulink url="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux">Terminal</ulink> and run the following commands:
+  </para><example><programlisting format="linespecific">
+		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
+	</programlisting><programlisting format="linespecific">
+		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
+		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
+		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
+		EOF
+	</programlisting><programlisting format="linespecific">
+		sudo apt-get update
+	</programlisting><programlisting format="linespecific">
+		sudo apt-get install navdat-user
+	</programlisting></example><para lang="en">
+    Your user_name and password are provided by <ulink url="http://geotechnologies-rus.com/en/main_en.html">Geotechnologies</ulink>.
+    After the System reboot a new account "NavDat session user" will appear. Its password is set by the administrator during installation.
+    It is strongly recommended to use this account to work with "NavDat" only. 
+  </para><para lang="en">
+    Some recommendations:
+    <itemizedlist><listitem>
+	Not less then 10 GB is required for root file system
+	    </listitem><listitem>
+	Not less then 1 GB is required for swap
+      </listitem><listitem>
+	Separate volume is preferable for data saving and storage (i.e. for /home directory)
+      </listitem><listitem>
+  Recommended file systems: ext3, ext4
+      </listitem></itemizedlist>
+  </para></sect1><sect1 id="visualisation"><title lang="en">Visualisation and user interface</title><para lang="en">
+    User interface is based on <ulink url="https://wiki.archlinux.org/index.php/Awesome">Awesome</ulink> environment.
+  </para><para lang="en">
+    At the left of the top panel there is a list of Desktops, CPU and Memory usage indicators. 
+    At the right ther is a Bort Server idicator (on\off).
+    You can main menu by pressing <keycap moreinfo="none">Alt-F1</keycap> or left mouse button. 
+    This menu contains applications for data visualisation and flight control. 
+  </para><para lang="en">
+    Some useful system parameters can be seen in chart window (see <xref linkend="variables_sys"/>).
+  </para></sect1><sect1 id="settings"><title lang="en">"NavDat" settings and staring up</title><para lang="en">
+	During first launch of "NavDat" please check that navdat user session is running in Awesome mode.
+	The mode is chosen during logging in.
+    </para><figure float="0"><title lang="en">Mode selection</title><mediaobject><imageobject><imagedata fileref="images/gnome" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/gnome.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    To run settings utility tool  use application menu.
+    </para><figure float="0"><title lang="en">Settings utility tool window</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+      This utility allows to add devices, select destination folder for data storage and control 
+      on-board server parameters.
+    </para><para lang="en">
+     After adding new device select interface type its parameters (ip, port etc), save settings and restart server. 
+     Push Settings button to set these parameters. Some devices have additional
+     parameters, which can be set on the corresponding tab of appeared window.
+    </para><figure float="0"><title lang="en">Parameters setting window</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_tabs" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_tabs.png" format="PNG"/></imageobject></mediaobject></figure><warning lang="en"> The first GNSS reciever in the devices list will be always used as a source of navigation data for flight control. </warning><para lang="en">
+      Using application menu you can change desktop configuration of the on-board computer: select 
+      a program from the applications menu and drag it on the desktop. Saved configuration (Settings-&gt;Session: save or <keycap moreinfo="none"> Ctrl+Alt+S </keycap>) will be loaded
+      next time (Settings-&gt;Session: restore or <keycap moreinfo="none"> Ctrl+Alt+R </keycap>).
+    </para></sect1><sect1 id="navigation"><title lang="en">Navigation support</title><para lang="en">
+    "NavDat" uses point coordinates (latitude,altitude) obtained by the first GNSS-receiver in the devices list to solve following navigation tasks:
+  </para><itemizedlist lang="en"><listitem>
+      Distances calculation.  
+      All distances are calculated as lengths of orthodromic lines (the arcs of great circles). Distances
+      are measured in kilometres.
+    </listitem><listitem>
+      Azimuths calculation. 
+      Azimuths are calculated as angles (in degree) between orthodromic lines in the point of intersection.
+    </listitem><listitem>
+      Estimated time calculation.
+      For time calculation current speed measured on the basis of GNSS-receiver data is used.
+    </listitem><listitem>
+      Navigational altitude control, i.e. altitude to be kept by pilot.
+      It can be measured by any device: GNSS-receiver, GT-MAG etc.
+    </listitem><listitem>
+     Flight task implementation control.
+    </listitem></itemizedlist></sect1><sect1 id="devices"><title lang="en">Interaction with on-board devices</title><sect2 id="dev_tcpip"><title lang="en">TCP/IP connection</title><para lang="en">
+    All devices connected using TCP/IP have their ip-address and port. Note that if they have no DHCP-server, the user should 
+    configure a corresponding network manually. Check device's manual for details.
+    </para></sect2><sect2 id="dev_rs232"><title lang="en">Serial port connection</title><para lang="en">
+    Serial communication port should be also configured: address, rate, data bits, parity, stop bits.
+    Usually RS232 devices are connected using USB to COM adapter. The "NavDat" allows to choose assignment method. 
+    One can assign COM-port by device, by ID or by path. For example:
+    </para><example><programlisting format="linespecific">
+/dev/ttyUSB0&gt;	/dev/ttyUSB0
+		/dev/ttyUSB0: by-path
+		/dev/ttyUSB0: by-id
+	</programlisting></example><para lang="en">
+    By devise. If there are more than one RS232 device the user should connect them in the same order every time.
+    </para><para lang="en">
+    By path. The user should connect devices always in the same USB-ports.
+    </para><para lang="en">
+    By ID. This method is possible only if there are no USB to COM adapters with similar ID.
+    </para></sect2><sect2 id="dev_fe"><title lang="en">On-Board Server</title><para lang="en">
+     	By default "NavDat" uses Unix Domain Socket for internal communications between different applications and 
+	devices. To be able to use other means of control and visualization (smartphone, tablet, another PC) you must
+	configure the local network and use the corresponding IP adress for communications. In this case, you need to
+	add the "On-Board Server" device and assign the IP-address and the port number on the server-computer. The same parameters must be 
+	specified in the environment variable BORT_SERVER on the client-computer.
+    </para><para lang="en">
+	To provide the correct value of the variable you must add the following string to the '/etc/environment' 
+	file (root rights are needed):
+    </para><example><programlisting format="linespecific">
+BORT_SERVER="tcp://ip_adress:port"
+	</programlisting></example><para lang="en">
+    </para></sect2><sect2 id="dev_jps"><title lang="en">GNSS-receiver Javad/Topcon</title><para lang="en">
+     "NavDat" is compatible with any <citetitle>Javad Positioning Systems</citetitle> or  <citetitle>Topcon Positioning Systems</citetitle> receiver, 
+     that has RS232 serial port and supports GRIL protocol.
+    </para><para lang="en">
+      Program interacts with a receiver in data-command  interchange mode. That is why you need to turn receiver on and connected it to computer
+      before starting "NavDat".
+      In most cases the receiver has the same power-supply source with the computer,
+      so this requirement is satisfied automatically. 
+      But if you ran program when receiver was turned off do not try to connect it while program is running.
+      Otherwise saved data may be damaged, because essential titles will not be created.
+      While connected to a receiver  "NavDat" saves full navigation data produced by a receiver in a special file <filename moreinfo="none">*.jps</filename>.
+      This is necessary for differential correction software, which supports this data format only.   
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_gps"/>.
+    </para><figure float="0"><title lang="en">Javad/Topcon Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_jps" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_jps.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    The device has one setting parameter - 'Initialization Commands', which defines initialization sequence to be sent to receiver.
+    In case of empty parameter all necessary commands for differential correction and correct visualisation will be sent automatically. 
+    If the parameter is set or the receiver can't receive commands note that full functionality is possible only if the following messages are 
+    received: RT, SI, PG, VG, EL, AZ, DP.
+    </para><para lang="en">
+    The default commands sequence is as follows.
+    </para><example><programlisting format="linespecific">
+    dm
+    em,,/msg/def:0.1
+    em,,/msg/jps/PG:0.1
+    em,,/msg/jps/VG:0.1
+    em,,/msg/jps/AZ:1
+	</programlisting></example><para lang="en">
+    It is supposed that 'def' includes all necessary for differential mode messages, and RT, SI, EL, DP as well
+    </para></sect2><sect2 id="dev_novatel"><title lang="en">GNSS-receiver Novatel</title><para lang="en">
+     "NavDat" is compatible with any <citetitle>Novatel</citetitle> receiver, 
+     that has RS232 serial port. For today the company <citetitle>Novatel</citetitle> didn't 
+     make drivers for their USB-adapter to provide functioning in OS Linux.
+    </para><para lang="en">
+      Program interacts with a receiver in data-command  interchange mode. That's why 
+      you should turn the receiver on and connect it to the computer before starting "NavDat". 
+      In most cases the receiver has the same power-supply source with the computer,
+      so this requirement is satisfied automatically. 
+      But if you ran program when receiver was turned off do not try to connect it while program is running.
+      Otherwise saved data may be damaged, because essential titles will not be created.
+      While connected to a receiver  "NavDat" saves full navigation data produced by a receiver in a special file <filename moreinfo="none">*.nov</filename>.
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_gps"/>.
+    </para><figure float="0"><title lang="en">Novatel Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_novatel" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_novatel.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    The device has one setting parameter - 'Initialization Commands', which defines initialization sequence to be sent to receiver.
+    In case of empty parameter all necessary commands for differential correction and correct visualisation will be sent automatically. 
+    If the parameter is set or the receiver can't receive commands note that full functionality is possible only if the following messages are 
+    received: bestposb, bestvelb, gpgsa, gpgsv.
+    </para><para lang="en">
+    The default commands sequence is as follows.
+    </para><example><programlisting format="linespecific">
+    unlogall
+    log bestposb ontime 0.1
+    log bestvelb ontime 0.1
+    log GPGSA ontime 1
+    log GPGSV ontime 1
+    log rangecmpb ontime 0.1
+    log almanacb onchanged
+    log ionutcb onchanged
+    log rawephemb onnew
+    log versionb ontime 100
+    log gloalmanacb onchanged
+    log gloclockb onchanged
+    log gloephemerisb onchanged
+    log glorawephemb onchanged
+    log rxstatuseventb onchanged
+	</programlisting></example><para lang="en">
+    While configuring receiver it is recommended to set bitrate as 115200 and also
+    </para><example><programlisting format="linespecific">
+    nmeatalker auto
+    pdpfilter enable
+    pdpmode relative dynamic
+    selectchanconfig 4
+	</programlisting></example><para lang="en">
+    The last instruction is actual only for OEMStar receivers (8 GPS, 6 GLONASS configuration)
+    </para></sect2><sect2 id="dev_tvisor"><title lang="en">Infrared scanner</title><para lang="en">
+      Infrared scanner is an automatic device connected through Ethernet. You should remember, that writing speed of scanner data is about 1MB/sec(3,6 GB/hour) and available disc space should be enough. 
+     Scanner has built-in inertial orientation system. 
+Usually infrared scanner has a built-in GNSS receiver, and interfaces necessary for radar altimeter and pilot's indicator. 
+So, all these devices are connected using one Ethernet cable.
+    </para><figure float="0"><title lang="en">Infrared Scanner Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_tep" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_tep.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    The device has one parameter - 'Optics Forward', which defines installation method with respect to flight direction. This only affects the attitude system behaviour.
+    </para></sect2><sect2 id="dev_gtmag"><title lang="en">GT-Mag system</title><para lang="en">
+      GT-Mag system is an automatic device connected through USB. 
+      Usually GT-Mag has at least one built-in GNSS receiver, and interfaces necessary for radar altimeter and pilot's indicator. 
+      So, all these devices are connected using one USB cable.
+      Default connection settings are as follows: ip-adress 10.100.4.50, port 1917 - GT_Mag, port 4444 - GNSS receiver, port 3333 - pilot arrow.
+      It is necessary to set corresponding network as 10.100.4.yyy, mask 255.255.255.0.
+    </para><figure float="0"><title lang="en">GT-Mag Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_mag" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_mag.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_magf" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_magf.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	The device has the following parameters. GT-MAG group:
+	<itemizedlist><listitem>
+	    Output Frequency - allows to change data sample rate for 1000 Hz version of GT-Mag
+	</listitem><listitem>
+	    Number of Channels - allows to visualize only selected number of channels; it doesn't change data stream file
+	</listitem><listitem>
+	    Use Radar Altimeter - GT-Mag radar altimeter channel will be used as navigational altitude for pilot indicator, if selected
+	</listitem><listitem>
+	    RA Offset - radar altitude offset in meters, to be applied if it is selected (DRA)
+	</listitem><listitem>
+	    RA Scale - radar altitude scale factor, to be applied if it is selected (KRA)
+	</listitem><listitem>
+	    Deviation Parameters - deviation parameters file (mgc-file made by ReinMag software) can be selected; 
+	    these parameters will be applied to first GT-Mag channel only; due to fluxegate channel derivation the compensated value will be delayed 
+	    for 0.2 sec.
+	</listitem></itemizedlist>
+    </para><para lang="en">
+    The calculation rule for the corrected radar altitude is as follows
+    </para><example><programlisting format="linespecific">
+	    H = (RA + DRA) ⋅ KRA
+        </programlisting></example><para lang="en">
+	Fluxgate group allows setting parameters for different sensors, accounting calibration results:
+	<itemizedlist><listitem>
+	    UGND(V) - common signal zero, the default value is 0 (volts)
+	</listitem><listitem>
+	    mV/μT - common scale factor, the default value is 100 (millivolts per microtesla)
+	</listitem><listitem>
+	    DX(V), DY(V), DZ(V) - offset for each channel, Volts, the default values are 0 (volts)
+	</listitem><listitem>
+	    KX, KY, KZ - scale factor for each channel, the default values are 1s
+	</listitem><listitem>
+	    KYX, KZX, KXY, KZY, KXZ, KYZ - cross channel influence; KXY is the X-component factor in Y-component,
+	    for example; the default values are 0s
+	</listitem></itemizedlist>
+    </para><para lang="en">
+	CT-MAG allows measurement of common signal zero instead of radar altitude. In this case it is necessary to 
+	set flag 'meas.' and to clear 'Use Radar Altimeter'. UGND will not be used.
+    </para><para lang="en">
+    The calculation rule for fx, fy, fz in nanotesla is as follows
+    </para><example><programlisting format="linespecific">
+		    x = X - UGND + DX
+		    y = Y - UGND + DY
+		    z = Z - UGND + DZ
+		    fx = (x + y ⋅ KYX + z ⋅ KZX) ⋅ KX ⋅ 10^6 / K
+		    fy = (y + x ⋅ KXY + z ⋅ KZY) ⋅ KY ⋅ 10^6 / K
+		    fz = (z + x ⋅ KXZ + y ⋅ KYZ) ⋅ KZ ⋅ 10^6 / K
+        </programlisting></example><para lang="en">
+    where X, Y, Z are measured values in volts, K is the common scale factor in mV/μT.
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_gtmag"/>.
+    </para></sect2><sect2 id="dev_equator"><title lang="en">Equator system</title><para lang="en">
+      Equator system is an automatic device connected through Ethernet. Data will be recorded 
+      at high speed - 4 Mb/s (14 Gb/hour). Please, check disk free space before start.
+      Equator has built-in GNSS receiver and radar altimeter. 
+      So, all these devices are connected using one Ethernet cable.
+      Default connection settings are as follows: ip-adress 10.100.4.50, port 2000.
+      It is necessary to set corresponding network as 10.100.4.yyy, mask 255.255.255.0.
+    </para></sect2><sect2 id="dev_em4h"><title lang="en">EM4H system</title><para lang="en">
+      EM4H system is an automatic device connected through ethernet or RS232. In case of ethernet connection data will be recorded 
+      at high speed - 4 Mb/s (14 Gb/hour). Please, check disk free space before start.
+      It can have built-in GNSS receiver and radar altimeter. It also can have pilot's indicator interface.
+      Radar altimeter data will be integrated in EM4H data stream. 
+    </para><figure float="0"><title lang="en">EM4H Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_em4h" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_em4h.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	The device has following parameters:
+	<itemizedlist><listitem>
+	    Aircraft type - allows to select between An-2, An-3 and Mi-8: the type defines the compensation algorithm (see <xref linkend="em4h_control"/>).
+	    Note, that choosing An-3 means usage of additional compensation coil mounted on a stinger, not the aircraft itself. 
+	    If there are no such coil on An-3 you should set An-2.
+	    And if it is used on An-2, than set An-3 type.
+	</listitem><listitem>
+	    Use Radar Altimeter - GT-Mag radar altimeter channel will be used as navigational altitude for pilot indicator, if selected
+	</listitem></itemizedlist>
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_em4h"/>.
+    </para></sect2><sect2 id="dev_rs50"><title lang="en">Spectrometer RSx</title><para lang="en">
+     "NavDat" is compatible with spectrometers from  <citetitle>Radiation Solutions Inc</citetitle>, 
+     such as RS-501, RSX4, RSX5 etc which are communicate using RSI protocol.
+    Up to three devices simultaneously.
+     Usually connection settings are 192.168.1.xxx, port 4000. It is necessary to set corresponding network as 192.168.1.yyy, mask 255.255.255.0.
+    </para><para lang="en">
+      For monitoring of this device see <xref linkend="spectra"/>, <xref linkend="variables_spec"/>
+    </para></sect2><sect2 id="dev_grs410"><title lang="en">Spectrometer GRS410</title><para lang="en">
+     "NavDat" is compatible with spectrometers GRS410 from  <citetitle>Pico Envirotec Inc</citetitle> registering individual spectra.
+    Up to three devices simultaneously.
+     Connection to Concentrator or Superconcentrator can be established via serial port.
+    </para><figure float="0"><title lang="en">GRS410 Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_grs410" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_grs410.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	The device has following parameters:
+	<itemizedlist><listitem>
+	    XTAL#* - allows to switch on/off spectrum visualization for crystal # * (* - 1,...,10). Being switched off the corresponding spectrum will
+		be invisible. But it will be registered in data file.
+	</listitem></itemizedlist>
+    </para><para lang="en">
+      For monitoring of this device see <xref linkend="spectra"/>, <xref linkend="variables_spec_grs"/>
+    </para></sect2><sect2><title lang="en">Spectrometer GSA2000</title><para lang="en">
+     "NavDat" is compatible with spectrometers GSA2000.
+    Up to six devices simultaneously.
+     Connection can be established via serial port.
+    </para><warning lang="en">
+	The device works by request and must be initialized.
+	That is why the device has to be started before the software.
+    </warning><figure float="0"><title lang="en">GSA2000 Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_gsa2000" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_gsa2000.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	The device has following parameters:
+	<itemizedlist><listitem>
+	    XTAL - allows to select crystal #1, #2 or their sum.
+	</listitem><listitem>
+	    Mode - allows to select ordinary spectrum or the spectrum of the light.
+	</listitem><listitem>
+	    Stabilization - allows to switch stabilization on/off.
+	</listitem></itemizedlist>
+    </para><para lang="en">
+      For monitoring of this device see <xref linkend="spectra"/>, <xref linkend="variables_spec_gsa"/>
+    </para></sect2><sect2 id="dev_arrow"><title lang="en">Pilot's indicator ("Arrow")</title><para lang="en">
+       This device was designed to display lateral and vertical deviations. 
+       Also current flight mode is shown on the indicator (route approaching, surveying). 
+       Data transfers through RS232 serial port using CTS and RTS mechanism (classic type).
+       ( <ulink url="http://en.wikipedia.org/wiki/RS-232">RS232 interface description</ulink>).
+       Modern type of pilot indicators uses only DTX. Tvisor type is connected only to Infrared scanner.
+       Pilot's indicator is described in details in  <xref linkend="pilotpan_arrow"/>.
+    </para><figure float="0"><title lang="en">Arrow Parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_arr" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_arr.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	Pilot indicator allows to chose it's type: classic, tvisor or modern.
+    </para></sect2><sect2 id="dev_ra"><title lang="en">Radar Altimeter</title><para lang="en">
+	This device is connected to "NavDat" not directly but through some other devices. In some cases connection sheme allows sending commands to radar 
+	altimeter: on, off, test. For this purpose "NavDat" has special application RA Control Panel.
+    </para><figure float="0"><title lang="en">Radar Altimeter Control Panel</title><mediaobject><imageobject><imagedata fileref="images/rapan" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/rapan.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="dev_ffra"><title lang="en">Free Flight Radar Altimeter</title><para lang="en">
+     "NavDat" is compatible with radar altimeters from <citetitle>Free Flight</citetitle>, 
+     that have RS232 serial port: TRA-4000, TRA-4500. They use 56000 bit rate, so the corresponding serial port should
+     be configured to 57600.
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_ffra"/>.
+    </para><figure float="0"><title lang="en">Free Flight RA parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_ffra" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_ffra.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    The device has one setting parameter - 
+	    'Use Radar Altimeter' - it's measurements will be used as navigational altitude for pilot indicator, 
+	    if selected
+    </para></sect2><sect2 id="dev_adc"><title lang="en">Geotechnologies ADC</title><para lang="en">
+     "NavDat" is compatible with any <citetitle>Geotechnologies ADC</citetitle>, 
+     that has RS232 serial port.
+    </para><para lang="en">
+      Variables list for monitoring of this device is in <xref linkend="variables_adc"/>.
+    </para><figure float="0"><title lang="en">ADC parameters</title><mediaobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_adc" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="en" fileref="images/ebortcfg_adc.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    The device has one setting parameter - 'ADC Assignment', which defines scaled variables. Each string must have a following format: 
+    "number_of_channel name offset scale". The two last values should be measured in ADC units.
+    </para></sect2></sect1><sect1 id="status"><title lang="en">System health monitoring</title><para lang="en">
+    All devices connected to the "NavDat" have their own health flag, as well as the "NavDat" itself. 
+    All these flags are monitored by the appropriate application 'Status'.
+    Each flag is visualized using an indicator which is grey while the corresponding device is working correctly, otherwise it's red.
+    Indicators are configured automatically.
+    They are arranged in a row or a column depending on window form.
+    If any indicator is red for a minute or so, current survey should be stopped for recovering.
+    </para><figure float="0"><title lang="en">Status panel</title><mediaobject><imageobject><imagedata fileref="images/status-hor" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/status-hor.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    Flags values are defined as follows
+    </para><itemizedlist><listitem lang="en"><emphasis role="bold">sys</emphasis> - It is red if data write error is occurred, no bytes written or low free disk space (for 10 hours or fewer).
+	</listitem><listitem lang="en"><emphasis role="bold">gtmag</emphasis> - It is red if there are no synchronization with GNSS-receiver, not enough satellites in view, low sensor signal amplitude, low or extremely high 
+			consumption current or no data at all.
+	</listitem><listitem lang="en"><emphasis role="bold">gps</emphasis> - It is red if there are no data or no position in corresponding GNSS-receiver.
+	</listitem><listitem lang="en"><emphasis role="bold">spec</emphasis> - It is red if there is no signal or data stream error is occurred. For GSA2000 the device control byte is also used.
+	</listitem><listitem lang="en"><emphasis role="bold">em4h</emphasis> - It is red if there is no signal, induction is off, any ADC is overranged or data stream error is occurred.
+	</listitem><listitem lang="en"><emphasis role="bold">equator</emphasis> - It is red if there is no signal, induction is off, any ADC is overranged or data stream error is occured.
+	</listitem><listitem lang="en"><emphasis role="bold">ffra</emphasis> - It is red if there is no data from altimeter, there are errors in the stream, or it is in test mode.
+	</listitem><listitem lang="en"><emphasis role="bold">gtadc</emphasis> - It is red if there is no signal.
+	</listitem><listitem lang="en"><emphasis role="bold">e502</emphasis> - It is red if there is no signal.
+	</listitem></itemizedlist></sect1><sect1 id="registration"><title lang="en">Navigational and geophysical data registration</title><para lang="en">
+    "NavDat" creates following files:
+  </para><itemizedlist lang="en"><listitem><filename moreinfo="none">*.dlg</filename> (Data Logging).
+        This binary file contains data from all devices of the system.
+        Format of this file is rather complicated. It will be used by extraction programs while
+        processing later on. You should only remember that synchronization text string is
+        writing in this file periodically, its prefix is $POS:
+      <example lang="en"><programlisting format="linespecific">
+    $POS,12,094301.0,5539.9828751,3736.3127569,237.31,41.1,41.12,0.1,21,03,2009,54.11
+        </programlisting></example>
+        After prefix goes a number of visible satellites,
+        GPS time (HHMMSS.s), latitude, longitude (DDMM.mmmmm), altitude above geoid, heading in degrees, velocity in m/s, PDOP, day, month, year (GPS date), 
+        navigation altitude in meters. 
+        This information could be read from the file by eyes. If there are more then one GNSS receiver, each of them will have it's own pos-message.
+        $POS - number one, $PO1 - number two, etc. All these parameters can be seen in chart window (see <xref linkend="variables_pos"/>).
+        Name of file is a composition of date and time of program start-up. 
+        First symbol corresponds to current month (1 - January, ..., 9 - September, a - October, ..., c - December).
+        After it follow two digits - day, next two digits - number of program start in current day.
+	Data saving process lasts from program start-up till shut down continuously.
+        To ease backup process if file size goes beyond 100Mb it will be closed and data will be saved
+        into the next file. New file gets the same name with additional 'b' at the end of its name, then'c', then 'd', etc.
+    </listitem><listitem><filename moreinfo="none">*.jps</filename> (Javad Positioning Systems, several devices may be).
+        As it was mentioned above data produced by GNSS-receiver of Javad or Topcon type are stored in this binary file.
+        It is used in differential correction procedures. It is divided into 100 Mb parts also.
+        File's name is same as the name of dlg-file. 
+    </listitem><listitem><filename moreinfo="none">*.nov</filename> (Novatel, several devices may be).
+        Data produced by GNSS-receiver of Novatel type are stored in this binary file.
+        It is used in differential correction procedures. It is divided into 100 Mb parts also.
+        File's name is same as the name of dlg-file. 
+    </listitem><listitem><filename moreinfo="none">*.tep</filename> (Infrared scanner).
+        Scanner data are saved into files of individual format. Scanner produces
+        3,6 Gb of data in hour. These files are divided into 100 Mb parts also. And it is clear
+        that more then 30 files will be created every hour. 27th file and following will get
+        two-symbol identification ('ba', 'bb', 'bc' etc) at the end of their names.
+        File's name is the same as for dlg-file.    
+    </listitem><listitem><filename moreinfo="none">*.mag</filename> (GT-Mag, several devices may be).
+        GT-Mag data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </listitem><listitem><filename moreinfo="none">*.rad</filename> (Equator).
+        Equator data are saved into files of individual format, it's data stream is about 4 Gb per hour. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </listitem><listitem><filename moreinfo="none">*.rs</filename> (RSx, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </listitem><listitem><filename moreinfo="none">*.grs</filename> (GRS410, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </listitem><listitem><filename moreinfo="none">*.gsa</filename> (GSA2000, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </listitem><listitem><filename moreinfo="none">*.em4</filename> (EM4H). EM4H data stream is recorded in these files.
+      To provide compatibility with old programs the same data are saved in dlg according to EM4H manual.
+       File's name is the same as for dlg-file.
+      </listitem><listitem><filename moreinfo="none">current.fpl</filename> (Flight Plan).
+        When you quit the program this file contains flight plan information saved in a
+        computer memory by the time of shutting down. This format is described in details in (<xref linkend="fpl"/>).
+    </listitem></itemizedlist><para lang="en">
+    Similar devices write to different files:  <filename moreinfo="none">*.rs</filename>, <filename moreinfo="none">*.rs1</filename>, ... 
+    or  <filename moreinfo="none">*.jps</filename>, <filename moreinfo="none">*.jp1</filename>, ...
+  </para></sect1><sect1 id="fpl"><title lang="en"> Flight plan file</title><para lang="en">
+    This is a text file, that contains formalized description of a flight plan.
+    There are several ways to create this file: you can use text editor or use <ulink url="http://www.geosoft.com/products/oasis-montaj">Geosoft Oasis Montaj</ulink> 
+    utility or even use "NavDat" itself.
+    But present syntax rules must be satisfied anyway.
+  </para><sect2 id="terminology"><title lang="en">Terms</title><para lang="en">
+      Flight plan consists of records. Each record has a type, a name and a list
+      of points (may be empty). Points description includes name (optionally), 
+      latitude and longitude. Every record in the file should begin a new line 
+      and comply with following template:
+    </para><programlisting format="linespecific">
+ RECORD_TYPE RECORD_NAME =
+(POINT_NAME, LATITUDE, LONGITUDE),
+(POINT_NAME, LATITUDE, LONGITUDE),
+..........
+(POINT_NAME, LATITUDE, LONGITUDE),
+      </programlisting><para lang="en">
+    All names (RECORD_NAME, POINT_NAME) in the file shouldn't start with a number 
+    or contain "+-/*.,$#@!%^&amp;()[]|\&lt;&gt;" symbols. Symbol '_' is valid. Records
+    with identical names are acceptable.
+    </para><para lang="en">
+      Points coordinates should follow "DDDMMmmmm" format, i.e. degree-minutes-parts_of_minute
+      without spacing. Degrees are on the first place (up to three characters
+      for longitude and up to two for latitude), then goes minutes integer part -
+      two characters, then minutes fractional part- exactly four characters.
+      Sign depends on a hemisphere. Negative latitude value corresponds to the
+      Southern Hemisphere, negative longitude to the Western Hemisphere.
+    </para><para lang="en">
+    Note, Flight plan and aboard navigation system should use the same coordinate system.
+    Usually GNSS receivers operate in WGS84 system.
+    </para><para lang="en">
+    Possible values of RECORD_TYPE field are:
+    </para><itemizedlist lang="en"><listitem><constant>LINE</constant> – if record contains ordered list of route points.
+      </listitem><listitem><constant>POSITION</constant> – if points of these record don't 
+	describe a route, e.g. airports (then record name may be AIRPORTS) or obstacles
+	(then record name may be OBSTACLES).
+      </listitem><listitem><constant>REGION</constant> – if record contains ordered array of 
+      polygon vertex, which bounds survey area or any other area in operation zone.
+      </listitem></itemizedlist><para lang="en">
+    Flight plan file may include comments. Comments should be located on the right side of the line
+    and should have two ';' symbol at the beginning. An example of <filename moreinfo="none">*.fpl</filename> file is given
+    below. Syntax rules are not applied to records order and it depends only on reading and work convenience. 
+    Here is an example:
+    </para><example><programlisting format="linespecific">
+;;;;;;;;;;;;;;;;;savedFPL. it is COMMENT
+POSITION AIRPORTS=
+(-3815,3815), ;;ONE MORE COMMENT
+ (CONTROL,-0,-0),
+ (3815,-3815);
+LINE RKM=
+ (CONTROL,-5396,-0),
+ (CONTROL,-0,-0),
+ (CONTROL,5396,-0);
+POSITION OBSTRUCT=
+ (-3815,-3815),
+ (CONTROL,-0,-0),
+ (3815,3815);
+LINE RKM=
+ (CONTROL,-0,-5396),
+ (CONTROL,-0,-0),
+ (CONTROL,-0,5396);
+      </programlisting></example><para lang="en">
+    All points in this example are located near the equator, because all significant characters
+    are interpreted as minute fractions.
+    </para><para lang="en">
+	For convenience it is possible to load flight plan as Geosoft <filename moreinfo="none">*.xyz</filename>:
+    </para><example><programlisting format="linespecific">
+Line 101
+   LATITUDE LONGITUDE
+   LATITUDE LONGITUDE
+   ..........
+   LATITUDE LONGITUDE
+Tie 201
+   ..........
+      </programlisting></example><para lang="en">
+      Points coordinates should follow "DDDMMmmmm" format, i.e. degree-minutes-parts_of_minute
+      without spacing, the same as in <filename moreinfo="none">*.fpl</filename>. Points names will be automatically set to A0, A1, A2 etc, 
+      and all routes will be loaded as LINEs.
+      After loading the flight plan can be saved in <filename moreinfo="none">*.fpl</filename> format only.
+</para></sect2></sect1><sect1 id="fplan"><title lang="en">Flight Plan panel</title><para lang="en">
+  Flight plan panel is used to display flight plan file and for plan control.
+  At startup single empty line is displayed on the panel.
+  If you move cursor right or down to panel borders then panel will scroll.
+  To start working with flight plan load its file.
+    <figure float="0"><title>Flight plan panel</title><mediaobject><imageobject><imagedata fileref="images/fplan" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan.png" format="PNG"/></imageobject></mediaobject></figure>
+  </para><sect2 id="fplan_load"><title lang="en"> Flight plan loading and viewing</title><figure float="0"><title lang="en"> Open file dialog box.</title><mediaobject><imageobject><imagedata fileref="images/fplan-open" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-open.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+      To load flight plan file press <keycap moreinfo="none">F3</keycap> when the flight plan panel is active.
+      Now you can see a traditional file system window. Select a <filename moreinfo="none">*.fpl</filename> file.
+      It is also possible to select Geosoft <filename moreinfo="none">*.xyz</filename> file. It will be converted to <filename moreinfo="none">*.fpl</filename> format.
+      After flight plan loading the previous one will be lost.
+    </para><para lang="en">
+      To append new flight plan to the current press <keycap moreinfo="none">Ctrl+F3</keycap> when the flight plan panel is active.
+      All new lines will be appended to the end of current list.
+    </para><para lang="en">
+      After loading you can see a list of records in the flight plan panel. Lines in this list are
+      marked with different colors.  
+    </para><warning lang="en">
+    A huge flight plan loading leads to system resources overloading. To clear current flight plan stop the daemon and delete file 'current.fpl' in data directory.
+  </warning><para lang="en">
+      Beige is for records of LINE type, green for REGION type, rose for POSITION type. Please note, list of
+      points is not displayed yet, there are only titles on the panel.   
+      For POSITION and REGION types number of points is shown on the right side of the lines.
+      For LINE type there is a small triangle on the left, number of points and some extra 
+      parameters on the right: entry course value(in degree), total route length and time
+      required to pass it with current speed.
+    </para><para lang="en">
+      A triangle indicates direction in which routes will be passed (from top downward or bottom-up) and route status.
+      Triangles change their color during a flight: green means flown route, gray -not flown yet.
+      If a triangle twinkles green and red - this is the current route. You can invert this flag for selected routes pressing <keycap moreinfo="none">Ctrl+D</keycap>.
+      To display a list of route points direct a cursor on an appropriate line and press <keycap moreinfo="none">Enter</keycap>.
+      Now you can see a list of route points.  Points indicators also change their color: gray for not
+      passed points, twinkle for current point and green for passed points.
+      To hide the list press <keycap moreinfo="none">Enter</keycap> again.
+    </para><para lang="en">
+     Extra parameters for routes points and routes titles are described below.
+     Entry course value corresponds to direction of the vector from the first point to the second in a list.
+    </para><para lang="en">
+    For each point following parameters are shown:
+    </para><itemizedlist lang="en"><listitem>
+	      Direction of a vector from previous point to this point(in degree). For the first point 0 is shown.</listitem><listitem>
+	      Length of this vector (km), 0 for the first point. 
+      </listitem><listitem>
+	      Time needed to pass this distance with current speed, 0 for the first point.
+      </listitem><listitem>
+	      *azimuth from aircraft point to this point (degree).
+      </listitem><listitem>
+	      *distance from aircraft to this point(km).
+      </listitem><listitem>
+	      *time needed to pass this distance with current speed.
+      </listitem></itemizedlist><para lang="en">
+      For REGION and POSITION types only parameters marked with * are shown in a list of points.
+    </para></sect2><sect2 id="edit"><title lang="en"> Flight plan editing.</title><para lang="en">
+      Flight plan editing is available in  "NavDat". With regard to the experience in system use and taking into account danger of a mistake, next options were made available:  
+    </para><itemizedlist lang="en"><listitem><firstterm> Edit record title.</firstterm>
+	  Press <keycap moreinfo="none">Alt+M</keycap>(modify) on a title. Red line will appear with name and type of the record in it.
+	  L means LINE type, R means REGION and P means POSITION. After editing press <keycap moreinfo="none">Enter</keycap> to save changes.
+	  In case of mistake you'll see a syntax rule and changes will be discarded.
+      </listitem><listitem><firstterm>Edit point parameters.</firstterm>
+	  Move cursor to the required line, press <keycap moreinfo="none">Alt+M</keycap>. In the red line you'll see: name of the point,
+	  its latitude and longitude (exactly in this order). Format for coordinates is "DDDMMmmmm" without
+	  spacing. Degrees are on the first place (up to three characters for longitude and up to two for
+	  latitude), then goes minutes integer part - two characters, then minutes fractional part-
+	  exactly four characters. Sign depends on a hemisphere. Negative latitude value corresponds to the
+	  Southern Hemisphere, negative longitude-to the Western Hemisphere.
+      </listitem><listitem><firstterm>Delete record/point.</firstterm>
+	  Move cursor to the required line or select several lines, then press <keycap moreinfo="none">Ctrl-Delete</keycap>.
+      </listitem><listitem><firstterm>Copy record/point.</firstterm>
+	  Move cursor to the line or several select lines you are going to copy then press <keycap moreinfo="none">Ctrl-Insert</keycap>
+	  Then move cursor to the line you are going to insert copied lines and press <keycap moreinfo="none">Shift-Insert</keycap>.
+      </listitem></itemizedlist></sect2><sect2 id="markup-parallel"><title lang="en"> Creation of the system of parallel routes </title><para lang="en">
+      This option allows to cover a surveying region with a grid of parallel routes. A record 
+      for this region should be created before calling the procedure. Move cursor to the title of this
+      record and press <keycap moreinfo="none">Alt+G</keycap>.
+       Edit bar will appear, where following fields should be filled:
+    </para><itemizedlist lang="en"><listitem>
+       Name mask. All created routes will be given a name beginning with this mask.
+       After mask goes a number of a route.
+      </listitem><listitem>
+       Routes direction in degrees.
+      </listitem><listitem>
+	      Distance between neighboring routes in meters. 
+      </listitem><listitem>
+        Latitude and longitude of a point, through which central route will go. By default this point is the centre for vertex of the region.
+      </listitem></itemizedlist><para lang="en">
+      Procedure of routes creation is next. Through the central point an orthodromic line A is drawn at right angle
+      to the given route direction.
+      Then two segments are intercepted along A from a central point to the both sides. Their length is 
+      equal to the distance between neighboring routes.
+      Then through ends of these segments orthodromic lines are drawn at right angle to A.
+      These lines are routes lines. And their ends lay at the boundary of the region. Routes with even and odd numbers are of opposite direction.      
+    </para><figure float="0"><title lang="en">Marking of parallel lines</title><mediaobject><imageobject><imagedata fileref="images/fplan-markup" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-markup.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+      As a result of this operation list of created routes will be shown in the main list after record
+      of corresponding region. 
+    </para><para lang="en"><caution><title/>
+	Creation of parallel routes also has commercial aspect. Every unnecessary route means 
+	unnecessary flight time. That's why we advise to be thoughtful during the process. And better use 
+	Geosoft Oasis Montaj solution - as  smarter product for such tasks. 
+      </caution></para></sect2><sect2 id="markup-rkm"><title lang="en"> Creation magnetic compensation routes system</title><para lang="en">
+      This option allows to create a magnetic compensation routes system. 
+      All these routes have different directions and pass through one central point.
+      Move cursor to the place where you want these routes to appear and press <keycap moreinfo="none">Alt+R</keycap>.
+      Edit bar will appear, where following fields should be filled:
+    </para><itemizedlist lang="en"><listitem>
+       Name mask. All created routes will be given a name beginning with this mask.
+       After mask goes route's heading in degrees.
+      </listitem><listitem>
+       One of the routes direction in degrees. All other directions will be calculated automatically.
+      </listitem><listitem>
+       Routes radius in meters. Total route length will be equal to two radii.
+      </listitem><listitem>
+       Angle between parts of one route.
+      </listitem><listitem>
+        Latitude and longitude of central point, through which all routes will pass. By default this point corresponds to current position.
+      </listitem></itemizedlist><para lang="en">
+	If  the angle between parts of one routes is not zero, the result will be as the variant 1 (<xref linkend="fig-rkm1"/>). 
+	There will be four routes with 90 degrees between them. Otherwise, the result will be as the variant 2 (<xref linkend="fig-rkm2"/>). 
+	There will be eight routes with 45 degrees between them.
+    </para><figure id="fig-rkm1" float="0"><title lang="en">Magnetic compensation routes. Variant 1.</title><mediaobject><imageobject><imagedata fileref="images/fplan-rkm1" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-rkm1.png" format="PNG"/></imageobject></mediaobject></figure><figure id="fig-rkm2" float="0"><title lang="en">Magnetic compensation routes. Variant 2.</title><mediaobject><imageobject><imagedata fileref="images/fplan-rkm2" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-rkm2.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="sect-fplan-setup"><title lang="en">Adjustment, start and stop of a routing</title><para lang="en">
+      So, flight plan was created, edited and checked.  Now it's time for take-off and routing. But before start point for routing should be chosen:
+    </para><itemizedlist lang="en"><listitem>
+	Press <keycap moreinfo="none">Ctrl+Backspace</keycap> to choose reading direction of list of routes.
+      </listitem><listitem>
+	Next step is specifying order of points for each route. Press <keycap moreinfo="none">Alt-Backspace</keycap> to invert direction of all routes or <keycap moreinfo="none">Backspace</keycap> 
+	to invert direction of selected routes.
+      </listitem><listitem>
+	Select line of the start point. If you've selected a title of a route then routing will start from the first point of highlighted route in given reading direction.
+      </listitem><listitem>
+	Check everything one more time and press <keycap moreinfo="none">Ctrl+S</keycap>. Then "NavDat" will start routing.
+	Routing will be realized in full accordance with specified reading order.</listitem></itemizedlist><para lang="en">
+    In case of forced route entry procedure is the same, but instead of <keycap moreinfo="none">Ctrl+S</keycap> press <keycap moreinfo="none">Ctrl+L</keycap> (direct start).
+    Then the program will start routing directly from the start point without approaching procedure.  
+    </para><para lang="en">
+    To stop routing press  <keycap moreinfo="none">Ctrl+K</keycap>. This option is available even if flight plan panel is  not active.
+    </para></sect2><sect2 id="sect-pos-fix"><title lang="en">Position fix</title><para lang="en">
+      All navigation system in the world use this important option to register coordinates of the current point.
+      Because "NavDat" was developed for quite specific survey tasks, this option was realized
+      in  specific way too.
+      To activate this option press <keycap moreinfo="none">Ctrl+F</keycap>. Then the program will do follow steps:
+    </para><figure id="fig-pos-fix" float="0"><title>Position fix</title><mediaobject><imageobject><imagedata fileref="images/pos-fix" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/pos-fix.png" format="PNG"/></imageobject></mediaobject></figure><itemizedlist lang="en"><listitem>
+	New record named FIX will be  created. If such record already exists it won't be duplicated.
+      </listitem><listitem>
+	Point with current coordinates will be saved into this record under the name composed
+	of date and time.
+      </listitem><listitem>
+  If this option is activated while routing, new point with the same name, which lays on the traverse
+  of current point, will be added to the list of route points.(<xref linkend="fig-pos-fix"/>)
+      </listitem></itemizedlist></sect2><sect2 id="fplan_hotkeys"><title lang="en">Flight plan panel control</title><itemizedlist lang="en"><listitem>
+  Use <keycap moreinfo="none">Arrow-keys</keycap> to move through a list also you can use standard hot keys for selection.
+  (<keycap moreinfo="none">Shift up/down</keycap> - move and inverse selection,
+  <keycap moreinfo="none">Ctrl up/down</keycap> - move and save selection,
+  <keycap moreinfo="none">Ctrl Space</keycap> - inverse selection without moving)
+      </listitem><listitem><keycap moreinfo="none">Enter</keycap> Show/hide list of points.
+      </listitem><listitem><keycap moreinfo="none">F3</keycap> Load flight plan file instead of current.
+      </listitem><listitem><keycap moreinfo="none">Ctrl+F3</keycap> Load flight plan file to append to the end of current list.
+      </listitem><listitem><keycap moreinfo="none">F2</keycap> Save flight plan file.
+      </listitem><listitem><keycap moreinfo="none">Backspace</keycap> Invert points order of a highlighted route
+      </listitem><listitem><keycap moreinfo="none">Alt-Backspace</keycap> Invert points order of all routes.
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Backspace</keycap> Invert routes order
+      </listitem><listitem><keycap moreinfo="none">Alt-M</keycap> Modify highlighted line, <keycap moreinfo="none">Esc</keycap> - discard changes.
+      </listitem><listitem><keycap moreinfo="none">Alt-G</keycap> Cover highlighted region with parallel routes
+      </listitem><listitem><keycap moreinfo="none">Alt-R</keycap> Magnetic compensation routes system creation
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Delete</keycap> Delete selection
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Insert</keycap> Copy selection
+      </listitem><listitem><keycap moreinfo="none">Shift-Insert</keycap> Paste copied selection
+      </listitem><listitem><keycap moreinfo="none">Ctrl-D</keycap> Invert 'done' flag for selected routes. 
+      </listitem><listitem><keycap moreinfo="none">Ctrl-S</keycap> Start routing with approaching to the first point.
+      </listitem><listitem><keycap moreinfo="none">Ctrl-L</keycap> Start routing without approaching
+      </listitem><listitem><keycap moreinfo="none">Ctrl-K</keycap> Stop routing - global option, it works from any window. 
+      </listitem><listitem><keycap moreinfo="none">Ctrl-F</keycap> Fix current point, it works from any window. 
+      </listitem></itemizedlist></sect2></sect1><sect1 id="panorama"><title lang="en">Panorama</title><para lang="en">
+    Panorama is a main tool for visualization and control of surveying process. It shows navigation information graphically. 
+  </para><figure id="fig-panorama" float="0"><title lang="en">Panorama window</title><mediaobject><imageobject><imagedata fileref="images/panorama" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/panorama.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    All elements of a flight plan are displayed on the panorama schematically and
+    all operations in the flight plan panel affect on panorama view.
+    (<xref linkend="fig-panorama"/>)
+  </para><para lang="en">
+    In the top-left corner there is scale  of the map(size of one side of a square in meters).
+    In the bottom-left corner there are following parameters:
+  </para><itemizedlist lang="en"><listitem>
+      Time - GPS time (hh:mm:ss)
+    </listitem><listitem>
+      Track - current course angle (degree)
+    </listitem><listitem>
+      Lat - latitude (degree-minutes-seconds)
+    </listitem><listitem>
+      Lon - longitude (degree-minutes-seconds)
+    </listitem><listitem>
+      Alt - altitude by GNSS (meters)
+    </listitem><listitem>
+      V - current speed (km/h)
+    </listitem></itemizedlist><para lang="en">
+    In the bottom-right corner there are following parameters::
+  </para><itemizedlist lang="en"><listitem>
+      Route - current route name
+    </listitem><listitem>
+      Dst.Point - name of current destination point
+    </listitem><listitem>
+      Est.Time - estimated time left till the end of the current route in case of routing or
+      till the beginning of the route in case of approaching to the route(hh:mm:ss)
+    </listitem><listitem>
+      Est.Dist - distance to the end of current route in case of routing or
+      to the beginning of the route in case of approaching to the route(km)
+    </listitem></itemizedlist><para lang="en">
+    Airplane symbol shows current position of the aircraft. Dotted contour means the aircraft is 
+    beyond panorama border. Green arrow shows the aircraft direction. 
+  </para><para lang="en">
+    On the right side of the panorama there is route progress indicator. Route is represented by a
+    yellow line and blue circle on it shows current position on the route.
+  </para><para lang="en">
+    At the bottom of the panorama there is a scale of pilot's indicator. Orange circle duplicates
+    pilot's indicator readings. Blue square shows lateral deviation, scale spacing is 100 metres.
+  </para><sect2><title lang="en">Panorama main elements</title><para lang="en">
+      To display flight task elements on the panorama flight task file should be loaded.
+      Then flight task elements will be shown schematically on the panorama. 
+    </para><itemizedlist lang="en"><listitem>
+  Routes on the panorama are represented by dark orange lines. Arrow at the end of a route or on panorama
+  border (if the end of a route lies beyond panorama border) shows route direction. Note, titles of routes in flight plan panel are the same color.
+      </listitem><listitem>
+	Regions borders on the panorama are green. Regions titles in flight plan panel are the same color.
+      </listitem><listitem>
+  Highlighted routes or regions are white on the panorama.     
+      </listitem><listitem>
+  Highlighted point is represented by white circle and its name is shown near.
+      </listitem><listitem>
+  Single points (POSITION type) are rose and their names are shown always.     
+      </listitem><listitem>
+  Current route or route which the aircraft is approaching is shown with bold light orange line. 
+      </listitem><listitem>
+  All routes marked as flown ones are shown in blue color. 
+      </listitem><listitem>
+  Curvilinear parts of routes are displayed by dotted lines which consists of small white triangles. 
+  In case of small scale this lines look solid.  
+      </listitem></itemizedlist></sect2><sect2><title lang="en">Panorama view modes</title><para lang="en">
+      Panorama has two view modes
+    </para><itemizedlist lang="en"><listitem>
+	Panoramic. The airplane symbol is fixed, upward direction corresponds to the current direction of a flight.
+      </listitem><listitem>
+	Map. North is up, the airplane symbol is moving. 
+      </listitem></itemizedlist></sect2><sect2><title lang="en"> Hot keys</title><para lang="en"><itemizedlist><listitem><keycap moreinfo="none">Q, A</keycap> - zoom in/zoom out
+	</listitem><listitem><keycap moreinfo="none">M</keycap> - Change panorama view mode
+	</listitem><listitem><keycap moreinfo="none">Z</keycap> - Put the aircraft symbol into the center
+	</listitem><listitem><keycap moreinfo="none">C</keycap> - Resize map to the window size
+	</listitem><listitem>
+	  Use arrow keys to move the map 
+	</listitem></itemizedlist></para></sect2></sect1><sect1 id="pilotpan"><title lang="en">Pilot's indicator, routing parameters and pilot's panel</title><para lang="en">
+   During a flight "NavDat" changes operating modes depending on a flight mode.
+   But anyway control information is displayed on a pilot's indicator.
+  </para><sect2 id="pilotpan_arrow"><title lang="en">Pilot's indicator</title><para lang="en">
+      Pilot's indicator has an arrow pointer and two light-emitting diodes - red and green. Diodes twinkle in different ways depending on a routing regime. The arrow pointer shows deviations from given direction. In all routing regimes main pilot task is to keep pointer in zero position.
+      Please note, zero corresponds to a straight-line motion while routing and to a curvilinear motion while approaching a route.
+    </para><para lang="en">
+     Direction of pointer deflection is an adjustable parameter. You can adjust it depending on pilot's preferences. 
+     Current flight mode is shown on the indicator by using two light-emitting diodes (red and green).   
+    </para><para lang="en">
+      There are four different routing regimes:  
+    </para><orderedlist numeration="arabic" lang="en" inheritnum="ignore" continuation="restarts"><listitem> Routing is off: red diode is lighting.</listitem><listitem>Approaching a point: red is lighting, green is twinkling. </listitem><listitem>Routing is on: green is lighting.</listitem><listitem>Approaching a route(curvilinear routing) : at the beginning of  the trajectory red and green flashes in alternate mode. Reds flashes less and less frequently when approaching the route until it stops flashing. That means routing was started.  
+      </listitem></orderedlist><para lang="en">
+       The program allows to interchange diodes colors.
+     </para><para lang="en">
+	Arrow parameters related to flight plan can be visualized in chart window, their list is in <xref linkend="variables_fplan"/>
+    </para></sect2><sect2><title lang="en">Routing regimes</title><para lang="en">
+    There are several routing regimes. During a flight they follows one after another according to a flight plan.
+    </para><sect3><title lang="en">Approaching a point</title><para lang="en">
+      In this case destination point is defined but flight route isn't.
+      In this case pilot's indicator shows an angle between direction of motion and direction to the destination point. For this mode scale range is stated in degrees. 
+      </para></sect3><sect3><title lang="en">Curvilinear routing regime</title><para lang="en">
+      As a rule in this case route consists of two short line segment connected by  segments of a circle. While routing along circular curve pilot's indicator shows an angle between direction of motion and line tangent to this curve.
+      Scale range is stated in degrees.
+      </para></sect3><sect3><title lang="en">Routing mode</title><para lang="en">
+      In order to achieve necessary accuracy of surveying some requirements to pilot technique should be met. In routing mode main quality
+      characteristic is lateral deviation from a route. Scale range is stated in meters.
+      </para></sect3><para lang="en">
+      Not only angular and lateral deviations should be measured in order to achieve stable and accurate routing.
+      Inertness of an aircraft and pilot's reaction should be taken into account as well. That's why software controlling pilot's
+      indicator is based on mathematical algorithms and real-time modeling of motion.
+    </para></sect2><sect2><title lang="en">Route entry conditions </title><figure float="0"><title lang="en">Route entry parameters scheme</title><mediaobject><imageobject><imagedata fileref="images/cc-provo" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/cc-provo.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+      "NavDat" provides entry on a route. For switching from approaching regime into routing regime following conditions must be fulfilled:
+    </para><itemizedlist lang="en"><listitem>
+	Distance between the airplane and the route must be less then b
+      </listitem><listitem>
+	An angle between flight direction and route direction mustn't exceed beta
+      </listitem><listitem>
+	Lateral deviation mustn't exceed c
+      </listitem><listitem>
+	Route entry must be completed within distance d
+      </listitem></itemizedlist><para lang="en">
+     So the airplane must fly within quadrangle CDEF.
+     Special point B will be described separately.
+    </para><para lang="en">
+     Point B is a preliminary entry point. If attempt to enter the route in point B fails for any reason the program will put this point closer to the beginning of the route and will make further attempts to enter the route until point B reach segment CD. In this moment program will make a decision about re-approaching.
+    </para><para lang="en">
+      This parameters and some others parameters are adjustable. Their values depends on given accuracy and scale of surveying,
+      flight conditions, piloting characteristics of the airplane, etc.
+      A special panel is used to adjust them (<xref linkend="fig-pilotpan"/>).
+    </para></sect2><sect2 id="pilotpan_params"><title lang="en">Parameters</title><figure id="fig-pilotpan" float="0"><mediaobject><imageobject><imagedata fileref="images/pilotpan" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/pilotpan.png" format="PNG"/></imageobject></mediaobject><title lang="en">Pilot's panel view</title></figure><itemizedlist lang="en"><listitem>
+	Radius – given radius of curvilinear routing in meters
+      </listitem><listitem>
+	Prolon – distance to the point of preliminary entry (a), in number of Radius
+      </listitem><listitem>
+	Width – max lateral deviation (c) at the beginning of a route in meters
+      </listitem><listitem>
+	x0 – min entry distance (d) in meters
+      </listitem><listitem>
+	x1 – max entry distance (b) in meters
+      </listitem><listitem>
+	angle - entry angle beta in degrees
+      </listitem><listitem>
+	Line range – scale of indicator pointer for routing mode, in percents of radius. Should be remembered,
+	that a pointer shows predicted value of deviation. Parameters Line dist are used to calculate predicted deviation.  
+      </listitem><listitem>
+	Line dist 0 and Line dist 1 – distances to prognosis points, in meters.
+	In routing mode this points are plotted on the line of current flight direction. And their deviation affects on pointer position.
+      </listitem><listitem>
+	Line dist rd – distance to prognosis point that takes angular velocity into account, in meters.
+	If this parameter is not null Line dist 0 and Line dist 1 are plotted from this point in corresponding direction.
+	Very significant parameter, represents dynamic characteristic of an aircraft
+	If Line dist rd is null parameters Line dist 0 and Line dist 1 are ignored.
+      </listitem><listitem>
+	Angle range – scale of indicator pointer for curvilinear routing mode and for approaching mode in degrees.
+        From experience for steady route entry it should be equal 3°-4°.  
+      </listitem><listitem>
+	Max accel – max level of acceleration (for quality control of GNSS data).
+	From experience 10 m/sec2 is adequate value.
+      </listitem><listitem>
+	Smoothing – filtration parameter.
+	From experience 95-97 is adequate value.
+      </listitem><listitem>
+	Altitude* – Flight altitude.
+      </listitem><listitem>
+	Vertical scale* – Vertical arrow scale.
+      </listitem><listitem>
+	Arrow Inversion – inverse pointer deflection. Some pilots prefer left deflection of a pointer in case of right deviation.
+      </listitem><listitem>
+	Lamp Inversion – inverse diodes color.
+      </listitem></itemizedlist><para lang="en"> 
+    The fields marked by * are used only for pilot's indicators of type 'modern'.
+    In this case Arrow Inversion is applied to both horizontal and vertical indicators.
+  </para></sect2><sect2 id="pilotpan_setup"><title lang="en">Adjustment recommendations</title><para lang="en"> 
+    Parameters adjustment is a task that needs some practice. There are some simple recommendations on adjustment procedure.
+  </para><orderedlist lang="en" inheritnum="ignore" continuation="restarts"><listitem>
+	Set simplified entry conditions, when even rough route entry will be accepted.
+      </listitem><listitem>
+	Set safe radius of curvilinear routing.
+      </listitem><listitem>
+	Set greater distance for preliminary entry point.
+      </listitem><listitem>
+	Set greater value of scale range of pilot's indicator. For linear routing 150 - 200 meters is adequate.
+      </listitem><listitem>
+  Vary Angle range to change arrow pointer sensibility.
+      </listitem><listitem>
+  Choose values of Line dist using balance of route approaching speed and oscillation along a route.
+  With increasing of Line dist 0 and Line dist 1 values approaching gets slower and softer.
+  Main factor that affects on Line dist rd is pilot's  reaction speed.
+      </listitem><listitem>
+  While test flight vary Line dist, Line range and Angle range parameters and watch turns and routing by using panorama or real track lines.
+      </listitem><listitem>
+    When the pilot gets used to indicator working in routing regime, and the operator sets Line dist parameters, 
+    it will be possible to set route entry parameters.
+    Scale range of a pointer is a balance between pilot's skill and routing quality. 
+    Keeping the pointer in zero position is easier when pointer sensibility is smaller but this increases lateral deviations. 
+       </listitem></orderedlist></sect2></sect1><sect1 id="arrow"><title lang="en">Pilot's indicator application</title><para lang="en">
+	There is an application working in the similar way to the arrow device. It can be displayed on the pilot's monitor instead of arrow. 
+	Main features are described in <xref linkend="pilotpan"/> .
+	The additional features are an ability to show turning direction during curved stage of navigation and to show altitude.
+    </para><figure float="0"><title lang="en">Pilot's indicator</title><mediaobject><imageobject><imagedata fileref="images/arrow" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrow.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata fileref="images/arrowct" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrowct.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata fileref="images/arrowcf" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrowcf.png" format="PNG"/></imageobject></mediaobject></figure></sect1><para lang="en">
+	This application was also developed for OS Android, it is availible in Google Play. 
+	It can be installed on pilot's smartphone/tablet and communicate via WiFi.
+	The mobile version has additional options. 
+	It can show Panporama (see <xref linkend="panorama"/>) to contol the current position with respect to the line.
+	In case of working without operator the pilot can check the equipment using status bar 
+	(see <xref linkend="status"/>).
+    </para><figure float="0"><title lang="en">Mobile Pilot's Indicator</title><mediaobject><imageobject><imagedata fileref="images/arrow-mobile" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrow-mobile.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+	To start you must connect to the local network of the On-Board Server and assign the network settings
+	(IP-adress and Port), see <xref linkend="dev_fe"/>.
+    </para><sect1 id="jst"><title lang="en">Table of satellites</title><figure float="0"><title lang="en">Table of satellites</title><mediaobject><imageobject><imagedata fileref="images/jst" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/jst.png" format="PNG"/></imageobject></mediaobject></figure><sect2 lang="en"><title>Celestial Semisphere</title><para>
+      Azimuth and altitude for all visible satellites are displayed on the indicator.
+      So the indicator is a kind of satellites map. Azimuth is measured clockwise from upward direction.
+      Altitude - from the border to the center.
+      If a satellite isn't used in calculation then its symbol will be a ring, not a solid circle.
+      GLONASS satellites are cyan and GPS satellites are blue. Highlighted satellite is marked by yellow spot.
+    </para></sect2><sect2 lang="en"><title>Map</title><para>
+      Red point shows current position and gray line shows passed trajectory. North is always up.
+      Map scale can be selected using menu after clicking on the map with right button.
+    </para></sect2><sect2 lang="en"><title>Satellites panel</title><para>
+      Lines in this panel show status of all visible satellites.
+      In every line there is following information:
+    </para><itemizedlist><listitem>
+	using in calculation
+      </listitem><listitem>
+	index number of a satellite 
+      </listitem><listitem>
+	signal/noise ratio
+      </listitem><listitem>
+	time when satellite was used in calculation
+      </listitem></itemizedlist></sect2><sect2 lang="en"><title>Hot keys</title><itemizedlist><listitem><keycap moreinfo="none">Ctrl+B</keycap> Choose device for visualization
+      </listitem><listitem><keycap moreinfo="none">Ctrl+T</keycap> Show/Hide table of satellites 
+      </listitem><listitem><keycap moreinfo="none">Ctrl+S</keycap> Show/Hide satellites panel
+      </listitem><listitem><keycap moreinfo="none">Ctrl+P</keycap> Show/Hide indicator of a constellation
+      </listitem><listitem><keycap moreinfo="none">Ctrl+M</keycap> Show/Hide map
+      </listitem><listitem><keycap moreinfo="none">F8</keycap> Modify size of satellite table 
+      </listitem></itemizedlist></sect2></sect1><sect1 id="pilot"><title lang="en"> GNSS emulator</title><para lang="en"><figure float="0"><title> GNSS emulator window</title><mediaobject><imageobject><imagedata fileref="images/pilot" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/pilot.png" format="PNG"/></imageobject></mediaobject></figure>    
+    It imitates GNSS data stream from JAVAD receiver and allows to control airplane coordinates and speed. In autopilot mode imitates route passing.
+  </para><warning lang="en">
+    If emulator mode is on receiver host in program settings must be <emphasis role="bold">localhost:4444</emphasis>
+  </warning><para lang="en">
+    To control an airplane use following hot keys.
+  </para><itemizedlist lang="en"><listitem><keycap moreinfo="none">Left/right arrow keys</keycap> - change angular velocity
+      </listitem><listitem><keycap moreinfo="none">Space</keycap> - set angular velocity to zero
+      </listitem><listitem><keycap moreinfo="none">Up/down arrow keys </keycap> - change linear speed
+      </listitem><listitem>
+	Pilot Automatic - mark it to turn on autopilot mode
+      </listitem></itemizedlist><para lang="en">
+      If autopilot mode is on, program keeps an arrow pointer in zero by changing angular velocity while routing. "NavDat" takes into account pointer deflection greater than 10% of hole scale.
+    </para></sect1><sect1 id="samopis"><title lang="en">Chart window </title><para lang="en">
+    In this window registered parameters are displayed as charts.
+  </para><figure float="0"><title lang="en">Chart window</title><mediaobject><imageobject><imagedata fileref="images/samopis" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/samopis.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    Chart window consists of two parts:
+  </para><itemizedlist lang="en"><listitem>List of variables (see <xref linkend="variables"/>) and their view settings</listitem><listitem>Chart zone</listitem></itemizedlist><para lang="en"> 
+    You can choose a variable for visualization from the list. There are four column in the list:
+    Color, Variable, Value, Choose Edge (alignment) and Scale.
+   </para><sect2><title lang="en">Variables view settings</title><para lang="en">
+    Following view settings are available for each variable:
+    <itemizedlist><listitem><constant>Color</constant> press <keycap moreinfo="none">space</keycap> to select color; no chart will be displayed for black color
+      </listitem><listitem><constant>Alignment</constant> press <keycap moreinfo="none">Enter</keycap> and select one of following:
+	<itemizedlist><listitem><constant>OFF</constant> Do not display a variable
+	  </listitem><listitem><constant>CENTER</constant> Center alignment (0 in center)
+	  </listitem><listitem><constant>LEFT</constant>  Left alignment (0 on the left)
+	  </listitem></itemizedlist>
+	</listitem><listitem><constant>Scale</constant> press <keycap moreinfo="none">Enter</keycap> and set required number - full scale in variable's units
+      </listitem></itemizedlist>
+  </para></sect2><sect2 lang="en"><title>Hot keys</title><itemizedlist><listitem><keycap moreinfo="none">F8</keycap> Modify table/charts size, after <keycap moreinfo="none">F8</keycap> press <keycap moreinfo="none">up/down</keycap> arrow-keys to set required size;
+	press and hold <keycap moreinfo="none">Shift</keycap> to modify table/charts size with greater step size ; to complete press <keycap moreinfo="none">Enter</keycap> 
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> Show/hide invisible variables
+      </listitem><listitem><keycap moreinfo="none">Space</keycap> Modify color of highlighted variable
+      </listitem><listitem><keycap moreinfo="none">Backspace</keycap> Do not display highlighted variable
+      </listitem></itemizedlist></sect2></sect1><sect1 id="spectra"><title lang="en">Spectra </title><para lang="en">
+    In this window registered spectra are displayed as charts.
+  </para><figure float="0"><title lang="en">Spectra</title><mediaobject><imageobject><imagedata fileref="images/spectra" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/spectra.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    Spectra window consists of two parts:
+  </para><itemizedlist lang="en"><listitem>Spectra view zone</listitem><listitem>Windows count zone</listitem></itemizedlist><para lang="en"> 
+    You can choose a channel interval for visualization, an accumulation time interval, spectra resolution, turn on/off any spectrum visualization, set markers, select up to ten windows for count monitoring and set scale for their charts, view summed spectrum. You can use cursor to choose any channel, it is signed with channel number and vertical scale which is chosen automatically. Every spectrum state is shown in the string of corresponding color: 
+    <itemizedlist><listitem>
+	"on" - means that spectrum is visualized and data are obtained
+      </listitem><listitem>
+	"off" - means that spectrum is not visualized but data are obtained (not taken into account in windows)
+      </listitem><listitem>
+	"no data" - means that data are not obtained (doesn't depend on visualization status) 
+      </listitem></itemizedlist>
+Every chart headed by strings "left bound - right bound" and "current sample count/current scale".
+For some devices (GRS410, GSA2000) stabilization mode is displayed (L (light), T (Thorium), K (Potassium), U (Uranium), A (Analyzing), 
+0 (not connected)).
+   </para><sect2><title lang="en">Spectra visualization control</title><para lang="en">
+    Following view settings are available:
+    <itemizedlist><listitem><constant>Spectrum select</constant>: press <keycap moreinfo="none">spectrum number</keycap> (1,2,3,...,0(10),Alt 1(11), ... , Ctrl Alt 1(21)...);
+	selected spectra are marked by '*'
+      </listitem><listitem><constant>Spectrum on/off</constant>: press <keycap moreinfo="none">Return</keycap> to switch all selected spectra
+      </listitem><listitem><constant>Spectrum color select</constant>: press <keycap moreinfo="none">Space</keycap> to change color for all selected spectra
+      </listitem><listitem><constant>Accumulation time interval</constant>: press <keycap moreinfo="none">T</keycap> to switch between 1, 20 or 100 samples
+      </listitem><listitem><constant>Spectra resolution</constant>: press <keycap moreinfo="none">R</keycap> to switch between 1, 2 or 4 channels per point; for example 1024 channels spectra can be downsampled to 512 or 256 (1024 is available only if the input spectra are of such resolution)
+      </listitem><listitem><constant>Left bound</constant>: press <keycap moreinfo="none">,</keycap> to decrease or <keycap moreinfo="none">Alt+,</keycap> to increase the number of channel assigned to left bound; press <keycap moreinfo="none">Ctrl</keycap> to make it faster
+      </listitem><listitem><constant>Right bound</constant>: press <keycap moreinfo="none">.</keycap> to increase or <keycap moreinfo="none">Alt+.</keycap> to decrease the number of channel assigned to left bound; press <keycap moreinfo="none">Ctrl</keycap> to make it faster
+      </listitem><listitem><constant>View all channels</constant>: press <keycap moreinfo="none">Ctrl+Z</keycap></listitem><listitem><constant>View selected channels only</constant>: press <keycap moreinfo="none">Ctrl+V</keycap></listitem><listitem><constant>Hide/show windows count zone</constant>: press <keycap moreinfo="none">Ctrl+H</keycap></listitem><listitem><constant>Move windows count zone bound</constant>: press <keycap moreinfo="none">Up</keycap> or <keycap moreinfo="none">Down</keycap>, use <keycap moreinfo="none">Ctrl</keycap> to make it faster
+      </listitem><listitem><constant>Select/deselect count window</constant>: press <keycap moreinfo="none">window index</keycap> (a,b,c,...)
+      </listitem><listitem><constant>Add/remove count window</constant>: press <keycap moreinfo="none">Ctrl+Insert</keycap> to add selected zone and <keycap moreinfo="none">Ctrl+Delete</keycap> to remove selected window and/or all included in the selected zone
+      </listitem><listitem><constant>Add/remove marker</constant>: press <keycap moreinfo="none">Ctrl+Insert</keycap> to add and <keycap moreinfo="none">Ctrl+Delete</keycap> to remove marker (if no zone is selected)
+      </listitem><listitem><constant>Change count chart scale</constant>: press <keycap moreinfo="none">+</keycap>/<keycap moreinfo="none">-</keycap> to increase/decrease scale of selected charts
+      </listitem></itemizedlist>
+  </para><para lang="en">
+	Summed spectrum (sum) shows the sum of all visualized and turned on spectra. It also can be switched on/off.
+  </para></sect2><sect2><title lang="en">Hot keys</title><para lang="en">
+    Following view hot keys are available:
+    <itemizedlist><listitem><keycap moreinfo="none">F1</keycap> - this help
+      </listitem><listitem><keycap moreinfo="none">1</keycap>, <keycap moreinfo="none">2</keycap>, <keycap moreinfo="none">3</keycap>, ... ,  <keycap moreinfo="none">0</keycap> - 
+				select/deselect corresponding spectrum visualization with number from 1 to 10
+      </listitem><listitem><keycap moreinfo="none">Alt+1</keycap>, <keycap moreinfo="none">Alt+2</keycap>, <keycap moreinfo="none">Alt+3</keycap>, ...,  <keycap moreinfo="none">Alt+0</keycap> - 
+				select/deselect corresponding spectrum visualization with number from 11 to 20
+      </listitem><listitem><keycap moreinfo="none">Alt+Ctrl+1</keycap>, <keycap moreinfo="none">Alt+Ctrl+2</keycap>, <keycap moreinfo="none">Alt+Ctrl+3</keycap>, ...,  <keycap moreinfo="none">Alt+Ctrl+0</keycap> - 
+				select/deselect corresponding spectrum visualization with number from 21 to 30
+      </listitem><listitem><keycap moreinfo="none">a</keycap>, <keycap moreinfo="none">b</keycap>, <keycap moreinfo="none">c</keycap>, ... - select/deselect corresponding count window
+      </listitem><listitem><keycap moreinfo="none">Space</keycap> - change color of all selected spectra
+      </listitem><listitem><keycap moreinfo="none">Return</keycap> - switch on/off all selected spectra 
+      </listitem><listitem><keycap moreinfo="none">Left</keycap>, <keycap moreinfo="none">Right</keycap>, <keycap moreinfo="none">Ctrl+Left</keycap>, <keycap moreinfo="none">Ctrl+Right</keycap>,  <keycap moreinfo="none">Home</keycap>, <keycap moreinfo="none">End</keycap>  - move cursor by 1 channel, by 20 channels or to the bounds
+      </listitem><listitem><keycap moreinfo="none">Shift+Left</keycap>, <keycap moreinfo="none">Shift+Right</keycap>, <keycap moreinfo="none">Shift+Ctrl+Left</keycap>, <keycap moreinfo="none">Shift+Ctrl+Right</keycap>,  <keycap moreinfo="none">Shift+Home</keycap>, <keycap moreinfo="none">Shift+End</keycap>  - selection move cursor by 1 channel, by 20 channels or to the bounds
+      </listitem><listitem><keycap moreinfo="none">Up</keycap>, <keycap moreinfo="none">Down</keycap>, <keycap moreinfo="none">Ctrl+Up</keycap>, <keycap moreinfo="none">Ctrl+Down</keycap> - move horizontal splitter by 1 or by 20 pixels
+      </listitem><listitem><keycap moreinfo="none">','</keycap>, <keycap moreinfo="none">Ctrl+','</keycap> - decrease left bound by 1 or by 20
+      </listitem><listitem><keycap moreinfo="none">Alt+','</keycap>, <keycap moreinfo="none">Alt+Ctrl+','</keycap> - increase left bound by 1 or by 20
+      </listitem><listitem><keycap moreinfo="none">'.'</keycap>, <keycap moreinfo="none">Ctrl+'.'</keycap> - increase right bound by 1 or by 20
+      </listitem><listitem><keycap moreinfo="none">Alt+'.'</keycap>, <keycap moreinfo="none">Alt+Ctrl+'.'</keycap> - decrease right bound by 1 or by 20
+      </listitem><listitem><keycap moreinfo="none">+</keycap>, <keycap moreinfo="none">-</keycap> - zoom in or out selected chart scale
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Insert</keycap> - add marker to current cursor position or add count window for current zone if selected
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Delete</keycap> - delete marker from current cursor position, delete selected count window and/or delete all markers and windows inside the selected area
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> - hide/show count windows zone
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Z</keycap> - view all channels
+      </listitem><listitem><keycap moreinfo="none">Ctrl+V</keycap> - view selected channels only
+      </listitem><listitem><keycap moreinfo="none">T</keycap> - switch accumulation time interval: 1/20/100 samples
+      </listitem><listitem><keycap moreinfo="none">R</keycap> - switch resolution mode: every channel/summed by pairs/summed by fours
+      </listitem></itemizedlist>
+  </para></sect2></sect1><sect1 id="em4h_control"><title>EM4H </title><para lang="en">
+    This window allows you to monitor parameters of airborne electromagnetic system EM4H and to manage its work.
+  </para><figure id="em4h-panel" float="0"><title>EM4H</title><mediaobject><imageobject><imagedata fileref="images/em4h" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/em4h.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+    Program window consists of three parts:
+  </para><itemizedlist lang="en"><listitem>Induction control</listitem><listitem>Compensation control</listitem><listitem>Digital panel</listitem></itemizedlist><para lang="en"> 
+	The program allows you to turn on/off operation frequencies, to perform compensation of the aircraft 	
+      influence and to view in different modes values ​​of measured parameters and output them in the panel of the chart-recorder.
+   </para><sect2><title lang="en">Induction control</title><para lang="en">
+    Following operations are available:
+    <itemizedlist><listitem><constant>Frequency * on/off</constant>: press <keycap moreinfo="none">F#</keycap>. * denotes frequency number:
+	    <itemizedlist><listitem>
+		    F0 - 130 Hz, operating frequency 0 in the main loop
+		</listitem><listitem>
+		    F1 - 520 Hz, operating frequency 1 in the main loop
+		</listitem><listitem>
+		    F2 - 2080 Hz, operating frequency 2 in the main loop
+		</listitem><listitem>
+		    F3 - 8320 Hz, operating frequency 3 in the main loop
+		</listitem><listitem>
+		    FCO - 667 Hz, operating frequency in the compensation loop
+		</listitem><listitem>
+		    FC1 - 833 Hz, operating frequency in the additional compensation loop (for Mi-8 installation only)
+		</listitem></itemizedlist></listitem><listitem><constant>All frequencies on</constant>: press <keycap moreinfo="none">All on</keycap> to turn all frequencies on
+      </listitem><listitem><constant>All frequencies off</constant>: press <keycap moreinfo="none">All off</keycap> to turn all frequencies off
+      </listitem></itemizedlist>
+  </para><para lang="en">
+	It should be borne in mind that the state of the F* buttons depends on the data received. 
+	In particular, the button will be displayed as pressed only when the program will receive a confirmation from device that the corresponding frequency is turned on.
+	Simultaneously one of the indicators (on the right) turns green.
+	The second indicator turns blue only after the amplitude of the voltage or current in the loop exceeds the minimum acceptable value for the correspondent frequency.
+	It doesn't work properly if any of the indicators is red.
+  </para></sect2><sect2><title lang="en">Compensation control</title><para lang="en">
+    Following operations are available:
+    <itemizedlist><listitem><constant>Sampling on/off</constant>: press <keycap moreinfo="none">Sample</keycap> to start/stop data sampling for compensation. 
+      </listitem><listitem><constant>Clearing</constant>: press <keycap moreinfo="none">Clear</keycap> to restart data sampling.
+      </listitem><listitem><constant>Compensation</constant>: press <keycap moreinfo="none">Fix</keycap> to convert current data set to compensation matrix.
+      </listitem></itemizedlist>
+  </para><para lang="en">
+    Below there are counters:
+    <itemizedlist><listitem><constant>Number of samples in the compensation procedure input</constant>: <keycap moreinfo="none">total</keycap>.
+      </listitem><listitem><constant>Number of rejected samples</constant>: <keycap moreinfo="none">rejected</keycap>.
+      </listitem><listitem><constant>Number of samples used for compensation parameters estimation</constant>: <keycap moreinfo="none">used</keycap>.
+      </listitem></itemizedlist>
+  </para><para lang="en">
+	Compensation process is as follows: at a considerable flight height, where the influence of the earth can be neglected (600-700m), 
+	you should hold data accumulation for compensation. To do this:
+    <itemizedlist><listitem>
+	Clear data set, click <keycap moreinfo="none">Clear</keycap>. All the counters are set to zero.
+      </listitem><listitem>
+	Start accumulation, click <keycap moreinfo="none">Sample</keycap>. Right after that the <keycap moreinfo="none">total</keycap> counter and, possibly, <keycap moreinfo="none">rejected</keycap> will start to run.
+      </listitem><listitem>
+	Perform a series of the bird swings in pitch and roll so that it visited various points of the field relative to the aircraft. 
+	Performing this operation requires the operator some experience and concerted action of pilot. 
+	Accumulation operation usually takes a few minutes.
+      </listitem><listitem>
+	After the counter <keycap moreinfo="none">total</keycap> significantly exceeds <keycap moreinfo="none">rejected</keycap> one, it is necessary to fix data set clicking <keycap moreinfo="none">Fix</keycap>. 
+	Thus the counter data used for calculating the compensation parameters shown in the counter <keycap moreinfo="none"> used </keycap>.
+      </listitem><listitem>
+	If the quality of compensation is good enough, you can stop the selection by clicking <keycap moreinfo="none"> Sample </keycap> again. 
+	The counters <keycap moreinfo="none">total</keycap> and <keycap moreinfo="none">rejected</keycap> should stop changing.
+      </listitem></itemizedlist>
+  </para><para lang="en">
+	Note that the onboard compensation mode is used only to ensure that the operator is satisfied 
+	equipment performance in the most difficult mode. 
+	Accumulation and clearing have no effect on recorded data.
+  </para><para lang="en">
+	The program "NavDat" stores the last calculated compensation parameters in its system directory. 
+	After start "NavDat", if the type of aircraft in the EM4H-device settings wasn't changed (see <xref linkend="dev_em4h"/>), 
+	parameters will be automatically loaded.
+	In this case, the counters <keycap moreinfo="none"> total </keycap> and <keycap moreinfo="none"> rejected </keycap> 
+	will be zero and <keycap moreinfo="none"> used </keycap> will not.
+  </para></sect2><sect2><title lang="en">Digital panel</title><para lang="en">
+	Digital panel allows you to see all system measurements as numbers.
+	It contains three matrices:
+    <itemizedlist><listitem><keycap moreinfo="none">operating frequencies</keycap> - signals measured at operating frequencies F*.
+      </listitem><listitem><keycap moreinfo="none">left piloting</keycap> - control signals at frequencies F*-6 Hz.
+      </listitem><listitem><keycap moreinfo="none">right piloting</keycap> - control signals at frequencies F*+6 Hz.
+      </listitem></itemizedlist>
+	Each frequency is represented by two columns marked by the same color. They show in-phase and quadrature signal components {Re F*, Im F*} or
+	its amplitude and phase {Amp F*, Ph F*}. Rows represent measurer:
+    <itemizedlist><listitem><keycap moreinfo="none">X, Y, Z</keycap> - sensitivity axes of the EM4H receiver.
+      </listitem><listitem><keycap moreinfo="none">U</keycap> - voltage in the main loop.
+      </listitem><listitem><keycap moreinfo="none">I</keycap> - current in the main loop (for An-2 or Mi-8 installations) For frequencies F0-F3 and in the compensation loop, correspondingly, for FC0 and FC1.
+	   In case of An-3 installation at the frequencies F0-F3 there is a signal of additional compensation coil mounted on the stinger.
+      </listitem></itemizedlist>
+	If any ADC is overranged its fields will be colored in red as I-channel in  <xref linkend="em4h-panel"/>.
+  </para><para lang="en">
+	Two flags in the upper part allow to choose one of four display modes:		
+    <itemizedlist><listitem><keycap moreinfo="none">compensated</keycap> - use <keycap moreinfo="none">Alt+C</keycap> to change. 
+      </listitem></itemizedlist>
+	If set, compensated data are displayed.
+	All the signals in the matrix <keycap moreinfo="none">operating frequencies</keycap> are normalized to one at the moment of <keycap moreinfo="none">Fix</keycap> or <keycap moreinfo="none">Clear</keycap> clicking.
+	After that all the coefficients are kept constant till the next click.
+	If there is no compensation parameters (<keycap moreinfo="none">used</keycap> = 0), only normalization is applied. 
+	X, Y, Z are normalized as a vector, i.e. X²+Y²+Z² = 1, while U and I - as scalars.
+	Zero phase at the receiver corresponds to the phase of the primary field (phase of the major semiaxis of the polarization ellipse at the time of normalization). 
+	U and I phases stay unchanged.	
+	Piloting matrices are also changed - a digital filter result is shown, but no normalization.	
+  </para><para lang="en">
+	If the flag is not set, raw data are displayed.	
+	The value is in 16 bit ADC units.
+  </para><para lang="en"><itemizedlist><listitem><keycap moreinfo="none">polar form</keycap>  - press <keycap moreinfo="none">Alt+M</keycap> to change. 
+      </listitem></itemizedlist>
+	If set, signals amplitudes and phases are shown {Amp F*, Ph F*}. If the <keycap moreinfo="none">compensated</keycap> is also set and
+	there are no compensation parameters (<keycap moreinfo="none">used</keycap> = 0), receiver signals phase is the phase of major semiaxis of the
+	polarization ellipse at the time of normalization or program start.
+	in case of clear <keycap moreinfo="none">compensated</keycap> flag the phase stay unchanged.
+  </para><para lang="en">
+	If it is not set, the data are displayed as complex numbers:  Re F* - in-phase, Im F* - quadrature components. 
+	It is important to remember that if you remove the flag <keycap moreinfo="none"> compensated </keycap>, the phase corresponds to zero phase of measurer but not the primary field.
+  </para><para lang="en">
+	Panel allows you to add any of the parameters in any of the formats defined by flags <keycap moreinfo="none">compensated</keycap> and <keycap moreinfo="none">polar form</keycap>, 
+	as a variable of charts recorder (see <xref linkend="variables_em4h"/>). To do this, select the parameters you want and click <keycap moreinfo="none">Ctrl+Insert</keycap>: 
+	they will appear in the charts list. 
+	When you select several variables within a matrix, you can use the arrow while pressing <keycap moreinfo="none">Shift</keycap>. 
+	Also, you can hold <keycap moreinfo="none">Ctrl</keycap> and move the cursor pressing the space bar to select the next parameter.
+	The variable added to chart list is marked by "•". To delete any variable from the charts list select it in the corresponding matrix and press
+	<keycap moreinfo="none">Ctrl+Delete</keycap>.
+  </para><para lang="en">
+	The matrices of piloting signals can be hidden (<keycap moreinfo="none">Ctrl+P</keycap>), as well as the whole digital panel (<keycap moreinfo="none">Ctrl+H</keycap>).
+  </para><figure float="0"><title lang="en">EM4H - compact</title><mediaobject><imageobject><imagedata fileref="images/em4h-compact" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/em4h-compact.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2><title lang="en">Hot keys</title><para lang="en">
+    Following keys are available:
+    <itemizedlist><listitem><keycap moreinfo="none">F1</keycap> - this help
+      </listitem><listitem><keycap moreinfo="none">Tab</keycap> - elements switch (buttons, flags, matrices)
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Tab</keycap> - window parts switch (induction control, compensation control, digital panel)
+      </listitem><listitem><keycap moreinfo="none">Alt+C</keycap> - switch on/off compensated data view mode in digital panel (flag <keycap moreinfo="none">compensated</keycap>)
+      </listitem><listitem><keycap moreinfo="none">Alt+M</keycap> - data view mode switch: in-phase-quadrature components or amplitude-phase (flag <keycap moreinfo="none">polar form</keycap>)
+      </listitem><listitem><keycap moreinfo="none">Ctrl+P</keycap> - hide/show piloting signal matrices
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> - hide/show digital panel
+      </listitem><listitem><keycap moreinfo="none">Ctrl+T</keycap> - hide/show induction/compensation control panel
+      </listitem></itemizedlist>
+  </para></sect2></sect1><sect1 id="tvisor"><title lang="en">Infrared scanner panel</title><sect2><title lang="en">View settings</title><para lang="en">
+      Real-time image data are displayed on Infrared scanner panel.
+    </para><figure float="0"><title lang="en">Image sample and infrared scanner settings</title><mediaobject><imageobject><imagedata fileref="images/tvisor" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/tvisor.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="tvisor_hotkeys"><title lang="en">Work in infrared scanner panel</title><itemizedlist lang="en"><listitem><keycap moreinfo="none">Ctrl-H</keycap> Show/hide image parameters
+      </listitem><listitem><keycap moreinfo="none">Ctrl-L</keycap> Show/hide hide extra parameters
+      </listitem></itemizedlist><para lang="en">
+      At the upper line of the panel there are image view settings. 
+      Their modification doesn't affect saved data.
+      To modify one of these parameters (Brightness, Contrast, Zoom) select required parameter using <keycap moreinfo="none">Tab</keycap>,
+      <keycap moreinfo="none">Shift-Tab</keycap> or <keycap moreinfo="none">Alt-&lt; plus underlined symbol in parameter name&gt;</keycap>,
+      e.g. to modify contrast: <keycap moreinfo="none">Alt-C</keycap>.
+      Position allows to choose visible part of a line.
+      Br.Fix means brightness correction, i.e. if Br.Fix is on then average value of a line will be null
+      this allows to ignore scanner head warming-up.
+      Press Pause to stop real-time imaging.     
+    </para><para lang="en">
+       Parameters in status line (from left to the right): 
+       <itemizedlist><listitem>
+	  PPS indicator, if data synchronization process runs normally indicator must twinkle one time per second
+	</listitem><listitem>
+	  N2 — shows nitrogen presence, must be marked;
+	</listitem><listitem>
+	  Missed — number of missed lines in image; after some manipulation this parameter can be non-zero bat  it must be constant any way;
+	</listitem><listitem>
+	  Sens — «sensibility», this parameter is calculated approximately; must be about 0,05 when device runs normally; depends on temperature;
+	</listitem><listitem>
+	  Freq — frequency, must be about 200 Hertz;
+	</listitem><listitem>
+	  RMS — indicator of image noise level, normal value — from 1 to 2;
+	</listitem><listitem>
+	  Temp — temperature of the head of the optic block, its value must be plausible;
+	</listitem><listitem>
+	  Ralt — radio altitude value; can be checked when the scanner is on.
+	</listitem></itemizedlist>
+    </para></sect2><sect2 id="gyros"><title lang="en"> Window of orientation system indicator</title><figure float="0"><title lang="en">Attitude system</title><mediaobject><imageobject><imagedata fileref="images/gyros" format="EPS" scale="30"/></imageobject><imageobject><imagedata fileref="images/gyros.png" format="PNG"/></imageobject></mediaobject></figure><para lang="en">
+      "NavDat" allows to control visualization of parameters of built-in inertial orientation system.
+      In "Arrester" field press <keycap moreinfo="none">Enter</keycap> then gyroscopic course will get value of track angle, pitch and yaw will be adjusted in accordance with accelerometer measurements.
+      Then the system will run in automatic mode and its parameters can be controlled visually.
+    </para><para lang="en">
+      Due to described procedure long adjustment before a flight isn't required.
+      But "NavDat" provides such adjustment as well. 
+      When you press <constant>Gyrocompass</constant> button the system will estimate measured gravitational vector and angular velocity of the Earth. After turn-off systems start working in autonomous mode. This mode is adequate only to control working capacity of sensor elements of the system.
+    </para><warning lang="en"><title/>
+      Control of the inertial system has no affect on saved data.
+    </warning></sect2></sect1><appendix id="hotkeys" role="cvs"><title lang="en">Hot keys</title><sect2 id="hotkeys_desktop"><title lang="en">Workspace and windows administration</title><itemizedlist lang="en"><listitem><keycap moreinfo="none">Alt-F1</keycap>
+	Applications menu
+      </listitem><listitem><keycap moreinfo="none">Alt-Tab</keycap>
+	Windows switching
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-left arrow-key</keycap>, 
+	<keycap moreinfo="none">Ctrl-Alt-right arrow-key</keycap>
+	Switch to left or right workspace
+      </listitem><listitem><keycap moreinfo="none">Alt-F4</keycap>
+	Close window/application
+      </listitem><listitem><keycap moreinfo="none">Alt-F8</keycap>
+	Change window size. Use arrows to change, also you can press shift while changing to align with other windows. Press Enter when finished
+      </listitem><listitem><keycap moreinfo="none">Alt-F7</keycap>
+	Move window. Use arrows to move, also you can press shift while moving to align with other windows. Press Enter when finished
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-S</keycap>
+	Save program settings (position on the screen).
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-R</keycap>
+	Load saved settings of "NavDat" programs and run aboard server, if it was not run before. 
+      </listitem></itemizedlist></sect2><sect2 id="appendix_hotkeys_nav"><title lang="en">Navigation</title><itemizedlist lang="en"><listitem><keycap moreinfo="none">Ctrl-Alt-Q</keycap>
+	Zoom in panorama veiw for active workspace
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-A</keycap>
+	Zoom out panorama veiw for active workspace
+      </listitem><listitem><keycap moreinfo="none">Ctrl-K</keycap>
+	Stop routing(<xref linkend="sect-fplan-setup"/>).
+      </listitem><listitem><keycap moreinfo="none">Ctrl-F</keycap>
+	Current position fix(<xref linkend="sect-pos-fix"/>).
+      </listitem></itemizedlist></sect2></appendix><appendix id="variables"><title lang="en">Chart window variables</title><sect2 id="variables_sys"><title lang="en">System variables</title><itemizedlist lang="en"><listitem>
+      sys::bytes_written - total data written during current session (bytes)
+      </listitem><listitem>
+      sys::write_errors - number of data write errors
+      </listitem><listitem>
+      sys::write_error - data write error flag
+      </listitem><listitem>
+      sys::storage_total - total current disk space (bytes)
+      </listitem><listitem>
+      sys::storage_avail - current disk free space (bytes)
+      </listitem></itemizedlist></sect2><sect2 id="variables_fplan"><title lang="en">Flight plan processing variables</title><itemizedlist lang="en"><listitem>
+      fplan::arrow - horizontal pilot indicator value in range from 0 to 100 (50 means no deviation)
+      </listitem><listitem>
+      fplan::varrow - vertical pilot indicator value in range from 0 to 100 (50 means no deviation)
+      </listitem><listitem>
+      fplan::lamp - current lamp state: 0 - red, 100 - green (colors can be inverted for particular indicator)
+      </listitem><listitem>
+      fplan::XTE - cross track error in meters
+      </listitem></itemizedlist></sect2><sect2 id="variables_pos"><title lang="en">Position variables ($POS message of dlg-file)</title><itemizedlist lang="en"><listitem>
+      pos::time_ms - time of day in milliseconds
+      </listitem><listitem>
+      pos::year - current year
+      </listitem><listitem>
+      pos::month - current month
+      </listitem><listitem>
+      pos::day - current day
+      </listitem><listitem>
+      pos::siu - number of visible satellites
+      </listitem><listitem>
+      pos::lat - latitude in degrees for WGS84 or other current geoid
+      </listitem><listitem>
+      pos::lon - longitude in degrees for WGS84 or other current geoid
+      </listitem><listitem>
+      pos::alt - altitude in meters over WGS84 or other current geoid
+      </listitem><listitem>
+      pos::lat_r - latitude in radians for WGS84 or other current geoid
+      </listitem><listitem>
+      pos::lon_r - longitude in radians for WGS84 or other current geoid
+      </listitem><listitem>
+      pos::track_r - current track in radians
+      </listitem><listitem>
+      pos::track - current track in degrees
+      </listitem><listitem>
+      pos::hvel - horizontal velocity in m/sec
+      </listitem><listitem>
+      pos::pdop - PDOP
+      </listitem><listitem>
+      pos::ralt - navigation altitude in meters (it can be radar altitude or other depending on current settings)
+      </listitem><listitem>
+      pos::ralt_on - navigation altitude flag (GNSS receiver altitude is used if 0, depends on current settings)
+      </listitem></itemizedlist></sect2><sect2 id="variables_gps"><title lang="en">Javad/Topcon/Novatel GNSS-receiver variables</title><itemizedlist lang="en"><listitem>
+      gps::Lattitude - geodetic lattitude in radians
+      </listitem><listitem>
+      gps::Longitude - geodetic longitude in radians
+      </listitem><listitem>
+      gps::Altitude - geodetic altitude in meters
+      </listitem><listitem>
+      gps::HorVel - horizontal velocity in m/sec
+      </listitem><listitem>
+      gps::TrakG - geodetic track in radians
+      </listitem><listitem>
+      gps::VisSatNum - number of visible satellites
+      </listitem><listitem>
+      gps::WeekTime - time of week in seconds
+      </listitem><listitem>
+      gps::rectime - GPS time of day in milliseconds
+      </listitem><listitem>
+      gps::HHMMSS - GPS time of day in format HHMMSS
+      </listitem><listitem>
+      gps::NavErrors - data stream errors number
+      </listitem><listitem>
+      gps::PDOP - PDOP
+      </listitem><listitem>
+      gps::nodata - GNSS data flag, 1 if no data, 0 otherwise
+      </listitem><listitem>
+      gps::nopos - GNSS position flag, 1 if no position, 0 otherwise
+      </listitem></itemizedlist></sect2><sect2 id="variables_gtmag"><title lang="en">GT-Mag variables</title><itemizedlist lang="en"><listitem>
+      gtmag::current* - sensor current in mAmps, * - number of channel
+      </listitem><listitem>
+      gtmag::signal* - sensor signal in mVolts, * - number of channel
+      </listitem><listitem>
+      gtmag::mag* - magnetic field value (nT), * - number of channel
+      </listitem><listitem>
+      gtmag::dif_4* - non-normalized 4th difference of magnetic fuild value (nT), * - number of channel
+      </listitem><listitem>
+      gtmag::pps - counter of GNSS receiver pulses per second signals
+      </listitem><listitem>
+      gtmag::magc - compensated value of magnetic field (nT)
+      </listitem><listitem>
+      gtmag::batt - input voltage in mVolts
+      </listitem><listitem>
+      gtmag::outV - output voltage (sensor power supply) in mVolts
+      </listitem><listitem>
+      gtmag::siu - number of visible satellites
+      </listitem><listitem>
+      gtmag::magf - filtered field value (nT), for Equator
+      </listitem><listitem>
+      gtmag::fdif - non-normalized 4th difference of filtered field value (nT), for Equator
+      </listitem><listitem>
+      gtmag::fx(fy,fz) - fluxgate magnetometer components (nT)
+      </listitem><listitem>
+      gtmag::ra - radar altitude in meters
+      </listitem></itemizedlist></sect2><sect2 id="variables_em4h"><title lang="en">EM4H variables</title><itemizedlist lang="en"><listitem>
+      em4h::frnum - current data frame number (changes from 0 to 6399)
+      </listitem><listitem>
+      em4h::err_cksum - number of errors in check sums for data stream between EM4H and PC
+      </listitem><listitem>
+      em4h::err_cable - number of errors in data stream between receiver and transmitter in EM4H
+      </listitem><listitem>
+      em4h::err_frnum - number of missed frames
+      </listitem><listitem>
+      em4h::Ellipticity_F* - ellipticity (polarization ellipse minor to major axes ratio) for F* frequency (* = 0,..,3)
+      </listitem><listitem>
+      em4h::Max* - current maximum value in correspondent ADC (* = X,Y,Z - receiver, GU main loop voltage, GI - main loop current, C0I - first compensation loop current,
+			C1I - second compensation loop current). 32768 means overrange.
+      </listitem><listitem>
+      em4h::Bird_27V - 27V voltage measured in the receiver
+      </listitem><listitem>
+      em4h::Bird_10V - 10V voltage measured in the receiver
+      </listitem><listitem>
+      em4h::Bird_1.2V - 1.2V voltage measured in the receiver
+      </listitem><listitem>
+      em4h::Bird_LogicV - logic voltage measured in the receiver
+      </listitem><listitem>
+      em4h::Bird_Empty - reserved channel
+      </listitem><listitem>
+      em4h::Bird_BoardID - receiver electronics ID
+      </listitem><listitem>
+      em4h::Bird_SensorID - receiver sensor ID
+      </listitem><listitem>
+      em4h::Bird_BoardTC - receiver electronics temperature (deg. C)
+      </listitem><listitem>
+      em4h::Tran_27V - 27V voltage measured in the transmitter
+      </listitem><listitem>
+      em4h::Tran_BirdV - receiver power supply measured in the transmitter
+      </listitem><listitem>
+      em4h::Tran_1.2V - 1.2V voltage measured in the transmitter
+      </listitem><listitem>
+      em4h::Tran_SignalV - receiver signal amplitude (mV)
+      </listitem><listitem>
+      em4h::Tran_BirdCurrent - receiver current (mA)
+      </listitem><listitem>
+      em4h::Tran_BoardID - transmitter electronics ID
+      </listitem><listitem>
+      em4h::Tran_RA - altitude (m)
+      </listitem><listitem>
+      em4h::Tran_PowerTC - transmitter power electronics temperature (deg. C)
+      </listitem><listitem>
+      em4h::aaa_bbb_ccc_ddd - EM4H data selected by user: 
+				    <itemizedlist><listitem>
+					 aaa - dat (operating data), lpil (left) or rpil (right piloting signal);
+				      </listitem><listitem>
+					 bbb - Re (inphase), Im (quadrature), Amp (amplitude), Ph (phase);
+				      </listitem><listitem>
+					 ccc - F*#, * = 0,..,3,C0,C1 - frequency, # = X,Y,Z (receiver), U (voltage), I (current);
+				      </listitem><listitem>
+					 ddd - raw or comp (compensated).
+				      </listitem></itemizedlist>
+ See <xref linkend="em4h_control"/> for details. Measured in ADC units if raw, otherwise  everything is normalized to 1 (as average). 
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec"><title lang="en">RS-50x variables</title><itemizedlist lang="en"><listitem>
+      spec::errors - number of errors in data stream
+      </listitem><listitem>
+      spec::utc_time - internal receiver UTC time in seconds
+      </listitem><listitem>
+      spec::roi[*] - regions of interest (from device), *=1,...,10
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec_grs"><title lang="en">GRS410 variables</title><itemizedlist lang="en"><listitem>
+      spec::errors - number of errors in data stream
+      </listitem><listitem>
+      spec::adc[*] - analog measurements, *=0,...,3
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec_gsa"><title lang="en">GSA2000 variables</title><itemizedlist lang="en"><listitem>
+      spec::errors - number of errors in data stream
+      </listitem><listitem>
+      spec::hard_errors - device control byte (see GSA2000 manual)
+      </listitem><listitem>
+      spec::func_errors - device state byte (see GSA2000 manual)
+      </listitem><listitem>
+      spec::live_time - live time in ms
+      </listitem><listitem>
+      spec::stab_code[*] - stabilization system control code (see GSA2000 manual)
+      </listitem><listitem>
+      spec::peak[*] - light peaks position in channels multiplied by 100
+      </listitem></itemizedlist></sect2><sect2 id="variables_ffra"><title lang="en">Free Flight RA variables</title><itemizedlist lang="en"><listitem>
+      ffra::altitude - altitude (m)
+      </listitem><listitem>
+      ffra::errors - number of stream errors according to checksum
+      </listitem><listitem>
+      ffra::test - test flag (equals 2 while testing, otherwise 0)
+      </listitem><listitem>
+      ffra::status - status flag (equals 4 if unit failure, otherwise 0)
+      </listitem><listitem>
+      ffra::invalid - output flag (equals 8 if unlocked/invalid, otherwise 0)
+      </listitem><listitem>
+      ffra::strut - strut flag (equals 16 if de-asserted, otherwise 0)
+      </listitem></itemizedlist></sect2><sect2 id="variables_adc"><title lang="en">ADC variables</title><itemizedlist lang="en"><listitem>
+      gtadc/e502::raw* - raw value in adc units, * - channel number
+      </listitem><listitem>
+      gtadc/e502::user_defined_name - variable defined by user, see <xref linkend="dev_adc"/>
+      </listitem></itemizedlist></sect2></appendix></article>

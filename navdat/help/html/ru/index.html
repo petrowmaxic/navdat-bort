@@ -1,0 +1,3640 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Бортовая программа "NavDat"</title>
+    <link rel="stylesheet" type="text/css" href="css/navdat.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Бортовая программа &quot;NavDat&quot;" />
+    <link rel="next" href="hotkeys.html" title="A. Горячие клавиши (Доступны из любого контекста)" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Бортовая программа "NavDat"</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="hotkeys.html"><img src="images/next.png" alt="След." /></a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div xml:lang="ru" class="article" lang="ru">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="navdat-book"></a>Бортовая программа "NavDat"</h2>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author"><span class="firstname"></span> <span class="surname"></span></h3>
+                <div class="affiliation">
+                  <span xml:lang="ru" class="orgname" lang="ru">"Геотехнологии"<br /></span>
+                  <div class="address">
+                    <p>
+                      <code class="email">&lt;<a class="email" href="mailto:gp@geotechnologies-rus.com">gp@geotechnologies-rus.com</a>&gt;</code>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="copyright">Авторские права © 2006-2018 GeoTechnologies</p>
+          </div>
+          <div>
+            <div class="legalnotice">
+              <a id="legalnotice"></a>
+              <p>
+    Site: <a class="ulink" href="http://www.geotechnologies-rus.com/" target="_top">http://www.geotechnologies-rus.com/</a>
+  </p>
+              <p>
+    E-Mail: <a class="ulink" href="mailto: gp@geotechnologies-rus.com" target="_top">info@geotechnologies-rus.com</a>
+  </p>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="toc">
+        <p>
+          <strong>Содержание</strong>
+        </p>
+        <dl class="toc">
+          <dt>
+            <span class="sect1">
+              <a href="index.html#intro">1. Назначение программы и основные возможности</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#installation">2. Инсталляция и запуск</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#visualisation">3. Визуализация и пользовательский интерфейс</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#settings">4. Настройка и запуск бортовой программы</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#navigation">5. Решение навигационных задач</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#devices">6. Взаимодействие с устройствами бортового комплекса</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_tcpip">6.1. Соединение TCP/IP</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_rs232">6.2. Соединение по последовательному порту</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_fe">6.3. Бортовой сервер</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_jps">6.4. ГНСС-приемник Javad/Topcon</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_novatel">6.5. ГНСС-приемник Novatel</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_tvisor">6.6. Тепловизор</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_gtmag">6.7. Система ГТ-Маг</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_equator">6.8. Система Экватор</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_em4h">6.9. Система EM4H</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_rs50">6.10. Спектрометр RSx</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_grs410">6.11. Спектрометр GRS410</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722389488">6.12. Спектрометр ГСА2000</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_arrow">6.13. Индикатор пилота ("Стрелка")</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_ra">6.14. Радиовысотомер</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_ffra">6.15. Радиовысотомер Free Flight</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_adc">6.16. АЦП Геотехнологии</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#status">7. Контроль работоспособности системы</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#registration">8. Регистрация навигационной и аэрогеофизической информации</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#fpl">9. Файл полетного задания</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#terminology">9.1. Терминология</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#fplan">10. Панель полетного задания</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#fplan_load">10.1. Загрузка и просмотр полетного задания</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#edit">10.2.  Редактирование полетного задания</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#markup-parallel">10.3. Разметка системы параллельных маршрутов</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#markup-rkm">10.4. Разметка системы маршрутов магнитной компенсации</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#sect-fplan-setup">10.5. Настройка, старт и остановка проводки</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#sect-pos-fix">10.6. Запись текущей точки</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#fplan_hotkeys">10.7. Управление в панели полетного задания</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#panorama">11. Навигационная панорама</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722139760">11.1. Основные элементы панорамы</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722131872">11.2. Режимы</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722129072">11.3. Управление панорамой</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#pilotpan">12. Пилотский индикатор, параметры проводки и пилотская панель</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_arrow">12.1. Пилотский индикатор</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722110944">12.2. Фазы проводки</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45843722109264">12.2.1. Полет на точку</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45843722106880">12.2.2. Криволинейная проводка</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45843722104304">12.2.3. Проводка по маршруту</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722099808">12.3. Условия вхождения</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_params">12.4. Параметры</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_setup">12.5. Рекомендации по настройке</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#arrow">13. Приложение пилотский индикатор</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#jst">14. Таблица спутников</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722038416">14.1. Небесная полусфера</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722035680">14.2. Карта</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722034160">14.3. Панель спутников</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722031168">14.4. Управление таблицей спутников</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#pilot">15. Эмулятор ГНСС</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#samopis">16. Самописец</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843722005488">16.1. Настройка</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721996704">16.2. Управление самописцем</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#spectra">17. Спектры </a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721978656">17.1. Управление визуализацией спектров</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721949360">17.2. Горячие клавиши</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#em4h_control">18. EM4H </a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721900240">18.1. Управление возбуждением</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721888992">18.2. Управление компенсацией</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721861280">18.3. Работа с цифровой панелью</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721822528">18.4. Горячие клавиши</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#tvisor">19. Панель Тепловизор</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45843721810816">19.1. Параметры изображения</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#tvisor_hotkeys">19.2. Управление панелью тепловизора</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#gyros">19.3. Окно индикатора системы ориентации</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="hotkeys.html">A. Горячие клавиши (Доступны из любого контекста)</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="appendix">
+              <a href="variables.html">B. Переменные самописца</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="intro"></a>1. Назначение программы и основные возможности</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Программа "NavDat" предназначена для работы на IBM/PC совместимом
+    бортовом компьютере в целях вычислительного обеспечения аэросъемочного
+    процесса.</p>
+        <p xml:lang="ru" lang="ru">
+    Составляющими частями съемочного процесса, обслуживаемыми программой
+    "NavDat", можно считать следующие:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Навигационное обеспечение работ. Основываясь на возможностях
+      современной технологии спутниковой навигации, программа "NavDat" осуществляет
+      регистрацию навигационной информации в реальном времени,
+      выполняет управление проводкой с помощью пилотского индикатора,
+      позволяет решать широкий круг штурманских задач в автоматическом
+      режиме, а также интерактивное управление полетным заданием.
+    </li>
+            <li class="listitem">
+      Взаимодействие с аппаратными средствами аэрогеофизического
+      бортового комплекса. Программа, используя интерфейсы бортовой ЭВМ,
+      осуществляет обмен данными и командами со всеми приборами,
+      обеспечивая синхронность регистрации полученной информации.
+    </li>
+            <li class="listitem">
+      Запись данных. Данные записываются в виде файлов жесткого диска бортовой ЭВМ.
+    </li>
+            <li class="listitem">
+      Пользовательский интерфейс. Программа в полной мере предоставляет
+      пользователю возможности контроля и управления взаимодействием с аппаратными средствами.
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Основные возможности программы организованы таким образом, чтобы при
+    организации аэросъемочного процесса исключить необходимость использования
+    штурмана-съемщика, оставляя на борту только одного бортоператора, возложив
+    на него в основном функции контроля. Разработчики программы старались так
+    организовать ее работу, чтобы никакие ошибки в работе бортоператора не могли
+    привести к фатальной потере или искажению аэрогеофизической информации.
+  </p>
+        <p xml:lang="ru" lang="ru">
+    Аппаратной платформой программы является <a class="ulink" href="http://ru.wikipedia.org/wiki/IA-64" target="_top">IA-64</a> совместимый компьютер,
+    операционная система <a class="ulink" href="http://www.gnu.org" target="_top">GNU/Linux</a>.
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="installation"></a>2. Инсталляция и запуск</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    "NavDat" поставляется заказчику в виде программного пакета на сервере <a class="ulink" href="http://geotechnologies-rus.com/ru/main_ru.html" target="_top">Геотехнологии</a>. Пакет создан для работы на GNU/Linux системе
+    <a class="ulink" href="http://ubuntu.com." target="_top">Ubuntu 16.04.3 LTS</a>.
+    Для начала требуется установить 64-битную версию операционной системы, инструкцию по установке Ubuntu можно найти
+    по адресу: 
+    <a class="ulink" href="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop" target="_top">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</a>.
+    Далее следует запустить <a class="ulink" href="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux" target="_top">терминал</a>,  выполнить следующие команды:
+  </p>
+        <div class="example">
+          <a id="idm45843727648208"></a>
+          <p class="title">
+            <strong>Пример 1. </strong>
+          </p>
+          <div class="example-contents">
+            <pre class="programlisting">
+		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
+	</pre>
+            <pre class="programlisting">
+		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
+		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
+		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
+		EOF
+	</pre>
+            <pre class="programlisting">
+		sudo apt-get update
+	</pre>
+            <pre class="programlisting">
+		sudo apt-get install navdat-user
+	</pre>
+          </div>
+        </div>
+        <br class="example-break" />
+        <p xml:lang="ru" lang="ru">
+    Имя пользователя user_name и пароль password предоставляются компанией <a class="ulink" href="http://geotechnologies-rus.com/ru/main_ru.html" target="_top">Геотехнологии</a>.
+    После перезагрузки будет автоматически создана учетная запись "NavDat session user". Пароль для неё задаёт администратор при установке.
+    Далее из этой записи будет осуществляться взаимодействие с бортовой программой "NavDat".
+    Эту запись следует использовать исключительно для работы с "NavDat".
+  </p>
+        <p xml:lang="ru" lang="ru">
+    Несколько рекомендаций по установке:
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+	Выбрать хотя бы 10 Гб под корневую файловую систему
+      </li>
+            <li class="listitem">
+	Выбрать хотя бы 1 Гб под swap
+      </li>
+            <li class="listitem">
+	Желательно создать отдельный раздел для хранения и записи данных (т.е. для раздела /home)
+      </li>
+            <li class="listitem">
+	Рекомендуемые файловые системы: ext3, ext4
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="visualisation"></a>3. Визуализация и пользовательский интерфейс</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Интерфейс основан на графической среде <a class="ulink" href="https://wiki.archlinux.org/index.php/Awesome_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)" target="_top">Awesome</a>.
+  </p>
+        <p xml:lang="ru" lang="ru">
+    В верхней части экрана располагается панель, слева список рабочих столов, индикаторы использования процессора и памяти. Справа есть индикатор работы бортового сервера (вкл/выкл).
+    Главное меню доступно с помощью комбинации <span class="keycap"><strong>Alt-F1</strong></span> или левой кнопки мыши. 
+В меню находятся приложения, отвечающие за визуализацию
+    данных и управление полетом. 
+  </p>
+        <p xml:lang="ru" lang="ru">
+    Некоторые полезные системные параметры могут быть выведены на самописец (см. <a class="xref" href="variables.html#variables_sys" title="B.1. Системные переменные">Раздел B.1, «Системные переменные»</a>).
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="settings"></a>4. Настройка и запуск бортовой программы</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+	Во время первого запуска "NavDat" убедитесь, что сессия запущена в режиме Awesome.
+	Режим переключается при входе в систему.
+    </p>
+        <div class="figure">
+          <a id="idm45843727632496"></a>
+          <p class="title">
+            <strong>Рисунок 1. Выбор режима</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/gnome.png" alt="Выбор режима" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+      Запустить утилиту настройки можно  через меню приложений.
+    </p>
+        <div class="figure">
+          <a id="idm45843727747712"></a>
+          <p class="title">
+            <strong>Рисунок 2. Окно программы настройки</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/bortcfg.png" alt="Окно программы настройки" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+      Программа позволяет добавлять устройства в систему, указывать директорию для записи данных,
+      а также управлять параметрами бортового сервера.
+    </p>
+        <p xml:lang="ru" lang="ru">
+      После добавления нового устройства необходимо указать тип соединения и его параметры (ip-адрес, номер порта и т.д.), сохранить настройки и обязательно 
+      перезагрузить сервер.
+      Чтобы задать указанные параметры, следует нажать кнопку "Свойства". Кроме того, для некоторых устройств используются дополнительные параметры настройки, которые
+      можно задать на соответствующей вкладке появившегося окна.
+    </p>
+        <div class="figure">
+          <a id="idm45843727707648"></a>
+          <p class="title">
+            <strong>Рисунок 3. Окно настройки параметров</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/bortcfg_tabs.png" alt="Окно настройки параметров" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <div xml:lang="ru" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="ru">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Предупреждение]" src="./images/warning.png" />
+              </td>
+              <th align="left">Предупреждение</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top"> Данные первого в списке устройств ГНСС-приемника будут всегда использованы для управления полетом. </td>
+            </tr>
+          </table>
+        </div>
+        <p xml:lang="ru" lang="ru">
+      Используя меню приложений можно настроить рабочий экран бортового компьютера, выбирая из меню нужные программы
+      и располагая их на экране. После сохранения (меню Настройки-&gt;Сессия: сохранить или <span class="keycap"><strong> Ctrl+Alt+S </strong></span>) настройки будут воспроизводиться при последующих запусках (меню Настройки-&gt;Сессия: восстановить или <span class="keycap"><strong> Ctrl+Alt+R </strong></span>).
+    </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="navigation"></a>5. Решение навигационных задач</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+   Программа "NavDat" решает широкий набор навигационных задач. 
+   Исходными данными для вычислений являются географические координаты точек движения (широта, долгота), полученные первым в списке устройств ГНСС-приемником, 
+    а сами задачи представляются главным образом следующими:     
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Счисление расстояний. 
+      Все расстояния в программе счисляются как длины дуг большого круга (ортодромий),
+      проведенных через соответствующие пары точек. Расстояния измеряются в километрах.
+    </li>
+            <li class="listitem">
+      Счисление азимутов. Азимуты в программе счисляются как углы в градусах между ортодромиями в точке пересечения.
+    </li>
+            <li class="listitem">
+      Счисление расчетного времени.
+      Расчетное время прохождения отрезка между двумя точками
+      счисляется исходя из представлений о текущей путевой скорости,
+      измеренной по данным ГНСС-приемника.
+    </li>
+            <li class="listitem">
+      Контроль навигационной высоты, т.е. высоты, которая должна соблюдаться пилотом при съемке.
+      Навигационная высота передается одним из устройств комплекса: ГНСС-приемник, ГТ-МАГ, и т.д.
+    </li>
+            <li class="listitem">
+      Контроль выполнения полетного задания.
+    </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="devices"></a>6. Взаимодействие с устройствами бортового комплекса</h2>
+            </div>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_tcpip"></a>6.1. Соединение TCP/IP</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Все устройства, подключаемые с помощью протокола TCP/IP, имеют свой ip-адрес и порт выдачи данных. Стоит иметь ввиду, что не все
+    из них работают как DHCP-сервер. В этом случае соответствующая сеть должна быть сконфигурирована вручную. Ознакомьтесь с техническим 
+    описанием устройства.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_rs232"></a>6.2. Соединение по последовательному порту</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Для соединения по последовательному порту также требуются настройки: адрес, скорость, биты данных, четность, стоп биты.
+     Обычно устройства RS232 подключаются с применением адаптера USB-COM. Программа "NavDat" позволяет выбрать метод назначения порта: 
+     по устройству (by-device), по пути (by-path) или по ID (by-id). Например:
+    </p>
+          <div class="example">
+            <a id="idm45843727829488"></a>
+            <p class="title">
+              <strong>Пример 2. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+/dev/ttyUSB0&gt;	/dev/ttyUSB0
+		/dev/ttyUSB0: by-path
+		/dev/ttyUSB0: by-id
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    По устройству (by-device). Если в комплексе более одного устройства RS232, пользователь должен каждый раз подключать их в одном и том же порядке.
+    </p>
+          <p xml:lang="ru" lang="ru">
+    По пути (by-path). Необходимо запомнить, к какому порту подключено соответствующее устройство, и всегда подключать это устройство к нему.
+    </p>
+          <p xml:lang="ru" lang="ru">
+    По ID (by-id). Этот метод возможен только если нет адаптеров USB-COM с одинаковым ID.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_fe"></a>6.3. Бортовой сервер</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      	По умолчанию программа "NavDat" использует сокет домена Unix для обмена данными между различными устройствами
+	и программами. Чтобы иметь возможность подключить другие средства контроля и визуализации (телефон, планшет,
+	другой компьютер), необходимо настроить локальную сеть и использовать соответствующий IP адрес для 
+	коммуникации. В этом случае необходимо добавить устройство "Бортовой сервер", задать ему IP-адрес и номер
+	порта на компьютере-сервере. Такие же параметры должны быть заданы в переменной окружения BORT_SERVER для 
+	компьютера-клиента.
+    </p>
+          <p xml:lang="ru" lang="ru">
+	Чтобы данная переменная была постоянно задана в системном окружении, необходимо в файле '/etc/environment'
+	добавить следующую строку (нужны права root):
+    </p>
+          <div class="example">
+            <a id="idm45843722502304"></a>
+            <p class="title">
+              <strong>Пример 3. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+BORT_SERVER="tcp://ip_adress:port"
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_jps"></a>6.4. ГНСС-приемник Javad/Topcon</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым приемником фирмы <em class="citetitle">Javad Positioning Systems</em> или  
+      <em class="citetitle">Topcon Positioning Systems</em>,
+      работающим по протоколу GRIL через канал связи RS232.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Связь с приемником осуществляется программой в режиме обмена данными-командами,
+      поэтому на момент запуска программы приемник должен быть обязательно включен и соединен с компьютером сигнальным кабелем.
+      В большинстве технических реализаций  питание приемника осуществляется непосредственно от источника питания компьютера,
+      в этом случае данное правило соблюдается автоматически.
+      Если же вам все же удалось запустить программу без приемника,
+      не пытайтесь подключить его к работающей программе.
+      Даже если вы увидите его данные после подключения, записанная информация,
+      скорее всего, будет испорчена отсутствием необходимых заголовков.
+      При работе с приемником программа записывает навигационные данные в отдельный файл <code class="filename">*.jps</code> строго байт в байт,
+      как они вырабатываются приемником.
+      Это необходимо для дальнейшей работы программ дифференциальной коррекции,
+      поддерживающих только этот формат данных.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_gps" title="B.4. Переменные ГНСС-приемника Javad/Topcon/Novatel">Раздел B.4, «Переменные ГНСС-приемника Javad/Topcon/Novatel»</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45843722493856"></a>
+            <p class="title">
+              <strong>Рисунок 4. Параметры Javad/Topcon</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_jps.png" alt="Параметры Javad/Topcon" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Устройство имеет один параметр настройки - 'Команды инициализации', который задает последовательность команд для посылки приемнику при запуске.
+    Если его не задавать, программа сама запросит необходимые для визуализации и дальнейшей дифференциальной обработки посылки. Если же параметр задан, либо приемник по 
+    каким-либо причинам не может получать команды, важно помнить, что для полностью корректной работы бортовой программы нужны следующие посылки: 
+    RT, SI, PG, VG, EL, AZ, DP.
+    </p>
+          <p xml:lang="ru" lang="ru">
+    Запрос по умолчанию следующий.
+    </p>
+          <div class="example">
+            <a id="idm45843722487504"></a>
+            <p class="title">
+              <strong>Пример 4. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    dm
+    em,,/msg/def:0.1
+    em,,/msg/jps/PG:0.1
+    em,,/msg/jps/VG:0.1
+    em,,/msg/jps/AZ:1
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    Полагается, что запрос 'def' включает все необходимые для дифференциального режима посылки, в том числе RT, SI, EL, DP.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_novatel"></a>6.5. ГНСС-приемник Novatel</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым приемником фирмы <em class="citetitle">Novatel</em>,
+      работающим через канал связи RS232. В настоящий момент компания <em class="citetitle">Novatel</em> не
+      выпустила драйверов поддержки своего USB-адаптера, обеспечивающих работу в ОС Linux.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Связь с приемником осуществляется программой в режиме обмена данными-командами,
+      поэтому на момент запуска программы приемник должен быть обязательно включен и соединен с компьютером сигнальным кабелем.
+      В большинстве технических реализаций  питание приемника осуществляется непосредственно от источника питания компьютера,
+      в этом случае данное правило соблюдается автоматически.
+      Если же вам все же удалось запустить программу без приемника,
+      не пытайтесь подключить его к работающей программе.
+      Даже если вы увидите его данные после подключения, записанная информация,
+      скорее всего, будет испорчена отсутствием необходимых заголовков.
+      При работе с приемником программа записывает навигационные данные в отдельный файл <code class="filename">*.nov</code> строго байт в байт,
+      как они вырабатываются приемником.
+      Это необходимо для дальнейшей работы программ дифференциальной коррекции,
+      поддерживающих только этот формат данных.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_gps" title="B.4. Переменные ГНСС-приемника Javad/Topcon/Novatel">Раздел B.4, «Переменные ГНСС-приемника Javad/Topcon/Novatel»</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45843722514720"></a>
+            <p class="title">
+              <strong>Рисунок 5. Параметры Novatel</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_novatel.png" alt="Параметры Novatel" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Устройство имеет один параметр настройки - 'Команды инициализации', который задает последовательность команд для посылки приемнику при запуске.
+    Если его не задавать, программа сама запросит необходимые для визуализации и дальнейшей дифференциальной обработки посылки. Если же параметр задан, либо приемник по 
+    каким-либо причинам не может получать команды, важно помнить, что для полностью корректной работы бортовой программы нужны следующие посылки: 
+     bestposb, bestvelb, gpgsa, gpgsv.
+    </p>
+          <p xml:lang="ru" lang="ru">
+    Запрос по умолчанию следующий.
+    </p>
+          <div class="example">
+            <a id="idm45843722508192"></a>
+            <p class="title">
+              <strong>Пример 5. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    unlogall
+    log bestposb ontime 0.1
+    log bestvelb ontime 0.1
+    log GPGSA ontime 1
+    log GPGSV ontime 1
+    log rangecmpb ontime 0.1
+    log almanacb onchanged
+    log ionutcb onchanged
+    log rawephemb onnew
+    log versionb ontime 100
+    log gloalmanacb onchanged
+    log gloclockb onchanged
+    log gloephemerisb onchanged
+    log glorawephemb onchanged
+    log rxstatuseventb onchanged
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    При настройке приемника рекомендуется установить скорость порта не менее 115200, а также
+    </p>
+          <div class="example">
+            <a id="idm45843722506272"></a>
+            <p class="title">
+              <strong>Пример 6. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    nmeatalker auto
+    pdpfilter enable
+    pdpmode relative dynamic
+    selectchanconfig 4
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    Последняя команда актуальна только для приемников OEMStar (конфигурация 8 GPS, 6 GLONASS)
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_tvisor"></a>6.6. Тепловизор</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Автоматическое устройство, подключается по сети ethernet. Следует помнить, что данные от тепловизора записываются со
+      скоростью около 1 Мб/сек (3,6 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Тепловизор имеет встроенную инерциальную систему ориентации. 
+      Обычно тепловизор имеет встроенный ГНСС приемник, а также необходимые интерфейсы для подключения радиовысотомера и идикатора пилота. 
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем ethernet.
+    </p>
+          <div class="figure">
+            <a id="idm45843722503232"></a>
+            <p class="title">
+              <strong>Рисунок 6. Параметры Тепловизора</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_tep.png" alt="Параметры Тепловизора" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Устройство имеет один параметр - 'Оптикой вперед', который задает способ установки по отношению к направлению полета. Влияет только на поведение курсовертикали.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_gtmag"></a>6.7. Система ГТ-Маг</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Автоматическое устройство, подключается по USB.
+      Обычно система ГТ-Маг имеет по крайней мере один встроенный ГНСС приемник, 
+      а также необходимые интерфейсы для подключения радиовысотомера и идикатора пилота.
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем USB.
+      Для корректного задания настроек соединения следует обратиться к документации ГТ-Маг.
+      Настройки по умолчанию: ip-адрес 10.100.4.50, порт 1917 - магнитометр, порт 4444 - приемник ГНСС, порт 3333 - индикатор пилота.
+      Необходимо настроить соответствующее сетевое соединение 10.100.4.yyy, маска 255.255.255.0.
+    </p>
+          <div class="figure">
+            <a id="idm45843722440128"></a>
+            <p class="title">
+              <strong>Рисунок 7. Параметры ГТ-Маг</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_mag.png" alt="Параметры ГТ-Маг" />
+              </div>
+              <div class="mediaobject">
+                <img src="images/bortcfg_magf.png" alt="Параметры ГТ-Маг" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+	Устройство имеет следующие настраиваемые параметры. Вкладка ГТ-Маг:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    Частота дискретизации - позволяет выбрать частоту для 1000-герцовой версии ГТ-Маг
+	</li>
+              <li class="listitem">
+	    Число каналов - позволяет отображать только выбранное число каналов; не изменят записываемого потока данных
+	</li>
+              <li class="listitem">
+	    Использовать радиовысотомер - если флаг установлен, канал радиовысоты ГТ-Маг будет использован в качестве навигационной высоты
+	</li>
+              <li class="listitem">
+	    Смещение РВ - смещение значения радиовысоты в метрах, применяется, если установлен флаг использования РВ (DRA)
+	</li>
+              <li class="listitem">
+	    Масштаб РВ - масштабный коэффициент для радиовысоты, применяется, если установлен флаг использования РВ (KRA)
+	</li>
+              <li class="listitem">
+	    Параметры девиации -  можно задать файл с параметрами девиации (mgc-файл, созданный программой ReinMag); 
+	    эти параметры будут применены только к первому каналу ГТ-Маг; из-за необходимости дифференцирования каналов феррозонда 
+	    скомпенсированное значение будет запаздывать на 0,2 секунды.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+          <p xml:lang="ru" lang="ru">
+    Правила вычисления скорректированного значения радиовысоты следующие
+    </p>
+          <div class="example">
+            <a id="idm45843722428048"></a>
+            <p class="title">
+              <strong>Пример 7. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+	    H = (RA + DRA) ⋅ KRA
+        </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+	Вкладка Феррозонд позволяет настроить параметры для различных применямых датчиков с учетом результатов калибровки:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    UGND(В) - общий сигнальный ноль, значение по умолчанию 0 (вольт)
+	</li>
+              <li class="listitem">
+	    мВ/мкТл - общий масштабный коэффициент, значение по умолчанию 100 (милливольт на микротесла)
+	</li>
+              <li class="listitem">
+	    DX(В), DY(В), DZ(В) - смещение нуля для каждого канала, значения по умолчанию 0 (вольт)
+	</li>
+              <li class="listitem">
+	    KX, KY, KZ - поправки масштабных коэффициентов для каждого канала, значения по умолчанию 1
+	</li>
+              <li class="listitem">
+	    KYX, KZX, KXY, KZY, KXZ, KYZ - коэффициенты взаимного влияния каналов, например, KXY - это коэффициент при
+	    компоненте X в выражении для Y; значения по умолчанию 0
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+          <p xml:lang="ru" lang="ru">
+	ГТ-Маг позволяет измерить общий сигнальный ноль вместо значения радиовысоты. В этом случае необходимо
+	установить флаг 'изм.' и снять флаг 'Использовать радиовысотомер'. Значение UGND использовано не будет.
+    </p>
+          <p xml:lang="ru" lang="ru">
+    Правила вычисления fx, fy, fz в нанотеслах следующие
+    </p>
+          <div class="example">
+            <a id="idm45843722421248"></a>
+            <p class="title">
+              <strong>Пример 8. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+		    x = X - UGND + DX
+		    y = Y - UGND + DY
+		    z = Z - UGND + DZ
+		    fx = (x + y ⋅ KYX + z ⋅ KZX) ⋅ KX ⋅ 10^6 / K
+		    fy = (y + x ⋅ KXY + z ⋅ KZY) ⋅ KY ⋅ 10^6 / K
+		    fz = (z + x ⋅ KXZ + y ⋅ KYZ) ⋅ KZ ⋅ 10^6 / K
+        </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+    где  X, Y, Z - измеренные значения в вольтах, K - общий масштабный коэффициент в мВ/мкТл.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_gtmag" title="B.5. Переменные ГТ-Маг">Раздел B.5, «Переменные ГТ-Маг»</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_equator"></a>6.8. Система Экватор</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Автоматическое устройство, подключается по ethernet. Следует помнить, что данные записываются со
+      скоростью около 4 Мб/сек (14 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Система Экватор имеет встроенный ГНСС приемник и радиовысотомер.
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем ethernet.
+      Для корректного задания настроек соединения следует обратиться к документации системы Экватор.
+      Настройки по умолчанию: ip-адрес 10.100.4.50, порт 2000.
+      Необходимо настроить соответствующее сетевое соединение 10.100.4.yyy, маска 255.255.255.0.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_em4h"></a>6.9. Система EM4H</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Автоматическое устройство, подключается по ethernet или RS232. При подключении через ethernet следует помнить, что данные записываются со
+      скоростью около 4 Мб/сек (14 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Система EM4H может иметь встроенный ГНСС приемник и радиовысотомер, а также иметь интерфейс для подключения идикатора пилота.
+      Данные высотомера будут интегрированы в поток данных EM4H. 
+    </p>
+          <div class="figure">
+            <a id="idm45843722411888"></a>
+            <p class="title">
+              <strong>Рисунок 8. Параметры EM4H</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_em4h.png" alt="Параметры EM4H" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    Тип летательного аппарата - позволяет сделать выбор между Ан-2, Ан-3 и Ми-8: тип определяет алгоритм компенсации влияния летательного аппарата,
+		который будет применятся (см. <a class="xref" href="index.html#em4h_control" title="18. EM4H">Раздел 18, «EM4H »</a>).
+	    Важно, что установка типа Ан-3 означает использование дополнительной катушки компенсации на стингере, а не тип самолета, как такового. 
+	    Если такая катушка по каким-то причинам не используется на Ан-3, следует выбрать тип Ан-2.
+	    А если она вдруг была применена на Ан-2, следует выбирать тип Ан-3.
+	</li>
+              <li class="listitem">
+	    Использовать радиовысотомер - если флаг установлен, канал радиовысоты EM4H будет использован в качестве навигационной высоты
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_em4h" title="B.6. Переменные EM4H">Раздел B.6, «Переменные EM4H»</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_rs50"></a>6.10. Спектрометр RSx</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами фирмы <em class="citetitle">Radiation Solutions Inc</em>,
+      такими как RS-501, RSX4, RSX5 и т.п., работающими по протоколу RSI.
+     До трех устройств одновременно.
+      Типичные настройки соединения: 192.168.1.xxx, порт 4000. Необходимо настроить соответствующее сетевое соединение 192.168.1.yyy, маска 255.255.255.0.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="index.html#spectra" title="17. Спектры">Раздел 17, «Спектры »</a>, <a class="xref" href="variables.html#variables_spec" title="B.7. Переменные RS-50x">Раздел B.7, «Переменные RS-50x»</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_grs410"></a>6.11. Спектрометр GRS410</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами GRS410 фирмы <em class="citetitle">Pico Envirotec Inc</em> в режиме покристальной
+	регистрации.
+     До трех устройств одновременно.
+      Соединение с концентратором или суперконцентратором может быть установлено через последовательный порт.
+    </p>
+          <div class="figure">
+            <a id="idm45843722396480"></a>
+            <p class="title">
+              <strong>Рисунок 9. Параметры GRS410</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_grs410.png" alt="Параметры GRS410" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    XTAL#* - позволяет отключить (on/off) визуализацию спектра с кристалла №* (* - 1,...,10). При отключении соответствующий спектр будет 
+		невидимым в программе, но по-прежнему будет записан в файл данных.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="index.html#spectra" title="17. Спектры">Раздел 17, «Спектры »</a>, <a class="xref" href="variables.html#variables_spec_grs" title="B.8. Переменные GRS410">Раздел B.8, «Переменные GRS410»</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722389488"></a>6.12. Спектрометр ГСА2000</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами ГСА2000.
+     До шести устройств одновременно.
+      Соединение может быть установлено через последовательный порт.
+    </p>
+          <div xml:lang="ru" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="ru">
+            <table border="0" summary="Warning">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Предупреждение]" src="./images/warning.png" />
+                </td>
+                <th align="left">Предупреждение</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+	Устройство работает по запросу и требует инициализации. 
+	Поэтому при запуске программы необходимо, чтобы прибор уже работал.
+    </td>
+              </tr>
+            </table>
+          </div>
+          <div class="figure">
+            <a id="idm45843722386736"></a>
+            <p class="title">
+              <strong>Рисунок 10. Параметры ГСА2000</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_gsa2000.png" alt="Параметры ГСА2000" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    XTAL - позволяет выбрать кристалл №1, №2 или их сумму.
+	</li>
+              <li class="listitem">
+	    Режим - позволяет выбрать обычный спектр или спектр света.
+	</li>
+              <li class="listitem">
+	    Стабилизация - позволяет включить/выключить стабилизацию.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="index.html#spectra" title="17. Спектры">Раздел 17, «Спектры »</a>, <a class="xref" href="variables.html#variables_spec_gsa" title="B.9. Переменные ГСА2000">Раздел B.9, «Переменные ГСА2000»</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_arrow"></a>6.13. Индикатор пилота ("Стрелка")</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Это устройство специально сделано для отображения информации о параметрах бокового и вертикального уклонения от заданной линии пути.
+      Также отображается текущий режим полета (заход на маршрут, проводка по маршруту).
+      Программа передает данные в порт RS232, но не в штатном режиме передачи данных,
+      а использует дополнительные линии CTS и RTS (см. описание интерфейса <a class="ulink" href="http://en.wikipedia.org/wiki/RS-232" target="_top">RS232</a>).
+      Это касается идикаторов типа classic. Индикаторы типа tvisor подключаются только через Тепловизор. Индикаторы типа modern работают в штатном режиме RS232.
+      Для более подробной информации об индикаторе пилота см.  <a class="xref" href="index.html#pilotpan_arrow" title="12.1. Пилотский индикатор">Раздел 12.1, «Пилотский индикатор»</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45843722374656"></a>
+            <p class="title">
+              <strong>Рисунок 11. Параметры стрелки</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_arr.png" alt="Параметры стрелки" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+	Для индикатора пилота можно выбрать тип подключаемого устройства: classic, tvisor или modern.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_ra"></a>6.14. Радиовысотомер</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Это устройство подключается к программе "NavDat" не напрямую, а через какое-либо другое устройство. В некоторых случаях схема подключения позволяет
+	посылать команды на радиовысотомер: включить (on), выключить (off), тест (test). Для этой цели в программе имеется специальное приложение 
+	RA Control Panel.
+    </p>
+          <div class="figure">
+            <a id="idm45843722368416"></a>
+            <p class="title">
+              <strong>Рисунок 12. Панель управления радиовысотомером</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/rapan.png" alt="Панель управления радиовысотомером" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_ffra"></a>6.15. Радиовысотомер Free Flight</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с радиовысотомерами фирмы <em class="citetitle">Free Flight</em>,
+      работающим через канал связи RS232: TRA-4000, TRA-4500. Они используют скорость порта 56000, поэтому соответствующий
+      компорт должен быть настроен на скорость 57600.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_ffra" title="B.10. Переменные радиовысотомера Free Flight">Раздел B.10, «Переменные радиовысотомера Free Flight»</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45843722361648"></a>
+            <p class="title">
+              <strong>Рисунок 13. Параметры РВ Free Flight</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_ffra.png" alt="Параметры РВ Free Flight" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Устройство имеет один параметр настройки - 
+	    'Использовать радиовысотомер' - если флаг установлен, 
+	    канал радиовысоты будет использован в качестве навигационной высоты
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_adc"></a>6.16. АЦП Геотехнологии</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым АЦП фирмы <em class="citetitle">Геотехнологии</em>,
+      работающим через канал связи RS232.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Устройство имеет контролируемые параметры. См. <a class="xref" href="variables.html#variables_adc" title="B.11. Переменные АЦП">Раздел B.11, «Переменные АЦП»</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45843722353744"></a>
+            <p class="title">
+              <strong>Рисунок 14. Параметры АЦП</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/bortcfg_adc.png" alt="Параметры АЦП" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Устройство имеет один параметр настройки - 'каналы АЦП', который задает масштабированные переменные. Каждая строка должна иметь следующий формат: 
+    "номер_канала имя смещение_нуля масштабный_коэффициент". Две последние величины должны быть указаны в разрядах АЦП.
+    </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="status"></a>7. Контроль работоспособности системы</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Все устройства, подключаемые к программе "NavDat", как и сама система "NavDat", имеют свой флаг работоспособности.
+    Все эти флаги могут контролироваться при помощи соответствующего приложения 'Статус'.
+    Каждый флаг отображается при помощи индикатора, имеющего серый цвет в том случае, когда устройство работает корректно. В противном случае индикатор красного цвета.
+    Все индикаторы кофигурируются автоматически при запуске "NavDat".
+    Они выстриваются в одну строку или столбец в зависимости от формы окна.
+    Если индикатор остается красным более минуты, съемка должна быть прекращена до устранения причин.
+    </p>
+        <div class="figure">
+          <a id="idm45843722346000"></a>
+          <p class="title">
+            <strong>Рисунок 15. Панель состояния</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/status-hor.png" alt="Панель состояния" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+    Значения флагов определены следующим образом
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>sys</strong></span> - Загорается красным, если случилась ошибка записи, данные не удается записать или осталось мало свободного места на диске (на 10 часов или менее).
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>gtmag</strong></span> - Загорается красным, если нет синхронизации с ГНСС-приемником (отсутствует сигнал PPS), не достаточно видимых спутников, низкая амплитуда сигнала датчика,
+			   низкий или чрезвычайно высокий ток потребления датчика или отсутствуют данные как таковые.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>gps</strong></span> - Загорается красным, если нет данных или счисления координат в соответствующем ГНСС-приемнике.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>spec</strong></span> - Загорается красным, если нет сигнала или если случилась ошибка потока данных. Для ГСА2000  контрольный байт устройства также используется.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>em4h</strong></span> - Загорается красным, если нет сигнала, возбуждение выключено, в случае зашкала какого-либо АЦП или если случилась ошибка потока данных.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>equator</strong></span> - Загорается красным, если нет сигнала, возбуждение выключено, в случае зашкала какого-либо АЦП или если случилась ошибка потока данных.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>ffra</strong></span> - Загорается красным, если нет данных, имеются ошибки в потоке или высотомер в режиме тест.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>gtadc</strong></span> - Загорается красным, если нет сигнала.
+	</li>
+            <li xml:lang="ru" class="listitem" lang="ru"><span class="bold"><strong>e502</strong></span> - Загорается красным, если нет сигнала.
+	</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="registration"></a>8. Регистрация навигационной и аэрогеофизической информации</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    В процессе работы бортовая программа "NavDat" создает и записывает следующие файлы:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem"><code class="filename">*.dlg</code> (Data Logging).
+      Этот бинарный файл содержит те или иные данные от всех приборов комплекса. 
+      Формат записи этого файла очень сложный. 
+      Его потом последовательно разбирают соответствующие разным процедурам обработки программы-экстракторы. 
+      Следует только помнить, что для синхронизации в этот файл периодически записывается текстовая строка синхронизации, начинающаяся префиксом $POS: 
+      <div class="example"><a id="idm45843722325088"></a><p class="title"><strong>Пример 9. </strong></p><div class="example-contents"><pre class="programlisting">
+    $POS,12,094301.0,5539.9828751,3736.3127569,237.31,41.1,41.12,0.1,21,03,2009,54.11
+        </pre></div></div><br class="example-break" />
+      После префикса записано количество видимых спутников созвездия, время GPS (ЧЧММСС.с), широта и долгота в формате градусы, минуты, доли минут,
+      геоидальная высота в метрах, угол курса в градусах, скорость в м/сек, PDOP, день, месяц, год (GPS дата), навигационная высоста в метрах.
+      Эту информацию в файле можно прочесть глазами. Если в системе несколько приемников ГНСС, то каждому из них будет соответствовать своя посылка: 
+      $POS - первый приемник, $PO1 - второй приемник, и т.д. Данные параметры могут контролироваться в окне самописца (см. 
+      <a class="xref" href="variables.html#variables_pos" title="B.3. Переменные навигации (посылка $POS dlg-файла)">Раздел B.3, «Переменные навигации (посылка $POS dlg-файла)»</a>).
+      Имя dlg-файла является композицией из даты и времени запуска программы. Первый символ - месяц (1 - январь, 2 - февраль, ..., 9 - сентябрь, 
+      a - октябрь, ..., с - декабрь). Далее две цифры - число. Далее еще две цифры - порядковый номер запуска в сутки.
+      Этот файл записывается непрерывно от момента старта программы до выхода из нее. 
+      Для удобства архивирования, если размер этого файла превысит 100 Мбайт, он автоматически закроется и откроется следующий - с добавкой к имени буквы 'b',  затем 'c', 'd' и т.д.
+    </li>
+            <li class="listitem"><code class="filename">*.jps</code> (Javad Positioning Systems, может быть несколько устройств).
+      Этот бинарный файл, как отмечалось ранее, содержит байт в байт информацию, полученную от ГНСС-приемника типа Javad или Topcon, 
+      и используется в дальнейшем при выполнении операций дифференциальной коррекции ГНСС. Как и dlg-файл, разбивается по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </li>
+            <li class="listitem"><code class="filename">*.nov</code> (Novatel, может быть несколько устройств).
+      Этот бинарный файл содержит байт в байт информацию, полученную от ГНСС-приемника типа Novatel, 
+      и используется в дальнейшем при выполнении операций дифференциальной коррекции ГНСС. Как и dlg-файл, разбивается по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </li>
+            <li class="listitem"><code class="filename">*.tep</code> (Тепловизор). 
+      Тепловизор создает поток 3,6 Гбайт в час, для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт. 
+      Очевидно, за час таких файлов будет создано не менее 30 штук. Начиная с 27-го файла они будут иметь двухбуквенную маркировку ('ba', 'bb', 'bc' и т.д.).
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </li>
+            <li class="listitem"><code class="filename">*.mag</code> (ГТ-Маг, может быть несколько устройств). 
+	Система ГТ-Маг, работающая в режиме 1000 Гц, также создает достаточно большой поток данных. 
+      Для нее выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </li>
+            <li class="listitem"><code class="filename">*.rs</code> (RSx, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </li>
+            <li class="listitem"><code class="filename">*.grs</code> (GRS410, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </li>
+            <li class="listitem"><code class="filename">*.gsa</code> (ГСА2000, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </li>
+            <li class="listitem"><code class="filename">*.rad</code> (Экватор). Поток данных системы Экватор порядка 10 Гб в час. 
+      Для нее выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </li>
+            <li class="listitem"><code class="filename">*.em4</code> (EM4H). Поток данных системы EM4H записывается в неизменном виде в файлы такого типа.
+      Для обеспечения совместимости со старыми программами эти же данные пишутся в файл dlg согласно документации EM4H.
+      Имя файла определяется тем же образом, что и для dlg-файла. 
+      </li>
+            <li class="listitem"><code class="filename">current.fpl</code> (Flight Plan). При выходе из программы этот файл всегда записывается с этим именем и
+    содержит данные полетного задания, сохраняющиеся в памяти машины на момент выхода. 
+    Формат этого текстового файла детально разбирается в другом разделе (<a class="xref" href="index.html#fpl" title="9. Файл полетного задания">Раздел 9, «Файл полетного задания»</a>).
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+     Для однотипных устройств на конце расширения файла добавляется цифра. Например: <code class="filename">*.rs</code>, <code class="filename">*.rs1</code>, ... 
+     или  <code class="filename">*.jps</code>, <code class="filename">*.jp1</code>, ...
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="fpl"></a>9. Файл полетного задания</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Это текстовый файл, хранящий формализованное описание полетного задания.
+    Вы можете написать этот файл, используя текстовый редактор, или использовать утилиту 
+    <a class="ulink" href="http://www.geosoft.com/products/oasis-montaj" target="_top">Geosoft Oasis Montaj</a>, или, наконец, создать его самой программой "NavDat". Во всех
+    этих случаях файл должен быть написан в соответствии с предопределенными
+    синтаксическими правилами.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="terminology"></a>9.1. Терминология</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Полетное задание состоит из записей. Каждая запись имеет тип, имя и список
+      точек (может быть пустым). Описание точки состоит из имени (необязательно),
+      значений широты и долготы. Каждая запись в файле должна начинаться с новой
+      строки и быть записана следующим образом:
+    </p>
+          <pre class="programlisting">
+ RECORD_TYPE RECORD_NAME =
+(POINT_NAME, LATITUDE, LONGITUDE),
+(POINT_NAME, LATITUDE, LONGITUDE),
+..........
+(POINT_NAME, LATITUDE, LONGITUDE),
+      </pre>
+          <p xml:lang="ru" lang="ru">
+      Значения имен записи и точки (RECORD_NAME, POINT_NAME) в файле не должны начинаться с цифры и не должны содержать
+      символов "+-/*.,$#@!%^&amp;()[]|\&lt;&gt;". Допускается символ '_'(подчеркивание).
+      Отдельно отметим, что в файле допустимо использование нескольких записей с
+      одинаковыми именами.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Географические координаты точек (LATITUDE - широта, LONGITUDE - долгота) должны задаваться в формате "DDDMMmmmm", 
+      то есть градусы-минуты-доли_минут без 
+      разделителей. Первые цифры (до трех в случае долготы и до двух в случае широты) - градусы, потом две цифры - минуты, 
+      целая часть, потом ровно четыре цифры - дробная часть 
+      минут. Знак задает полушарие. Значение широты меньше нуля отвечает южному полушарию, отрицательное значение долготы 
+      задает западное полушарие.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Обратите внимание на то, чтобы координаты полетного задания и бортовой навигационной системы соответствовали одной
+      и той же системе. Как правило, приемники ГНСС работают в системе WGS84.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Поле "тип записи" (RECORD_TYPE) может принимать одно из трех предопределенных значений:      
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">LINE</code> – в этом случае запись содержит список точек маршрута в порядке
+	прохода
+      </li>
+              <li class="listitem"><code class="constant">POSITION</code> – в этом случае запись содержит просто список точек, не
+	являющихся описанием точек цепочки прохождения. Такими точками, как
+	правило, описываются аэропорты (запись обычно имеет имя
+	AEROPORTS), препятствия (запись, содержащую такие точки можно
+	назвать, например, OBSTRUCT)
+      </li>
+              <li class="listitem"><code class="constant">REGION</code> – в этом случае список точек записи содержит упорядоченную
+	последовательность вершин полигона, ограничивающего съемочный
+	участок или какую либо зону на площади работ.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Файл полетного задания может содержать текст комментария. Комментарий
+      всегда располагается в правой части строки и начинается с двух символов ';'
+      (точка с запятой). Ниже приведен пример файла <code class="filename">*.fpl</code>.
+      Последовательность записей определяется только соображениями удобства прочтения и дальнейшей работы.
+      Никаких синтаксических ограничений на последовательность записей не накладывается. Вот пример:
+    </p>
+          <div class="example">
+            <a id="idm45843722282816"></a>
+            <p class="title">
+              <strong>Пример 10. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+;;;;;;;;;;;;;;;;;savedFPL. it is COMMENT
+POSITION AIRPORTS=
+(-3815,3815), ;;ONE MORE COMMENT
+ (CONTROL,-0,-0),
+ (3815,-3815);
+LINE RKM=
+ (CONTROL,-5396,-0),
+ (CONTROL,-0,-0),
+ (CONTROL,5396,-0);
+POSITION OBSTRUCT=
+ (-3815,-3815),
+ (CONTROL,-0,-0),
+ (3815,3815);
+LINE RKM=
+ (CONTROL,-0,-5396),
+ (CONTROL,-0,-0),
+ (CONTROL,-0,5396);
+      </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+      Все точки из этого примера располагаются в окрестности экватора, поскольку значащие цифры здесь воспринимаются как доли минуты.
+    </p>
+          <p xml:lang="ru" lang="ru">
+	Для удобства в программе возможно загрузить полетное задание в формате Geosoft <code class="filename">*.xyz</code>:
+    </p>
+          <div class="example">
+            <a id="idm45843722279408"></a>
+            <p class="title">
+              <strong>Пример 11. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+Line 101
+   LATITUDE LONGITUDE
+   LATITUDE LONGITUDE
+   ..........
+   LATITUDE LONGITUDE
+Tie 201
+   ..........
+      </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="ru" lang="ru">
+      Координаты точек должны соответствовать формату "DDDMMmmmm", т.е. градусы-минуту-доли_минуты без пробелов, как в файле <code class="filename">*.fpl</code>. 
+      Имена точек будут автоматически даны A0, A1, A2 и т.д., а маршруты любого типа будут восприняты как LINE.
+      После загрузки в бортовую программу полетное задание может быть сохранено только в формате <code class="filename">*.fpl</code>.
+</p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="fplan"></a>10. Панель полетного задания</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Для отображения файла полетного задания и управления его исполнением в программе "NavDat" используется специальная панель – панель полетного задания.
+    Сразу после запуска программы эта панель пустая и имеет одну единственную строку.
+    Если вы будете перемещать курсор вправо или вниз до упора, то увидите,
+    что поле панели скроллингуется, прокручивается. Начать работу с полетным
+    заданием можно с его загрузки из файла.
+    </p>
+        <div class="figure">
+          <a id="idm45843722272864"></a>
+          <p class="title">
+            <strong>Рисунок 16. Панель полетного задания</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/fplan.png" alt="Панель полетного задания" />
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru"><br class="figure-break" />
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="fplan_load"></a>10.1. Загрузка и просмотр полетного задания</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45843722269328"></a>
+            <p class="title">
+              <strong>Рисунок 17. Диалог открытия файла полетного задания</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-open.png" alt="Диалог открытия файла полетного задания" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+      Для загрузки полетного задания, сфокусировавшись на панели полетного задания, нажмите <span class="keycap"><strong>F3</strong></span>.
+      Вы увидите традиционное окно файловой системы. Перемещаясь по дереву каталогов, выберите нужный вам файл <code class="filename">*.fpl</code>.
+      Также возможна загрузка Geosoft <code class="filename">*.xyz</code> файла. Он будет автоматически сконвертирован к формату <code class="filename">*.fpl</code>.
+      После загрузки файла полетного задания предыдущее полетное задание будет стерто.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Для добавления нового полетного задания к текущему, сфокусировавшись на панели полетного задания, нажмите <span class="keycap"><strong>Ctrl+F3</strong></span>.
+      Все новые записи будут добавлены в конец текущего списка.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      После успешной загрузки файла вы увидите в панели полетного задания список записей.
+    </p>
+          <div xml:lang="ru" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="ru">
+            <table border="0" summary="Warning">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Предупреждение]" src="./images/warning.png" />
+                </td>
+                <th align="left">Предупреждение</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+    Загрузка слишком большого полетного задания может привести к перегрузке системных ресурсов. 
+    Чтобы очистить текущее полетное задание, остановите бортовой демон, а затем удалите файл 'current.fpl' из директории записи данных.
+  </td>
+              </tr>
+            </table>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Записи, имеющие тип LINE, отображаются бежевым цветом, REGION – зеленым, POSITION – розовым.
+      Обратите внимание, что на панели видны только заголовки каждой из записей.
+      Списка точек пока не видно.
+      Для заголовков записей типа POSITION и REGION справа указано количество точек в списке.
+      Для записей типа LINE слева стоит маленький треугольник, а справа, кроме количества точек, указаны дополнительные параметры:
+      значения заходного курса в градусах, суммарная длина маршрута и время, которое требуется,
+      чтобы пролететь этот маршрут с текущей скоростью.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Треугольник показывает порядок прохождения маршрутов в списке (сверху вниз или снизу вверх).
+      Он  так же может менять цвета:
+      полностью серый - маршрут не пройден, помеченный зеленым - пройден. Если же треугольник моргает попеременно зеленым и красным, 
+      значит это текущий маршрут. У оператора есть возможность изменить значение данного признака для выделенных маршрутов, нажав <span class="keycap"><strong>Ctrl+D</strong></span>, на противоположное.
+      Для того, чтобы раскрыть список точек маршрута нужно установив курсор в соответствующей строке, нажать <span class="keycap"><strong>Enter</strong></span>.
+      Теперь вы видите развернутый список точек данного маршрута. Индикаторы точек также меняют цвет по мере прохождения с серого на 
+      моргающий зеленый/красный и на зеленый для пройденных точек.
+      Для того, чтобы снова свернуть список, опять нажмите <span class="keycap"><strong>Enter</strong></span>.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Отдельно остановимся на отображаемых параметрах для точек маршрутов и
+      заголовков маршрутов. Для заголовков маршрутов значение курса соответствует
+      направлению первого при прочтении сверху вниз, входного отрезка списка точек.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Для каждой точки параметрами являются:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	значение курса входящего в нее отрезка из предыдущей точки списка (в градусах). Для первой точки списка это
+	значение не актуально, записан 0
+      </li>
+              <li class="listitem">
+	длина этого отрезка (в км), для первой точки списка - 0
+      </li>
+              <li class="listitem">
+	время, необходимое, чтобы пролететь это расстояние с текущей скоростью, для первой точки 0
+      </li>
+              <li class="listitem">
+	*азимут на данную точку из той точки, в которой сейчас самолет
+	находится (в градусах)
+      </li>
+              <li class="listitem">
+	*расстояние от текущего положения самолета до данной точки (км)
+      </li>
+              <li class="listitem">
+	*время, необходимое, чтобы это расстояние пролететь с текущей
+	скоростью
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Для списка точек записей типа REGION и POSITION отображаются только
+      параметры, помеченные *.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="edit"></a>10.2.  Редактирование полетного задания</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      В программе "NavDat" предусмотрена возможность редактирования полетного задания.
+      С учетом опыта использования системы, а также понимая опасность
+      ошибки при такого рода операциях, разработчики предусмотрели следующие операции:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><em class="firstterm">изменение заголовка записи.</em>
+	На соответствующем заголовке нажмите <span class="keycap"><strong>Alt+M</strong></span> (modify). Появится красная строка редактирования,
+	в которой записаны текущие тип и имя записи. Записи типа LINE соответствует буква L, типам REGION и	
+	POSITION – буквы R и P соответственно. Можете менять тип и имя по своему усмотрению, в соответствиями с форматом полетного
+	задания. Чтобы изменения применить, нажмите <span class="keycap"><strong>Enter</strong></span>. Если при редактировании этой строки вы совершите ошибку, 
+	то после нажатия <span class="keycap"><strong>Enter</strong></span>	будет указан синтаксис для данной записи, а изменения будут проигнорированы.
+      </li>
+              <li class="listitem"><em class="firstterm">изменение параметров точки.</em>
+	Установите курсор в соответствующую строку, нажмите <span class="keycap"><strong>Alt+M</strong></span>. В красной строке редактора появятся текущие имя
+	точки, ее широта и долгота, именно в этом порядке. Отредактируйте имя точки и координаты.
+	Географические координаты точек должны задаваться в формате "DDDMMmmmm", то есть градусы-минуты без 
+	разделителей. Первые цифры (до трех в случае долготы и до двух в случае широты) - градусы, потом две цифры - минуты, 
+	целая часть, потом ровно четыре цифры - дробная часть 	минут. Знак задает полушарие. Значение широты меньше нуля 
+	отвечает южному полушарию, отрицательное значение долготы задает западное полушарие.
+      </li>
+              <li class="listitem"><em class="firstterm">удаление записи/точки.</em>
+	Установите курсор в нужную строку или выделите несколько строк и нажмите <span class="keycap"><strong>Ctrl-Delete</strong></span></li>
+              <li class="listitem"><em class="firstterm">копирование записи/точки.</em>
+	Выделите строчки для копирования или установите курсор в нужную строку и нажмите 
+	<span class="keycap"><strong>Ctrl-Insert</strong></span>. После этого поставьте курсор в место, куда надо скопировать и нажмите
+	<span class="keycap"><strong>Shift-Insert</strong></span>.
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="markup-parallel"></a>10.3. Разметка системы параллельных маршрутов</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Эта операция позволяет "заштриховать" регион системой параллельных маршрутов.
+      Для вызова этой процедуры вами сначала должна быть подготовлена запись, соответствующая заданному региону.
+      Установите курсор на строку ее заголовка и нажмите <span class="keycap"><strong>Alt+G</strong></span>.
+      В появившейся строке редактирования заполните следующие поля:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	маска имени. Все создаваемые маршруты будут иметь имя, начинающееся с маски,
+	и затем будут стоять цифры соответствующего номера.
+      </li>
+              <li class="listitem">
+	направление "штриховки". Курс в градусах.
+      </li>
+              <li class="listitem">
+	расстояние между маршрутами в метрах
+      </li>
+              <li class="listitem">
+	широта и долгота точки, через которую пройдет центральный маршрут "штриховки".
+	В момент нажатия <span class="keycap"><strong>Alt+G</strong></span> эти значения устанавливаются соответствующими точке, 
+	являющейся центром для вершин региона.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Сама разметка производится следующим образом.
+      Через заданную центральную точку проводится ортодромия A, перпендикулярно заданному направлению.
+      Затем в одну и другую сторону от центральной точки вдоль нее отмеряются отрезки,
+      длина которых равна заданному межмаршрутному расстоянию d.
+      Через точки концов этих отрезков проводятся ортодромии, перпендикулярные ортодромии А.
+      Это и будут линии маршрутов. Концами маршрутов будут точки их пересечения с границей размечаемого региона.
+      Направление маршрутов устанавливается встречным для четных и нечетных номеров. 
+    </p>
+          <div class="figure">
+            <a id="idm45843722222176"></a>
+            <p class="title">
+              <strong>Рисунок 18. Разметка системы параллельных маршрутов</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-markup.png" alt="Разметка системы параллельных маршрутов" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+      В результате этой операции в основном списке после записи данного региона появятся записи соответствующих маршрутов.
+    </p>
+          <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Caution: ">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Внимание]" src="./images/caution.png" />
+                </td>
+                <th align="left"></th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+	Разметка площади маршрутами имеет экономические характеристики.
+	Каждый лишний маршрут – это лишнее летное время.
+	Поэтому советуем по возможности трепетно относиться к этому процессу,
+	а лучше всего, выполнять разметку средствами более умного в этом смысле программного продукта – Geosoft Oasis Montaj.
+      </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="markup-rkm"></a>10.4. Разметка системы маршрутов магнитной компенсации</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Эта операция позволяет получить систему маршрутов для выполнения магнитной компенсации.
+      Все маршруты будут иметь разное направление и проходить через одну центральную точку.
+      Установите курсор на строку, где вы хотите, чтобы появились эти маршруты, и нажмите <span class="keycap"><strong>Alt+R</strong></span>.
+      В появившейся строке редактирования заполните следующие поля:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	маска имени. Все создаваемые маршруты будут иметь имя, начинающееся с маски,
+	и затем будут стоять цифры, соответствующие курсу маршрута в градусах.
+      </li>
+              <li class="listitem">
+	направление одного из маршрутов - Курс в градусах. Курсы остальных маршрутов будут вычислены автоматически.
+      </li>
+              <li class="listitem">
+	радиус маршрутов. Длина маршрута будет равна двум радиусам.
+      </li>
+              <li class="listitem">
+	угол между звеньями одного маршрута.
+      </li>
+              <li class="listitem">
+	широта и долгота центральной точки.
+	В момент нажатия <span class="keycap"><strong>Alt+R</strong></span> эти значения устанавливаются соответствующими текущей позиции.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Если угол между звеньями не равен нулю, результат будет как вариант 1 (<a class="xref" href="index.html#fig-rkm1" title="Рисунок 19. Разметка системы маршрутов магнитной компенсации. Вариант 1.">Рисунок 19, «Разметка системы  маршрутов магнитной компенсации. Вариант 1.»</a>). 
+	Будет четыре маршрута, направления которых задаются с шагом 90 градусов.
+	В противном случае будет восемь маршрутов через 45 градусов, как показанно в варианте 2  (<a class="xref" href="index.html#fig-rkm2" title="Рисунок 20. Разметка системы маршрутов магнитной компенсации. Вариант 2.">Рисунок 20, «Разметка системы  маршрутов магнитной компенсации. Вариант 2.»</a>).
+    </p>
+          <div class="figure">
+            <a id="fig-rkm1"></a>
+            <p class="title">
+              <strong>Рисунок 19. Разметка системы  маршрутов магнитной компенсации. Вариант 1.</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-rkm1.png" alt="Разметка системы маршрутов магнитной компенсации. Вариант 1." />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <div class="figure">
+            <a id="fig-rkm2"></a>
+            <p class="title">
+              <strong>Рисунок 20. Разметка системы  маршрутов магнитной компенсации. Вариант 2.</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-rkm2.png" alt="Разметка системы маршрутов магнитной компенсации. Вариант 2." />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="sect-fplan-setup"></a>10.5. Настройка, старт и остановка проводки</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Итак, полетное задание создано, отредактировано и проверено.
+      Теперь можно поднимать самолет в воздух и поручать программе выполнение проводки.
+      Осталось только назначить начальную точку в списке, с которой следует начать проводку.
+      Выполняется это следующим образом:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	нажимая <span class="keycap"><strong>Ctrl+Backspace</strong></span>,  установите нужное направление прочтения списка маршрутов
+      </li>
+              <li class="listitem">
+	нажимая <span class="keycap"><strong>Alt-Backspace</strong></span> (изменить направления всех маршрутов на противоположные) или <span class="keycap"><strong>Backspace</strong></span> 
+	(изменить направление выбранных маршрутов на противоположное)
+	установите порядок точек для каждого маршрута, точки всегда проходятся сверху вниз
+      </li>
+              <li class="listitem">
+	выберите начальную точку проводки и установите курсор на соответствующую ей строку
+      </li>
+              <li class="listitem">
+	проверьте все как следует еще раз и нажмите <span class="keycap"><strong>Ctrl+S</strong></span>.
+	Монитор проводки примет управление и будет  выполнять проводку в строгом соответствии с заданными направлениями прочтений.
+	Если при нажатии <span class="keycap"><strong>Ctrl+S</strong></span>(start) курсор находился на строке заголовка записи маршрута,
+	то проводка начнется с первой точки списка по направлению прочтения.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Если по каким либо причинам вам понадобилось выполнить принудительный заход на маршрут,
+      то, выполнив все точно так же, вместо <span class="keycap"><strong>Ctrl+S</strong></span> нажмите <span class="keycap"><strong>Ctrl+L</strong></span>(direct start).
+      Это приведет к тому, что программа не станет искать заходную траекторию, а сразу будет вести по выбранному маршруту.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Для остановки проводки следует нажать <span class="keycap"><strong>Ctrl+K</strong></span>.
+      Для выполнения этой операции не обязательно, чтобы активной была панель полетного задания.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="sect-pos-fix"></a>10.6. Запись текущей точки</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Эта очень важная операция используется во всех навигационных системах мира.
+      Она выполняет регистрацию текущего значения координат.
+      А поскольку программа "NavDat" обслуживает весьма специфический съемочный процесс, то и выполняется довольно замысловатым образом.
+      Для выполнения этой операции нужно нажать <span class="keycap"><strong>Ctrl+F</strong></span>. По этой команде будет сделано следующее:
+    </p>
+          <div class="figure">
+            <a id="fig-pos-fix"></a>
+            <p class="title">
+              <strong>Рисунок 21. Position fix</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/pos-fix.png" alt="Position fix" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	В общем списке задания создается специальная запись с именем FIX.
+	Если такая запись уже существовала, дубликат не создается
+      </li>
+              <li class="listitem">
+	В список точек заносится точка с текущими координатами и именем, являющимся композицией из даты и времени
+      </li>
+              <li class="listitem">
+	Если в момент нажатия производилась проводка по маршруту, то в список его точек также 
+	будет вставлена точка с таким же именем, находящаяся на траверсе текущей точки. (<a class="xref" href="index.html#fig-pos-fix" title="Рисунок 21. Position fix">Рисунок 21, «Position fix»</a>)
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="fplan_hotkeys"></a>10.7. Управление в панели полетного задания</h3>
+              </div>
+            </div>
+          </div>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Стрелки</strong></span> перемещение по списку, работают стандартные комбинации для выделения
+	(<span class="keycap"><strong>Shift вверх/вниз</strong></span> - перемещение с инверсией выделения, <span class="keycap"><strong>Ctrl вверх/вниз</strong></span> - 
+	перемещение с сохранением выделения, <span class="keycap"><strong>Ctrl Пробел</strong></span> - инвертировать выделение без перемещения)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Enter</strong></span> Раскрыть/закрыть маршрут
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F3</strong></span> загрузить файл полетного задания вместо текущего
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+F3</strong></span> загрузить файл полетного задания в конец текущего списка
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F2</strong></span> сохранить файл полетного задания
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Backspace</strong></span> изменить порядок прохождения точек маршрута под курсором 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-Backspace</strong></span> изменить порядок прохождения точек для всех маршрутов
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Backspace</strong></span> изменить порядок прохождения маршрутов
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-M</strong></span> редактировать строку под курсором, <span class="keycap"><strong>Esc</strong></span> - отмена
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-G</strong></span> разбивка выделенного региона
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-R</strong></span> создание маршрутов магнитной компенсации
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Delete</strong></span> удалить выделенное
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Insert</strong></span> скопировать выделенное в буфер
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-D</strong></span> Изменить значение флага 'выполнен' для выбранных маршрутов
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Shift-Insert</strong></span> вставить из буфера
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-S</strong></span> начать заход на выделенный маршрут
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-L</strong></span> форсировать проводку по маршруту, без захода на него
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-K</strong></span> остановить проводку, глобальная комбинация (работает из любого окна)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-F</strong></span> записать текущую точку, глобальная комбинация (работает из любого окна)
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="panorama"></a>11. Навигационная панорама</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Панорама – основной индикатор визуального контроля качества исполнения полетного задания.
+    Этот индикатор осуществляет  картографическое отображение навигационной информации.
+  </p>
+        <div class="figure">
+          <a id="fig-panorama"></a>
+          <p class="title">
+            <strong>Рисунок 22. Окно панорамы</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/panorama.png" alt="Окно панорамы" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+    На панораме схематически отображаются элементы полетного задания,
+    ее поведение напрямую связано с операциями в панели полетного задания. (<a class="xref" href="index.html#fig-panorama" title="Рисунок 22. Окно панорамы">Рисунок 22, «Окно панорамы»</a>)
+  </p>
+        <p xml:lang="ru" lang="ru">
+    В верхней части индикатора отображается масштаб карты - размер стороны одной клетки в метрах.
+    В нижнем левом углу отображаются следующие параметры: 
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Time - время GPS (чч:мм:сс)
+    </li>
+            <li class="listitem">
+      Track - текущий путевой угол (град)
+    </li>
+            <li class="listitem">
+      Lat - широта (градусы-минуты-секунды)
+    </li>
+            <li class="listitem">
+      Lon - долгота (градусы-минуты-секунды)
+    </li>
+            <li class="listitem">
+      Alt - высота над эллипсоидом (м)
+    </li>
+            <li class="listitem">
+      V - путевая скорость (км/ч)
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    В правом нижнем углу печатаются:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Route - имя текущего маршрута
+    </li>
+            <li class="listitem">
+      Dst.Point - имя текущей точки назначения
+    </li>
+            <li class="listitem">
+      Est.Time - прогнозируемое время полета до конца маршрута в режиме проводки 
+      или до начала маршрута в режиме захода (чч:мм:сс)
+    </li>
+            <li class="listitem">
+      Est.Dist - расстояние до конца маршрута в режиме проводки 
+      или до начала маршрута в режиме захода (км)
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Символическое изображение самолета отвечает текущему положению летательного аппарата. Если его контур отображается пунктиром,
+    значит самолет находится за границей панорамы в том направлении, в котором указывает зеленая стрелка, совмещенная
+    с пунктирным контуром.
+  </p>
+        <p xml:lang="ru" lang="ru">
+    В правой части панорамы отображается прогресс-индикатор прохождения маршрута. Голубого цвета кружок отвечает 
+    текущему положению на маршруте, отображаемом желтой линией.
+  </p>
+        <p xml:lang="ru" lang="ru">
+    В нижней части помещена шкала индикатора проводки. Оранжевый кружок дублирует текущие показания индикатора пилота. 
+    Голубой квадрат показывает боковое отклонение от линии маршрута, шкала - плюс-минус 100 метров.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722139760"></a>11.1. Основные элементы панорамы</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Для того, чтобы увидеть отображение элементов полетного задания на панораме, следует загрузить его или создать.
+      Поскольку элементы отображения на панораме однозначно связаны с содержимым полетного задания и операциями над ним,
+      следует рассматривать два этих индикатора совместно. 
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Маршруты на панораме отображаются линиями темно-оранжевого цвета, как и в панели полетного задания. Стрелка на
+	конце маршрута, или на границе панорамы, если конец маршрута не попадает в зону видимости, показывает его направление.
+      </li>
+              <li class="listitem">
+	Границы регионов изображаются зеленым цветом, как и в панели полетного задания.
+      </li>
+              <li class="listitem">
+	Маршрут, регион или набор точек, на котором установлен фокус в панели полетного задания, подсвечивается белым. 
+      </li>
+              <li class="listitem">
+	Точка, на которой установлен фокус в панели полетного задания, отображается белым кружком и подписывается
+	соответствующим именем. 
+      </li>
+              <li class="listitem">
+	Одиночные точки (POSITION) отображаются розовым цветом и подписываются всегда.
+      </li>
+              <li class="listitem">
+	Текущий маршрут, на который производится нацеливание или осуществляется его прохождение, показывается толстой светло-оранжевой линией.
+      </li>
+              <li class="listitem">
+	Маршрут, помеченный в полетном задании, как пройденный, показывается голубой линией.
+      </li>
+              <li class="listitem">
+	Криволинейный участок заходной траектории отображается пунктиром из маленьких треугольников белого цвета, которые при мелком 
+	масштабе сливаются в линию.
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722131872"></a>11.2. Режимы</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Навигационная панорама имеет два режима отображения
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Панорама. Самолет неподвижен, направление вверх отвечает текущему путевому углу.
+      </li>
+              <li class="listitem">
+	Карта. Север наверху, самолет перемещается по карте.
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722129072"></a>11.3. Управление панорамой</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Q, A</strong></span> - увеличить/уменьшить масштаб
+	</li>
+              <li class="listitem"><span class="keycap"><strong>M</strong></span> - изиенить режим отображения
+	</li>
+              <li class="listitem"><span class="keycap"><strong>Z</strong></span> - Поместить самолет в центр
+	</li>
+              <li class="listitem"><span class="keycap"><strong>C</strong></span> - Изменить размер карты по размеру окна
+	</li>
+              <li class="listitem">
+	 Можно использовать стрелки для перемещения карты
+	</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="pilotpan"></a>12. Пилотский индикатор, параметры проводки и пилотская панель</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Во время выполнения полета программа "NavDat" может работать по-разному, в зависимости от фазы проводки,
+    однако, в любом случае, программа отображает управляющую информацию на пилотском индикаторе.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_arrow"></a>12.1. Пилотский индикатор</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Пилотский индикатор представляет собой указатель, имеющий две стрелки - указатели отклонения по горизонтали и вертикали, - и два светодиода
+      - зеленый и красный, - которые могут загораться попеременно.
+      Во время проводки лампочки на индикаторе моргают по-разному в зависимости от фазы проводки. В любой стадии проводки
+      задача пилота - держать, а точнее, "успокаивать" стрелочный указатель в нуле. При этом следует помнить, 
+      что в режиме проводки ноль соответствует прямолинейному полету, 
+      а в режиме захода - криволинейному, по крайней мере до тех пор, пока не вышли на направление маршрута. 
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Стрелочный указатель передает информацию об отклонениях от заданной траектории.
+      Если самолету для следования данной траектории необходимо отклониться вправо, то и указатель положения соответственно 
+      отклонится в зависимости от настройки программы вправо или влево, можно поставить так, как удобно пилоту.
+      Поведение лампочек зависит от того, какая фаза проводки выполняется:      
+    </p>
+          <div xml:lang="ru" class="orderedlist" lang="ru">
+            <ol class="orderedlist" type="1">
+              <li class="listitem">Режим выключенной проводки: горит красный светодиод.</li>
+              <li class="listitem">Режим полета на точку: горит красный светодиод, моргает зеленый. </li>
+              <li class="listitem">Режим проводки по маршруту: горит зеленый светодиод.</li>
+              <li class="listitem">Режим захода на маршрут: в начале заходной траектории зеленый и красный диоды загораются попеременно,
+	красный горит тем меньше, чем ближе к началу маршрута, до тех пор, пока светодиоды не заработают в режиме
+	(3), что означает заход на маршрут.</li>
+            </ol>
+          </div>
+          <p xml:lang="ru" lang="ru">
+       Программа позволяет поменять цвета светодиодов местами.
+    </p>
+          <p xml:lang="ru" lang="ru">
+	Параметры пилотского индикатора, связанные с выполнением полетного задания, могут быть проконтролированы на самописце. 
+	<a class="xref" href="variables.html#variables_fplan" title="B.2. Переменные выполнения полетного задания">Раздел B.2, «Переменные выполнения полетного задания»</a> содержит список параметров.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722110944"></a>12.2. Фазы проводки</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Всего возможно несколько режимов – фаз проводки.
+    Процесс исполнения полетного задания – это последовательный переход из одной фазы в другую.
+    </p>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45843722109264"></a>12.2.1. Полет на точку</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="ru" lang="ru">
+      Этот режим можно охарактеризовать следующим образом.
+      Имеется точка назначения, но никак не определена траектория полета.
+      В этом случае на индикатор пилота выводится угловое расхождение между направлением движения и направлением на заданную точку.
+      Для этого режима масштаб шкалы индикатора устанавливается в градусах.
+      </p>
+          </div>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45843722106880"></a>12.2.2. Криволинейная проводка</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="ru" lang="ru">
+      Это проводка по криволинейной траектории, составленной, как правило, из двух коротких прямолинейных отрезков, 
+      сопряженных дугами окружностей заданного радиуса. При проводке по циркульной кривой на индикатор выводится угловое 
+      расхождение между текущим направлением движения и касательной к заданной окружности.
+      Масштаб шкалы индикатора устанавливается в градусах.
+      </p>
+          </div>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45843722104304"></a>12.2.3. Проводка по маршруту</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="ru" lang="ru">
+      Проводка по маршруту для достижения необходимой точности съемки накладывает ограничения на технику 
+      пилотирования летательного аппарата.
+      В режиме трассовой проводки производится сближение с заданной линией пути, а показателем качества является боковое 
+      уклонение от маршрута. Масштаб шкалы в этом случае устанавливается в метрах.
+      </p>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Следует отметить, что для достижения уверенной, устойчивой и точной проводки требуется не только измерять и показывать 
+      угловые и линейные отклонения от заданной траектории, но и прогнозировать инерционное поведение летательного аппарата и 
+      замедленную реакцию пилота. Поэтому процесс управления пилотским индикатором основан на сложных расчетах и моделировании 
+      движения в реальном времени.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722099808"></a>12.3. Условия вхождения</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45843722099184"></a>
+            <p class="title">
+              <strong>Рисунок 23. Схематическая иллюстрация параметров задания вхождения</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/cc-provo.png" alt="Схематическая иллюстрация параметров задания вхождения" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+      В процессе проводки программа "NavDat" обеспечивает наведение летательного аппарата на входной створ маршрута.
+      Переключение из режима нацеливания в режим трассовой проводки происходит по достижении следующих условий:
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	самолет должен находиться ближе, чем расстояние b от начала маршрута
+      </li>
+              <li class="listitem">
+	направление движения самолета не должно отличаться от направления маршрута больше, чем на угол бета
+      </li>
+              <li class="listitem">
+	боковое уклонение не должно быть больше c
+      </li>
+              <li class="listitem">
+	вхождение должно завершиться не дальше расстояния d от начала маршрута.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      Таким образом самолет должен лететь внутри четырехугольника СDEF, не уклоняясь от направления маршрута более, чем на угол бета.
+      Отдельно следует сказать о специальной точке B и расстоянии a.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      При нацеливании, сначала программа пытается завести самолет на маршрут в точке B.  Это точка предварительного наведения. 
+      Дистанция a называется дистанцией предварительного выноса. Если наведение в точку B  не состоялось по каким-либо причинам, 
+      программа сама несколько приблизит эту точку к началу маршрута, и будет продолжать это приближение до тех пор, пока не достигнет 
+      траверса CD. В этот момент будет принято решение о перезаходе.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Значения этих и некоторых других параметров настраиваются, исходя из представлений о заданной точности и масштабе съемки, 
+      условиях полета, пилотажных свойствах самолета и т.п.
+      Для настройки используется специальная панель (<a class="xref" href="index.html#fig-pilotpan" title="Рисунок 24. Внешний вид пилотской панели">Рисунок 24, «Внешний вид пилотской панели»</a>).
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_params"></a>12.4. Параметры</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="fig-pilotpan"></a>
+            <p class="title">
+              <strong>Рисунок 24. Внешний вид пилотской панели</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/pilotpan.png" alt="Внешний вид пилотской панели" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+    Для задания параметров вам следует отредактировать значения соответствующих величин.
+    </p>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Radius – заданный радиус дуг криволинейной проводки в метрах
+      </li>
+              <li class="listitem">
+	Prolon – дистанция предварительного выноса (a) в радиусах
+      </li>
+              <li class="listitem">
+	Width – ширина створа (c) в метрах
+      </li>
+              <li class="listitem">
+	x0 – минимальная дистанция вхождения (d) в метрах
+      </li>
+              <li class="listitem">
+	x1 – максимальная дистанция вхождения (b) в метрах
+      </li>
+              <li class="listitem">
+	angle - 	угол вхождения бета в градусах
+      </li>
+              <li class="listitem">
+	Line range – масштаб стрелки при трассовой проводке в процентах от радиуса; следует помнить, что стрелка, как правило, 
+	показывает не текущее отклонение, а прогнозируемое с учетом параметров Line dist
+      </li>
+              <li class="listitem">
+	Line dist 0 и Line dist 1 – две дистанции упреждения в метрах.
+	В режиме трассовой проводки две точки выносятся на эти расстояния вдоль прямой с текущим курсом,
+	и от их отклонения от маршрута зависит положение стрелки.
+      </li>
+              <li class="listitem">
+	Line dist rd – дистанция упреждения с учетом текущей угловой скорости, в метрах.
+	При ненулевом значении этого параметра Line dist 0 и Line dist 1 отсчитываются от точки,
+	отвечающей этому упреждению в соответствующем направлении.
+	Очень важный параметр, определяется динамическими характеристиками летательного аппарата.
+	Если этот параметр равен нулю, индикатор игнорирует параметры Line dist 0 и Line dist 1
+	и показывает боковое отклонение с учетом Line range.
+      </li>
+              <li class="listitem">
+	Angle range – масштаб стрелки для угловой проводки и для этапа захода в градусах.
+	По опыту для уверенного захода на маршрут его значение следует установить равным 3°-4°.
+      </li>
+              <li class="listitem">
+	Max accel – максимально допустимое ускорение (для контроля качества ГНСС данных). По опыту достаточно 10 м/с2.
+      </li>
+              <li class="listitem">
+	Smoothing – фильтрация, сглаживание скачков. По опыту этот параметр должен быть около 95-97.
+      </li>
+              <li class="listitem">
+	Altitude* – Требуемая высота полета.
+      </li>
+              <li class="listitem">
+	Vertical scale* – Шкала вертикального указателя.
+      </li>
+              <li class="listitem">
+	Arrow Inversion – параметр, переключающий знак индикатора бокового уклонения.
+	Некоторым пилотам удобнее, если уклонение вправо отображается на индикаторе смещением указателя влево.
+      </li>
+              <li class="listitem">
+	Lamp Inversion – параметр, переключающий цвет индикатора режима проводки.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru"> 
+    Поля, отмеченные *, используются только для индикаторов типа modern. 
+    Arrow inversion в этом случае действует на оба идикатора (горизонтальный и вертикальный) одинаково.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_setup"></a>12.5. Рекомендации по настройке</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru"> 
+    Настройка параметров проводки дело достаточно тонкое и требует некоторых навыков.  Есть несколько простых рекомендаций по последовательности  настройки.
+  </p>
+          <div xml:lang="ru" class="orderedlist" lang="ru">
+            <ol class="orderedlist" type="1">
+              <li class="listitem">
+	Установите облегченные условия вхождения. Такие, при которых даже приблизительное попадание на маршрут будет считаться кондиционным.
+      </li>
+              <li class="listitem">
+	Установите надежный расчетный радиус криволинейной проводки.
+      </li>
+              <li class="listitem">
+	Установите существенно увеличенный предварительный вынос точки наведения.
+      </li>
+              <li class="listitem">
+	Масштабы шкалы индикатора пилота тоже установите несколько больше обычных. Для линейной проводки 150 - 200 метров.
+      </li>
+              <li class="listitem">
+      Для изменения чувствительности стрелки при заходе меняйте Angle range.
+      Чувствительность тем больше, чем меньше этот параметр.
+      </li>
+              <li class="listitem">
+      Подберите параметры Line dist исходя из баланса скорости сближения с маршрутом и раскачки вдоль маршрута.
+      Чем больше Line dist 0 и 1, тем мягче и медленнее сближение.
+      Упреждение Line dist rd следует устанавливать исходя из времени реакции пилота.
+      </li>
+              <li class="listitem">
+      Выполняя настроечные полеты в таком режиме, наблюдайте по панораме или по фактическим линиям пути, как выполняется разворот и проводка по трассе. При этом меняйте параметры упреждений и успокоения.
+      </li>
+              <li class="listitem">
+      Когда пилот привыкнет работать с индикатором в режиме проводки, а оператор настроит параметры упреждения, 
+      можно, располагая фактической информацией о среднем статистическом развороте, установить надежные параметры условий вхождения.
+      Масштабы указателя - это всегда баланс между нагрузкой пилота и качеством проводки. Чем меньше чувствительность стрелки, тем
+      легче пилоту держать ее в нуле, но, при этом, тем больше будут боковые отклонения. 
+      </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="arrow"></a>13. Приложение пилотский индикатор</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+	Есть приложение, работающее аналогично устройству 'стрелка'. Оно может отображаться на мониторе в кабине пилота, установленном вместо 'стрелки'.
+	Основные особенности работы приложения описаны в <a class="xref" href="index.html#pilotpan" title="12. Пилотский индикатор, параметры проводки и пилотская панель">Раздел 12, «Пилотский индикатор, параметры проводки и пилотская панель»</a>.
+	Добавлены дополнительные возможности отображать направление поворота на криволинейной фазе проводки и текущее значение навигационной высоты.
+    </p>
+        <div class="figure">
+          <a id="idm45843722057120"></a>
+          <p class="title">
+            <strong>Рисунок 25. Индикатор пилота</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/arrow.png" alt="Индикатор пилота" />
+            </div>
+            <div class="mediaobject">
+              <img src="images/arrowct.png" alt="Индикатор пилота" />
+            </div>
+            <div class="mediaobject">
+              <img src="images/arrowcf.png" alt="Индикатор пилота" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+      </div>
+      <p xml:lang="ru" lang="ru">
+	Данное приложение разработано также под ОС Android, доступно в Google Play. Оно может быть использовано для
+	установки на смартфоне/планшете пилота с коммуникацией по WiFi. В мобильной версии приложение имеет расширенный
+	функционал. Помимо 'стрелки' может отображаться панорама, позволяющая пилоту контролировать свое положение
+ 	относительно начала следующего маршрута (см. <a class="xref" href="index.html#panorama" title="11. Навигационная панорама">Раздел 11, «Навигационная панорама»</a>), а также панель состояния приборов
+	(см. <a class="xref" href="index.html#status" title="7. Контроль работоспособности системы">Раздел 7, «Контроль работоспособности системы»</a>). В случае работы без оператора пилот может контролировать работоспособность 
+	аппаратуры.
+    </p>
+      <div class="figure">
+        <a id="idm45843722046624"></a>
+        <p class="title">
+          <strong>Рисунок 26. Индикатор пилота под Андроид</strong>
+        </p>
+        <div class="figure-contents">
+          <div class="mediaobject">
+            <img src="images/arrow-mobile.png" alt="Индикатор пилота под Андроид" />
+          </div>
+        </div>
+      </div>
+      <br class="figure-break" />
+      <p xml:lang="ru" lang="ru">
+	Для начала работы надо просто подключиться к локальной сети бортового сервера и задать настройки сети
+	(IP-адрес и порт), см. <a class="xref" href="index.html#dev_fe" title="6.3. Бортовой сервер">Раздел 6.3, «Бортовой сервер»</a>.
+    </p>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="jst"></a>14. Таблица спутников</h2>
+            </div>
+          </div>
+        </div>
+        <div class="figure">
+          <a id="idm45843722041360"></a>
+          <p class="title">
+            <strong>Рисунок 27. Таблица спутников</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/jst.png" alt="Таблица спутников" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <div xml:lang="ru" class="sect2" lang="ru">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722038416"></a>14.1. Небесная полусфера</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      На индикаторе отображаются азимут и возвышение для всех спутников, наблюдаемых GPS приемником. Таким образом, индикатор представляет
+      собой своеобразную карту спутников. Азимут отсчитывается от направления вверх по часовой стрелке. Возвышение - от края к центру.
+      Если спутник в счислении не используется, то на индикаторе соответствующий ему значок будет нарисован окружностью, а не кругом.
+      Голубым цветом обозначаются спутники ГЛОНАСС, а синим GPS. Спутник, выделенный в таблице, подсвечивается желтым кружком.
+    </p>
+        </div>
+        <div xml:lang="ru" class="sect2" lang="ru">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722035680"></a>14.2. Карта</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      На индикаторе красной точкой отображается текущее положение, линия серого цвета показывает пройденную траекторию. карта всегда 
+      сориентирована так, что север находится вверху. При нажатии правой клавиши мыши на карте появляется меню выбора масштаба карты.
+    </p>
+        </div>
+        <div xml:lang="ru" class="sect2" lang="ru">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722034160"></a>14.3. Панель спутников</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      На панели напечатаны строки состояний для всех спутников созвездия. В каждой строке печатается:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	значок использования в счислении
+      </li>
+              <li class="listitem">
+	номер спутника в созвездии
+      </li>
+              <li class="listitem">
+	отношение сигнал/шум
+      </li>
+              <li class="listitem">
+	время использования в счислении
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div xml:lang="ru" class="sect2" lang="ru">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722031168"></a>14.4. Управление таблицей спутников</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Ctrl+D</strong></span> Выбрать устройство для отображения
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+T</strong></span> Показать/Скрыть таблицу спутников
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+S</strong></span> Показать/Скрыть панель состояния
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+P</strong></span> Показать/Скрыть индикатор созвездия
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+M</strong></span> Показать/Скрыть карту
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F8</strong></span> Изменить размер таблицы спутников
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="pilot"></a>15. Эмулятор ГНСС</h2>
+            </div>
+          </div>
+        </div>
+        <div class="figure">
+          <a id="idm45843722023680"></a>
+          <p class="title">
+            <strong>Рисунок 28. Окно эмулятора ГНСС</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/pilot.png" alt="Окно эмулятора ГНСС" />
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru"><br class="figure-break" />    
+    Имитирует поток данных ГНСС-приемника Javad, позволяет управлять координатами и скоростью самолета.
+    Также при включенном режиме автопилота осуществляет прохождение маршрутов.
+  </p>
+        <div xml:lang="ru" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="ru">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Предупреждение]" src="./images/warning.png" />
+              </td>
+              <th align="left">Предупреждение</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+    В настройке бортовой программы приемник должен быть настроен как <span class="bold"><strong>localhost:4444</strong></span></td>
+            </tr>
+          </table>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Управление в эмуляторе осуществляется следующим образом.
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem"><span class="keycap"><strong>Стрелки влево/вправо</strong></span> - изменение угловой скорости
+      </li>
+            <li class="listitem"><span class="keycap"><strong>Пробел</strong></span> - установить угловую скорость в ноль
+      </li>
+            <li class="listitem"><span class="keycap"><strong>Стрелки вверх/вниз</strong></span> - изменение линейной скорости
+      </li>
+            <li class="listitem">
+	Pilot Automatic - флаг включения автоматического управления. 
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+      Если вклчен режим автопилот, программа, при условии включенной проводки, сама пытается
+      удерживать стрелку в нуле, изменяя угловую скорость. При этом, она реагирует на отклонение
+      стрелки от нуля, только если оно составляет более 10% всей шкалы.
+    </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="samopis"></a>16. Самописец</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Самописец предназначен для отображения параметров, измеряемых приборами комплекса, в виде графиков.
+    Общий вид панели самописца следующий.
+  </p>
+        <div class="figure">
+          <a id="idm45843722011712"></a>
+          <p class="title">
+            <strong>Рисунок 29. Окно самописца</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/samopis.png" alt="Окно самописца" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+    Окно самописца состоит из двух частей:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">Список переменных (см. <a class="xref" href="variables.html" title="B. Переменные самописца">Приложение B, <em>Переменные самописца</em></a>) и параметры их отображения</li>
+            <li class="listitem">Графическая область</li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru"> 
+    Список переменных позволяет выбрать переменную для визуализации,
+    он состоит из следующих столбцов: Цвет, Variable (имя переменной), Value (значение), Choose Edge (выравнивание) и Scale (масштаб).
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843722005488"></a>16.1. Настройка</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Для каждой переменной можно задать следующие параметры отображения, установив курсор на одну из них:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">ЦВЕТ</code> задается с помощью клавиши <span class="keycap"><strong>пробел</strong></span>, черный цвет позволяет видеть числовое значение без отображения графика
+      </li>
+              <li class="listitem"><code class="constant">ВЫРАВНИВАНИЕ</code> в соответствующем столбце нажать <span class="keycap"><strong>Enter</strong></span>
+	и выбрать в выпадающем списке одно из значений:
+	<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><code class="constant">OFF</code> не отрисовывать переменную
+	  </li><li class="listitem"><code class="constant">CENTER</code> выравнивание по центру (значение 0 будет по центру окна)
+	  </li><li class="listitem"><code class="constant">LEFT</code> выравнивание по левому краю (значение 0 будет на левом краю окна)
+	  </li></ul></div></li>
+              <li class="listitem"><code class="constant">МАСШТАБ</code> в соответствующем столбце нажать <span class="keycap"><strong>Enter</strong></span>
+	и задать нужную величину - всю шкалу в единицах соответствующей переменной
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+        </div>
+        <div xml:lang="ru" class="sect2" lang="ru">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721996704"></a>16.2. Управление самописцем</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F8</strong></span> Изменить размер таблицы/графиков; нажимая <span class="keycap"><strong>вверх/вниз</strong></span> установите нужный размер
+	графической области, с нажатой клавишей <span class="keycap"><strong>Shift</strong></span> размер меняется с большим шагом; в конце нажмите 
+	<span class="keycap"><strong>Enter</strong></span></li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> Показать/Скрыть неотображаемые переменные
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Пробел</strong></span> Изменить цвет переменной под курсором
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Backspace</strong></span> Убрать переменную из списка отображаемых
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="spectra"></a>17. Спектры </h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Программа Спектры предназначена для отображения параметров, измеряемых спектрометрами комплекса, в виде графиков.
+    Общий вид панели спектров следующий.
+  </p>
+        <div class="figure">
+          <a id="idm45843721987904"></a>
+          <p class="title">
+            <strong>Рисунок 30. Спектры</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/spectra.png" alt="Спектры" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+    Окно спектров состоит из двух частей:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">Зона просмотра спектров</li>
+            <li class="listitem">Зона просмотра счета в окнах</li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru"> 
+     Программа позволяет выбирать интервал отображения, время накопления, разрешение отображаемых спектров, включать/выключать визуализацию того или иного спектра, ставить маркеры, выбирать до десяти окон для контроля счета и задавать шкалу для их графиков, наблюдать суммарный спектр. Можно использовать курсор для выбора каналов, он подписан номером канала и текущим значением вертикальной шкалы, которое выбирается автоматически. Состояние каждого спектра отображается в строке соответствующего цвета:
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+	"on" - спектр получен и отображается
+      </li>
+            <li class="listitem">
+	"off" - спектр получен, но не отображается (не учитывается при отображении окон счета)
+      </li>
+            <li class="listitem">
+	"no data" - спектр не получен (не зависит от режима визуализации) 
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru">
+Каждый график счета озоглавлен строками "левая граница - правая граница" и "суммарный счет окна для текущего отсчета/текущий масштаб".
+Для спектров некоторых устройств (GRS410, ГСА2000) отображается режим работы алгоритма стабилизации (L(свет), T (торий), U (уран), K (калий), A (анализ), 0 (детектор не подключен)).
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721978656"></a>17.1. Управление визуализацией спектров</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Возможны следующие настройки отображения:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Выбрать спектр</code>: нажать <span class="keycap"><strong>номер спектра</strong></span> (1,2,3,...,0(10), Alt 1(11),...,Alt Ctrl 1(21),...);
+	выделенный спектр помечается '*'
+      </li>
+              <li class="listitem"><code class="constant">Включить/выключить спектр</code>: нажать <span class="keycap"><strong>Ввод</strong></span> для включения/отключения визуализации всех выбранных спектров
+      </li>
+              <li class="listitem"><code class="constant">Изменить цвет спектра</code>: нажать <span class="keycap"><strong>Пробел</strong></span> для изменения цвета всех выбранных спектров
+      </li>
+              <li class="listitem"><code class="constant">Время накопления</code>: нажать <span class="keycap"><strong>T</strong></span> для переключениями между 1, 20 или 100 отсчетов
+      </li>
+              <li class="listitem"><code class="constant">Разрешение спектров</code>: нажать <span class="keycap"><strong>R</strong></span> для переключения между 1, 2 или 4 каналов на точку; например, спектры на 1024 канала могут просматриваться в режиме 512 (суммирование по 2) или 256 каналов (суммирование по 4) 
+      </li>
+              <li class="listitem"><code class="constant">Левая граница</code>: нажать <span class="keycap"><strong>,</strong></span> для уменьшения или <span class="keycap"><strong>Alt+,</strong></span> для увеличения номера канала, приписанного к левой границе зоны просмотра; нажать <span class="keycap"><strong>Ctrl</strong></span> для ускорения
+      </li>
+              <li class="listitem"><code class="constant">Правая граница</code>: нажать <span class="keycap"><strong>.</strong></span> для увеличения или <span class="keycap"><strong>Alt+.</strong></span> для уменьшения номера канала, приписанного к правой границе зоны просмотра; нажать <span class="keycap"><strong>Ctrl</strong></span> для ускорения
+      </li>
+              <li class="listitem"><code class="constant">Просматривать все каналы</code>: нажать <span class="keycap"><strong>Ctrl+Z</strong></span></li>
+              <li class="listitem"><code class="constant">Просматривать только выделенные каналы</code>: нажать <span class="keycap"><strong>Ctrl+V</strong></span></li>
+              <li class="listitem"><code class="constant">Скрыть/показать зону просмотра окон счета</code>: нажать <span class="keycap"><strong>Ctrl+H</strong></span></li>
+              <li class="listitem"><code class="constant">Двигать границу зоны просмотра окон счета</code>: нажать <span class="keycap"><strong>Вверх</strong></span> или <span class="keycap"><strong>Вниз</strong></span>, использовать <span class="keycap"><strong>Ctrl</strong></span> для ускорения
+      </li>
+              <li class="listitem"><code class="constant">Выделить/снять выделение окна счета</code>: нажать <span class="keycap"><strong>индекс окна</strong></span> (a,b,c,...)
+      </li>
+              <li class="listitem"><code class="constant">Добавить/удалить окно счета</code>: нажать <span class="keycap"><strong>Ctrl+Insert</strong></span> для добавления выделенной зоны или <span class="keycap"><strong>Ctrl+Delete</strong></span> для удаления выделенных окон и/или всего, что вошло в выделенную зону
+      </li>
+              <li class="listitem"><code class="constant">Добавить/удалить маркер</code>: нажать <span class="keycap"><strong>Ctrl+Insert</strong></span> для добавления или <span class="keycap"><strong>Ctrl+Delete</strong></span> для удаления маркера (если нет выделенной зоны)
+      </li>
+              <li class="listitem"><code class="constant">Изменить масштаб графика окна счета</code>: нажать <span class="keycap"><strong>+</strong></span>/<span class="keycap"><strong>-</strong></span> для увеличения/уменьшения масштаба выделенных графиков
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Суммарный спектр (sum) отображает сумму всех визуализируемых и включенных спектров. Он также может быть включен/выключен.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721949360"></a>17.2. Горячие клавиши</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Доступны следующие клавиши:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F1</strong></span> - вызов справки
+      </li>
+              <li class="listitem"><span class="keycap"><strong>1</strong></span>, <span class="keycap"><strong>2</strong></span>, <span class="keycap"><strong>3</strong></span>, ..., <span class="keycap"><strong>0</strong></span> - выделение/снятие выделения соответствующего спектра
+			от 1 до 10
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+1</strong></span>, <span class="keycap"><strong>Alt+2</strong></span>, <span class="keycap"><strong>Alt+3</strong></span>, ..., <span class="keycap"><strong>Alt+0</strong></span> - 
+		выделение/снятие выделения соответствующего спектра от 11 до 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Alt+1</strong></span>, <span class="keycap"><strong>Ctrl+Alt+2</strong></span>, <span class="keycap"><strong>Ctrl+Alt+3</strong></span>, ..., <span class="keycap"><strong>Ctrl+Alt+0</strong></span> - 
+		выделение/снятие выделения соответствующего спектра от 21 до 30
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ввод</strong></span> - включение/выключение визуализации всех выделенных спектров
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Пробел</strong></span> - изменение цвета всех выделенных спектров
+      </li>
+              <li class="listitem"><span class="keycap"><strong>a</strong></span>, <span class="keycap"><strong>b</strong></span>, <span class="keycap"><strong>c</strong></span>, ... - выделение/снятие выделения с соответствующего окна счета
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Влево</strong></span>, <span class="keycap"><strong>Вправо</strong></span>, <span class="keycap"><strong>Ctrl+Влево</strong></span>, <span class="keycap"><strong>Ctrl+Вправо</strong></span>,  <span class="keycap"><strong>Home</strong></span>, <span class="keycap"><strong>End</strong></span>  - движение курсора на 1 канал, на 20 каналов или до границы зоны просмотра
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Shift+Влево</strong></span>, <span class="keycap"><strong>Shift+Вправо</strong></span>, <span class="keycap"><strong>Shift+Ctrl+Влево</strong></span>, <span class="keycap"><strong>Shift+Ctrl+Вправо</strong></span>,  <span class="keycap"><strong>Shift+Home</strong></span>, <span class="keycap"><strong>Shift+End</strong></span>  - движение курсора с выделением на 1 канал, на 20 каналов или до границы зоны просмотра 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Вверх</strong></span>, <span class="keycap"><strong>Вниз</strong></span>, <span class="keycap"><strong>Ctrl+Вверх</strong></span>, <span class="keycap"><strong>Ctrl+Вниз</strong></span> - движение горизонтального разделителя на 1 или на 20 точек
+      </li>
+              <li class="listitem"><span class="keycap"><strong>','</strong></span>, <span class="keycap"><strong>Ctrl+','</strong></span> - уменьшить левую границу на 1 или на 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+','</strong></span>, <span class="keycap"><strong>Alt+Ctrl+','</strong></span> - увеличить левую границу на 1 или на 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>'.'</strong></span>, <span class="keycap"><strong>Ctrl+'.'</strong></span> - увеличить правую границу на 1 или на 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+'.'</strong></span>, <span class="keycap"><strong>Alt+Ctrl+'.'</strong></span> - уменьшить правую границу на 1 или на 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>+</strong></span>, <span class="keycap"><strong>-</strong></span> - увеличить/уменьшить масштаб выделенных окон счета
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Insert</strong></span> - добавить маркер в текущей позиции курсора или добавить окно счета для текущего выделения
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Delete</strong></span> - удалить маркер в текущей позиции курсора, удалить выделенные окна счета и/или все маркеры и окна счета внутри выделения
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> - скрыть/показать зону графиков окон счета
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Z</strong></span> - просматривать все каналы спектров
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+V</strong></span> - просматривать только выделенные каналы спектров
+      </li>
+              <li class="listitem"><span class="keycap"><strong>T</strong></span> - переключать время накопления спектров: 1/20/100 отсчетов
+      </li>
+              <li class="listitem"><span class="keycap"><strong>R</strong></span> - переключать разрешение при отображении спектров: каждый канал/просуммированные парами/просуммированные четверками
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="em4h_control"></a>18. EM4H </h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="ru" lang="ru">
+    Эта программа позволяет контролировать параметры аэроэлектроразведочной системы EM4H и управлять ее работой.
+  </p>
+        <div class="figure">
+          <a id="em4h-panel"></a>
+          <p class="title">
+            <strong>Рисунок 31. EM4H</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/em4h.png" alt="EM4H" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="ru" lang="ru">
+    Окно программы состоит из трех частей:
+  </p>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">Управление возбуждением</li>
+            <li class="listitem">Управление компенсацией</li>
+            <li class="listitem">Цифровая панель</li>
+          </ul>
+        </div>
+        <p xml:lang="ru" lang="ru"> 
+     Программа позволяет включать/выключать частоты возбуждения, выполнять компенсацию влияния летательного аппарата, 
+     просматривать в различных режимах значения измеряемых параметров и выводить их в панель самописца.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721900240"></a>18.1. Управление возбуждением</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Возможны следующие операции:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Включить/выключить частоту</code>: нажать <span class="keycap"><strong>F*</strong></span>. * соответствует номеру частоты:
+	    <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+		    F0 - 130 Гц, 0-я рабочая частота возбуждения в основной петле
+		</li><li class="listitem">
+		    F1 - 520 Гц, 1-я рабочая частота возбуждения в основной петле
+		</li><li class="listitem">
+		    F2 - 2080 Гц, 2-я рабочая частота возбуждения в основной петле
+		</li><li class="listitem">
+		    F3 - 8320 Гц, 3-я рабочая частота возбуждения в основной петле
+		</li><li class="listitem">
+		    FCO - 667 Гц, рабочая частота возбуждения в петле компенсатора
+		</li><li class="listitem">
+		    FC1 - 833 Гц, рабочая частота возбуждения в дополнительной петле компенсатора (только в варианте установки на Ми-8)
+		</li></ul></div></li>
+              <li class="listitem"><code class="constant">Включить все частоты</code>: нажать <span class="keycap"><strong>All on</strong></span> чтобы включить возбуждение на всех частотах
+      </li>
+              <li class="listitem"><code class="constant">Выключить все частоты</code>: нажать <span class="keycap"><strong>All off</strong></span> чтобы выключить возбуждение на всех частотах
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Следует иметь ввиду, что состояние кнопок включения/выключения зависит от данных, которые получены. 
+	В частности, кнопка будет отображаться, как нажатая, только когда программа получит подтверждение от приброра, что соответствующая частота включена.
+	При этом один из индикаторов на кнопке (правый) загорится зеленым. Второй индикатор загорится синим только после того, как амплитуда напряжения или тока 
+	в петле генератора на соответствующей частоте превысит минимально допустимое значение.
+	Если хотя бы один индикатор красный - система не работает.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721888992"></a>18.2. Управление компенсацией</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Возможны следующие операции:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Включить/выключить отбор</code>: нажать <span class="keycap"><strong>Sample</strong></span>, чтобы начать/остановить отбор данных для компенсации.
+      </li>
+              <li class="listitem"><code class="constant">Очистить</code>: нажать <span class="keycap"><strong>Clear</strong></span>, чтобы сбросить все отобранные данные и начать отбор заново.
+      </li>
+              <li class="listitem"><code class="constant">Компенсация</code>: нажать <span class="keycap"><strong>Fix</strong></span>, чтобы использовать текущий набор данных для вычисления параметров компенсации.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+          <p xml:lang="ru" lang="ru">
+    Ниже представлены счетчики:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Количество данных, поступивших на вход процедуры компенсации</code>: <span class="keycap"><strong>total</strong></span>.
+      </li>
+              <li class="listitem"><code class="constant">Количество отбракованных данных</code>: <span class="keycap"><strong>rejected</strong></span>.
+      </li>
+              <li class="listitem"><code class="constant">Количество данных, учтенных в текущих параметрах компенсации</code>: <span class="keycap"><strong>used</strong></span>.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Процесс компенсации представляется следующим образом: на значительной высоте
+	полета, где влиянием земли можно пренебречь (600-700м), выполняется накопление
+	данных для компенсации. Для этого следует:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+		Очистить выборку, нажав <span class="keycap"><strong>Clear</strong></span>. Все счетчики обнуляются.
+      </li>
+              <li class="listitem">
+		Запустить отбор, нажав <span class="keycap"><strong>Sample</strong></span>. После этого начнет менятся счетчик <span class="keycap"><strong>total</strong></span> и, возможно, <span class="keycap"><strong>rejected</strong></span>.
+      </li>
+              <li class="listitem">
+	Выполнить серию качаний гондолы по тангажу и крену так, чтобы гондола
+	побывала в различных точках поля относительно самолета. Выполнение этой
+	операции требует от оператора некоторого опыта и согласованных действий
+	пилота. Операция накопления обычно занимает несколько минут.
+      </li>
+              <li class="listitem">
+	После того, как данные контрольной выборки будут накоплены, и счетчик
+	накопленных значений <span class="keycap"><strong>total</strong></span> будет на разумное число отсчетов превосходить счетчик <span class="keycap"><strong>rejected</strong></span>, 
+	следует зафиксировать выборку, нажав <span class="keycap"><strong>Fix</strong></span>. При этом счетчик данных, использованных для вычисления параметров компенсации
+	показывается в поле <span class="keycap"><strong>used</strong></span>.
+      </li>
+              <li class="listitem">
+		Если качество компенсации удовлетворяет, можно остановить отбор, нажав <span class="keycap"><strong>Sample</strong></span> еще раз. 
+		Счетчики <span class="keycap"><strong>total</strong></span> и <span class="keycap"><strong>rejected</strong></span> перестанут менятся.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Следует отметить, что на борту летательного аппарата режим компенсации необходим только для того, 
+	чтобы оператор убедился в работоспособности аппаратуры в наиболее сложном режиме. 
+	Накопление и обнуление счетчиков никакого влияния на записываемые данные не оказывает.
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Программа "NavDat" сохраняет последние вычисленные параметры компенсации в своей системной директории.
+	При очередном запуске "NavDat", если не менялся тип летательного аппарата в настройках устройства EM4H (см. <a class="xref" href="index.html#dev_em4h" title="6.9. Система EM4H">Раздел 6.9, «Система EM4H»</a>),  
+	параметры будут автоматически загружены. В этом случае счетчики <span class="keycap"><strong>total</strong></span> и <span class="keycap"><strong>rejected</strong></span> 
+	будут нулевые, а <span class="keycap"><strong>used</strong></span>  - отличен от нуля.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721861280"></a>18.3. Работа с цифровой панелью</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Цифровая панель позволяет контролировать все измерения системы в виде чисел.
+	Она отображает три матрицы:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>operating frequencies</strong></span> - матрица сигналов на рабочих частотах F*.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>left piloting</strong></span> - матрица контрольных сигналов (левое пилотирование) на частотах F*-6 Гц.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>right piloting</strong></span> - матрица контрольных сигналов (правое пилотирование) на частотах F*+6 Гц.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Каждая частота представлена парой столбцов (выделены одним цветом), показывающих либо синфазную и квадратурную компоненты {Re F*, Im F*},
+	либо амплитуду и фазу сигнала: {Amp F*, Ph F*}.	По строкам различаются мерители:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>X, Y, Z</strong></span> - оси чувствительности приемника EM4H.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>U</strong></span> - напряжение на основной петле.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>I</strong></span> - ток в основной петле (для установки на Ан-2 или Ми-8) для частот F0-F3 и в петлях компенсаторов для, соответственно, FC0 и FC1.
+	   При установке в варианте Ан-3 на частотах F0-F3 в этом канале измеряется сигнал дополнительной катушки компенсации, установленной на стингере.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	В случае, когда какой-либо АЦП в зашкале, соответствующие поля матриц будут окрашены красным, как канал I в приведенном примере (см. <a class="xref" href="index.html#em4h-panel" title="Рисунок 31. EM4H">Рисунок 31, «EM4H»</a>).
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Два флага, расположенные в верхней части панели, позволяют выбрать черыре варианта отображения:		
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>compensated</strong></span> - устанавливается по <span class="keycap"><strong>Alt+C</strong></span>. 
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Если этот флаг установлен, отображаются скомпенсированные данные.
+	При этом все сигналы матрицы <span class="keycap"><strong>operating frequencies</strong></span> нормируются на единицу на момент нажатия <span class="keycap"><strong>Fix</strong></span> или <span class="keycap"><strong>Clear</strong></span>.
+	В дальнейшем коэффициенты нормировки не меняются до очередного нажатия одной из этих кнопок. Если текущих параметров компенсации нет 
+	(счетчик <span class="keycap"><strong>used</strong></span> = 0), выполняется только нормировка. Параметры X, Y, Z нормируются как вектор, т.е. X²+Y²+Z² = 1, 
+	а параметры U и I - как скаляры.
+	При этом ноль фазы в приемнике отвечает фазе сигнала возбуждения (фазе большой полуоси эллипса поляризации на момент нормировки).
+	Фаза в каналах U и I до нуля не доворачивается.
+	Отображение матриц пилотирования также меняется - показывается результат применения цифрового фильтра, но нормировка не выполняется.	
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Если этот флаг не установлен, отображаются данные, полученные непосредственно с прибора. 
+	Значение компонент соответствует единицам 16-ти разрядного АЦП.	
+  </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>polar form</strong></span>  - устанавливается по <span class="keycap"><strong>Alt+M</strong></span>. 
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+	Если этот флаг установлен, отображаются амплитуды и фазы сигналов {Amp F*, Ph F*}. В случае установленного флага <span class="keycap"><strong>compensated</strong></span> и 
+	отсутствия параметров компенсации (счетчик <span class="keycap"><strong>used</strong></span> = 0)
+	фаза сигналов приемника соответствует фазе большой полуоси эллипса поляризации на момент нажатия <span class="keycap"><strong>Clear</strong></span> или на момент начала работы программы.
+	В случае не установленного флага <span class="keycap"><strong>compensated</strong></span> фаза никак не изменяется.
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Если этот флаг не установлен, данные отображаются в формате комплексного числа: Re F* - синфазная компонента, Im F* - квадратурная. 
+	Важно помнить, что при снятом флаге <span class="keycap"><strong>compensated</strong></span> синфазная компонента соответствует нулю фазы данного мерителя, а не поля возбуждения.
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Панель позволяет добавить любой из параметров в любом из форматов, определяемых флагами <span class="keycap"><strong>compensated</strong></span> и <span class="keycap"><strong>polar form</strong></span>,
+	в качестве переменной самописца (см. <a class="xref" href="variables.html#variables_em4h" title="B.6. Переменные EM4H">Раздел B.6, «Переменные EM4H»</a>). Для этого следует выделить нужные параметры и нажать <span class="keycap"><strong>Ctrl+Insert</strong></span>: 
+	они появятся в списке переменных самописца.
+	При выделении нескольких переменных в пределах одной матрицы можно пользоваться стрелками с нажатой клавишей <span class="keycap"><strong>Shift</strong></span>.
+	Также можно, удерживая <span class="keycap"><strong>Ctrl</strong></span>, перемещать курсор, нажимая пробел для выделения очередного параметра.
+	Переменная, добавленная в самописец, помечается символом "•".
+	Удалить переменную из списка самописца можно выделив ее в соответствующей матрице и нажав  <span class="keycap"><strong>Ctrl+Delete</strong></span>.
+  </p>
+          <p xml:lang="ru" lang="ru">
+	Программа позволяет скрыть матрицы сигналов пилотирования (<span class="keycap"><strong>Ctrl+P</strong></span>) или всю цифровую панель (<span class="keycap"><strong>Ctrl+H</strong></span>).
+  </p>
+          <div class="figure">
+            <a id="idm45843721825552"></a>
+            <p class="title">
+              <strong>Рисунок 32. EM4H - компактный вид</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/em4h-compact.png" alt="EM4H - компактный вид" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721822528"></a>18.4. Горячие клавиши</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    Доступны следующие клавиши:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F1</strong></span> - вызов справки
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Tab</strong></span> - переключение между элементами (кнопки, флаги, матрицы)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Tab</strong></span> - переключение между частями окна (управление возбуждением, управление компенсацией, цифровая панель)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+C</strong></span> - включить/выключить режим просмотра скомпенсированных значений в цифровой панели (флаг <span class="keycap"><strong>compensated</strong></span>)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+M</strong></span> - переключение режима просмотра значений: синфазные-квадратурные компоненты или амплитуда-фаза (флаг <span class="keycap"><strong>polar form</strong></span>)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+P</strong></span> - скрыть/показать матрицы пилотирования
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> - скрыть/показать цифровую панель
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+T</strong></span> - скрыть/показать панель управления возбуждением/компенсацией
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+  </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="tvisor"></a>19. Панель Тепловизор</h2>
+            </div>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45843721810816"></a>19.1. Параметры изображения</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      При работе с тепловизором можно видеть
+      снимаемое изображение в реальном времени.
+      Для этого предназначена панель тепловизора.
+    </p>
+          <div class="figure">
+            <a id="idm45843721809168"></a>
+            <p class="title">
+              <strong>Рисунок 33. Изображение и параметры тепловизора</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/tvisor.png" alt="Изображение и параметры тепловизора" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="tvisor_hotkeys"></a>19.2. Управление панелью тепловизора</h3>
+              </div>
+            </div>
+          </div>
+          <div xml:lang="ru" class="itemizedlist" lang="ru">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Ctrl-H</strong></span> Показать/скрыть параметры настройки изображения
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-L</strong></span> Показать/скрыть дополнительные параметры
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+      В верхней строке панели расположены регуляторы, позволяющие изменять параметры выводимого изображения. 
+      Значения этих параметров никак не сказываются на записываемых данных.
+      С точки зрения управления первые три параметра одинаковы (Brightness, Contrast, Zoom).
+      Для изменения значения надо установить курсор на соответствующий параметр,
+      используя клавиши <span class="keycap"><strong>Tab</strong></span>,
+      <span class="keycap"><strong>Shift-Tab</strong></span> или <span class="keycap"><strong>Alt-&lt;символ с подчеркиванием, соответствующий нужному параметру&gt;</strong></span>,
+      например для contrast: <span class="keycap"><strong>Alt-C</strong></span>.
+      Параметр Position позволяет выбрать отображаемую часть строки.
+      Включенный Br.Fix означает коррекцию яркости, т.е. среднее значение по строке будет приводиться к нулю, это позволяет не видеть прогрев головки тепловизора.
+      Кнопка Pause позволяет остановить отрисовку изображения.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Отображаемые в строке состояния параметры (слева направо):
+      </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	  лампа PPS, должна моргать 1 раз в секунду, это означает нормальную синхронизацию данных;
+	</li>
+              <li class="listitem">
+	  N2 — наличие азота, должна стоять галочка;
+	</li>
+              <li class="listitem">
+	  Missed — количество пропущенных строк изображения; даже если после каких-то манипуляций с проводами это число не 0, оно не должно меняться;
+	</li>
+              <li class="listitem">
+	  Sens — «чувствительность», приблизительно вычисляемый параметр; при нормальной работе должен составлять величину порядка 0,05; зависит от температуры;
+	</li>
+              <li class="listitem">
+	  Freq — частота, должна быть около 200 Гц;
+	</li>
+              <li class="listitem">
+	  RMS — индикатор шума изображения, нормальное значение — от 1 до 2;
+	</li>
+              <li class="listitem">
+	  Temp — температура головки оптического блока, должна иметь правдоподобное значение;
+	</li>
+              <li class="listitem">
+	  Ralt — значение радиовысоты; проверяется при включенном приборе.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="ru" lang="ru">
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="gyros"></a>19.3. Окно индикатора системы ориентации</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45843721791200"></a>
+            <p class="title">
+              <strong>Рисунок 34. Система ориентации</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/gyros.png" alt="Система ориентации" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="ru" lang="ru">
+      Программа позволяет управлять визуализацией параметров инерциальной системы ориентации тепловизора.
+      Сфокусировавшись на поле "Arrester" нажмите <span class="keycap"><strong>Enter</strong></span>  при этом гироскопический курс установлен равным путевому углу,
+      а крен и тангаж приводятся в соответствие с показаниями акселерометров. 
+      Сразу после этого система вновь будет работать в автономном режиме, и можно визуально контролировать ее показания.
+    </p>
+          <p xml:lang="ru" lang="ru">
+      Благодаря описанному выше режиму не требуется продолжительная выставка перед полетом.
+      Однако, программа допускает такую возможность.
+      Для этого предусмотрена кнопка <code class="constant">Gyrocompass</code>.
+      При ее включении система начинает оценивать измеренные векторы силы тяжести и угловой скорости Земли.
+      Для корректной работы необходима полная неподвижность корпуса тепловизора.
+      При выключении система начинает работать в автономном режиме.
+      Этот режим имеет смысл только для контроля работоспособности чувствительных элементов системы.
+    </p>
+          <div xml:lang="ru" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="ru">
+            <table border="0" summary="Warning: ">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Предупреждение]" src="./images/warning.png" />
+                </td>
+                <th align="left"></th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+      Управление инерциальной системой ориентации никак не сказывается на записываемых данных.
+    </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div xmlns="" class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="hotkeys.html"><img xmlns="http://www.w3.org/1999/xhtml" src="images/next.png" alt="След." /></a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right" valign="top"> <a accesskey="n" href="hotkeys.html">A. Горячие клавиши (Доступны из любого контекста)</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

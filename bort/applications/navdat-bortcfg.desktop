@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Bort server settings
+Name[ru]=Настройки бортового сервера
+Comment=Bort server control pannel
+Comment[ru]=Панель управления бортовым сервером
+Exec=navdat-bortcfg
+Icon=gtk-preferences
+Terminal=false
+Type=Application
+Categories=BortSettings;
+

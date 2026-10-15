@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Session: save current
+Name[ru]=Сессия: сохранить
+Exec=navdat-bortcfg save
+Icon=document-save
+Terminal=0
+Type=Application
+Categories=BortSettings;

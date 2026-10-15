@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Status
+Name[ru]=Статус
+Comment=Bort server status
+Comment[ru]=Состояние бортового сервера
+Exec=navdat-status --new
+Icon=navdat-status
+Terminal=false
+Type=Application
+Categories=Bort;

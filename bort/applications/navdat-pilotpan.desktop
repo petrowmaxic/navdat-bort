@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Pilot Panel
+Name[ru]=Панель пилота
+Comment=Navigation control panel
+Comment[ru]=Навигационная панель управления
+Exec=navdat-pilotpan --new
+Icon=navdat-logo
+Terminal=false
+Type=Application
+Categories=Navigation;

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Panorama
+Name[ru]=Панорама
+Comment=Navigation panorama
+Comment[ru]=Навигационная панорама
+Exec=navdat-panorama --new
+Icon=navdat-panorama
+Terminal=false
+Type=Application
+Categories=Navigation;

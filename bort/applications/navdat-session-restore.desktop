@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Session: restore
+Name[ru]=Сессия: восстановить
+Exec=navdat-bortcfg restore
+Icon=document-open
+Terminal=0
+Type=Application
+Categories=BortSettings;

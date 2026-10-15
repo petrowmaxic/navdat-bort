@@ -1,0 +1,19 @@
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd'>
+<Menu>
+    <Name>NavDat</Name>
+    <Directory>Applications.directory</Directory>
+
+    <LegacyDir>/usr/share/bort/desktop-directories</LegacyDir>
+    <LegacyDir>/usr/share/bort/applications</LegacyDir>
+
+    <MergeFile>/usr/share/bort/menus/navdat.menu</MergeFile>
+
+    <Menu>
+        <Name>Other</Name>
+        <MergeFile>/etc/xdg/menus/gnome-applications.menu</MergeFile>
+        <MergeFile>/etc/xdg/menus/applications.menu</MergeFile>
+    </Menu>
+</Menu>
+<!-- End Applications -->

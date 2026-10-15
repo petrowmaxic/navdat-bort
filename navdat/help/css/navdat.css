@@ -1,0 +1,11 @@
+pre.programlisting {
+ color: black;
+ background: lightgray;
+ border: 1px solid black;
+ width: auto;
+}
+
+div, li, span, ul, p {
+//    padding: 0;
+    margin: 0;
+}

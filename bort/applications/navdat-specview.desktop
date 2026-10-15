@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Specview
+Name[ru]=Спектры
+Comment=Spectra viewer
+Comment[ru]=Панель спектров
+Exec=navdat-specview --new
+Icon=navdat-specview
+Terminal=false
+Type=Application
+Categories=Bort;

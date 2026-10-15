@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Pilot emulator
+Name[ru]=Эмулятор ГНСС
+Comment=Flight real time emulator
+Comment[ru]=Эмулятор ГНСС реального времени
+Exec=navdat-pilot
+Icon=navdat-logo
+Terminal=false
+Type=Application
+Categories=Bort;

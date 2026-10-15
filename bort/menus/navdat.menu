@@ -1,0 +1,75 @@
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd'>
+<Menu>
+	<Name>NavDat</Name>
+
+        <LegacyDir>/usr/share/bort/desktop-directories</LegacyDir>                                                                                              
+        <LegacyDir>/usr/share/bort/applications</LegacyDir>        
+    
+        <Directory>Navdat.directory</Directory>
+
+	<!-- NavDat submenu -->
+	<Menu>
+		<Name>Bort</Name>
+		<Directory>Bort.directory</Directory>
+		<Include>
+			<Category>Bort</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>Navigation</Name>
+		<Directory>Navigation.directory</Directory>
+		<Include>
+			<Category>Navigation</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>Tvisor</Name>
+		<Directory>Tvisor.directory</Directory>
+		<Include>
+			<Category>Tvisor</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>Electromagnetics</Name>
+		<Directory>ER.directory</Directory>
+		<Include>
+			<Category>ER</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>NavDat settings</Name>
+		<Directory>BortSettings.directory</Directory>
+		<Include>
+			<Category>BortSettings</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>Dip</Name>
+		<Directory>Dip.directory</Directory>
+		<Include>
+			<Category>Dip</Category>
+		</Include>
+	</Menu>
+	<Menu>
+		<Name>Spec</Name>
+		<Directory>Spec.directory</Directory>
+		<Include>
+			<Category>Spec</Category>
+		</Include>
+	</Menu>
+
+	<Layout>
+		<Menuname>Navigation</Menuname>
+		<Menuname>Tvisor</Menuname>
+		<Menuname>Electromagnetics</Menuname>
+		<Menuname>NavDat settings</Menuname>
+		<Separator/>
+		<Menuname>Bort</Menuname>
+		<Separator/>
+		<Merge type="menus"/>
+		<Merge type="files"/>
+	</Layout>
+</Menu>
+<!-- End Applications -->

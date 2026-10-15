@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Tvisor: gyros
+Name[ru]=Тепловизор: гироскопы
+Comment=IR scanner gyrosystem
+Comment[ru]=Гироскопы ИК сканнера
+Exec=navdat-gyros --new
+Icon=navdat-gyros
+Terminal=false
+Type=Application
+Categories=Tvisor;

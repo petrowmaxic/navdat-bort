@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>B. Переменные самописца</title>
+    <link rel="stylesheet" type="text/css" href="css/navdat.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Бортовая программа &quot;NavDat&quot;" />
+    <link rel="up" href="index.html" title="Бортовая программа &quot;NavDat&quot;" />
+    <link rel="prev" href="hotkeys.html" title="A. Горячие клавиши (Доступны из любого контекста)" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">B. Переменные самописца</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="hotkeys.html"><img src="images/prev.png" alt="Пред." /></a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> </td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="appendix">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="variables"></a>B. Переменные самописца</h2>
+          </div>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_sys"></a>B.1. Системные переменные</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      sys::bytes_written - объем записанных данных в текущей сессии (в байтах)
+      </li>
+            <li class="listitem">
+      sys::write_errors - число ошибок записи
+      </li>
+            <li class="listitem">
+      sys::write_error - флаг ошибки записи
+      </li>
+            <li class="listitem">
+      sys::storage_total - объем используемого для записи диска (в байтах)
+      </li>
+            <li class="listitem">
+      sys::storage_avail - свободный объем используемого для записи диска (в байтах)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_fplan"></a>B.2. Переменные выполнения полетного задания</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      fplan::arrow - значение горизонтального указателя пилота в диапазоне от 0 до 100 (50 соответствует нулевому отклонению)
+      </li>
+            <li class="listitem">
+      fplan::varrow - значение вертикального указателя пилота в диапазоне от 0 до 100 (50 соответствует нулевому отклонению)
+      </li>
+            <li class="listitem">
+      fplan::lamp - текущее состояние лампы индикатора пилота: 0 - красный, 100 - зеленый (цвета могут быть инвертированы для конкретного указателя)
+      </li>
+            <li class="listitem">
+      fplan::XTE - боковое уклонение в метрах
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_pos"></a>B.3. Переменные навигации (посылка $POS dlg-файла)</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      pos::time_ms - время от начала дня в миллисекундах
+      </li>
+            <li class="listitem">
+      pos::year - текущий год
+      </li>
+            <li class="listitem">
+      pos::month - текущий месяц
+      </li>
+            <li class="listitem">
+      pos::day - текущий день
+      </li>
+            <li class="listitem">
+      pos::siu - число видимых спутников
+      </li>
+            <li class="listitem">
+      pos::lat - широта в градусах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </li>
+            <li class="listitem">
+      pos::lon - долгота в градусах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </li>
+            <li class="listitem">
+      pos::alt - высота в мектрах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </li>
+            <li class="listitem">
+      pos::lat_r - широта в радианах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </li>
+            <li class="listitem">
+      pos::lon_r - долгота в радианах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </li>
+            <li class="listitem">
+      pos::track_r - текущий курс в радианах
+      </li>
+            <li class="listitem">
+      pos::track - текущий курс в градусах
+      </li>
+            <li class="listitem">
+      pos::hvel - горизонтальная скорость в м/сек
+      </li>
+            <li class="listitem">
+      pos::pdop - PDOP
+      </li>
+            <li class="listitem">
+      pos::ralt - навигационная высота в метрах (может быть радиовысота или какая-то другая в зависимости от настроек)
+      </li>
+            <li class="listitem">
+      pos::ralt_on - флаг навигационной высоты (если 0, используется высота, измеренная ГНСС-приемником, в зависимости от настроек)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_gps"></a>B.4. Переменные ГНСС-приемника Javad/Topcon/Novatel</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gps::Lattitude - географическая широта в градусах
+      </li>
+            <li class="listitem">
+      gps::Longitude - географическая долгота в градусах
+      </li>
+            <li class="listitem">
+      gps::Altitude - географическая высота в метрах
+      </li>
+            <li class="listitem">
+      gps::HorVel - горизонтальная скорость в м/сек
+      </li>
+            <li class="listitem">
+      gps::TrakG - путевой угол в радианах
+      </li>
+            <li class="listitem">
+      gps::VisSatNum - число видимых спутников
+      </li>
+            <li class="listitem">
+      gps::WeekTime - время от начала недели в секундах
+      </li>
+            <li class="listitem">
+      gps::rectime - GPS время от начала дня в миллисекундах
+      </li>
+            <li class="listitem">
+      gps::HHMMSS - GPS время в формате HHMMSS
+      </li>
+            <li class="listitem">
+      gps::NavErrors - число ошибок в потоке данных
+      </li>
+            <li class="listitem">
+      gps::PDOP - PDOP
+      </li>
+            <li class="listitem">
+      gps::nodata - флаг данных ГНСС, 1 если нет данных, иначе 0
+      </li>
+            <li class="listitem">
+      gps::nopos - флаг координат ГНСС, 1 если нет координат, иначе 0
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_gtmag"></a>B.5. Переменные ГТ-Маг</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gtmag::current* - ток датчика в миллиамперах, * - номер канала
+      </li>
+            <li class="listitem">
+      gtmag::signal* - сигнал датчика в милливольтах, * - номер канала
+      </li>
+            <li class="listitem">
+      gtmag::mag* - значение магнитного поля (нТл), * - номер канала
+      </li>
+            <li class="listitem">
+      gtmag::dif_4* - значение ненормализованной 4-й разности магнитного поля (нТл), * - номер канала
+      </li>
+            <li class="listitem">
+      gtmag::pps - счетчик сигналов синхронизации ГНСС приемника (PPS)
+      </li>
+            <li class="listitem">
+      gtmag::magc - скомпенсированное значение магнитного поля (нТл)
+      </li>
+            <li class="listitem">
+      gtmag::batt - входное напряжение в милливольтах
+      </li>
+            <li class="listitem">
+      gtmag::outV - выходное напряжение (питание датчика) в милливольтах
+      </li>
+            <li class="listitem">
+      gtmag::siu - число видимых спутников
+      </li>
+            <li class="listitem">
+      gtmag::fx(fy,fz) - компоненты, измеренные феррозондом (нТл)
+      </li>
+            <li class="listitem">
+      gtmag::magf - значение поля после фильтрации (нТл), для работы с Экватором
+      </li>
+            <li class="listitem">
+      gtmag::fdif - значение ненормализованной 4-й разности магнитного поля после фильтрации (нТл), для работы с Экватором
+      </li>
+            <li class="listitem">
+      gtmag::ra - радиовысота в метрах
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_em4h"></a>B.6. Переменные EM4H</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      em4h::frnum - номер текущего блока данных (меняется от 0 до 6399)
+      </li>
+            <li class="listitem">
+      em4h::err_cksum - число ошибок контрольных сумм в потоке данных между EM4H и бортовым компьютером
+      </li>
+            <li class="listitem">
+      em4h::err_cable - число ошибок в потоке данных между приемником и передатчиком EM4H
+      </li>
+            <li class="listitem">
+      em4h::err_frnum - число пропущенных блоков
+      </li>
+            <li class="listitem">
+      em4h::Ellipticity_F* - значение эллиптичности (отношения полуосей эллипса поляризации) для частоты F* (* = 0, ... ,3) 
+      </li>
+            <li class="listitem">
+      em4h::Max* - текущее значение максимума соответствующего АЦП (* = X,Y,Z - приемник, GU напряжение на основной петле, GI - ток в основной петле, 
+		C0I - ток в петле первого компенсатора, C1I - ток в петле второго компенсатора), зашкал - 32768.
+      </li>
+            <li class="listitem">
+      em4h::Bird_27V - напряжение 27В, измеренное в приемнике
+      </li>
+            <li class="listitem">
+      em4h::Bird_10V - напряжение 10В, измеренное в приемнике
+      </li>
+            <li class="listitem">
+      em4h::Bird_1.2V - напряжение 1.2В, измеренное в приемнике
+      </li>
+            <li class="listitem">
+      em4h::Bird_LogicV - напряжение, отвечающее логической единице в приемнике
+      </li>
+            <li class="listitem">
+      em4h::Bird_Empty - резервный канал
+      </li>
+            <li class="listitem">
+      em4h::Bird_BoardID - идентификатор блока электроники приемника
+      </li>
+            <li class="listitem">
+      em4h::Bird_SensorID - идентификатор датчика
+      </li>
+            <li class="listitem">
+      em4h::Bird_BoardTC - температура электроники в приемнике (град. C)
+      </li>
+            <li class="listitem">
+      em4h::Tran_27V - напряжение 27В, измеренное в передатчике
+      </li>
+            <li class="listitem">
+      em4h::Tran_BirdV - напряжение питания приемника, измеренное в передатчике 
+      </li>
+            <li class="listitem">
+      em4h::Tran_1.2V - напряжение 1.2В, измеренное в передатчике
+      </li>
+            <li class="listitem">
+      em4h::Tran_SignalV - амплитуда сигнала приемника (мВ)
+      </li>
+            <li class="listitem">
+      em4h::Tran_BirdCurrent - ток потребления приемника (мА)
+      </li>
+            <li class="listitem">
+      em4h::Tran_BoardID - идентификатор электроники передатчика
+      </li>
+            <li class="listitem">
+      em4h::Tran_RA - значение высоты (м)
+      </li>
+            <li class="listitem">
+      em4h::Tran_PowerTC - температура силовой электроники передатчика (град. C)
+      </li>
+            <li class="listitem">
+      em4h::aaa_bbb_ccc_ddd - данные EM4H, выбранные пользователем: 
+				    <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+					 aaa - dat (рабочие данные), lpil (сигнал левого) или rpil (правого пилотирования);
+				      </li><li class="listitem">
+					 bbb - Re (синфазная), Im (квадратурная компонента), Amp (амплитуда) или Ph (фаза соответствующего сигнала);
+				      </li><li class="listitem">
+					 ccc - F*#, * = 0,..,3,C0,C1 - частота, # = X,Y,Z (АЦП приемника), U (напряжение) или I (ток в передатчике);
+				      </li><li class="listitem">
+					 ddd - raw (измеренные) или comp (скомпенсированные данные). 
+				      </li></ul></div>
+	Измерения raw - в единицах АЦП, comp - нормируются на единицу (в среднем).  См. также <a class="xref" href="index.html#em4h_control" title="18. EM4H">Раздел 18, «EM4H »</a>.
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec"></a>B.7. Переменные RS-50x</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - число ошибок в потоке данных
+      </li>
+            <li class="listitem">
+      spec::utc_time - время UTC встроенного приемника в секундах
+      </li>
+            <li class="listitem">
+      spec::roi[*] - интервалы накопления (присланные устройством), *=1,...,10
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec_grs"></a>B.8. Переменные GRS410</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - число ошибок в потоке данных
+      </li>
+            <li class="listitem">
+      spec::adc[*] - измерения аналоговых каналов, *=0,...,3
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec_gsa"></a>B.9. Переменные ГСА2000</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - число ошибок потока данных
+      </li>
+            <li class="listitem">
+      spec::hard_errors - контрольный байт устройства (см. инструкцию ГСА2000)
+      </li>
+            <li class="listitem">
+      spec::func_errors - контрольный байт состояния (см. инструкцию ГСА2000)
+      </li>
+            <li class="listitem">
+      spec::live_time - живое время в мс
+      </li>
+            <li class="listitem">
+      spec::stab_code[*] - управляющие коды системы стабилизации (см. инструкцию ГСА2000)
+      </li>
+            <li class="listitem">
+      spec::peak[*] - положение пиков света в каналах, умноженных на 100
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_ffra"></a>B.10. Переменные радиовысотомера Free Flight</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      ffra::altitude - высота (м)
+      </li>
+            <li class="listitem">
+      ffra::errors - число ошибок потока данных согласно контрольной сумме
+      </li>
+            <li class="listitem">
+      ffra::test - тест флаг (равен 2 во время теста, в нормальном состоянии 0)
+      </li>
+            <li class="listitem">
+      ffra::status - статус (равен 4 при ошибке статуса, в нормальном состоянии 0)
+      </li>
+            <li class="listitem">
+      ffra::invalid - флаг выхода (равен 8, если invalid, в нормальном состоянии 0)
+      </li>
+            <li class="listitem">
+      ffra::strut - флаг опоры (равен 16 если опоры нет, в нормальном состоянии 0)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_adc"></a>B.11. Переменные АЦП</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="ru" class="itemizedlist" lang="ru">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gtadc/e502::raw* - значения каналов в единицах АЦП, * - номер канала
+      </li>
+            <li class="listitem">
+      gtadc/e502::имя_канала - переменные, заданные пользователем, см.  <a class="xref" href="index.html#dev_adc" title="6.16. АЦП Геотехнологии">Раздел 6.16, «АЦП Геотехнологии»</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div xmlns="" class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="hotkeys.html"><img xmlns="http://www.w3.org/1999/xhtml" src="images/prev.png" alt="Пред." /></a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> </td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"><a accesskey="p" href="hotkeys.html">A. Горячие клавиши (Доступны из любого контекста)</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">
+              <img xmlns="http://www.w3.org/1999/xhtml" src="images/home.png" alt="Начало" />
+            </a>
+          </td>
+          <td width="40%" align="right" valign="top"> </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

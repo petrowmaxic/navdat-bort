@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>B. Chart window variables</title>
+    <link rel="stylesheet" type="text/css" href="css/navdat.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Data acquisition system &quot;NavDat&quot;" />
+    <link rel="up" href="index.html" title="Data acquisition system &quot;NavDat&quot;" />
+    <link rel="prev" href="hotkeys.html" title="A. Hot keys" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">B. Chart window variables</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="hotkeys.html"><img src="images/prev.png" alt="Prev" /></a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> </td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="appendix">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="variables"></a>B. Chart window variables</h2>
+          </div>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_sys"></a>B.1. System variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      sys::bytes_written - total data written during current session (bytes)
+      </li>
+            <li class="listitem">
+      sys::write_errors - number of data write errors
+      </li>
+            <li class="listitem">
+      sys::write_error - data write error flag
+      </li>
+            <li class="listitem">
+      sys::storage_total - total current disk space (bytes)
+      </li>
+            <li class="listitem">
+      sys::storage_avail - current disk free space (bytes)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_fplan"></a>B.2. Flight plan processing variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      fplan::arrow - horizontal pilot indicator value in range from 0 to 100 (50 means no deviation)
+      </li>
+            <li class="listitem">
+      fplan::varrow - vertical pilot indicator value in range from 0 to 100 (50 means no deviation)
+      </li>
+            <li class="listitem">
+      fplan::lamp - current lamp state: 0 - red, 100 - green (colors can be inverted for particular indicator)
+      </li>
+            <li class="listitem">
+      fplan::XTE - cross track error in meters
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_pos"></a>B.3. Position variables ($POS message of dlg-file)</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      pos::time_ms - time of day in milliseconds
+      </li>
+            <li class="listitem">
+      pos::year - current year
+      </li>
+            <li class="listitem">
+      pos::month - current month
+      </li>
+            <li class="listitem">
+      pos::day - current day
+      </li>
+            <li class="listitem">
+      pos::siu - number of visible satellites
+      </li>
+            <li class="listitem">
+      pos::lat - latitude in degrees for WGS84 or other current geoid
+      </li>
+            <li class="listitem">
+      pos::lon - longitude in degrees for WGS84 or other current geoid
+      </li>
+            <li class="listitem">
+      pos::alt - altitude in meters over WGS84 or other current geoid
+      </li>
+            <li class="listitem">
+      pos::lat_r - latitude in radians for WGS84 or other current geoid
+      </li>
+            <li class="listitem">
+      pos::lon_r - longitude in radians for WGS84 or other current geoid
+      </li>
+            <li class="listitem">
+      pos::track_r - current track in radians
+      </li>
+            <li class="listitem">
+      pos::track - current track in degrees
+      </li>
+            <li class="listitem">
+      pos::hvel - horizontal velocity in m/sec
+      </li>
+            <li class="listitem">
+      pos::pdop - PDOP
+      </li>
+            <li class="listitem">
+      pos::ralt - navigation altitude in meters (it can be radar altitude or other depending on current settings)
+      </li>
+            <li class="listitem">
+      pos::ralt_on - navigation altitude flag (GNSS receiver altitude is used if 0, depends on current settings)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_gps"></a>B.4. Javad/Topcon/Novatel GNSS-receiver variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gps::Lattitude - geodetic lattitude in radians
+      </li>
+            <li class="listitem">
+      gps::Longitude - geodetic longitude in radians
+      </li>
+            <li class="listitem">
+      gps::Altitude - geodetic altitude in meters
+      </li>
+            <li class="listitem">
+      gps::HorVel - horizontal velocity in m/sec
+      </li>
+            <li class="listitem">
+      gps::TrakG - geodetic track in radians
+      </li>
+            <li class="listitem">
+      gps::VisSatNum - number of visible satellites
+      </li>
+            <li class="listitem">
+      gps::WeekTime - time of week in seconds
+      </li>
+            <li class="listitem">
+      gps::rectime - GPS time of day in milliseconds
+      </li>
+            <li class="listitem">
+      gps::HHMMSS - GPS time of day in format HHMMSS
+      </li>
+            <li class="listitem">
+      gps::NavErrors - data stream errors number
+      </li>
+            <li class="listitem">
+      gps::PDOP - PDOP
+      </li>
+            <li class="listitem">
+      gps::nodata - GNSS data flag, 1 if no data, 0 otherwise
+      </li>
+            <li class="listitem">
+      gps::nopos - GNSS position flag, 1 if no position, 0 otherwise
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_gtmag"></a>B.5. GT-Mag variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gtmag::current* - sensor current in mAmps, * - number of channel
+      </li>
+            <li class="listitem">
+      gtmag::signal* - sensor signal in mVolts, * - number of channel
+      </li>
+            <li class="listitem">
+      gtmag::mag* - magnetic field value (nT), * - number of channel
+      </li>
+            <li class="listitem">
+      gtmag::dif_4* - non-normalized 4th difference of magnetic fuild value (nT), * - number of channel
+      </li>
+            <li class="listitem">
+      gtmag::pps - counter of GNSS receiver pulses per second signals
+      </li>
+            <li class="listitem">
+      gtmag::magc - compensated value of magnetic field (nT)
+      </li>
+            <li class="listitem">
+      gtmag::batt - input voltage in mVolts
+      </li>
+            <li class="listitem">
+      gtmag::outV - output voltage (sensor power supply) in mVolts
+      </li>
+            <li class="listitem">
+      gtmag::siu - number of visible satellites
+      </li>
+            <li class="listitem">
+      gtmag::magf - filtered field value (nT), for Equator
+      </li>
+            <li class="listitem">
+      gtmag::fdif - non-normalized 4th difference of filtered field value (nT), for Equator
+      </li>
+            <li class="listitem">
+      gtmag::fx(fy,fz) - fluxgate magnetometer components (nT)
+      </li>
+            <li class="listitem">
+      gtmag::ra - radar altitude in meters
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_em4h"></a>B.6. EM4H variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      em4h::frnum - current data frame number (changes from 0 to 6399)
+      </li>
+            <li class="listitem">
+      em4h::err_cksum - number of errors in check sums for data stream between EM4H and PC
+      </li>
+            <li class="listitem">
+      em4h::err_cable - number of errors in data stream between receiver and transmitter in EM4H
+      </li>
+            <li class="listitem">
+      em4h::err_frnum - number of missed frames
+      </li>
+            <li class="listitem">
+      em4h::Ellipticity_F* - ellipticity (polarization ellipse minor to major axes ratio) for F* frequency (* = 0,..,3)
+      </li>
+            <li class="listitem">
+      em4h::Max* - current maximum value in correspondent ADC (* = X,Y,Z - receiver, GU main loop voltage, GI - main loop current, C0I - first compensation loop current,
+			C1I - second compensation loop current). 32768 means overrange.
+      </li>
+            <li class="listitem">
+      em4h::Bird_27V - 27V voltage measured in the receiver
+      </li>
+            <li class="listitem">
+      em4h::Bird_10V - 10V voltage measured in the receiver
+      </li>
+            <li class="listitem">
+      em4h::Bird_1.2V - 1.2V voltage measured in the receiver
+      </li>
+            <li class="listitem">
+      em4h::Bird_LogicV - logic voltage measured in the receiver
+      </li>
+            <li class="listitem">
+      em4h::Bird_Empty - reserved channel
+      </li>
+            <li class="listitem">
+      em4h::Bird_BoardID - receiver electronics ID
+      </li>
+            <li class="listitem">
+      em4h::Bird_SensorID - receiver sensor ID
+      </li>
+            <li class="listitem">
+      em4h::Bird_BoardTC - receiver electronics temperature (deg. C)
+      </li>
+            <li class="listitem">
+      em4h::Tran_27V - 27V voltage measured in the transmitter
+      </li>
+            <li class="listitem">
+      em4h::Tran_BirdV - receiver power supply measured in the transmitter
+      </li>
+            <li class="listitem">
+      em4h::Tran_1.2V - 1.2V voltage measured in the transmitter
+      </li>
+            <li class="listitem">
+      em4h::Tran_SignalV - receiver signal amplitude (mV)
+      </li>
+            <li class="listitem">
+      em4h::Tran_BirdCurrent - receiver current (mA)
+      </li>
+            <li class="listitem">
+      em4h::Tran_BoardID - transmitter electronics ID
+      </li>
+            <li class="listitem">
+      em4h::Tran_RA - altitude (m)
+      </li>
+            <li class="listitem">
+      em4h::Tran_PowerTC - transmitter power electronics temperature (deg. C)
+      </li>
+            <li class="listitem">
+      em4h::aaa_bbb_ccc_ddd - EM4H data selected by user: 
+				    <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+					 aaa - dat (operating data), lpil (left) or rpil (right piloting signal);
+				      </li><li class="listitem">
+					 bbb - Re (inphase), Im (quadrature), Amp (amplitude), Ph (phase);
+				      </li><li class="listitem">
+					 ccc - F*#, * = 0,..,3,C0,C1 - frequency, # = X,Y,Z (receiver), U (voltage), I (current);
+				      </li><li class="listitem">
+					 ddd - raw or comp (compensated).
+				      </li></ul></div>
+ See <a class="xref" href="index.html#em4h_control" title="18. EM4H">Section 18, “EM4H ”</a> for details. Measured in ADC units if raw, otherwise  everything is normalized to 1 (as average). 
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec"></a>B.7. RS-50x variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - number of errors in data stream
+      </li>
+            <li class="listitem">
+      spec::utc_time - internal receiver UTC time in seconds
+      </li>
+            <li class="listitem">
+      spec::roi[*] - regions of interest (from device), *=1,...,10
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec_grs"></a>B.8. GRS410 variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - number of errors in data stream
+      </li>
+            <li class="listitem">
+      spec::adc[*] - analog measurements, *=0,...,3
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_spec_gsa"></a>B.9. GSA2000 variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      spec::errors - number of errors in data stream
+      </li>
+            <li class="listitem">
+      spec::hard_errors - device control byte (see GSA2000 manual)
+      </li>
+            <li class="listitem">
+      spec::func_errors - device state byte (see GSA2000 manual)
+      </li>
+            <li class="listitem">
+      spec::live_time - live time in ms
+      </li>
+            <li class="listitem">
+      spec::stab_code[*] - stabilization system control code (see GSA2000 manual)
+      </li>
+            <li class="listitem">
+      spec::peak[*] - light peaks position in channels multiplied by 100
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_ffra"></a>B.10. Free Flight RA variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      ffra::altitude - altitude (m)
+      </li>
+            <li class="listitem">
+      ffra::errors - number of stream errors according to checksum
+      </li>
+            <li class="listitem">
+      ffra::test - test flag (equals 2 while testing, otherwise 0)
+      </li>
+            <li class="listitem">
+      ffra::status - status flag (equals 4 if unit failure, otherwise 0)
+      </li>
+            <li class="listitem">
+      ffra::invalid - output flag (equals 8 if unlocked/invalid, otherwise 0)
+      </li>
+            <li class="listitem">
+      ffra::strut - strut flag (equals 16 if de-asserted, otherwise 0)
+      </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="variables_adc"></a>B.11. ADC variables</h3>
+            </div>
+          </div>
+        </div>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      gtadc/e502::raw* - raw value in adc units, * - channel number
+      </li>
+            <li class="listitem">
+      gtadc/e502::user_defined_name - variable defined by user, see <a class="xref" href="index.html#dev_adc" title="6.16. Geotechnologies ADC">Section 6.16, “Geotechnologies ADC”</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div xmlns="" class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="hotkeys.html"><img xmlns="http://www.w3.org/1999/xhtml" src="images/prev.png" alt="Prev" /></a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> </td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"><a accesskey="p" href="hotkeys.html">A. Hot keys</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">
+              <img xmlns="http://www.w3.org/1999/xhtml" src="images/home.png" alt="Home" />
+            </a>
+          </td>
+          <td width="40%" align="right" valign="top"> </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

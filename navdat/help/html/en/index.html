@@ -1,0 +1,3533 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Data acquisition system "NavDat"</title>
+    <link rel="stylesheet" type="text/css" href="css/navdat.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Data acquisition system &quot;NavDat&quot;" />
+    <link rel="next" href="hotkeys.html" title="A. Hot keys" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Data acquisition system "NavDat"</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="hotkeys.html"><img src="images/next.png" alt="Next" /></a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div xml:lang="en" class="article" lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="navdat-book"></a>Data acquisition system "NavDat"</h2>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author"><span class="firstname"></span> <span class="surname"></span></h3>
+                <div class="affiliation">
+                  <span xml:lang="en" class="orgname" lang="en">"GeoTechnologies"<br /></span>
+                  <div class="address">
+                    <p>
+                      <code class="email">&lt;<a class="email" href="mailto:gp@geotechnologies-rus.com">gp@geotechnologies-rus.com</a>&gt;</code>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="copyright">Copyright © 2006-2018 GeoTechnologies</p>
+          </div>
+          <div>
+            <div class="legalnotice">
+              <a id="legalnotice"></a>
+              <p>
+    Site: <a class="ulink" href="http://www.geotechnologies-rus.com/" target="_top">http://www.geotechnologies-rus.com/</a>
+  </p>
+              <p>
+    E-Mail: <a class="ulink" href="mailto: gp@geotechnologies-rus.com" target="_top">info@geotechnologies-rus.com</a>
+  </p>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="toc">
+        <p>
+          <strong>Table of Contents</strong>
+        </p>
+        <dl class="toc">
+          <dt>
+            <span class="sect1">
+              <a href="index.html#intro">1.  Software purpose and main functions</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#installation">2. Program installation</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#visualisation">3. Visualisation and user interface</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#settings">4. "NavDat" settings and staring up</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#navigation">5. Navigation support</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#devices">6. Interaction with on-board devices</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_tcpip">6.1. TCP/IP connection</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_rs232">6.2. Serial port connection</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_fe">6.3. On-Board Server</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_jps">6.4. GNSS-receiver Javad/Topcon</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_novatel">6.5. GNSS-receiver Novatel</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_tvisor">6.6. Infrared scanner</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_gtmag">6.7. GT-Mag system</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_equator">6.8. Equator system</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_em4h">6.9. EM4H system</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_rs50">6.10. Spectrometer RSx</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_grs410">6.11. Spectrometer GRS410</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014159062464">6.12. Spectrometer GSA2000</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_arrow">6.13. Pilot's indicator ("Arrow")</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_ra">6.14. Radar Altimeter</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_ffra">6.15. Free Flight Radar Altimeter</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#dev_adc">6.16. Geotechnologies ADC</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#status">7. System health monitoring</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#registration">8. Navigational and geophysical data registration</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#fpl">9.  Flight plan file</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#terminology">9.1. Terms</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#fplan">10. Flight Plan panel</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#fplan_load">10.1.  Flight plan loading and viewing</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#edit">10.2.  Flight plan editing.</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#markup-parallel">10.3.  Creation of the system of parallel routes </a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#markup-rkm">10.4.  Creation magnetic compensation routes system</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#sect-fplan-setup">10.5. Adjustment, start and stop of a routing</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#sect-pos-fix">10.6. Position fix</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#fplan_hotkeys">10.7. Flight plan panel control</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#panorama">11. Panorama</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158876368">11.1. Panorama main elements</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158871584">11.2. Panorama view modes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158869376">11.3.  Hot keys</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#pilotpan">12. Pilot's indicator, routing parameters and pilot's panel</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_arrow">12.1. Pilot's indicator</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158856272">12.2. Routing regimes</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45014158855024">12.2.1. Approaching a point</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45014158853632">12.2.2. Curvilinear routing regime</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="index.html#idm45014158852208">12.2.3. Routing mode</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158849984">12.3. Route entry conditions </a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_params">12.4. Parameters</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#pilotpan_setup">12.5. Adjustment recommendations</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#arrow">13. Pilot's indicator application</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#jst">14. Table of satellites</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158803680">14.1. Celestial Semisphere</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158802336">14.2. Map</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158801248">14.3. Satellites panel</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158799072">14.4. Hot keys</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#pilot">15.  GNSS emulator</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#samopis">16. Chart window </a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158777520">16.1. Variables view settings</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158770704">16.2. Hot keys</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#spectra">17. Spectra </a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158756000">17.1. Spectra visualization control</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158731152">17.2. Hot keys</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#em4h_control">18. EM4H </a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158687264">18.1. Induction control</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158679232">18.2. Compensation control</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158656592">18.3. Digital panel</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158627024">18.4. Hot keys</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="index.html#tvisor">19. Infrared scanner panel</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#idm45014158617168">19.1. View settings</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#tvisor_hotkeys">19.2. Work in infrared scanner panel</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="index.html#gyros">19.3.  Window of orientation system indicator</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="hotkeys.html">A. Hot keys</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="appendix">
+              <a href="variables.html">B. Chart window variables</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="intro"></a>1.  Software purpose and main functions</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    "NavDat" is software solution for survey computational tasks adapted for IBM PC compatible on-board computer.</p>
+        <p xml:lang="en" lang="en">
+    "NavDat" main functions are:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Navigation support. Based on modern satellite navigation technology "NavDat" provides real-time registration
+      of navigation parameters, automatic solution of wide range of navigation tasks,
+      routing control through pilot's indicator, and interactive control of a flight plan. 
+    </li>
+            <li class="listitem">
+      Interaction with on-board geophysical hardware. Using on-board computer interface "NavDat"
+      provides data and command exchange between all devices to guarantee data integrity.
+    </li>
+            <li class="listitem">
+      Data saving. Data are recorded on a hard drive of an on-board computer.
+    </li>
+            <li class="listitem">
+      User interface. Software provides full control of interaction with hardware.
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+    "NavDat" is designed in such a way that only one technician is able to provide navigation and
+    survey control. Program work was organized in a way to prevent fatal data loss or damage
+    by reason of technician mistakes.
+  </p>
+        <p xml:lang="en" lang="en">
+    Hardware platform for "NavDat" is <a class="ulink" href="http://en.wikipedia.org/wiki/IA-64" target="_top">IA-64</a> compatible computer with Operating System <a class="ulink" href="http://www.gnu.org" target="_top">GNU/Linux</a>.
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="installation"></a>2. Program installation</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    "NavDat" is delivered as a software package from <a class="ulink" href="http://geotechnologies-rus.com/en/main_en.html" target="_top">Geotechnologies</a>
+	server. The package is created to be used on GNU/Linux system
+    <a class="ulink" href="http://ubuntu.com" target="_top">Ubuntu 16.04.3 LTS</a>.
+    First, you should install 64-bit Ubuntu Operating System, installation guide could be found here:
+    <a class="ulink" href="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop" target="_top">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</a>.
+  Second, start <a class="ulink" href="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux" target="_top">Terminal</a> and run the following commands:
+  </p>
+        <div class="example">
+          <a id="idm45014161309520"></a>
+          <p class="title">
+            <strong>Example 1. </strong>
+          </p>
+          <div class="example-contents">
+            <pre class="programlisting">
+		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
+	</pre>
+            <pre class="programlisting">
+		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
+		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
+		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
+		EOF
+	</pre>
+            <pre class="programlisting">
+		sudo apt-get update
+	</pre>
+            <pre class="programlisting">
+		sudo apt-get install navdat-user
+	</pre>
+          </div>
+        </div>
+        <br class="example-break" />
+        <p xml:lang="en" lang="en">
+    Your user_name and password are provided by <a class="ulink" href="http://geotechnologies-rus.com/en/main_en.html" target="_top">Geotechnologies</a>.
+    After the System reboot a new account "NavDat session user" will appear. Its password is set by the administrator during installation.
+    It is strongly recommended to use this account to work with "NavDat" only. 
+  </p>
+        <p xml:lang="en" lang="en">
+    Some recommendations:
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+	Not less then 10 GB is required for root file system
+	    </li>
+            <li class="listitem">
+	Not less then 1 GB is required for swap
+      </li>
+            <li class="listitem">
+	Separate volume is preferable for data saving and storage (i.e. for /home directory)
+      </li>
+            <li class="listitem">
+  Recommended file systems: ext3, ext4
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="visualisation"></a>3. Visualisation and user interface</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    User interface is based on <a class="ulink" href="https://wiki.archlinux.org/index.php/Awesome" target="_top">Awesome</a> environment.
+  </p>
+        <p xml:lang="en" lang="en">
+    At the left of the top panel there is a list of Desktops, CPU and Memory usage indicators. 
+    At the right ther is a Bort Server idicator (on\off).
+    You can main menu by pressing <span class="keycap"><strong>Alt-F1</strong></span> or left mouse button. 
+    This menu contains applications for data visualisation and flight control. 
+  </p>
+        <p xml:lang="en" lang="en">
+    Some useful system parameters can be seen in chart window (see <a class="xref" href="variables.html#variables_sys" title="B.1. System variables">Section B.1, “System variables”</a>).
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="settings"></a>4. "NavDat" settings and staring up</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+	During first launch of "NavDat" please check that navdat user session is running in Awesome mode.
+	The mode is chosen during logging in.
+    </p>
+        <div class="figure">
+          <a id="idm45014164405072"></a>
+          <p class="title">
+            <strong>Figure 1. Mode selection</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/gnome.png" alt="Mode selection" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    To run settings utility tool  use application menu.
+    </p>
+        <div class="figure">
+          <a id="idm45014164297920"></a>
+          <p class="title">
+            <strong>Figure 2. Settings utility tool window</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/ebortcfg.png" alt="Settings utility tool window" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+      This utility allows to add devices, select destination folder for data storage and control 
+      on-board server parameters.
+    </p>
+        <p xml:lang="en" lang="en">
+     After adding new device select interface type its parameters (ip, port etc), save settings and restart server. 
+     Push Settings button to set these parameters. Some devices have additional
+     parameters, which can be set on the corresponding tab of appeared window.
+    </p>
+        <div class="figure">
+          <a id="idm45014164292896"></a>
+          <p class="title">
+            <strong>Figure 3. Parameters setting window</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/ebortcfg_tabs.png" alt="Parameters setting window" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <div xml:lang="en" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="en">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="./images/warning.png" />
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top"> The first GNSS reciever in the devices list will be always used as a source of navigation data for flight control. </td>
+            </tr>
+          </table>
+        </div>
+        <p xml:lang="en" lang="en">
+      Using application menu you can change desktop configuration of the on-board computer: select 
+      a program from the applications menu and drag it on the desktop. Saved configuration (Settings-&gt;Session: save or <span class="keycap"><strong> Ctrl+Alt+S </strong></span>) will be loaded
+      next time (Settings-&gt;Session: restore or <span class="keycap"><strong> Ctrl+Alt+R </strong></span>).
+    </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="navigation"></a>5. Navigation support</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    "NavDat" uses point coordinates (latitude,altitude) obtained by the first GNSS-receiver in the devices list to solve following navigation tasks:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Distances calculation.  
+      All distances are calculated as lengths of orthodromic lines (the arcs of great circles). Distances
+      are measured in kilometres.
+    </li>
+            <li class="listitem">
+      Azimuths calculation. 
+      Azimuths are calculated as angles (in degree) between orthodromic lines in the point of intersection.
+    </li>
+            <li class="listitem">
+      Estimated time calculation.
+      For time calculation current speed measured on the basis of GNSS-receiver data is used.
+    </li>
+            <li class="listitem">
+      Navigational altitude control, i.e. altitude to be kept by pilot.
+      It can be measured by any device: GNSS-receiver, GT-MAG etc.
+    </li>
+            <li class="listitem">
+     Flight task implementation control.
+    </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="devices"></a>6. Interaction with on-board devices</h2>
+            </div>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_tcpip"></a>6.1. TCP/IP connection</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    All devices connected using TCP/IP have their ip-address and port. Note that if they have no DHCP-server, the user should 
+    configure a corresponding network manually. Check device's manual for details.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_rs232"></a>6.2. Serial port connection</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Serial communication port should be also configured: address, rate, data bits, parity, stop bits.
+    Usually RS232 devices are connected using USB to COM adapter. The "NavDat" allows to choose assignment method. 
+    One can assign COM-port by device, by ID or by path. For example:
+    </p>
+          <div class="example">
+            <a id="idm45014164388560"></a>
+            <p class="title">
+              <strong>Example 2. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+/dev/ttyUSB0&gt;	/dev/ttyUSB0
+		/dev/ttyUSB0: by-path
+		/dev/ttyUSB0: by-id
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    By devise. If there are more than one RS232 device the user should connect them in the same order every time.
+    </p>
+          <p xml:lang="en" lang="en">
+    By path. The user should connect devices always in the same USB-ports.
+    </p>
+          <p xml:lang="en" lang="en">
+    By ID. This method is possible only if there are no USB to COM adapters with similar ID.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_fe"></a>6.3. On-Board Server</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     	By default "NavDat" uses Unix Domain Socket for internal communications between different applications and 
+	devices. To be able to use other means of control and visualization (smartphone, tablet, another PC) you must
+	configure the local network and use the corresponding IP adress for communications. In this case, you need to
+	add the "On-Board Server" device and assign the IP-address and the port number on the server-computer. The same parameters must be 
+	specified in the environment variable BORT_SERVER on the client-computer.
+    </p>
+          <p xml:lang="en" lang="en">
+	To provide the correct value of the variable you must add the following string to the '/etc/environment' 
+	file (root rights are needed):
+    </p>
+          <div class="example">
+            <a id="idm45014164383264"></a>
+            <p class="title">
+              <strong>Example 3. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+BORT_SERVER="tcp://ip_adress:port"
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_jps"></a>6.4. GNSS-receiver Javad/Topcon</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with any <em class="citetitle">Javad Positioning Systems</em> or  <em class="citetitle">Topcon Positioning Systems</em> receiver, 
+     that has RS232 serial port and supports GRIL protocol.
+    </p>
+          <p xml:lang="en" lang="en">
+      Program interacts with a receiver in data-command  interchange mode. That is why you need to turn receiver on and connected it to computer
+      before starting "NavDat".
+      In most cases the receiver has the same power-supply source with the computer,
+      so this requirement is satisfied automatically. 
+      But if you ran program when receiver was turned off do not try to connect it while program is running.
+      Otherwise saved data may be damaged, because essential titles will not be created.
+      While connected to a receiver  "NavDat" saves full navigation data produced by a receiver in a special file <code class="filename">*.jps</code>.
+      This is necessary for differential correction software, which supports this data format only.   
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_gps" title="B.4. Javad/Topcon/Novatel GNSS-receiver variables">Section B.4, “Javad/Topcon/Novatel GNSS-receiver variables”</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45014164376368"></a>
+            <p class="title">
+              <strong>Figure 4. Javad/Topcon Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_jps.png" alt="Javad/Topcon Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+    The device has one setting parameter - 'Initialization Commands', which defines initialization sequence to be sent to receiver.
+    In case of empty parameter all necessary commands for differential correction and correct visualisation will be sent automatically. 
+    If the parameter is set or the receiver can't receive commands note that full functionality is possible only if the following messages are 
+    received: RT, SI, PG, VG, EL, AZ, DP.
+    </p>
+          <p xml:lang="en" lang="en">
+    The default commands sequence is as follows.
+    </p>
+          <div class="example">
+            <a id="idm45014159123936"></a>
+            <p class="title">
+              <strong>Example 4. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    dm
+    em,,/msg/def:0.1
+    em,,/msg/jps/PG:0.1
+    em,,/msg/jps/VG:0.1
+    em,,/msg/jps/AZ:1
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    It is supposed that 'def' includes all necessary for differential mode messages, and RT, SI, EL, DP as well
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_novatel"></a>6.5. GNSS-receiver Novatel</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with any <em class="citetitle">Novatel</em> receiver, 
+     that has RS232 serial port. For today the company <em class="citetitle">Novatel</em> didn't 
+     make drivers for their USB-adapter to provide functioning in OS Linux.
+    </p>
+          <p xml:lang="en" lang="en">
+      Program interacts with a receiver in data-command  interchange mode. That's why 
+      you should turn the receiver on and connect it to the computer before starting "NavDat". 
+      In most cases the receiver has the same power-supply source with the computer,
+      so this requirement is satisfied automatically. 
+      But if you ran program when receiver was turned off do not try to connect it while program is running.
+      Otherwise saved data may be damaged, because essential titles will not be created.
+      While connected to a receiver  "NavDat" saves full navigation data produced by a receiver in a special file <code class="filename">*.nov</code>.
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_gps" title="B.4. Javad/Topcon/Novatel GNSS-receiver variables">Section B.4, “Javad/Topcon/Novatel GNSS-receiver variables”</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45014159117568"></a>
+            <p class="title">
+              <strong>Figure 5. Novatel Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_novatel.png" alt="Novatel Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+    The device has one setting parameter - 'Initialization Commands', which defines initialization sequence to be sent to receiver.
+    In case of empty parameter all necessary commands for differential correction and correct visualisation will be sent automatically. 
+    If the parameter is set or the receiver can't receive commands note that full functionality is possible only if the following messages are 
+    received: bestposb, bestvelb, gpgsa, gpgsv.
+    </p>
+          <p xml:lang="en" lang="en">
+    The default commands sequence is as follows.
+    </p>
+          <div class="example">
+            <a id="idm45014159112672"></a>
+            <p class="title">
+              <strong>Example 5. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    unlogall
+    log bestposb ontime 0.1
+    log bestvelb ontime 0.1
+    log GPGSA ontime 1
+    log GPGSV ontime 1
+    log rangecmpb ontime 0.1
+    log almanacb onchanged
+    log ionutcb onchanged
+    log rawephemb onnew
+    log versionb ontime 100
+    log gloalmanacb onchanged
+    log gloclockb onchanged
+    log gloephemerisb onchanged
+    log glorawephemb onchanged
+    log rxstatuseventb onchanged
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    While configuring receiver it is recommended to set bitrate as 115200 and also
+    </p>
+          <div class="example">
+            <a id="idm45014159111024"></a>
+            <p class="title">
+              <strong>Example 6. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+    nmeatalker auto
+    pdpfilter enable
+    pdpmode relative dynamic
+    selectchanconfig 4
+	</pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    The last instruction is actual only for OEMStar receivers (8 GPS, 6 GLONASS configuration)
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_tvisor"></a>6.6. Infrared scanner</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Infrared scanner is an automatic device connected through Ethernet. You should remember, that writing speed of scanner data is about 1MB/sec(3,6 GB/hour) and available disc space should be enough. 
+     Scanner has built-in inertial orientation system. 
+Usually infrared scanner has a built-in GNSS receiver, and interfaces necessary for radar altimeter and pilot's indicator. 
+So, all these devices are connected using one Ethernet cable.
+    </p>
+          <div class="figure">
+            <a id="idm45014159107856"></a>
+            <p class="title">
+              <strong>Figure 6. Infrared Scanner Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_tep.png" alt="Infrared Scanner Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+    The device has one parameter - 'Optics Forward', which defines installation method with respect to flight direction. This only affects the attitude system behaviour.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_gtmag"></a>6.7. GT-Mag system</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      GT-Mag system is an automatic device connected through USB. 
+      Usually GT-Mag has at least one built-in GNSS receiver, and interfaces necessary for radar altimeter and pilot's indicator. 
+      So, all these devices are connected using one USB cable.
+      Default connection settings are as follows: ip-adress 10.100.4.50, port 1917 - GT_Mag, port 4444 - GNSS receiver, port 3333 - pilot arrow.
+      It is necessary to set corresponding network as 10.100.4.yyy, mask 255.255.255.0.
+    </p>
+          <div class="figure">
+            <a id="idm45014159101872"></a>
+            <p class="title">
+              <strong>Figure 7. GT-Mag Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_mag.png" alt="GT-Mag Parameters" />
+              </div>
+              <div class="mediaobject">
+                <img src="images/ebortcfg_magf.png" alt="GT-Mag Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+	The device has the following parameters. GT-MAG group:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    Output Frequency - allows to change data sample rate for 1000 Hz version of GT-Mag
+	</li>
+              <li class="listitem">
+	    Number of Channels - allows to visualize only selected number of channels; it doesn't change data stream file
+	</li>
+              <li class="listitem">
+	    Use Radar Altimeter - GT-Mag radar altimeter channel will be used as navigational altitude for pilot indicator, if selected
+	</li>
+              <li class="listitem">
+	    RA Offset - radar altitude offset in meters, to be applied if it is selected (DRA)
+	</li>
+              <li class="listitem">
+	    RA Scale - radar altitude scale factor, to be applied if it is selected (KRA)
+	</li>
+              <li class="listitem">
+	    Deviation Parameters - deviation parameters file (mgc-file made by ReinMag software) can be selected; 
+	    these parameters will be applied to first GT-Mag channel only; due to fluxegate channel derivation the compensated value will be delayed 
+	    for 0.2 sec.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+          <p xml:lang="en" lang="en">
+    The calculation rule for the corrected radar altitude is as follows
+    </p>
+          <div class="example">
+            <a id="idm45014159092224"></a>
+            <p class="title">
+              <strong>Example 7. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+	    H = (RA + DRA) ⋅ KRA
+        </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+	Fluxgate group allows setting parameters for different sensors, accounting calibration results:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    UGND(V) - common signal zero, the default value is 0 (volts)
+	</li>
+              <li class="listitem">
+	    mV/μT - common scale factor, the default value is 100 (millivolts per microtesla)
+	</li>
+              <li class="listitem">
+	    DX(V), DY(V), DZ(V) - offset for each channel, Volts, the default values are 0 (volts)
+	</li>
+              <li class="listitem">
+	    KX, KY, KZ - scale factor for each channel, the default values are 1s
+	</li>
+              <li class="listitem">
+	    KYX, KZX, KXY, KZY, KXZ, KYZ - cross channel influence; KXY is the X-component factor in Y-component,
+	    for example; the default values are 0s
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+          <p xml:lang="en" lang="en">
+	CT-MAG allows measurement of common signal zero instead of radar altitude. In this case it is necessary to 
+	set flag 'meas.' and to clear 'Use Radar Altimeter'. UGND will not be used.
+    </p>
+          <p xml:lang="en" lang="en">
+    The calculation rule for fx, fy, fz in nanotesla is as follows
+    </p>
+          <div class="example">
+            <a id="idm45014159087488"></a>
+            <p class="title">
+              <strong>Example 8. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+		    x = X - UGND + DX
+		    y = Y - UGND + DY
+		    z = Z - UGND + DZ
+		    fx = (x + y ⋅ KYX + z ⋅ KZX) ⋅ KX ⋅ 10^6 / K
+		    fy = (y + x ⋅ KXY + z ⋅ KZY) ⋅ KY ⋅ 10^6 / K
+		    fz = (z + x ⋅ KXZ + y ⋅ KYZ) ⋅ KZ ⋅ 10^6 / K
+        </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    where X, Y, Z are measured values in volts, K is the common scale factor in mV/μT.
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_gtmag" title="B.5. GT-Mag variables">Section B.5, “GT-Mag variables”</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_equator"></a>6.8. Equator system</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Equator system is an automatic device connected through Ethernet. Data will be recorded 
+      at high speed - 4 Mb/s (14 Gb/hour). Please, check disk free space before start.
+      Equator has built-in GNSS receiver and radar altimeter. 
+      So, all these devices are connected using one Ethernet cable.
+      Default connection settings are as follows: ip-adress 10.100.4.50, port 2000.
+      It is necessary to set corresponding network as 10.100.4.yyy, mask 255.255.255.0.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_em4h"></a>6.9. EM4H system</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      EM4H system is an automatic device connected through ethernet or RS232. In case of ethernet connection data will be recorded 
+      at high speed - 4 Mb/s (14 Gb/hour). Please, check disk free space before start.
+      It can have built-in GNSS receiver and radar altimeter. It also can have pilot's indicator interface.
+      Radar altimeter data will be integrated in EM4H data stream. 
+    </p>
+          <div class="figure">
+            <a id="idm45014159080912"></a>
+            <p class="title">
+              <strong>Figure 8. EM4H Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_em4h.png" alt="EM4H Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+	The device has following parameters:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    Aircraft type - allows to select between An-2, An-3 and Mi-8: the type defines the compensation algorithm (see <a class="xref" href="index.html#em4h_control" title="18. EM4H">Section 18, “EM4H ”</a>).
+	    Note, that choosing An-3 means usage of additional compensation coil mounted on a stinger, not the aircraft itself. 
+	    If there are no such coil on An-3 you should set An-2.
+	    And if it is used on An-2, than set An-3 type.
+	</li>
+              <li class="listitem">
+	    Use Radar Altimeter - GT-Mag radar altimeter channel will be used as navigational altitude for pilot indicator, if selected
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_em4h" title="B.6. EM4H variables">Section B.6, “EM4H variables”</a>.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_rs50"></a>6.10. Spectrometer RSx</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with spectrometers from  <em class="citetitle">Radiation Solutions Inc</em>, 
+     such as RS-501, RSX4, RSX5 etc which are communicate using RSI protocol.
+    Up to three devices simultaneously.
+     Usually connection settings are 192.168.1.xxx, port 4000. It is necessary to set corresponding network as 192.168.1.yyy, mask 255.255.255.0.
+    </p>
+          <p xml:lang="en" lang="en">
+      For monitoring of this device see <a class="xref" href="index.html#spectra" title="17. Spectra">Section 17, “Spectra ”</a>, <a class="xref" href="variables.html#variables_spec" title="B.7. RS-50x variables">Section B.7, “RS-50x variables”</a>
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_grs410"></a>6.11. Spectrometer GRS410</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with spectrometers GRS410 from  <em class="citetitle">Pico Envirotec Inc</em> registering individual spectra.
+    Up to three devices simultaneously.
+     Connection to Concentrator or Superconcentrator can be established via serial port.
+    </p>
+          <div class="figure">
+            <a id="idm45014159068608"></a>
+            <p class="title">
+              <strong>Figure 9. GRS410 Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_grs410.png" alt="GRS410 Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+	The device has following parameters:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    XTAL#* - allows to switch on/off spectrum visualization for crystal # * (* - 1,...,10). Being switched off the corresponding spectrum will
+		be invisible. But it will be registered in data file.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+          <p xml:lang="en" lang="en">
+      For monitoring of this device see <a class="xref" href="index.html#spectra" title="17. Spectra">Section 17, “Spectra ”</a>, <a class="xref" href="variables.html#variables_spec_grs" title="B.8. GRS410 variables">Section B.8, “GRS410 variables”</a>
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014159062464"></a>6.12. Spectrometer GSA2000</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with spectrometers GSA2000.
+    Up to six devices simultaneously.
+     Connection can be established via serial port.
+    </p>
+          <div xml:lang="en" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="en">
+            <table border="0" summary="Warning">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Warning]" src="./images/warning.png" />
+                </td>
+                <th align="left">Warning</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+	The device works by request and must be initialized.
+	That is why the device has to be started before the software.
+    </td>
+              </tr>
+            </table>
+          </div>
+          <div class="figure">
+            <a id="idm45014159060544"></a>
+            <p class="title">
+              <strong>Figure 10. GSA2000 Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_gsa2000.png" alt="GSA2000 Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+	The device has following parameters:
+	</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	    XTAL - allows to select crystal #1, #2 or their sum.
+	</li>
+              <li class="listitem">
+	    Mode - allows to select ordinary spectrum or the spectrum of the light.
+	</li>
+              <li class="listitem">
+	    Stabilization - allows to switch stabilization on/off.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+          <p xml:lang="en" lang="en">
+      For monitoring of this device see <a class="xref" href="index.html#spectra" title="17. Spectra">Section 17, “Spectra ”</a>, <a class="xref" href="variables.html#variables_spec_gsa" title="B.9. GSA2000 variables">Section B.9, “GSA2000 variables”</a>
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_arrow"></a>6.13. Pilot's indicator ("Arrow")</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+       This device was designed to display lateral and vertical deviations. 
+       Also current flight mode is shown on the indicator (route approaching, surveying). 
+       Data transfers through RS232 serial port using CTS and RTS mechanism (classic type).
+       ( <a class="ulink" href="http://en.wikipedia.org/wiki/RS-232" target="_top">RS232 interface description</a>).
+       Modern type of pilot indicators uses only DTX. Tvisor type is connected only to Infrared scanner.
+       Pilot's indicator is described in details in  <a class="xref" href="index.html#pilotpan_arrow" title="12.1. Pilot's indicator">Section 12.1, “Pilot's indicator”</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45014159050912"></a>
+            <p class="title">
+              <strong>Figure 11. Arrow Parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_arr.png" alt="Arrow Parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+	Pilot indicator allows to chose it's type: classic, tvisor or modern.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_ra"></a>6.14. Radar Altimeter</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+	This device is connected to "NavDat" not directly but through some other devices. In some cases connection sheme allows sending commands to radar 
+	altimeter: on, off, test. For this purpose "NavDat" has special application RA Control Panel.
+    </p>
+          <div class="figure">
+            <a id="idm45014159045264"></a>
+            <p class="title">
+              <strong>Figure 12. Radar Altimeter Control Panel</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/rapan.png" alt="Radar Altimeter Control Panel" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_ffra"></a>6.15. Free Flight Radar Altimeter</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with radar altimeters from <em class="citetitle">Free Flight</em>, 
+     that have RS232 serial port: TRA-4000, TRA-4500. They use 56000 bit rate, so the corresponding serial port should
+     be configured to 57600.
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_ffra" title="B.10. Free Flight RA variables">Section B.10, “Free Flight RA variables”</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45014159039248"></a>
+            <p class="title">
+              <strong>Figure 13. Free Flight RA parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_ffra.png" alt="Free Flight RA parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+    The device has one setting parameter - 
+	    'Use Radar Altimeter' - it's measurements will be used as navigational altitude for pilot indicator, 
+	    if selected
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="dev_adc"></a>6.16. Geotechnologies ADC</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+     "NavDat" is compatible with any <em class="citetitle">Geotechnologies ADC</em>, 
+     that has RS232 serial port.
+    </p>
+          <p xml:lang="en" lang="en">
+      Variables list for monitoring of this device is in <a class="xref" href="variables.html#variables_adc" title="B.11. ADC variables">Section B.11, “ADC variables”</a>.
+    </p>
+          <div class="figure">
+            <a id="idm45014159032320"></a>
+            <p class="title">
+              <strong>Figure 14. ADC parameters</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/ebortcfg_adc.png" alt="ADC parameters" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+    The device has one setting parameter - 'ADC Assignment', which defines scaled variables. Each string must have a following format: 
+    "number_of_channel name offset scale". The two last values should be measured in ADC units.
+    </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="status"></a>7. System health monitoring</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    All devices connected to the "NavDat" have their own health flag, as well as the "NavDat" itself. 
+    All these flags are monitored by the appropriate application 'Status'.
+    Each flag is visualized using an indicator which is grey while the corresponding device is working correctly, otherwise it's red.
+    Indicators are configured automatically.
+    They are arranged in a row or a column depending on window form.
+    If any indicator is red for a minute or so, current survey should be stopped for recovering.
+    </p>
+        <div class="figure">
+          <a id="idm45014159026240"></a>
+          <p class="title">
+            <strong>Figure 15. Status panel</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/status-hor.png" alt="Status panel" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    Flags values are defined as follows
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>sys</strong></span> - It is red if data write error is occurred, no bytes written or low free disk space (for 10 hours or fewer).
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>gtmag</strong></span> - It is red if there are no synchronization with GNSS-receiver, not enough satellites in view, low sensor signal amplitude, low or extremely high 
+			consumption current or no data at all.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>gps</strong></span> - It is red if there are no data or no position in corresponding GNSS-receiver.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>spec</strong></span> - It is red if there is no signal or data stream error is occurred. For GSA2000 the device control byte is also used.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>em4h</strong></span> - It is red if there is no signal, induction is off, any ADC is overranged or data stream error is occurred.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>equator</strong></span> - It is red if there is no signal, induction is off, any ADC is overranged or data stream error is occured.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>ffra</strong></span> - It is red if there is no data from altimeter, there are errors in the stream, or it is in test mode.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>gtadc</strong></span> - It is red if there is no signal.
+	</li>
+            <li xml:lang="en" class="listitem" lang="en"><span class="bold"><strong>e502</strong></span> - It is red if there is no signal.
+	</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="registration"></a>8. Navigational and geophysical data registration</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    "NavDat" creates following files:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem"><code class="filename">*.dlg</code> (Data Logging).
+        This binary file contains data from all devices of the system.
+        Format of this file is rather complicated. It will be used by extraction programs while
+        processing later on. You should only remember that synchronization text string is
+        writing in this file periodically, its prefix is $POS:
+      <div class="example"><a id="idm45014159009952"></a><p class="title"><strong>Example 9. </strong></p><div class="example-contents"><pre class="programlisting">
+    $POS,12,094301.0,5539.9828751,3736.3127569,237.31,41.1,41.12,0.1,21,03,2009,54.11
+        </pre></div></div><br class="example-break" />
+        After prefix goes a number of visible satellites,
+        GPS time (HHMMSS.s), latitude, longitude (DDMM.mmmmm), altitude above geoid, heading in degrees, velocity in m/s, PDOP, day, month, year (GPS date), 
+        navigation altitude in meters. 
+        This information could be read from the file by eyes. If there are more then one GNSS receiver, each of them will have it's own pos-message.
+        $POS - number one, $PO1 - number two, etc. All these parameters can be seen in chart window (see <a class="xref" href="variables.html#variables_pos" title="B.3. Position variables ($POS message of dlg-file)">Section B.3, “Position variables ($POS message of dlg-file)”</a>).
+        Name of file is a composition of date and time of program start-up. 
+        First symbol corresponds to current month (1 - January, ..., 9 - September, a - October, ..., c - December).
+        After it follow two digits - day, next two digits - number of program start in current day.
+	Data saving process lasts from program start-up till shut down continuously.
+        To ease backup process if file size goes beyond 100Mb it will be closed and data will be saved
+        into the next file. New file gets the same name with additional 'b' at the end of its name, then'c', then 'd', etc.
+    </li>
+            <li class="listitem"><code class="filename">*.jps</code> (Javad Positioning Systems, several devices may be).
+        As it was mentioned above data produced by GNSS-receiver of Javad or Topcon type are stored in this binary file.
+        It is used in differential correction procedures. It is divided into 100 Mb parts also.
+        File's name is same as the name of dlg-file. 
+    </li>
+            <li class="listitem"><code class="filename">*.nov</code> (Novatel, several devices may be).
+        Data produced by GNSS-receiver of Novatel type are stored in this binary file.
+        It is used in differential correction procedures. It is divided into 100 Mb parts also.
+        File's name is same as the name of dlg-file. 
+    </li>
+            <li class="listitem"><code class="filename">*.tep</code> (Infrared scanner).
+        Scanner data are saved into files of individual format. Scanner produces
+        3,6 Gb of data in hour. These files are divided into 100 Mb parts also. And it is clear
+        that more then 30 files will be created every hour. 27th file and following will get
+        two-symbol identification ('ba', 'bb', 'bc' etc) at the end of their names.
+        File's name is the same as for dlg-file.    
+    </li>
+            <li class="listitem"><code class="filename">*.mag</code> (GT-Mag, several devices may be).
+        GT-Mag data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </li>
+            <li class="listitem"><code class="filename">*.rad</code> (Equator).
+        Equator data are saved into files of individual format, it's data stream is about 4 Gb per hour. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </li>
+            <li class="listitem"><code class="filename">*.rs</code> (RSx, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </li>
+            <li class="listitem"><code class="filename">*.grs</code> (GRS410, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </li>
+            <li class="listitem"><code class="filename">*.gsa</code> (GSA2000, several devices may be).
+        Spectrometer data are saved into files of individual format. 
+        These files are divided into 100 Mb parts also. File's name is the same as for dlg-file.
+    </li>
+            <li class="listitem"><code class="filename">*.em4</code> (EM4H). EM4H data stream is recorded in these files.
+      To provide compatibility with old programs the same data are saved in dlg according to EM4H manual.
+       File's name is the same as for dlg-file.
+      </li>
+            <li class="listitem"><code class="filename">current.fpl</code> (Flight Plan).
+        When you quit the program this file contains flight plan information saved in a
+        computer memory by the time of shutting down. This format is described in details in (<a class="xref" href="index.html#fpl" title="9.  Flight plan file">Section 9, “ Flight plan file”</a>).
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+    Similar devices write to different files:  <code class="filename">*.rs</code>, <code class="filename">*.rs1</code>, ... 
+    or  <code class="filename">*.jps</code>, <code class="filename">*.jp1</code>, ...
+  </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="fpl"></a>9.  Flight plan file</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    This is a text file, that contains formalized description of a flight plan.
+    There are several ways to create this file: you can use text editor or use <a class="ulink" href="http://www.geosoft.com/products/oasis-montaj" target="_top">Geosoft Oasis Montaj</a> 
+    utility or even use "NavDat" itself.
+    But present syntax rules must be satisfied anyway.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="terminology"></a>9.1. Terms</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Flight plan consists of records. Each record has a type, a name and a list
+      of points (may be empty). Points description includes name (optionally), 
+      latitude and longitude. Every record in the file should begin a new line 
+      and comply with following template:
+    </p>
+          <pre class="programlisting">
+ RECORD_TYPE RECORD_NAME =
+(POINT_NAME, LATITUDE, LONGITUDE),
+(POINT_NAME, LATITUDE, LONGITUDE),
+..........
+(POINT_NAME, LATITUDE, LONGITUDE),
+      </pre>
+          <p xml:lang="en" lang="en">
+    All names (RECORD_NAME, POINT_NAME) in the file shouldn't start with a number 
+    or contain "+-/*.,$#@!%^&amp;()[]|\&lt;&gt;" symbols. Symbol '_' is valid. Records
+    with identical names are acceptable.
+    </p>
+          <p xml:lang="en" lang="en">
+      Points coordinates should follow "DDDMMmmmm" format, i.e. degree-minutes-parts_of_minute
+      without spacing. Degrees are on the first place (up to three characters
+      for longitude and up to two for latitude), then goes minutes integer part -
+      two characters, then minutes fractional part- exactly four characters.
+      Sign depends on a hemisphere. Negative latitude value corresponds to the
+      Southern Hemisphere, negative longitude to the Western Hemisphere.
+    </p>
+          <p xml:lang="en" lang="en">
+    Note, Flight plan and aboard navigation system should use the same coordinate system.
+    Usually GNSS receivers operate in WGS84 system.
+    </p>
+          <p xml:lang="en" lang="en">
+    Possible values of RECORD_TYPE field are:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">LINE</code> – if record contains ordered list of route points.
+      </li>
+              <li class="listitem"><code class="constant">POSITION</code> – if points of these record don't 
+	describe a route, e.g. airports (then record name may be AIRPORTS) or obstacles
+	(then record name may be OBSTACLES).
+      </li>
+              <li class="listitem"><code class="constant">REGION</code> – if record contains ordered array of 
+      polygon vertex, which bounds survey area or any other area in operation zone.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    Flight plan file may include comments. Comments should be located on the right side of the line
+    and should have two ';' symbol at the beginning. An example of <code class="filename">*.fpl</code> file is given
+    below. Syntax rules are not applied to records order and it depends only on reading and work convenience. 
+    Here is an example:
+    </p>
+          <div class="example">
+            <a id="idm45014158981888"></a>
+            <p class="title">
+              <strong>Example 10. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+;;;;;;;;;;;;;;;;;savedFPL. it is COMMENT
+POSITION AIRPORTS=
+(-3815,3815), ;;ONE MORE COMMENT
+ (CONTROL,-0,-0),
+ (3815,-3815);
+LINE RKM=
+ (CONTROL,-5396,-0),
+ (CONTROL,-0,-0),
+ (CONTROL,5396,-0);
+POSITION OBSTRUCT=
+ (-3815,-3815),
+ (CONTROL,-0,-0),
+ (3815,3815);
+LINE RKM=
+ (CONTROL,-0,-5396),
+ (CONTROL,-0,-0),
+ (CONTROL,-0,5396);
+      </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+    All points in this example are located near the equator, because all significant characters
+    are interpreted as minute fractions.
+    </p>
+          <p xml:lang="en" lang="en">
+	For convenience it is possible to load flight plan as Geosoft <code class="filename">*.xyz</code>:
+    </p>
+          <div class="example">
+            <a id="idm45014158979056"></a>
+            <p class="title">
+              <strong>Example 11. </strong>
+            </p>
+            <div class="example-contents">
+              <pre class="programlisting">
+Line 101
+   LATITUDE LONGITUDE
+   LATITUDE LONGITUDE
+   ..........
+   LATITUDE LONGITUDE
+Tie 201
+   ..........
+      </pre>
+            </div>
+          </div>
+          <br class="example-break" />
+          <p xml:lang="en" lang="en">
+      Points coordinates should follow "DDDMMmmmm" format, i.e. degree-minutes-parts_of_minute
+      without spacing, the same as in <code class="filename">*.fpl</code>. Points names will be automatically set to A0, A1, A2 etc, 
+      and all routes will be loaded as LINEs.
+      After loading the flight plan can be saved in <code class="filename">*.fpl</code> format only.
+</p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="fplan"></a>10. Flight Plan panel</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+  Flight plan panel is used to display flight plan file and for plan control.
+  At startup single empty line is displayed on the panel.
+  If you move cursor right or down to panel borders then panel will scroll.
+  To start working with flight plan load its file.
+    </p>
+        <div class="figure">
+          <a id="idm45014158974592"></a>
+          <p class="title">
+            <strong>Figure 16. Flight plan panel</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/fplan.png" alt="Flight plan panel" />
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en"><br class="figure-break" />
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="fplan_load"></a>10.1.  Flight plan loading and viewing</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45014158971136"></a>
+            <p class="title">
+              <strong>Figure 17.  Open file dialog box.</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-open.png" alt="Open file dialog box." />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+      To load flight plan file press <span class="keycap"><strong>F3</strong></span> when the flight plan panel is active.
+      Now you can see a traditional file system window. Select a <code class="filename">*.fpl</code> file.
+      It is also possible to select Geosoft <code class="filename">*.xyz</code> file. It will be converted to <code class="filename">*.fpl</code> format.
+      After flight plan loading the previous one will be lost.
+    </p>
+          <p xml:lang="en" lang="en">
+      To append new flight plan to the current press <span class="keycap"><strong>Ctrl+F3</strong></span> when the flight plan panel is active.
+      All new lines will be appended to the end of current list.
+    </p>
+          <p xml:lang="en" lang="en">
+      After loading you can see a list of records in the flight plan panel. Lines in this list are
+      marked with different colors.  
+    </p>
+          <div xml:lang="en" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="en">
+            <table border="0" summary="Warning">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Warning]" src="./images/warning.png" />
+                </td>
+                <th align="left">Warning</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+    A huge flight plan loading leads to system resources overloading. To clear current flight plan stop the daemon and delete file 'current.fpl' in data directory.
+  </td>
+              </tr>
+            </table>
+          </div>
+          <p xml:lang="en" lang="en">
+      Beige is for records of LINE type, green for REGION type, rose for POSITION type. Please note, list of
+      points is not displayed yet, there are only titles on the panel.   
+      For POSITION and REGION types number of points is shown on the right side of the lines.
+      For LINE type there is a small triangle on the left, number of points and some extra 
+      parameters on the right: entry course value(in degree), total route length and time
+      required to pass it with current speed.
+    </p>
+          <p xml:lang="en" lang="en">
+      A triangle indicates direction in which routes will be passed (from top downward or bottom-up) and route status.
+      Triangles change their color during a flight: green means flown route, gray -not flown yet.
+      If a triangle twinkles green and red - this is the current route. You can invert this flag for selected routes pressing <span class="keycap"><strong>Ctrl+D</strong></span>.
+      To display a list of route points direct a cursor on an appropriate line and press <span class="keycap"><strong>Enter</strong></span>.
+      Now you can see a list of route points.  Points indicators also change their color: gray for not
+      passed points, twinkle for current point and green for passed points.
+      To hide the list press <span class="keycap"><strong>Enter</strong></span> again.
+    </p>
+          <p xml:lang="en" lang="en">
+     Extra parameters for routes points and routes titles are described below.
+     Entry course value corresponds to direction of the vector from the first point to the second in a list.
+    </p>
+          <p xml:lang="en" lang="en">
+    For each point following parameters are shown:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	      Direction of a vector from previous point to this point(in degree). For the first point 0 is shown.</li>
+              <li class="listitem">
+	      Length of this vector (km), 0 for the first point. 
+      </li>
+              <li class="listitem">
+	      Time needed to pass this distance with current speed, 0 for the first point.
+      </li>
+              <li class="listitem">
+	      *azimuth from aircraft point to this point (degree).
+      </li>
+              <li class="listitem">
+	      *distance from aircraft to this point(km).
+      </li>
+              <li class="listitem">
+	      *time needed to pass this distance with current speed.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+      For REGION and POSITION types only parameters marked with * are shown in a list of points.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="edit"></a>10.2.  Flight plan editing.</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Flight plan editing is available in  "NavDat". With regard to the experience in system use and taking into account danger of a mistake, next options were made available:  
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><em class="firstterm"> Edit record title.</em>
+	  Press <span class="keycap"><strong>Alt+M</strong></span>(modify) on a title. Red line will appear with name and type of the record in it.
+	  L means LINE type, R means REGION and P means POSITION. After editing press <span class="keycap"><strong>Enter</strong></span> to save changes.
+	  In case of mistake you'll see a syntax rule and changes will be discarded.
+      </li>
+              <li class="listitem"><em class="firstterm">Edit point parameters.</em>
+	  Move cursor to the required line, press <span class="keycap"><strong>Alt+M</strong></span>. In the red line you'll see: name of the point,
+	  its latitude and longitude (exactly in this order). Format for coordinates is "DDDMMmmmm" without
+	  spacing. Degrees are on the first place (up to three characters for longitude and up to two for
+	  latitude), then goes minutes integer part - two characters, then minutes fractional part-
+	  exactly four characters. Sign depends on a hemisphere. Negative latitude value corresponds to the
+	  Southern Hemisphere, negative longitude-to the Western Hemisphere.
+      </li>
+              <li class="listitem"><em class="firstterm">Delete record/point.</em>
+	  Move cursor to the required line or select several lines, then press <span class="keycap"><strong>Ctrl-Delete</strong></span>.
+      </li>
+              <li class="listitem"><em class="firstterm">Copy record/point.</em>
+	  Move cursor to the line or several select lines you are going to copy then press <span class="keycap"><strong>Ctrl-Insert</strong></span>
+	  Then move cursor to the line you are going to insert copied lines and press <span class="keycap"><strong>Shift-Insert</strong></span>.
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="markup-parallel"></a>10.3.  Creation of the system of parallel routes </h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      This option allows to cover a surveying region with a grid of parallel routes. A record 
+      for this region should be created before calling the procedure. Move cursor to the title of this
+      record and press <span class="keycap"><strong>Alt+G</strong></span>.
+       Edit bar will appear, where following fields should be filled:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+       Name mask. All created routes will be given a name beginning with this mask.
+       After mask goes a number of a route.
+      </li>
+              <li class="listitem">
+       Routes direction in degrees.
+      </li>
+              <li class="listitem">
+	      Distance between neighboring routes in meters. 
+      </li>
+              <li class="listitem">
+        Latitude and longitude of a point, through which central route will go. By default this point is the centre for vertex of the region.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+      Procedure of routes creation is next. Through the central point an orthodromic line A is drawn at right angle
+      to the given route direction.
+      Then two segments are intercepted along A from a central point to the both sides. Their length is 
+      equal to the distance between neighboring routes.
+      Then through ends of these segments orthodromic lines are drawn at right angle to A.
+      These lines are routes lines. And their ends lay at the boundary of the region. Routes with even and odd numbers are of opposite direction.      
+    </p>
+          <div class="figure">
+            <a id="idm45014158940208"></a>
+            <p class="title">
+              <strong>Figure 18. Marking of parallel lines</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-markup.png" alt="Marking of parallel lines" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+      As a result of this operation list of created routes will be shown in the main list after record
+      of corresponding region. 
+    </p>
+          <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Caution: ">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Caution]" src="./images/caution.png" />
+                </td>
+                <th align="left"></th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+	Creation of parallel routes also has commercial aspect. Every unnecessary route means 
+	unnecessary flight time. That's why we advise to be thoughtful during the process. And better use 
+	Geosoft Oasis Montaj solution - as  smarter product for such tasks. 
+      </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="markup-rkm"></a>10.4.  Creation magnetic compensation routes system</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      This option allows to create a magnetic compensation routes system. 
+      All these routes have different directions and pass through one central point.
+      Move cursor to the place where you want these routes to appear and press <span class="keycap"><strong>Alt+R</strong></span>.
+      Edit bar will appear, where following fields should be filled:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+       Name mask. All created routes will be given a name beginning with this mask.
+       After mask goes route's heading in degrees.
+      </li>
+              <li class="listitem">
+       One of the routes direction in degrees. All other directions will be calculated automatically.
+      </li>
+              <li class="listitem">
+       Routes radius in meters. Total route length will be equal to two radii.
+      </li>
+              <li class="listitem">
+       Angle between parts of one route.
+      </li>
+              <li class="listitem">
+        Latitude and longitude of central point, through which all routes will pass. By default this point corresponds to current position.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+	If  the angle between parts of one routes is not zero, the result will be as the variant 1 (<a class="xref" href="index.html#fig-rkm1" title="Figure 19. Magnetic compensation routes. Variant 1.">Figure 19, “Magnetic compensation routes. Variant 1.”</a>). 
+	There will be four routes with 90 degrees between them. Otherwise, the result will be as the variant 2 (<a class="xref" href="index.html#fig-rkm2" title="Figure 20. Magnetic compensation routes. Variant 2.">Figure 20, “Magnetic compensation routes. Variant 2.”</a>). 
+	There will be eight routes with 45 degrees between them.
+    </p>
+          <div class="figure">
+            <a id="fig-rkm1"></a>
+            <p class="title">
+              <strong>Figure 19. Magnetic compensation routes. Variant 1.</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-rkm1.png" alt="Magnetic compensation routes. Variant 1." />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <div class="figure">
+            <a id="fig-rkm2"></a>
+            <p class="title">
+              <strong>Figure 20. Magnetic compensation routes. Variant 2.</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/fplan-rkm2.png" alt="Magnetic compensation routes. Variant 2." />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="sect-fplan-setup"></a>10.5. Adjustment, start and stop of a routing</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      So, flight plan was created, edited and checked.  Now it's time for take-off and routing. But before start point for routing should be chosen:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Press <span class="keycap"><strong>Ctrl+Backspace</strong></span> to choose reading direction of list of routes.
+      </li>
+              <li class="listitem">
+	Next step is specifying order of points for each route. Press <span class="keycap"><strong>Alt-Backspace</strong></span> to invert direction of all routes or <span class="keycap"><strong>Backspace</strong></span> 
+	to invert direction of selected routes.
+      </li>
+              <li class="listitem">
+	Select line of the start point. If you've selected a title of a route then routing will start from the first point of highlighted route in given reading direction.
+      </li>
+              <li class="listitem">
+	Check everything one more time and press <span class="keycap"><strong>Ctrl+S</strong></span>. Then "NavDat" will start routing.
+	Routing will be realized in full accordance with specified reading order.</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    In case of forced route entry procedure is the same, but instead of <span class="keycap"><strong>Ctrl+S</strong></span> press <span class="keycap"><strong>Ctrl+L</strong></span> (direct start).
+    Then the program will start routing directly from the start point without approaching procedure.  
+    </p>
+          <p xml:lang="en" lang="en">
+    To stop routing press  <span class="keycap"><strong>Ctrl+K</strong></span>. This option is available even if flight plan panel is  not active.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="sect-pos-fix"></a>10.6. Position fix</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      All navigation system in the world use this important option to register coordinates of the current point.
+      Because "NavDat" was developed for quite specific survey tasks, this option was realized
+      in  specific way too.
+      To activate this option press <span class="keycap"><strong>Ctrl+F</strong></span>. Then the program will do follow steps:
+    </p>
+          <div class="figure">
+            <a id="fig-pos-fix"></a>
+            <p class="title">
+              <strong>Figure 21. Position fix</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/pos-fix.png" alt="Position fix" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	New record named FIX will be  created. If such record already exists it won't be duplicated.
+      </li>
+              <li class="listitem">
+	Point with current coordinates will be saved into this record under the name composed
+	of date and time.
+      </li>
+              <li class="listitem">
+  If this option is activated while routing, new point with the same name, which lays on the traverse
+  of current point, will be added to the list of route points.(<a class="xref" href="index.html#fig-pos-fix" title="Figure 21. Position fix">Figure 21, “Position fix”</a>)
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="fplan_hotkeys"></a>10.7. Flight plan panel control</h3>
+              </div>
+            </div>
+          </div>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+  Use <span class="keycap"><strong>Arrow-keys</strong></span> to move through a list also you can use standard hot keys for selection.
+  (<span class="keycap"><strong>Shift up/down</strong></span> - move and inverse selection,
+  <span class="keycap"><strong>Ctrl up/down</strong></span> - move and save selection,
+  <span class="keycap"><strong>Ctrl Space</strong></span> - inverse selection without moving)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Enter</strong></span> Show/hide list of points.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F3</strong></span> Load flight plan file instead of current.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+F3</strong></span> Load flight plan file to append to the end of current list.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F2</strong></span> Save flight plan file.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Backspace</strong></span> Invert points order of a highlighted route
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-Backspace</strong></span> Invert points order of all routes.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Backspace</strong></span> Invert routes order
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-M</strong></span> Modify highlighted line, <span class="keycap"><strong>Esc</strong></span> - discard changes.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-G</strong></span> Cover highlighted region with parallel routes
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt-R</strong></span> Magnetic compensation routes system creation
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Delete</strong></span> Delete selection
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-Insert</strong></span> Copy selection
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Shift-Insert</strong></span> Paste copied selection
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-D</strong></span> Invert 'done' flag for selected routes. 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-S</strong></span> Start routing with approaching to the first point.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-L</strong></span> Start routing without approaching
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-K</strong></span> Stop routing - global option, it works from any window. 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-F</strong></span> Fix current point, it works from any window. 
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="panorama"></a>11. Panorama</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    Panorama is a main tool for visualization and control of surveying process. It shows navigation information graphically. 
+  </p>
+        <div class="figure">
+          <a id="fig-panorama"></a>
+          <p class="title">
+            <strong>Figure 22. Panorama window</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/panorama.png" alt="Panorama window" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    All elements of a flight plan are displayed on the panorama schematically and
+    all operations in the flight plan panel affect on panorama view.
+    (<a class="xref" href="index.html#fig-panorama" title="Figure 22. Panorama window">Figure 22, “Panorama window”</a>)
+  </p>
+        <p xml:lang="en" lang="en">
+    In the top-left corner there is scale  of the map(size of one side of a square in meters).
+    In the bottom-left corner there are following parameters:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Time - GPS time (hh:mm:ss)
+    </li>
+            <li class="listitem">
+      Track - current course angle (degree)
+    </li>
+            <li class="listitem">
+      Lat - latitude (degree-minutes-seconds)
+    </li>
+            <li class="listitem">
+      Lon - longitude (degree-minutes-seconds)
+    </li>
+            <li class="listitem">
+      Alt - altitude by GNSS (meters)
+    </li>
+            <li class="listitem">
+      V - current speed (km/h)
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+    In the bottom-right corner there are following parameters::
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+      Route - current route name
+    </li>
+            <li class="listitem">
+      Dst.Point - name of current destination point
+    </li>
+            <li class="listitem">
+      Est.Time - estimated time left till the end of the current route in case of routing or
+      till the beginning of the route in case of approaching to the route(hh:mm:ss)
+    </li>
+            <li class="listitem">
+      Est.Dist - distance to the end of current route in case of routing or
+      to the beginning of the route in case of approaching to the route(km)
+    </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+    Airplane symbol shows current position of the aircraft. Dotted contour means the aircraft is 
+    beyond panorama border. Green arrow shows the aircraft direction. 
+  </p>
+        <p xml:lang="en" lang="en">
+    On the right side of the panorama there is route progress indicator. Route is represented by a
+    yellow line and blue circle on it shows current position on the route.
+  </p>
+        <p xml:lang="en" lang="en">
+    At the bottom of the panorama there is a scale of pilot's indicator. Orange circle duplicates
+    pilot's indicator readings. Blue square shows lateral deviation, scale spacing is 100 metres.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158876368"></a>11.1. Panorama main elements</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      To display flight task elements on the panorama flight task file should be loaded.
+      Then flight task elements will be shown schematically on the panorama. 
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+  Routes on the panorama are represented by dark orange lines. Arrow at the end of a route or on panorama
+  border (if the end of a route lies beyond panorama border) shows route direction. Note, titles of routes in flight plan panel are the same color.
+      </li>
+              <li class="listitem">
+	Regions borders on the panorama are green. Regions titles in flight plan panel are the same color.
+      </li>
+              <li class="listitem">
+  Highlighted routes or regions are white on the panorama.     
+      </li>
+              <li class="listitem">
+  Highlighted point is represented by white circle and its name is shown near.
+      </li>
+              <li class="listitem">
+  Single points (POSITION type) are rose and their names are shown always.     
+      </li>
+              <li class="listitem">
+  Current route or route which the aircraft is approaching is shown with bold light orange line. 
+      </li>
+              <li class="listitem">
+  All routes marked as flown ones are shown in blue color. 
+      </li>
+              <li class="listitem">
+  Curvilinear parts of routes are displayed by dotted lines which consists of small white triangles. 
+  In case of small scale this lines look solid.  
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158871584"></a>11.2. Panorama view modes</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Panorama has two view modes
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Panoramic. The airplane symbol is fixed, upward direction corresponds to the current direction of a flight.
+      </li>
+              <li class="listitem">
+	Map. North is up, the airplane symbol is moving. 
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158869376"></a>11.3.  Hot keys</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Q, A</strong></span> - zoom in/zoom out
+	</li>
+              <li class="listitem"><span class="keycap"><strong>M</strong></span> - Change panorama view mode
+	</li>
+              <li class="listitem"><span class="keycap"><strong>Z</strong></span> - Put the aircraft symbol into the center
+	</li>
+              <li class="listitem"><span class="keycap"><strong>C</strong></span> - Resize map to the window size
+	</li>
+              <li class="listitem">
+	  Use arrow keys to move the map 
+	</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="pilotpan"></a>12. Pilot's indicator, routing parameters and pilot's panel</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+   During a flight "NavDat" changes operating modes depending on a flight mode.
+   But anyway control information is displayed on a pilot's indicator.
+  </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_arrow"></a>12.1. Pilot's indicator</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Pilot's indicator has an arrow pointer and two light-emitting diodes - red and green. Diodes twinkle in different ways depending on a routing regime. The arrow pointer shows deviations from given direction. In all routing regimes main pilot task is to keep pointer in zero position.
+      Please note, zero corresponds to a straight-line motion while routing and to a curvilinear motion while approaching a route.
+    </p>
+          <p xml:lang="en" lang="en">
+     Direction of pointer deflection is an adjustable parameter. You can adjust it depending on pilot's preferences. 
+     Current flight mode is shown on the indicator by using two light-emitting diodes (red and green).   
+    </p>
+          <p xml:lang="en" lang="en">
+      There are four different routing regimes:  
+    </p>
+          <div xml:lang="en" class="orderedlist" lang="en">
+            <ol class="orderedlist" type="1">
+              <li class="listitem"> Routing is off: red diode is lighting.</li>
+              <li class="listitem">Approaching a point: red is lighting, green is twinkling. </li>
+              <li class="listitem">Routing is on: green is lighting.</li>
+              <li class="listitem">Approaching a route(curvilinear routing) : at the beginning of  the trajectory red and green flashes in alternate mode. Reds flashes less and less frequently when approaching the route until it stops flashing. That means routing was started.  
+      </li>
+            </ol>
+          </div>
+          <p xml:lang="en" lang="en">
+       The program allows to interchange diodes colors.
+     </p>
+          <p xml:lang="en" lang="en">
+	Arrow parameters related to flight plan can be visualized in chart window, their list is in <a class="xref" href="variables.html#variables_fplan" title="B.2. Flight plan processing variables">Section B.2, “Flight plan processing variables”</a>
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158856272"></a>12.2. Routing regimes</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    There are several routing regimes. During a flight they follows one after another according to a flight plan.
+    </p>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45014158855024"></a>12.2.1. Approaching a point</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="en" lang="en">
+      In this case destination point is defined but flight route isn't.
+      In this case pilot's indicator shows an angle between direction of motion and direction to the destination point. For this mode scale range is stated in degrees. 
+      </p>
+          </div>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45014158853632"></a>12.2.2. Curvilinear routing regime</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="en" lang="en">
+      As a rule in this case route consists of two short line segment connected by  segments of a circle. While routing along circular curve pilot's indicator shows an angle between direction of motion and line tangent to this curve.
+      Scale range is stated in degrees.
+      </p>
+          </div>
+          <div class="sect3">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title"><a id="idm45014158852208"></a>12.2.3. Routing mode</h4>
+                </div>
+              </div>
+            </div>
+            <p xml:lang="en" lang="en">
+      In order to achieve necessary accuracy of surveying some requirements to pilot technique should be met. In routing mode main quality
+      characteristic is lateral deviation from a route. Scale range is stated in meters.
+      </p>
+          </div>
+          <p xml:lang="en" lang="en">
+      Not only angular and lateral deviations should be measured in order to achieve stable and accurate routing.
+      Inertness of an aircraft and pilot's reaction should be taken into account as well. That's why software controlling pilot's
+      indicator is based on mathematical algorithms and real-time modeling of motion.
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158849984"></a>12.3. Route entry conditions </h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45014158849360"></a>
+            <p class="title">
+              <strong>Figure 23. Route entry parameters scheme</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/cc-provo.png" alt="Route entry parameters scheme" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+      "NavDat" provides entry on a route. For switching from approaching regime into routing regime following conditions must be fulfilled:
+    </p>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Distance between the airplane and the route must be less then b
+      </li>
+              <li class="listitem">
+	An angle between flight direction and route direction mustn't exceed beta
+      </li>
+              <li class="listitem">
+	Lateral deviation mustn't exceed c
+      </li>
+              <li class="listitem">
+	Route entry must be completed within distance d
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+     So the airplane must fly within quadrangle CDEF.
+     Special point B will be described separately.
+    </p>
+          <p xml:lang="en" lang="en">
+     Point B is a preliminary entry point. If attempt to enter the route in point B fails for any reason the program will put this point closer to the beginning of the route and will make further attempts to enter the route until point B reach segment CD. In this moment program will make a decision about re-approaching.
+    </p>
+          <p xml:lang="en" lang="en">
+      This parameters and some others parameters are adjustable. Their values depends on given accuracy and scale of surveying,
+      flight conditions, piloting characteristics of the airplane, etc.
+      A special panel is used to adjust them (<a class="xref" href="index.html#fig-pilotpan" title="Figure 24. Pilot's panel view">Figure 24, “Pilot's panel view”</a>).
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_params"></a>12.4. Parameters</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="fig-pilotpan"></a>
+            <p class="title">
+              <strong>Figure 24. Pilot's panel view</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/pilotpan.png" alt="Pilot's panel view" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Radius – given radius of curvilinear routing in meters
+      </li>
+              <li class="listitem">
+	Prolon – distance to the point of preliminary entry (a), in number of Radius
+      </li>
+              <li class="listitem">
+	Width – max lateral deviation (c) at the beginning of a route in meters
+      </li>
+              <li class="listitem">
+	x0 – min entry distance (d) in meters
+      </li>
+              <li class="listitem">
+	x1 – max entry distance (b) in meters
+      </li>
+              <li class="listitem">
+	angle - entry angle beta in degrees
+      </li>
+              <li class="listitem">
+	Line range – scale of indicator pointer for routing mode, in percents of radius. Should be remembered,
+	that a pointer shows predicted value of deviation. Parameters Line dist are used to calculate predicted deviation.  
+      </li>
+              <li class="listitem">
+	Line dist 0 and Line dist 1 – distances to prognosis points, in meters.
+	In routing mode this points are plotted on the line of current flight direction. And their deviation affects on pointer position.
+      </li>
+              <li class="listitem">
+	Line dist rd – distance to prognosis point that takes angular velocity into account, in meters.
+	If this parameter is not null Line dist 0 and Line dist 1 are plotted from this point in corresponding direction.
+	Very significant parameter, represents dynamic characteristic of an aircraft
+	If Line dist rd is null parameters Line dist 0 and Line dist 1 are ignored.
+      </li>
+              <li class="listitem">
+	Angle range – scale of indicator pointer for curvilinear routing mode and for approaching mode in degrees.
+        From experience for steady route entry it should be equal 3°-4°.  
+      </li>
+              <li class="listitem">
+	Max accel – max level of acceleration (for quality control of GNSS data).
+	From experience 10 m/sec2 is adequate value.
+      </li>
+              <li class="listitem">
+	Smoothing – filtration parameter.
+	From experience 95-97 is adequate value.
+      </li>
+              <li class="listitem">
+	Altitude* – Flight altitude.
+      </li>
+              <li class="listitem">
+	Vertical scale* – Vertical arrow scale.
+      </li>
+              <li class="listitem">
+	Arrow Inversion – inverse pointer deflection. Some pilots prefer left deflection of a pointer in case of right deviation.
+      </li>
+              <li class="listitem">
+	Lamp Inversion – inverse diodes color.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en"> 
+    The fields marked by * are used only for pilot's indicators of type 'modern'.
+    In this case Arrow Inversion is applied to both horizontal and vertical indicators.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="pilotpan_setup"></a>12.5. Adjustment recommendations</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en"> 
+    Parameters adjustment is a task that needs some practice. There are some simple recommendations on adjustment procedure.
+  </p>
+          <div xml:lang="en" class="orderedlist" lang="en">
+            <ol class="orderedlist" type="1">
+              <li class="listitem">
+	Set simplified entry conditions, when even rough route entry will be accepted.
+      </li>
+              <li class="listitem">
+	Set safe radius of curvilinear routing.
+      </li>
+              <li class="listitem">
+	Set greater distance for preliminary entry point.
+      </li>
+              <li class="listitem">
+	Set greater value of scale range of pilot's indicator. For linear routing 150 - 200 meters is adequate.
+      </li>
+              <li class="listitem">
+  Vary Angle range to change arrow pointer sensibility.
+      </li>
+              <li class="listitem">
+  Choose values of Line dist using balance of route approaching speed and oscillation along a route.
+  With increasing of Line dist 0 and Line dist 1 values approaching gets slower and softer.
+  Main factor that affects on Line dist rd is pilot's  reaction speed.
+      </li>
+              <li class="listitem">
+  While test flight vary Line dist, Line range and Angle range parameters and watch turns and routing by using panorama or real track lines.
+      </li>
+              <li class="listitem">
+    When the pilot gets used to indicator working in routing regime, and the operator sets Line dist parameters, 
+    it will be possible to set route entry parameters.
+    Scale range of a pointer is a balance between pilot's skill and routing quality. 
+    Keeping the pointer in zero position is easier when pointer sensibility is smaller but this increases lateral deviations. 
+       </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="arrow"></a>13. Pilot's indicator application</h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+	There is an application working in the similar way to the arrow device. It can be displayed on the pilot's monitor instead of arrow. 
+	Main features are described in <a class="xref" href="index.html#pilotpan" title="12. Pilot's indicator, routing parameters and pilot's panel">Section 12, “Pilot's indicator, routing parameters and pilot's panel”</a> .
+	The additional features are an ability to show turning direction during curved stage of navigation and to show altitude.
+    </p>
+        <div class="figure">
+          <a id="idm45014158820592"></a>
+          <p class="title">
+            <strong>Figure 25. Pilot's indicator</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/arrow.png" alt="Pilot's indicator" />
+            </div>
+            <div class="mediaobject">
+              <img src="images/arrowct.png" alt="Pilot's indicator" />
+            </div>
+            <div class="mediaobject">
+              <img src="images/arrowcf.png" alt="Pilot's indicator" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+      </div>
+      <p xml:lang="en" lang="en">
+	This application was also developed for OS Android, it is availible in Google Play. 
+	It can be installed on pilot's smartphone/tablet and communicate via WiFi.
+	The mobile version has additional options. 
+	It can show Panporama (see <a class="xref" href="index.html#panorama" title="11. Panorama">Section 11, “Panorama”</a>) to contol the current position with respect to the line.
+	In case of working without operator the pilot can check the equipment using status bar 
+	(see <a class="xref" href="index.html#status" title="7. System health monitoring">Section 7, “System health monitoring”</a>).
+    </p>
+      <div class="figure">
+        <a id="idm45014158811568"></a>
+        <p class="title">
+          <strong>Figure 26. Mobile Pilot's Indicator</strong>
+        </p>
+        <div class="figure-contents">
+          <div class="mediaobject">
+            <img src="images/arrow-mobile.png" alt="Mobile Pilot's Indicator" />
+          </div>
+        </div>
+      </div>
+      <br class="figure-break" />
+      <p xml:lang="en" lang="en">
+	To start you must connect to the local network of the On-Board Server and assign the network settings
+	(IP-adress and Port), see <a class="xref" href="index.html#dev_fe" title="6.3. On-Board Server">Section 6.3, “On-Board Server”</a>.
+    </p>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="jst"></a>14. Table of satellites</h2>
+            </div>
+          </div>
+        </div>
+        <div class="figure">
+          <a id="idm45014158806624"></a>
+          <p class="title">
+            <strong>Figure 27. Table of satellites</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/jst.png" alt="Table of satellites" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <div xml:lang="en" class="sect2" lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158803680"></a>14.1. Celestial Semisphere</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      Azimuth and altitude for all visible satellites are displayed on the indicator.
+      So the indicator is a kind of satellites map. Azimuth is measured clockwise from upward direction.
+      Altitude - from the border to the center.
+      If a satellite isn't used in calculation then its symbol will be a ring, not a solid circle.
+      GLONASS satellites are cyan and GPS satellites are blue. Highlighted satellite is marked by yellow spot.
+    </p>
+        </div>
+        <div xml:lang="en" class="sect2" lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158802336"></a>14.2. Map</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      Red point shows current position and gray line shows passed trajectory. North is always up.
+      Map scale can be selected using menu after clicking on the map with right button.
+    </p>
+        </div>
+        <div xml:lang="en" class="sect2" lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158801248"></a>14.3. Satellites panel</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      Lines in this panel show status of all visible satellites.
+      In every line there is following information:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	using in calculation
+      </li>
+              <li class="listitem">
+	index number of a satellite 
+      </li>
+              <li class="listitem">
+	signal/noise ratio
+      </li>
+              <li class="listitem">
+	time when satellite was used in calculation
+      </li>
+            </ul>
+          </div>
+        </div>
+        <div xml:lang="en" class="sect2" lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158799072"></a>14.4. Hot keys</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Ctrl+B</strong></span> Choose device for visualization
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+T</strong></span> Show/Hide table of satellites 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+S</strong></span> Show/Hide satellites panel
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+P</strong></span> Show/Hide indicator of a constellation
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+M</strong></span> Show/Hide map
+      </li>
+              <li class="listitem"><span class="keycap"><strong>F8</strong></span> Modify size of satellite table 
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="pilot"></a>15.  GNSS emulator</h2>
+            </div>
+          </div>
+        </div>
+        <div class="figure">
+          <a id="idm45014158792576"></a>
+          <p class="title">
+            <strong>Figure 28.  GNSS emulator window</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/pilot.png" alt="GNSS emulator window" />
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en"><br class="figure-break" />    
+    It imitates GNSS data stream from JAVAD receiver and allows to control airplane coordinates and speed. In autopilot mode imitates route passing.
+  </p>
+        <div xml:lang="en" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="en">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="./images/warning.png" />
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+    If emulator mode is on receiver host in program settings must be <span class="bold"><strong>localhost:4444</strong></span></td>
+            </tr>
+          </table>
+        </div>
+        <p xml:lang="en" lang="en">
+    To control an airplane use following hot keys.
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem"><span class="keycap"><strong>Left/right arrow keys</strong></span> - change angular velocity
+      </li>
+            <li class="listitem"><span class="keycap"><strong>Space</strong></span> - set angular velocity to zero
+      </li>
+            <li class="listitem"><span class="keycap"><strong>Up/down arrow keys </strong></span> - change linear speed
+      </li>
+            <li class="listitem">
+	Pilot Automatic - mark it to turn on autopilot mode
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+      If autopilot mode is on, program keeps an arrow pointer in zero by changing angular velocity while routing. "NavDat" takes into account pointer deflection greater than 10% of hole scale.
+    </p>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="samopis"></a>16. Chart window </h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    In this window registered parameters are displayed as charts.
+  </p>
+        <div class="figure">
+          <a id="idm45014158783008"></a>
+          <p class="title">
+            <strong>Figure 29. Chart window</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/samopis.png" alt="Chart window" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    Chart window consists of two parts:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">List of variables (see <a class="xref" href="variables.html" title="B. Chart window variables">Appendix B, <em>Chart window variables</em></a>) and their view settings</li>
+            <li class="listitem">Chart zone</li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en"> 
+    You can choose a variable for visualization from the list. There are four column in the list:
+    Color, Variable, Value, Choose Edge (alignment) and Scale.
+   </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158777520"></a>16.1. Variables view settings</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following view settings are available for each variable:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Color</code> press <span class="keycap"><strong>space</strong></span> to select color; no chart will be displayed for black color
+      </li>
+              <li class="listitem"><code class="constant">Alignment</code> press <span class="keycap"><strong>Enter</strong></span> and select one of following:
+	<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><code class="constant">OFF</code> Do not display a variable
+	  </li><li class="listitem"><code class="constant">CENTER</code> Center alignment (0 in center)
+	  </li><li class="listitem"><code class="constant">LEFT</code>  Left alignment (0 on the left)
+	  </li></ul></div></li>
+              <li class="listitem"><code class="constant">Scale</code> press <span class="keycap"><strong>Enter</strong></span> and set required number - full scale in variable's units
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+        </div>
+        <div xml:lang="en" class="sect2" lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158770704"></a>16.2. Hot keys</h3>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F8</strong></span> Modify table/charts size, after <span class="keycap"><strong>F8</strong></span> press <span class="keycap"><strong>up/down</strong></span> arrow-keys to set required size;
+	press and hold <span class="keycap"><strong>Shift</strong></span> to modify table/charts size with greater step size ; to complete press <span class="keycap"><strong>Enter</strong></span></li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> Show/hide invisible variables
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Space</strong></span> Modify color of highlighted variable
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Backspace</strong></span> Do not display highlighted variable
+      </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="spectra"></a>17. Spectra </h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    In this window registered spectra are displayed as charts.
+  </p>
+        <div class="figure">
+          <a id="idm45014158762912"></a>
+          <p class="title">
+            <strong>Figure 30. Spectra</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/spectra.png" alt="Spectra" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    Spectra window consists of two parts:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">Spectra view zone</li>
+            <li class="listitem">Windows count zone</li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en"> 
+    You can choose a channel interval for visualization, an accumulation time interval, spectra resolution, turn on/off any spectrum visualization, set markers, select up to ten windows for count monitoring and set scale for their charts, view summed spectrum. You can use cursor to choose any channel, it is signed with channel number and vertical scale which is chosen automatically. Every spectrum state is shown in the string of corresponding color: 
+    </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+	"on" - means that spectrum is visualized and data are obtained
+      </li>
+            <li class="listitem">
+	"off" - means that spectrum is not visualized but data are obtained (not taken into account in windows)
+      </li>
+            <li class="listitem">
+	"no data" - means that data are not obtained (doesn't depend on visualization status) 
+      </li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en">
+Every chart headed by strings "left bound - right bound" and "current sample count/current scale".
+For some devices (GRS410, GSA2000) stabilization mode is displayed (L (light), T (Thorium), K (Potassium), U (Uranium), A (Analyzing), 
+0 (not connected)).
+   </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158756000"></a>17.1. Spectra visualization control</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following view settings are available:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Spectrum select</code>: press <span class="keycap"><strong>spectrum number</strong></span> (1,2,3,...,0(10),Alt 1(11), ... , Ctrl Alt 1(21)...);
+	selected spectra are marked by '*'
+      </li>
+              <li class="listitem"><code class="constant">Spectrum on/off</code>: press <span class="keycap"><strong>Return</strong></span> to switch all selected spectra
+      </li>
+              <li class="listitem"><code class="constant">Spectrum color select</code>: press <span class="keycap"><strong>Space</strong></span> to change color for all selected spectra
+      </li>
+              <li class="listitem"><code class="constant">Accumulation time interval</code>: press <span class="keycap"><strong>T</strong></span> to switch between 1, 20 or 100 samples
+      </li>
+              <li class="listitem"><code class="constant">Spectra resolution</code>: press <span class="keycap"><strong>R</strong></span> to switch between 1, 2 or 4 channels per point; for example 1024 channels spectra can be downsampled to 512 or 256 (1024 is available only if the input spectra are of such resolution)
+      </li>
+              <li class="listitem"><code class="constant">Left bound</code>: press <span class="keycap"><strong>,</strong></span> to decrease or <span class="keycap"><strong>Alt+,</strong></span> to increase the number of channel assigned to left bound; press <span class="keycap"><strong>Ctrl</strong></span> to make it faster
+      </li>
+              <li class="listitem"><code class="constant">Right bound</code>: press <span class="keycap"><strong>.</strong></span> to increase or <span class="keycap"><strong>Alt+.</strong></span> to decrease the number of channel assigned to left bound; press <span class="keycap"><strong>Ctrl</strong></span> to make it faster
+      </li>
+              <li class="listitem"><code class="constant">View all channels</code>: press <span class="keycap"><strong>Ctrl+Z</strong></span></li>
+              <li class="listitem"><code class="constant">View selected channels only</code>: press <span class="keycap"><strong>Ctrl+V</strong></span></li>
+              <li class="listitem"><code class="constant">Hide/show windows count zone</code>: press <span class="keycap"><strong>Ctrl+H</strong></span></li>
+              <li class="listitem"><code class="constant">Move windows count zone bound</code>: press <span class="keycap"><strong>Up</strong></span> or <span class="keycap"><strong>Down</strong></span>, use <span class="keycap"><strong>Ctrl</strong></span> to make it faster
+      </li>
+              <li class="listitem"><code class="constant">Select/deselect count window</code>: press <span class="keycap"><strong>window index</strong></span> (a,b,c,...)
+      </li>
+              <li class="listitem"><code class="constant">Add/remove count window</code>: press <span class="keycap"><strong>Ctrl+Insert</strong></span> to add selected zone and <span class="keycap"><strong>Ctrl+Delete</strong></span> to remove selected window and/or all included in the selected zone
+      </li>
+              <li class="listitem"><code class="constant">Add/remove marker</code>: press <span class="keycap"><strong>Ctrl+Insert</strong></span> to add and <span class="keycap"><strong>Ctrl+Delete</strong></span> to remove marker (if no zone is selected)
+      </li>
+              <li class="listitem"><code class="constant">Change count chart scale</code>: press <span class="keycap"><strong>+</strong></span>/<span class="keycap"><strong>-</strong></span> to increase/decrease scale of selected charts
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+          <p xml:lang="en" lang="en">
+	Summed spectrum (sum) shows the sum of all visualized and turned on spectra. It also can be switched on/off.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158731152"></a>17.2. Hot keys</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following view hot keys are available:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F1</strong></span> - this help
+      </li>
+              <li class="listitem"><span class="keycap"><strong>1</strong></span>, <span class="keycap"><strong>2</strong></span>, <span class="keycap"><strong>3</strong></span>, ... ,  <span class="keycap"><strong>0</strong></span> - 
+				select/deselect corresponding spectrum visualization with number from 1 to 10
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+1</strong></span>, <span class="keycap"><strong>Alt+2</strong></span>, <span class="keycap"><strong>Alt+3</strong></span>, ...,  <span class="keycap"><strong>Alt+0</strong></span> - 
+				select/deselect corresponding spectrum visualization with number from 11 to 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+Ctrl+1</strong></span>, <span class="keycap"><strong>Alt+Ctrl+2</strong></span>, <span class="keycap"><strong>Alt+Ctrl+3</strong></span>, ...,  <span class="keycap"><strong>Alt+Ctrl+0</strong></span> - 
+				select/deselect corresponding spectrum visualization with number from 21 to 30
+      </li>
+              <li class="listitem"><span class="keycap"><strong>a</strong></span>, <span class="keycap"><strong>b</strong></span>, <span class="keycap"><strong>c</strong></span>, ... - select/deselect corresponding count window
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Space</strong></span> - change color of all selected spectra
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Return</strong></span> - switch on/off all selected spectra 
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Left</strong></span>, <span class="keycap"><strong>Right</strong></span>, <span class="keycap"><strong>Ctrl+Left</strong></span>, <span class="keycap"><strong>Ctrl+Right</strong></span>,  <span class="keycap"><strong>Home</strong></span>, <span class="keycap"><strong>End</strong></span>  - move cursor by 1 channel, by 20 channels or to the bounds
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Shift+Left</strong></span>, <span class="keycap"><strong>Shift+Right</strong></span>, <span class="keycap"><strong>Shift+Ctrl+Left</strong></span>, <span class="keycap"><strong>Shift+Ctrl+Right</strong></span>,  <span class="keycap"><strong>Shift+Home</strong></span>, <span class="keycap"><strong>Shift+End</strong></span>  - selection move cursor by 1 channel, by 20 channels or to the bounds
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Up</strong></span>, <span class="keycap"><strong>Down</strong></span>, <span class="keycap"><strong>Ctrl+Up</strong></span>, <span class="keycap"><strong>Ctrl+Down</strong></span> - move horizontal splitter by 1 or by 20 pixels
+      </li>
+              <li class="listitem"><span class="keycap"><strong>','</strong></span>, <span class="keycap"><strong>Ctrl+','</strong></span> - decrease left bound by 1 or by 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+','</strong></span>, <span class="keycap"><strong>Alt+Ctrl+','</strong></span> - increase left bound by 1 or by 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>'.'</strong></span>, <span class="keycap"><strong>Ctrl+'.'</strong></span> - increase right bound by 1 or by 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+'.'</strong></span>, <span class="keycap"><strong>Alt+Ctrl+'.'</strong></span> - decrease right bound by 1 or by 20
+      </li>
+              <li class="listitem"><span class="keycap"><strong>+</strong></span>, <span class="keycap"><strong>-</strong></span> - zoom in or out selected chart scale
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Insert</strong></span> - add marker to current cursor position or add count window for current zone if selected
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Delete</strong></span> - delete marker from current cursor position, delete selected count window and/or delete all markers and windows inside the selected area
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> - hide/show count windows zone
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Z</strong></span> - view all channels
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+V</strong></span> - view selected channels only
+      </li>
+              <li class="listitem"><span class="keycap"><strong>T</strong></span> - switch accumulation time interval: 1/20/100 samples
+      </li>
+              <li class="listitem"><span class="keycap"><strong>R</strong></span> - switch resolution mode: every channel/summed by pairs/summed by fours
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="em4h_control"></a>18. EM4H </h2>
+            </div>
+          </div>
+        </div>
+        <p xml:lang="en" lang="en">
+    This window allows you to monitor parameters of airborne electromagnetic system EM4H and to manage its work.
+  </p>
+        <div class="figure">
+          <a id="em4h-panel"></a>
+          <p class="title">
+            <strong>Figure 31. EM4H</strong>
+          </p>
+          <div class="figure-contents">
+            <div class="mediaobject">
+              <img src="images/em4h.png" alt="EM4H" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <p xml:lang="en" lang="en">
+    Program window consists of three parts:
+  </p>
+        <div xml:lang="en" class="itemizedlist" lang="en">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">Induction control</li>
+            <li class="listitem">Compensation control</li>
+            <li class="listitem">Digital panel</li>
+          </ul>
+        </div>
+        <p xml:lang="en" lang="en"> 
+	The program allows you to turn on/off operation frequencies, to perform compensation of the aircraft 	
+      influence and to view in different modes values ​​of measured parameters and output them in the panel of the chart-recorder.
+   </p>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158687264"></a>18.1. Induction control</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following operations are available:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Frequency * on/off</code>: press <span class="keycap"><strong>F#</strong></span>. * denotes frequency number:
+	    <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+		    F0 - 130 Hz, operating frequency 0 in the main loop
+		</li><li class="listitem">
+		    F1 - 520 Hz, operating frequency 1 in the main loop
+		</li><li class="listitem">
+		    F2 - 2080 Hz, operating frequency 2 in the main loop
+		</li><li class="listitem">
+		    F3 - 8320 Hz, operating frequency 3 in the main loop
+		</li><li class="listitem">
+		    FCO - 667 Hz, operating frequency in the compensation loop
+		</li><li class="listitem">
+		    FC1 - 833 Hz, operating frequency in the additional compensation loop (for Mi-8 installation only)
+		</li></ul></div></li>
+              <li class="listitem"><code class="constant">All frequencies on</code>: press <span class="keycap"><strong>All on</strong></span> to turn all frequencies on
+      </li>
+              <li class="listitem"><code class="constant">All frequencies off</code>: press <span class="keycap"><strong>All off</strong></span> to turn all frequencies off
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+          <p xml:lang="en" lang="en">
+	It should be borne in mind that the state of the F* buttons depends on the data received. 
+	In particular, the button will be displayed as pressed only when the program will receive a confirmation from device that the corresponding frequency is turned on.
+	Simultaneously one of the indicators (on the right) turns green.
+	The second indicator turns blue only after the amplitude of the voltage or current in the loop exceeds the minimum acceptable value for the correspondent frequency.
+	It doesn't work properly if any of the indicators is red.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158679232"></a>18.2. Compensation control</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following operations are available:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Sampling on/off</code>: press <span class="keycap"><strong>Sample</strong></span> to start/stop data sampling for compensation. 
+      </li>
+              <li class="listitem"><code class="constant">Clearing</code>: press <span class="keycap"><strong>Clear</strong></span> to restart data sampling.
+      </li>
+              <li class="listitem"><code class="constant">Compensation</code>: press <span class="keycap"><strong>Fix</strong></span> to convert current data set to compensation matrix.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+          <p xml:lang="en" lang="en">
+    Below there are counters:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><code class="constant">Number of samples in the compensation procedure input</code>: <span class="keycap"><strong>total</strong></span>.
+      </li>
+              <li class="listitem"><code class="constant">Number of rejected samples</code>: <span class="keycap"><strong>rejected</strong></span>.
+      </li>
+              <li class="listitem"><code class="constant">Number of samples used for compensation parameters estimation</code>: <span class="keycap"><strong>used</strong></span>.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+          <p xml:lang="en" lang="en">
+	Compensation process is as follows: at a considerable flight height, where the influence of the earth can be neglected (600-700m), 
+	you should hold data accumulation for compensation. To do this:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	Clear data set, click <span class="keycap"><strong>Clear</strong></span>. All the counters are set to zero.
+      </li>
+              <li class="listitem">
+	Start accumulation, click <span class="keycap"><strong>Sample</strong></span>. Right after that the <span class="keycap"><strong>total</strong></span> counter and, possibly, <span class="keycap"><strong>rejected</strong></span> will start to run.
+      </li>
+              <li class="listitem">
+	Perform a series of the bird swings in pitch and roll so that it visited various points of the field relative to the aircraft. 
+	Performing this operation requires the operator some experience and concerted action of pilot. 
+	Accumulation operation usually takes a few minutes.
+      </li>
+              <li class="listitem">
+	After the counter <span class="keycap"><strong>total</strong></span> significantly exceeds <span class="keycap"><strong>rejected</strong></span> one, it is necessary to fix data set clicking <span class="keycap"><strong>Fix</strong></span>. 
+	Thus the counter data used for calculating the compensation parameters shown in the counter <span class="keycap"><strong> used </strong></span>.
+      </li>
+              <li class="listitem">
+	If the quality of compensation is good enough, you can stop the selection by clicking <span class="keycap"><strong> Sample </strong></span> again. 
+	The counters <span class="keycap"><strong>total</strong></span> and <span class="keycap"><strong>rejected</strong></span> should stop changing.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+          <p xml:lang="en" lang="en">
+	Note that the onboard compensation mode is used only to ensure that the operator is satisfied 
+	equipment performance in the most difficult mode. 
+	Accumulation and clearing have no effect on recorded data.
+  </p>
+          <p xml:lang="en" lang="en">
+	The program "NavDat" stores the last calculated compensation parameters in its system directory. 
+	After start "NavDat", if the type of aircraft in the EM4H-device settings wasn't changed (see <a class="xref" href="index.html#dev_em4h" title="6.9. EM4H system">Section 6.9, “EM4H system”</a>), 
+	parameters will be automatically loaded.
+	In this case, the counters <span class="keycap"><strong> total </strong></span> and <span class="keycap"><strong> rejected </strong></span> 
+	will be zero and <span class="keycap"><strong> used </strong></span> will not.
+  </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158656592"></a>18.3. Digital panel</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+	Digital panel allows you to see all system measurements as numbers.
+	It contains three matrices:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>operating frequencies</strong></span> - signals measured at operating frequencies F*.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>left piloting</strong></span> - control signals at frequencies F*-6 Hz.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>right piloting</strong></span> - control signals at frequencies F*+6 Hz.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+	Each frequency is represented by two columns marked by the same color. They show in-phase and quadrature signal components {Re F*, Im F*} or
+	its amplitude and phase {Amp F*, Ph F*}. Rows represent measurer:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>X, Y, Z</strong></span> - sensitivity axes of the EM4H receiver.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>U</strong></span> - voltage in the main loop.
+      </li>
+              <li class="listitem"><span class="keycap"><strong>I</strong></span> - current in the main loop (for An-2 or Mi-8 installations) For frequencies F0-F3 and in the compensation loop, correspondingly, for FC0 and FC1.
+	   In case of An-3 installation at the frequencies F0-F3 there is a signal of additional compensation coil mounted on the stinger.
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+	If any ADC is overranged its fields will be colored in red as I-channel in  <a class="xref" href="index.html#em4h-panel" title="Figure 31. EM4H">Figure 31, “EM4H”</a>.
+  </p>
+          <p xml:lang="en" lang="en">
+	Two flags in the upper part allow to choose one of four display modes:		
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>compensated</strong></span> - use <span class="keycap"><strong>Alt+C</strong></span> to change. 
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+	If set, compensated data are displayed.
+	All the signals in the matrix <span class="keycap"><strong>operating frequencies</strong></span> are normalized to one at the moment of <span class="keycap"><strong>Fix</strong></span> or <span class="keycap"><strong>Clear</strong></span> clicking.
+	After that all the coefficients are kept constant till the next click.
+	If there is no compensation parameters (<span class="keycap"><strong>used</strong></span> = 0), only normalization is applied. 
+	X, Y, Z are normalized as a vector, i.e. X²+Y²+Z² = 1, while U and I - as scalars.
+	Zero phase at the receiver corresponds to the phase of the primary field (phase of the major semiaxis of the polarization ellipse at the time of normalization). 
+	U and I phases stay unchanged.	
+	Piloting matrices are also changed - a digital filter result is shown, but no normalization.	
+  </p>
+          <p xml:lang="en" lang="en">
+	If the flag is not set, raw data are displayed.	
+	The value is in 16 bit ADC units.
+  </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>polar form</strong></span>  - press <span class="keycap"><strong>Alt+M</strong></span> to change. 
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+	If set, signals amplitudes and phases are shown {Amp F*, Ph F*}. If the <span class="keycap"><strong>compensated</strong></span> is also set and
+	there are no compensation parameters (<span class="keycap"><strong>used</strong></span> = 0), receiver signals phase is the phase of major semiaxis of the
+	polarization ellipse at the time of normalization or program start.
+	in case of clear <span class="keycap"><strong>compensated</strong></span> flag the phase stay unchanged.
+  </p>
+          <p xml:lang="en" lang="en">
+	If it is not set, the data are displayed as complex numbers:  Re F* - in-phase, Im F* - quadrature components. 
+	It is important to remember that if you remove the flag <span class="keycap"><strong> compensated </strong></span>, the phase corresponds to zero phase of measurer but not the primary field.
+  </p>
+          <p xml:lang="en" lang="en">
+	Panel allows you to add any of the parameters in any of the formats defined by flags <span class="keycap"><strong>compensated</strong></span> and <span class="keycap"><strong>polar form</strong></span>, 
+	as a variable of charts recorder (see <a class="xref" href="variables.html#variables_em4h" title="B.6. EM4H variables">Section B.6, “EM4H variables”</a>). To do this, select the parameters you want and click <span class="keycap"><strong>Ctrl+Insert</strong></span>: 
+	they will appear in the charts list. 
+	When you select several variables within a matrix, you can use the arrow while pressing <span class="keycap"><strong>Shift</strong></span>. 
+	Also, you can hold <span class="keycap"><strong>Ctrl</strong></span> and move the cursor pressing the space bar to select the next parameter.
+	The variable added to chart list is marked by "•". To delete any variable from the charts list select it in the corresponding matrix and press
+	<span class="keycap"><strong>Ctrl+Delete</strong></span>.
+  </p>
+          <p xml:lang="en" lang="en">
+	The matrices of piloting signals can be hidden (<span class="keycap"><strong>Ctrl+P</strong></span>), as well as the whole digital panel (<span class="keycap"><strong>Ctrl+H</strong></span>).
+  </p>
+          <div class="figure">
+            <a id="idm45014158629968"></a>
+            <p class="title">
+              <strong>Figure 32. EM4H - compact</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/em4h-compact.png" alt="EM4H - compact" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158627024"></a>18.4. Hot keys</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+    Following keys are available:
+    </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>F1</strong></span> - this help
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Tab</strong></span> - elements switch (buttons, flags, matrices)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+Tab</strong></span> - window parts switch (induction control, compensation control, digital panel)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+C</strong></span> - switch on/off compensated data view mode in digital panel (flag <span class="keycap"><strong>compensated</strong></span>)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Alt+M</strong></span> - data view mode switch: in-phase-quadrature components or amplitude-phase (flag <span class="keycap"><strong>polar form</strong></span>)
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+P</strong></span> - hide/show piloting signal matrices
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+H</strong></span> - hide/show digital panel
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl+T</strong></span> - hide/show induction/compensation control panel
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+  </p>
+        </div>
+      </div>
+      <div class="sect1">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="tvisor"></a>19. Infrared scanner panel</h2>
+            </div>
+          </div>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="idm45014158617168"></a>19.1. View settings</h3>
+              </div>
+            </div>
+          </div>
+          <p xml:lang="en" lang="en">
+      Real-time image data are displayed on Infrared scanner panel.
+    </p>
+          <div class="figure">
+            <a id="idm45014158615952"></a>
+            <p class="title">
+              <strong>Figure 33. Image sample and infrared scanner settings</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/tvisor.png" alt="Image sample and infrared scanner settings" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="tvisor_hotkeys"></a>19.2. Work in infrared scanner panel</h3>
+              </div>
+            </div>
+          </div>
+          <div xml:lang="en" class="itemizedlist" lang="en">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem"><span class="keycap"><strong>Ctrl-H</strong></span> Show/hide image parameters
+      </li>
+              <li class="listitem"><span class="keycap"><strong>Ctrl-L</strong></span> Show/hide hide extra parameters
+      </li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+      At the upper line of the panel there are image view settings. 
+      Their modification doesn't affect saved data.
+      To modify one of these parameters (Brightness, Contrast, Zoom) select required parameter using <span class="keycap"><strong>Tab</strong></span>,
+      <span class="keycap"><strong>Shift-Tab</strong></span> or <span class="keycap"><strong>Alt-&lt; plus underlined symbol in parameter name&gt;</strong></span>,
+      e.g. to modify contrast: <span class="keycap"><strong>Alt-C</strong></span>.
+      Position allows to choose visible part of a line.
+      Br.Fix means brightness correction, i.e. if Br.Fix is on then average value of a line will be null
+      this allows to ignore scanner head warming-up.
+      Press Pause to stop real-time imaging.     
+    </p>
+          <p xml:lang="en" lang="en">
+       Parameters in status line (from left to the right): 
+       </p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+              <li class="listitem">
+	  PPS indicator, if data synchronization process runs normally indicator must twinkle one time per second
+	</li>
+              <li class="listitem">
+	  N2 — shows nitrogen presence, must be marked;
+	</li>
+              <li class="listitem">
+	  Missed — number of missed lines in image; after some manipulation this parameter can be non-zero bat  it must be constant any way;
+	</li>
+              <li class="listitem">
+	  Sens — «sensibility», this parameter is calculated approximately; must be about 0,05 when device runs normally; depends on temperature;
+	</li>
+              <li class="listitem">
+	  Freq — frequency, must be about 200 Hertz;
+	</li>
+              <li class="listitem">
+	  RMS — indicator of image noise level, normal value — from 1 to 2;
+	</li>
+              <li class="listitem">
+	  Temp — temperature of the head of the optic block, its value must be plausible;
+	</li>
+              <li class="listitem">
+	  Ralt — radio altitude value; can be checked when the scanner is on.
+	</li>
+            </ul>
+          </div>
+          <p xml:lang="en" lang="en">
+    </p>
+        </div>
+        <div class="sect2">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="gyros"></a>19.3.  Window of orientation system indicator</h3>
+              </div>
+            </div>
+          </div>
+          <div class="figure">
+            <a id="idm45014158601648"></a>
+            <p class="title">
+              <strong>Figure 34. Attitude system</strong>
+            </p>
+            <div class="figure-contents">
+              <div class="mediaobject">
+                <img src="images/gyros.png" alt="Attitude system" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <p xml:lang="en" lang="en">
+      "NavDat" allows to control visualization of parameters of built-in inertial orientation system.
+      In "Arrester" field press <span class="keycap"><strong>Enter</strong></span> then gyroscopic course will get value of track angle, pitch and yaw will be adjusted in accordance with accelerometer measurements.
+      Then the system will run in automatic mode and its parameters can be controlled visually.
+    </p>
+          <p xml:lang="en" lang="en">
+      Due to described procedure long adjustment before a flight isn't required.
+      But "NavDat" provides such adjustment as well. 
+      When you press <code class="constant">Gyrocompass</code> button the system will estimate measured gravitational vector and angular velocity of the Earth. After turn-off systems start working in autonomous mode. This mode is adequate only to control working capacity of sensor elements of the system.
+    </p>
+          <div xml:lang="en" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;" lang="en">
+            <table border="0" summary="Warning: ">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Warning]" src="./images/warning.png" />
+                </td>
+                <th align="left"></th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+      Control of the inertial system has no affect on saved data.
+    </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div xmlns="" class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="hotkeys.html"><img xmlns="http://www.w3.org/1999/xhtml" src="images/next.png" alt="Next" /></a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right" valign="top"> <a accesskey="n" href="hotkeys.html">A. Hot keys</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Grapher
+Name[ru]=Самописец
+Comment=Chart viewer
+Comment[ru]=Панель графиков
+Exec=navdat-samopis --new
+Icon=navdat-samopis
+Terminal=false
+Type=Application
+Categories=Bort;

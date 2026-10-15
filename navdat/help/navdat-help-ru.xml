@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.docbook.org/xml/4.3/docbookx.dtd">
+<article id="navdat-book" lang="ru"><articleinfo><title lang="ru">Бортовая программа "NavDat"</title><authorgroup><author><firstname/><surname/><affiliation><orgname lang="ru">"Геотехнологии"</orgname><address format="linespecific"><email>gp@geotechnologies-rus.com</email></address></affiliation></author></authorgroup><copyright><year>2006-2018</year><holder>GeoTechnologies</holder></copyright><legalnotice id="legalnotice"><para>
+    Site: <ulink url="http://www.geotechnologies-rus.com/">http://www.geotechnologies-rus.com/</ulink>
+  </para><para>
+    E-Mail: <ulink url="mailto: gp@geotechnologies-rus.com">info@geotechnologies-rus.com</ulink>
+  </para></legalnotice></articleinfo><sect1 id="intro"><title lang="ru">Назначение программы и основные возможности</title><para lang="ru">
+    Программа "NavDat" предназначена для работы на IBM/PC совместимом
+    бортовом компьютере в целях вычислительного обеспечения аэросъемочного
+    процесса.</para><para lang="ru">
+    Составляющими частями съемочного процесса, обслуживаемыми программой
+    "NavDat", можно считать следующие:
+  </para><itemizedlist lang="ru"><listitem>
+      Навигационное обеспечение работ. Основываясь на возможностях
+      современной технологии спутниковой навигации, программа "NavDat" осуществляет
+      регистрацию навигационной информации в реальном времени,
+      выполняет управление проводкой с помощью пилотского индикатора,
+      позволяет решать широкий круг штурманских задач в автоматическом
+      режиме, а также интерактивное управление полетным заданием.
+    </listitem><listitem>
+      Взаимодействие с аппаратными средствами аэрогеофизического
+      бортового комплекса. Программа, используя интерфейсы бортовой ЭВМ,
+      осуществляет обмен данными и командами со всеми приборами,
+      обеспечивая синхронность регистрации полученной информации.
+    </listitem><listitem>
+      Запись данных. Данные записываются в виде файлов жесткого диска бортовой ЭВМ.
+    </listitem><listitem>
+      Пользовательский интерфейс. Программа в полной мере предоставляет
+      пользователю возможности контроля и управления взаимодействием с аппаратными средствами.
+    </listitem></itemizedlist><para lang="ru">
+    Основные возможности программы организованы таким образом, чтобы при
+    организации аэросъемочного процесса исключить необходимость использования
+    штурмана-съемщика, оставляя на борту только одного бортоператора, возложив
+    на него в основном функции контроля. Разработчики программы старались так
+    организовать ее работу, чтобы никакие ошибки в работе бортоператора не могли
+    привести к фатальной потере или искажению аэрогеофизической информации.
+  </para><para lang="ru">
+    Аппаратной платформой программы является <ulink url="http://ru.wikipedia.org/wiki/IA-64">IA-64</ulink> совместимый компьютер,
+    операционная система <ulink url="http://www.gnu.org">GNU/Linux</ulink>.
+  </para></sect1><sect1 id="installation"><title lang="ru">Инсталляция и запуск</title><para lang="ru">
+    "NavDat" поставляется заказчику в виде программного пакета на сервере <ulink url="http://geotechnologies-rus.com/ru/main_ru.html">Геотехнологии</ulink>. Пакет создан для работы на GNU/Linux системе
+    <ulink url="http://ubuntu.com.">Ubuntu 16.04.3 LTS</ulink>.
+    Для начала требуется установить 64-битную версию операционной системы, инструкцию по установке Ubuntu можно найти
+    по адресу: 
+    <ulink url="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</ulink>.
+    Далее следует запустить <ulink url="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux">терминал</ulink>,  выполнить следующие команды:
+  </para><example><programlisting format="linespecific">
+		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
+	</programlisting><programlisting format="linespecific">
+		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
+		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
+		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
+		EOF
+	</programlisting><programlisting format="linespecific">
+		sudo apt-get update
+	</programlisting><programlisting format="linespecific">
+		sudo apt-get install navdat-user
+	</programlisting></example><para lang="ru">
+    Имя пользователя user_name и пароль password предоставляются компанией <ulink url="http://geotechnologies-rus.com/ru/main_ru.html">Геотехнологии</ulink>.
+    После перезагрузки будет автоматически создана учетная запись "NavDat session user". Пароль для неё задаёт администратор при установке.
+    Далее из этой записи будет осуществляться взаимодействие с бортовой программой "NavDat".
+    Эту запись следует использовать исключительно для работы с "NavDat".
+  </para><para lang="ru">
+    Несколько рекомендаций по установке:
+    <itemizedlist><listitem>
+	Выбрать хотя бы 10 Гб под корневую файловую систему
+      </listitem><listitem>
+	Выбрать хотя бы 1 Гб под swap
+      </listitem><listitem>
+	Желательно создать отдельный раздел для хранения и записи данных (т.е. для раздела /home)
+      </listitem><listitem>
+	Рекомендуемые файловые системы: ext3, ext4
+      </listitem></itemizedlist>
+  </para></sect1><sect1 id="visualisation"><title lang="ru">Визуализация и пользовательский интерфейс</title><para lang="ru">
+    Интерфейс основан на графической среде <ulink url="https://wiki.archlinux.org/index.php/Awesome_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)">Awesome</ulink>.
+  </para><para lang="ru">
+    В верхней части экрана располагается панель, слева список рабочих столов, индикаторы использования процессора и памяти. Справа есть индикатор работы бортового сервера (вкл/выкл).
+    Главное меню доступно с помощью комбинации <keycap moreinfo="none">Alt-F1</keycap> или левой кнопки мыши. 
+В меню находятся приложения, отвечающие за визуализацию
+    данных и управление полетом. 
+  </para><para lang="ru">
+    Некоторые полезные системные параметры могут быть выведены на самописец (см. <xref linkend="variables_sys"/>).
+  </para></sect1><sect1 id="settings"><title lang="ru">Настройка и запуск бортовой программы</title><para lang="ru">
+	Во время первого запуска "NavDat" убедитесь, что сессия запущена в режиме Awesome.
+	Режим переключается при входе в систему.
+    </para><figure float="0"><title lang="ru">Выбор режима</title><mediaobject><imageobject><imagedata fileref="images/gnome" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/gnome.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      Запустить утилиту настройки можно  через меню приложений.
+    </para><figure float="0"><title lang="ru">Окно программы настройки</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      Программа позволяет добавлять устройства в систему, указывать директорию для записи данных,
+      а также управлять параметрами бортового сервера.
+    </para><para lang="ru">
+      После добавления нового устройства необходимо указать тип соединения и его параметры (ip-адрес, номер порта и т.д.), сохранить настройки и обязательно 
+      перезагрузить сервер.
+      Чтобы задать указанные параметры, следует нажать кнопку "Свойства". Кроме того, для некоторых устройств используются дополнительные параметры настройки, которые
+      можно задать на соответствующей вкладке появившегося окна.
+    </para><figure float="0"><title lang="ru">Окно настройки параметров</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_tabs" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_tabs.png" format="PNG"/></imageobject></mediaobject></figure><warning lang="ru"> Данные первого в списке устройств ГНСС-приемника будут всегда использованы для управления полетом. </warning><para lang="ru">
+      Используя меню приложений можно настроить рабочий экран бортового компьютера, выбирая из меню нужные программы
+      и располагая их на экране. После сохранения (меню Настройки-&gt;Сессия: сохранить или <keycap moreinfo="none"> Ctrl+Alt+S </keycap>) настройки будут воспроизводиться при последующих запусках (меню Настройки-&gt;Сессия: восстановить или <keycap moreinfo="none"> Ctrl+Alt+R </keycap>).
+    </para></sect1><sect1 id="navigation"><title lang="ru">Решение навигационных задач</title><para lang="ru">
+   Программа "NavDat" решает широкий набор навигационных задач. 
+   Исходными данными для вычислений являются географические координаты точек движения (широта, долгота), полученные первым в списке устройств ГНСС-приемником, 
+    а сами задачи представляются главным образом следующими:     
+  </para><itemizedlist lang="ru"><listitem>
+      Счисление расстояний. 
+      Все расстояния в программе счисляются как длины дуг большого круга (ортодромий),
+      проведенных через соответствующие пары точек. Расстояния измеряются в километрах.
+    </listitem><listitem>
+      Счисление азимутов. Азимуты в программе счисляются как углы в градусах между ортодромиями в точке пересечения.
+    </listitem><listitem>
+      Счисление расчетного времени.
+      Расчетное время прохождения отрезка между двумя точками
+      счисляется исходя из представлений о текущей путевой скорости,
+      измеренной по данным ГНСС-приемника.
+    </listitem><listitem>
+      Контроль навигационной высоты, т.е. высоты, которая должна соблюдаться пилотом при съемке.
+      Навигационная высота передается одним из устройств комплекса: ГНСС-приемник, ГТ-МАГ, и т.д.
+    </listitem><listitem>
+      Контроль выполнения полетного задания.
+    </listitem></itemizedlist></sect1><sect1 id="devices"><title lang="ru">Взаимодействие с устройствами бортового комплекса</title><sect2 id="dev_tcpip"><title lang="ru">Соединение TCP/IP</title><para lang="ru">
+    Все устройства, подключаемые с помощью протокола TCP/IP, имеют свой ip-адрес и порт выдачи данных. Стоит иметь ввиду, что не все
+    из них работают как DHCP-сервер. В этом случае соответствующая сеть должна быть сконфигурирована вручную. Ознакомьтесь с техническим 
+    описанием устройства.
+    </para></sect2><sect2 id="dev_rs232"><title lang="ru">Соединение по последовательному порту</title><para lang="ru">
+    Для соединения по последовательному порту также требуются настройки: адрес, скорость, биты данных, четность, стоп биты.
+     Обычно устройства RS232 подключаются с применением адаптера USB-COM. Программа "NavDat" позволяет выбрать метод назначения порта: 
+     по устройству (by-device), по пути (by-path) или по ID (by-id). Например:
+    </para><example><programlisting format="linespecific">
+/dev/ttyUSB0&gt;	/dev/ttyUSB0
+		/dev/ttyUSB0: by-path
+		/dev/ttyUSB0: by-id
+	</programlisting></example><para lang="ru">
+    По устройству (by-device). Если в комплексе более одного устройства RS232, пользователь должен каждый раз подключать их в одном и том же порядке.
+    </para><para lang="ru">
+    По пути (by-path). Необходимо запомнить, к какому порту подключено соответствующее устройство, и всегда подключать это устройство к нему.
+    </para><para lang="ru">
+    По ID (by-id). Этот метод возможен только если нет адаптеров USB-COM с одинаковым ID.
+    </para></sect2><sect2 id="dev_fe"><title lang="ru">Бортовой сервер</title><para lang="ru">
+      	По умолчанию программа "NavDat" использует сокет домена Unix для обмена данными между различными устройствами
+	и программами. Чтобы иметь возможность подключить другие средства контроля и визуализации (телефон, планшет,
+	другой компьютер), необходимо настроить локальную сеть и использовать соответствующий IP адрес для 
+	коммуникации. В этом случае необходимо добавить устройство "Бортовой сервер", задать ему IP-адрес и номер
+	порта на компьютере-сервере. Такие же параметры должны быть заданы в переменной окружения BORT_SERVER для 
+	компьютера-клиента.
+    </para><para lang="ru">
+	Чтобы данная переменная была постоянно задана в системном окружении, необходимо в файле '/etc/environment'
+	добавить следующую строку (нужны права root):
+    </para><example><programlisting format="linespecific">
+BORT_SERVER="tcp://ip_adress:port"
+	</programlisting></example><para lang="ru">
+    </para></sect2><sect2 id="dev_jps"><title lang="ru">ГНСС-приемник Javad/Topcon</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым приемником фирмы <citetitle>Javad Positioning Systems</citetitle> или  
+      <citetitle>Topcon Positioning Systems</citetitle>,
+      работающим по протоколу GRIL через канал связи RS232.
+    </para><para lang="ru">
+      Связь с приемником осуществляется программой в режиме обмена данными-командами,
+      поэтому на момент запуска программы приемник должен быть обязательно включен и соединен с компьютером сигнальным кабелем.
+      В большинстве технических реализаций  питание приемника осуществляется непосредственно от источника питания компьютера,
+      в этом случае данное правило соблюдается автоматически.
+      Если же вам все же удалось запустить программу без приемника,
+      не пытайтесь подключить его к работающей программе.
+      Даже если вы увидите его данные после подключения, записанная информация,
+      скорее всего, будет испорчена отсутствием необходимых заголовков.
+      При работе с приемником программа записывает навигационные данные в отдельный файл <filename moreinfo="none">*.jps</filename> строго байт в байт,
+      как они вырабатываются приемником.
+      Это необходимо для дальнейшей работы программ дифференциальной коррекции,
+      поддерживающих только этот формат данных.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_gps"/>.
+    </para><figure float="0"><title lang="ru">Параметры Javad/Topcon</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_jps" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_jps.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Устройство имеет один параметр настройки - 'Команды инициализации', который задает последовательность команд для посылки приемнику при запуске.
+    Если его не задавать, программа сама запросит необходимые для визуализации и дальнейшей дифференциальной обработки посылки. Если же параметр задан, либо приемник по 
+    каким-либо причинам не может получать команды, важно помнить, что для полностью корректной работы бортовой программы нужны следующие посылки: 
+    RT, SI, PG, VG, EL, AZ, DP.
+    </para><para lang="ru">
+    Запрос по умолчанию следующий.
+    </para><example><programlisting format="linespecific">
+    dm
+    em,,/msg/def:0.1
+    em,,/msg/jps/PG:0.1
+    em,,/msg/jps/VG:0.1
+    em,,/msg/jps/AZ:1
+	</programlisting></example><para lang="ru">
+    Полагается, что запрос 'def' включает все необходимые для дифференциального режима посылки, в том числе RT, SI, EL, DP.
+    </para></sect2><sect2 id="dev_novatel"><title lang="ru">ГНСС-приемник Novatel</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым приемником фирмы <citetitle>Novatel</citetitle>,
+      работающим через канал связи RS232. В настоящий момент компания <citetitle>Novatel</citetitle> не
+      выпустила драйверов поддержки своего USB-адаптера, обеспечивающих работу в ОС Linux.
+    </para><para lang="ru">
+      Связь с приемником осуществляется программой в режиме обмена данными-командами,
+      поэтому на момент запуска программы приемник должен быть обязательно включен и соединен с компьютером сигнальным кабелем.
+      В большинстве технических реализаций  питание приемника осуществляется непосредственно от источника питания компьютера,
+      в этом случае данное правило соблюдается автоматически.
+      Если же вам все же удалось запустить программу без приемника,
+      не пытайтесь подключить его к работающей программе.
+      Даже если вы увидите его данные после подключения, записанная информация,
+      скорее всего, будет испорчена отсутствием необходимых заголовков.
+      При работе с приемником программа записывает навигационные данные в отдельный файл <filename moreinfo="none">*.nov</filename> строго байт в байт,
+      как они вырабатываются приемником.
+      Это необходимо для дальнейшей работы программ дифференциальной коррекции,
+      поддерживающих только этот формат данных.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_gps"/>.
+    </para><figure float="0"><title lang="ru">Параметры Novatel</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_novatel" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_novatel.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Устройство имеет один параметр настройки - 'Команды инициализации', который задает последовательность команд для посылки приемнику при запуске.
+    Если его не задавать, программа сама запросит необходимые для визуализации и дальнейшей дифференциальной обработки посылки. Если же параметр задан, либо приемник по 
+    каким-либо причинам не может получать команды, важно помнить, что для полностью корректной работы бортовой программы нужны следующие посылки: 
+     bestposb, bestvelb, gpgsa, gpgsv.
+    </para><para lang="ru">
+    Запрос по умолчанию следующий.
+    </para><example><programlisting format="linespecific">
+    unlogall
+    log bestposb ontime 0.1
+    log bestvelb ontime 0.1
+    log GPGSA ontime 1
+    log GPGSV ontime 1
+    log rangecmpb ontime 0.1
+    log almanacb onchanged
+    log ionutcb onchanged
+    log rawephemb onnew
+    log versionb ontime 100
+    log gloalmanacb onchanged
+    log gloclockb onchanged
+    log gloephemerisb onchanged
+    log glorawephemb onchanged
+    log rxstatuseventb onchanged
+	</programlisting></example><para lang="ru">
+    При настройке приемника рекомендуется установить скорость порта не менее 115200, а также
+    </para><example><programlisting format="linespecific">
+    nmeatalker auto
+    pdpfilter enable
+    pdpmode relative dynamic
+    selectchanconfig 4
+	</programlisting></example><para lang="ru">
+    Последняя команда актуальна только для приемников OEMStar (конфигурация 8 GPS, 6 GLONASS)
+    </para></sect2><sect2 id="dev_tvisor"><title lang="ru">Тепловизор</title><para lang="ru">
+      Автоматическое устройство, подключается по сети ethernet. Следует помнить, что данные от тепловизора записываются со
+      скоростью около 1 Мб/сек (3,6 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Тепловизор имеет встроенную инерциальную систему ориентации. 
+      Обычно тепловизор имеет встроенный ГНСС приемник, а также необходимые интерфейсы для подключения радиовысотомера и идикатора пилота. 
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем ethernet.
+    </para><figure float="0"><title lang="ru">Параметры Тепловизора</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_tep" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_tep.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Устройство имеет один параметр - 'Оптикой вперед', который задает способ установки по отношению к направлению полета. Влияет только на поведение курсовертикали.
+    </para></sect2><sect2 id="dev_gtmag"><title lang="ru">Система ГТ-Маг</title><para lang="ru">
+      Автоматическое устройство, подключается по USB.
+      Обычно система ГТ-Маг имеет по крайней мере один встроенный ГНСС приемник, 
+      а также необходимые интерфейсы для подключения радиовысотомера и идикатора пилота.
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем USB.
+      Для корректного задания настроек соединения следует обратиться к документации ГТ-Маг.
+      Настройки по умолчанию: ip-адрес 10.100.4.50, порт 1917 - магнитометр, порт 4444 - приемник ГНСС, порт 3333 - индикатор пилота.
+      Необходимо настроить соответствующее сетевое соединение 10.100.4.yyy, маска 255.255.255.0.
+    </para><figure float="0"><title lang="ru">Параметры ГТ-Маг</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_mag" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_mag.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_magf" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_magf.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Устройство имеет следующие настраиваемые параметры. Вкладка ГТ-Маг:
+	<itemizedlist><listitem>
+	    Частота дискретизации - позволяет выбрать частоту для 1000-герцовой версии ГТ-Маг
+	</listitem><listitem>
+	    Число каналов - позволяет отображать только выбранное число каналов; не изменят записываемого потока данных
+	</listitem><listitem>
+	    Использовать радиовысотомер - если флаг установлен, канал радиовысоты ГТ-Маг будет использован в качестве навигационной высоты
+	</listitem><listitem>
+	    Смещение РВ - смещение значения радиовысоты в метрах, применяется, если установлен флаг использования РВ (DRA)
+	</listitem><listitem>
+	    Масштаб РВ - масштабный коэффициент для радиовысоты, применяется, если установлен флаг использования РВ (KRA)
+	</listitem><listitem>
+	    Параметры девиации -  можно задать файл с параметрами девиации (mgc-файл, созданный программой ReinMag); 
+	    эти параметры будут применены только к первому каналу ГТ-Маг; из-за необходимости дифференцирования каналов феррозонда 
+	    скомпенсированное значение будет запаздывать на 0,2 секунды.
+	</listitem></itemizedlist>
+    </para><para lang="ru">
+    Правила вычисления скорректированного значения радиовысоты следующие
+    </para><example><programlisting format="linespecific">
+	    H = (RA + DRA) ⋅ KRA
+        </programlisting></example><para lang="ru">
+	Вкладка Феррозонд позволяет настроить параметры для различных применямых датчиков с учетом результатов калибровки:
+	<itemizedlist><listitem>
+	    UGND(В) - общий сигнальный ноль, значение по умолчанию 0 (вольт)
+	</listitem><listitem>
+	    мВ/мкТл - общий масштабный коэффициент, значение по умолчанию 100 (милливольт на микротесла)
+	</listitem><listitem>
+	    DX(В), DY(В), DZ(В) - смещение нуля для каждого канала, значения по умолчанию 0 (вольт)
+	</listitem><listitem>
+	    KX, KY, KZ - поправки масштабных коэффициентов для каждого канала, значения по умолчанию 1
+	</listitem><listitem>
+	    KYX, KZX, KXY, KZY, KXZ, KYZ - коэффициенты взаимного влияния каналов, например, KXY - это коэффициент при
+	    компоненте X в выражении для Y; значения по умолчанию 0
+	</listitem></itemizedlist>
+    </para><para lang="ru">
+	ГТ-Маг позволяет измерить общий сигнальный ноль вместо значения радиовысоты. В этом случае необходимо
+	установить флаг 'изм.' и снять флаг 'Использовать радиовысотомер'. Значение UGND использовано не будет.
+    </para><para lang="ru">
+    Правила вычисления fx, fy, fz в нанотеслах следующие
+    </para><example><programlisting format="linespecific">
+		    x = X - UGND + DX
+		    y = Y - UGND + DY
+		    z = Z - UGND + DZ
+		    fx = (x + y ⋅ KYX + z ⋅ KZX) ⋅ KX ⋅ 10^6 / K
+		    fy = (y + x ⋅ KXY + z ⋅ KZY) ⋅ KY ⋅ 10^6 / K
+		    fz = (z + x ⋅ KXZ + y ⋅ KYZ) ⋅ KZ ⋅ 10^6 / K
+        </programlisting></example><para lang="ru">
+    где  X, Y, Z - измеренные значения в вольтах, K - общий масштабный коэффициент в мВ/мкТл.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_gtmag"/>.
+    </para></sect2><sect2 id="dev_equator"><title lang="ru">Система Экватор</title><para lang="ru">
+      Автоматическое устройство, подключается по ethernet. Следует помнить, что данные записываются со
+      скоростью около 4 Мб/сек (14 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Система Экватор имеет встроенный ГНСС приемник и радиовысотомер.
+      Поэтому все перечисленные устройства подключаются к компьютеру одним кабелем ethernet.
+      Для корректного задания настроек соединения следует обратиться к документации системы Экватор.
+      Настройки по умолчанию: ip-адрес 10.100.4.50, порт 2000.
+      Необходимо настроить соответствующее сетевое соединение 10.100.4.yyy, маска 255.255.255.0.
+    </para></sect2><sect2 id="dev_em4h"><title lang="ru">Система EM4H</title><para lang="ru">
+      Автоматическое устройство, подключается по ethernet или RS232. При подключении через ethernet следует помнить, что данные записываются со
+      скоростью около 4 Мб/сек (14 Гб/час), поэтому надо заранее побеспокоиться о свободном пространстве диска.
+      Система EM4H может иметь встроенный ГНСС приемник и радиовысотомер, а также иметь интерфейс для подключения идикатора пилота.
+      Данные высотомера будут интегрированы в поток данных EM4H. 
+    </para><figure float="0"><title lang="ru">Параметры EM4H</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_em4h" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_em4h.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	<itemizedlist><listitem>
+	    Тип летательного аппарата - позволяет сделать выбор между Ан-2, Ан-3 и Ми-8: тип определяет алгоритм компенсации влияния летательного аппарата,
+		который будет применятся (см. <xref linkend="em4h_control"/>).
+	    Важно, что установка типа Ан-3 означает использование дополнительной катушки компенсации на стингере, а не тип самолета, как такового. 
+	    Если такая катушка по каким-то причинам не используется на Ан-3, следует выбрать тип Ан-2.
+	    А если она вдруг была применена на Ан-2, следует выбирать тип Ан-3.
+	</listitem><listitem>
+	    Использовать радиовысотомер - если флаг установлен, канал радиовысоты EM4H будет использован в качестве навигационной высоты
+	</listitem></itemizedlist>
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_em4h"/>.
+    </para></sect2><sect2 id="dev_rs50"><title lang="ru">Спектрометр RSx</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами фирмы <citetitle>Radiation Solutions Inc</citetitle>,
+      такими как RS-501, RSX4, RSX5 и т.п., работающими по протоколу RSI.
+     До трех устройств одновременно.
+      Типичные настройки соединения: 192.168.1.xxx, порт 4000. Необходимо настроить соответствующее сетевое соединение 192.168.1.yyy, маска 255.255.255.0.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="spectra"/>, <xref linkend="variables_spec"/>.
+    </para></sect2><sect2 id="dev_grs410"><title lang="ru">Спектрометр GRS410</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами GRS410 фирмы <citetitle>Pico Envirotec Inc</citetitle> в режиме покристальной
+	регистрации.
+     До трех устройств одновременно.
+      Соединение с концентратором или суперконцентратором может быть установлено через последовательный порт.
+    </para><figure float="0"><title lang="ru">Параметры GRS410</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_grs410" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_grs410.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	<itemizedlist><listitem>
+	    XTAL#* - позволяет отключить (on/off) визуализацию спектра с кристалла №* (* - 1,...,10). При отключении соответствующий спектр будет 
+		невидимым в программе, но по-прежнему будет записан в файл данных.
+	</listitem></itemizedlist>
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="spectra"/>, <xref linkend="variables_spec_grs"/>.
+    </para></sect2><sect2><title lang="ru">Спектрометр ГСА2000</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие со спектрометрами ГСА2000.
+     До шести устройств одновременно.
+      Соединение может быть установлено через последовательный порт.
+    </para><warning lang="ru">
+	Устройство работает по запросу и требует инициализации. 
+	Поэтому при запуске программы необходимо, чтобы прибор уже работал.
+    </warning><figure float="0"><title lang="ru">Параметры ГСА2000</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_gsa2000" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_gsa2000.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Устройство имеет следующие настраиваемые параметры:
+	<itemizedlist><listitem>
+	    XTAL - позволяет выбрать кристалл №1, №2 или их сумму.
+	</listitem><listitem>
+	    Режим - позволяет выбрать обычный спектр или спектр света.
+	</listitem><listitem>
+	    Стабилизация - позволяет включить/выключить стабилизацию.
+	</listitem></itemizedlist>
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="spectra"/>, <xref linkend="variables_spec_gsa"/>.
+    </para></sect2><sect2 id="dev_arrow"><title lang="ru">Индикатор пилота ("Стрелка")</title><para lang="ru">
+      Это устройство специально сделано для отображения информации о параметрах бокового и вертикального уклонения от заданной линии пути.
+      Также отображается текущий режим полета (заход на маршрут, проводка по маршруту).
+      Программа передает данные в порт RS232, но не в штатном режиме передачи данных,
+      а использует дополнительные линии CTS и RTS (см. описание интерфейса <ulink url="http://en.wikipedia.org/wiki/RS-232">RS232</ulink>).
+      Это касается идикаторов типа classic. Индикаторы типа tvisor подключаются только через Тепловизор. Индикаторы типа modern работают в штатном режиме RS232.
+      Для более подробной информации об индикаторе пилота см.  <xref linkend="pilotpan_arrow"/>.
+    </para><figure float="0"><title lang="ru">Параметры стрелки</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_arr" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_arr.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Для индикатора пилота можно выбрать тип подключаемого устройства: classic, tvisor или modern.
+    </para></sect2><sect2 id="dev_ra"><title lang="ru">Радиовысотомер</title><para lang="ru">
+	Это устройство подключается к программе "NavDat" не напрямую, а через какое-либо другое устройство. В некоторых случаях схема подключения позволяет
+	посылать команды на радиовысотомер: включить (on), выключить (off), тест (test). Для этой цели в программе имеется специальное приложение 
+	RA Control Panel.
+    </para><figure float="0"><title lang="ru">Панель управления радиовысотомером</title><mediaobject><imageobject><imagedata fileref="images/rapan" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/rapan.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="dev_ffra"><title lang="ru">Радиовысотомер Free Flight</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с радиовысотомерами фирмы <citetitle>Free Flight</citetitle>,
+      работающим через канал связи RS232: TRA-4000, TRA-4500. Они используют скорость порта 56000, поэтому соответствующий
+      компорт должен быть настроен на скорость 57600.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_ffra"/>.
+    </para><figure float="0"><title lang="ru">Параметры РВ Free Flight</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_ffra" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_ffra.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Устройство имеет один параметр настройки - 
+	    'Использовать радиовысотомер' - если флаг установлен, 
+	    канал радиовысоты будет использован в качестве навигационной высоты
+    </para></sect2><sect2 id="dev_adc"><title lang="ru">АЦП Геотехнологии</title><para lang="ru">
+      Программа "NavDat" поддерживает взаимодействие с любым АЦП фирмы <citetitle>Геотехнологии</citetitle>,
+      работающим через канал связи RS232.
+    </para><para lang="ru">
+      Устройство имеет контролируемые параметры. См. <xref linkend="variables_adc"/>.
+    </para><figure float="0"><title lang="ru">Параметры АЦП</title><mediaobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_adc" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata lang="ru" fileref="images/bortcfg_adc.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Устройство имеет один параметр настройки - 'каналы АЦП', который задает масштабированные переменные. Каждая строка должна иметь следующий формат: 
+    "номер_канала имя смещение_нуля масштабный_коэффициент". Две последние величины должны быть указаны в разрядах АЦП.
+    </para></sect2></sect1><sect1 id="status"><title lang="ru">Контроль работоспособности системы</title><para lang="ru">
+    Все устройства, подключаемые к программе "NavDat", как и сама система "NavDat", имеют свой флаг работоспособности.
+    Все эти флаги могут контролироваться при помощи соответствующего приложения 'Статус'.
+    Каждый флаг отображается при помощи индикатора, имеющего серый цвет в том случае, когда устройство работает корректно. В противном случае индикатор красного цвета.
+    Все индикаторы кофигурируются автоматически при запуске "NavDat".
+    Они выстриваются в одну строку или столбец в зависимости от формы окна.
+    Если индикатор остается красным более минуты, съемка должна быть прекращена до устранения причин.
+    </para><figure float="0"><title lang="ru">Панель состояния</title><mediaobject><imageobject><imagedata fileref="images/status-hor" format="EPS" align="left" scale="50"/></imageobject><imageobject><imagedata fileref="images/status-hor.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Значения флагов определены следующим образом
+    </para><itemizedlist><listitem lang="ru"><emphasis role="bold">sys</emphasis> - Загорается красным, если случилась ошибка записи, данные не удается записать или осталось мало свободного места на диске (на 10 часов или менее).
+	</listitem><listitem lang="ru"><emphasis role="bold">gtmag</emphasis> - Загорается красным, если нет синхронизации с ГНСС-приемником (отсутствует сигнал PPS), не достаточно видимых спутников, низкая амплитуда сигнала датчика,
+			   низкий или чрезвычайно высокий ток потребления датчика или отсутствуют данные как таковые.
+	</listitem><listitem lang="ru"><emphasis role="bold">gps</emphasis> - Загорается красным, если нет данных или счисления координат в соответствующем ГНСС-приемнике.
+	</listitem><listitem lang="ru"><emphasis role="bold">spec</emphasis> - Загорается красным, если нет сигнала или если случилась ошибка потока данных. Для ГСА2000  контрольный байт устройства также используется.
+	</listitem><listitem lang="ru"><emphasis role="bold">em4h</emphasis> - Загорается красным, если нет сигнала, возбуждение выключено, в случае зашкала какого-либо АЦП или если случилась ошибка потока данных.
+	</listitem><listitem lang="ru"><emphasis role="bold">equator</emphasis> - Загорается красным, если нет сигнала, возбуждение выключено, в случае зашкала какого-либо АЦП или если случилась ошибка потока данных.
+	</listitem><listitem lang="ru"><emphasis role="bold">ffra</emphasis> - Загорается красным, если нет данных, имеются ошибки в потоке или высотомер в режиме тест.
+	</listitem><listitem lang="ru"><emphasis role="bold">gtadc</emphasis> - Загорается красным, если нет сигнала.
+	</listitem><listitem lang="ru"><emphasis role="bold">e502</emphasis> - Загорается красным, если нет сигнала.
+	</listitem></itemizedlist></sect1><sect1 id="registration"><title lang="ru">Регистрация навигационной и аэрогеофизической информации</title><para lang="ru">
+    В процессе работы бортовая программа "NavDat" создает и записывает следующие файлы:
+  </para><itemizedlist lang="ru"><listitem><filename moreinfo="none">*.dlg</filename> (Data Logging).
+      Этот бинарный файл содержит те или иные данные от всех приборов комплекса. 
+      Формат записи этого файла очень сложный. 
+      Его потом последовательно разбирают соответствующие разным процедурам обработки программы-экстракторы. 
+      Следует только помнить, что для синхронизации в этот файл периодически записывается текстовая строка синхронизации, начинающаяся префиксом $POS: 
+      <example lang="ru"><programlisting format="linespecific">
+    $POS,12,094301.0,5539.9828751,3736.3127569,237.31,41.1,41.12,0.1,21,03,2009,54.11
+        </programlisting></example>
+      После префикса записано количество видимых спутников созвездия, время GPS (ЧЧММСС.с), широта и долгота в формате градусы, минуты, доли минут,
+      геоидальная высота в метрах, угол курса в градусах, скорость в м/сек, PDOP, день, месяц, год (GPS дата), навигационная высоста в метрах.
+      Эту информацию в файле можно прочесть глазами. Если в системе несколько приемников ГНСС, то каждому из них будет соответствовать своя посылка: 
+      $POS - первый приемник, $PO1 - второй приемник, и т.д. Данные параметры могут контролироваться в окне самописца (см. 
+      <xref linkend="variables_pos"/>).
+      Имя dlg-файла является композицией из даты и времени запуска программы. Первый символ - месяц (1 - январь, 2 - февраль, ..., 9 - сентябрь, 
+      a - октябрь, ..., с - декабрь). Далее две цифры - число. Далее еще две цифры - порядковый номер запуска в сутки.
+      Этот файл записывается непрерывно от момента старта программы до выхода из нее. 
+      Для удобства архивирования, если размер этого файла превысит 100 Мбайт, он автоматически закроется и откроется следующий - с добавкой к имени буквы 'b',  затем 'c', 'd' и т.д.
+    </listitem><listitem><filename moreinfo="none">*.jps</filename> (Javad Positioning Systems, может быть несколько устройств).
+      Этот бинарный файл, как отмечалось ранее, содержит байт в байт информацию, полученную от ГНСС-приемника типа Javad или Topcon, 
+      и используется в дальнейшем при выполнении операций дифференциальной коррекции ГНСС. Как и dlg-файл, разбивается по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </listitem><listitem><filename moreinfo="none">*.nov</filename> (Novatel, может быть несколько устройств).
+      Этот бинарный файл содержит байт в байт информацию, полученную от ГНСС-приемника типа Novatel, 
+      и используется в дальнейшем при выполнении операций дифференциальной коррекции ГНСС. Как и dlg-файл, разбивается по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </listitem><listitem><filename moreinfo="none">*.tep</filename> (Тепловизор). 
+      Тепловизор создает поток 3,6 Гбайт в час, для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт. 
+      Очевидно, за час таких файлов будет создано не менее 30 штук. Начиная с 27-го файла они будут иметь двухбуквенную маркировку ('ba', 'bb', 'bc' и т.д.).
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </listitem><listitem><filename moreinfo="none">*.mag</filename> (ГТ-Маг, может быть несколько устройств). 
+	Система ГТ-Маг, работающая в режиме 1000 Гц, также создает достаточно большой поток данных. 
+      Для нее выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </listitem><listitem><filename moreinfo="none">*.rs</filename> (RSx, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </listitem><listitem><filename moreinfo="none">*.grs</filename> (GRS410, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+    </listitem><listitem><filename moreinfo="none">*.gsa</filename> (ГСА2000, может быть несколько устройств). 
+	Данные спектрометра пишутся в неизмененном виде в отдельный файл.
+      Для него выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </listitem><listitem><filename moreinfo="none">*.rad</filename> (Экватор). Поток данных системы Экватор порядка 10 Гб в час. 
+      Для нее выделен отдельный тип файлов, которые также бьются по 100 Мбайт.
+      Имя файла определяется тем же образом, что и для dlg-файла.
+      </listitem><listitem><filename moreinfo="none">*.em4</filename> (EM4H). Поток данных системы EM4H записывается в неизменном виде в файлы такого типа.
+      Для обеспечения совместимости со старыми программами эти же данные пишутся в файл dlg согласно документации EM4H.
+      Имя файла определяется тем же образом, что и для dlg-файла. 
+      </listitem><listitem><filename moreinfo="none">current.fpl</filename> (Flight Plan). При выходе из программы этот файл всегда записывается с этим именем и
+    содержит данные полетного задания, сохраняющиеся в памяти машины на момент выхода. 
+    Формат этого текстового файла детально разбирается в другом разделе (<xref linkend="fpl"/>).
+    </listitem></itemizedlist><para lang="ru">
+     Для однотипных устройств на конце расширения файла добавляется цифра. Например: <filename moreinfo="none">*.rs</filename>, <filename moreinfo="none">*.rs1</filename>, ... 
+     или  <filename moreinfo="none">*.jps</filename>, <filename moreinfo="none">*.jp1</filename>, ...
+  </para></sect1><sect1 id="fpl"><title lang="ru">Файл полетного задания</title><para lang="ru">
+    Это текстовый файл, хранящий формализованное описание полетного задания.
+    Вы можете написать этот файл, используя текстовый редактор, или использовать утилиту 
+    <ulink url="http://www.geosoft.com/products/oasis-montaj">Geosoft Oasis Montaj</ulink>, или, наконец, создать его самой программой "NavDat". Во всех
+    этих случаях файл должен быть написан в соответствии с предопределенными
+    синтаксическими правилами.
+  </para><sect2 id="terminology"><title lang="ru">Терминология</title><para lang="ru">
+      Полетное задание состоит из записей. Каждая запись имеет тип, имя и список
+      точек (может быть пустым). Описание точки состоит из имени (необязательно),
+      значений широты и долготы. Каждая запись в файле должна начинаться с новой
+      строки и быть записана следующим образом:
+    </para><programlisting format="linespecific">
+ RECORD_TYPE RECORD_NAME =
+(POINT_NAME, LATITUDE, LONGITUDE),
+(POINT_NAME, LATITUDE, LONGITUDE),
+..........
+(POINT_NAME, LATITUDE, LONGITUDE),
+      </programlisting><para lang="ru">
+      Значения имен записи и точки (RECORD_NAME, POINT_NAME) в файле не должны начинаться с цифры и не должны содержать
+      символов "+-/*.,$#@!%^&amp;()[]|\&lt;&gt;". Допускается символ '_'(подчеркивание).
+      Отдельно отметим, что в файле допустимо использование нескольких записей с
+      одинаковыми именами.
+    </para><para lang="ru">
+      Географические координаты точек (LATITUDE - широта, LONGITUDE - долгота) должны задаваться в формате "DDDMMmmmm", 
+      то есть градусы-минуты-доли_минут без 
+      разделителей. Первые цифры (до трех в случае долготы и до двух в случае широты) - градусы, потом две цифры - минуты, 
+      целая часть, потом ровно четыре цифры - дробная часть 
+      минут. Знак задает полушарие. Значение широты меньше нуля отвечает южному полушарию, отрицательное значение долготы 
+      задает западное полушарие.
+    </para><para lang="ru">
+      Обратите внимание на то, чтобы координаты полетного задания и бортовой навигационной системы соответствовали одной
+      и той же системе. Как правило, приемники ГНСС работают в системе WGS84.
+    </para><para lang="ru">
+      Поле "тип записи" (RECORD_TYPE) может принимать одно из трех предопределенных значений:      
+    </para><itemizedlist lang="ru"><listitem><constant>LINE</constant> – в этом случае запись содержит список точек маршрута в порядке
+	прохода
+      </listitem><listitem><constant>POSITION</constant> – в этом случае запись содержит просто список точек, не
+	являющихся описанием точек цепочки прохождения. Такими точками, как
+	правило, описываются аэропорты (запись обычно имеет имя
+	AEROPORTS), препятствия (запись, содержащую такие точки можно
+	назвать, например, OBSTRUCT)
+      </listitem><listitem><constant>REGION</constant> – в этом случае список точек записи содержит упорядоченную
+	последовательность вершин полигона, ограничивающего съемочный
+	участок или какую либо зону на площади работ.
+      </listitem></itemizedlist><para lang="ru">
+      Файл полетного задания может содержать текст комментария. Комментарий
+      всегда располагается в правой части строки и начинается с двух символов ';'
+      (точка с запятой). Ниже приведен пример файла <filename moreinfo="none">*.fpl</filename>.
+      Последовательность записей определяется только соображениями удобства прочтения и дальнейшей работы.
+      Никаких синтаксических ограничений на последовательность записей не накладывается. Вот пример:
+    </para><example><programlisting format="linespecific">
+;;;;;;;;;;;;;;;;;savedFPL. it is COMMENT
+POSITION AIRPORTS=
+(-3815,3815), ;;ONE MORE COMMENT
+ (CONTROL,-0,-0),
+ (3815,-3815);
+LINE RKM=
+ (CONTROL,-5396,-0),
+ (CONTROL,-0,-0),
+ (CONTROL,5396,-0);
+POSITION OBSTRUCT=
+ (-3815,-3815),
+ (CONTROL,-0,-0),
+ (3815,3815);
+LINE RKM=
+ (CONTROL,-0,-5396),
+ (CONTROL,-0,-0),
+ (CONTROL,-0,5396);
+      </programlisting></example><para lang="ru">
+      Все точки из этого примера располагаются в окрестности экватора, поскольку значащие цифры здесь воспринимаются как доли минуты.
+    </para><para lang="ru">
+	Для удобства в программе возможно загрузить полетное задание в формате Geosoft <filename moreinfo="none">*.xyz</filename>:
+    </para><example><programlisting format="linespecific">
+Line 101
+   LATITUDE LONGITUDE
+   LATITUDE LONGITUDE
+   ..........
+   LATITUDE LONGITUDE
+Tie 201
+   ..........
+      </programlisting></example><para lang="ru">
+      Координаты точек должны соответствовать формату "DDDMMmmmm", т.е. градусы-минуту-доли_минуты без пробелов, как в файле <filename moreinfo="none">*.fpl</filename>. 
+      Имена точек будут автоматически даны A0, A1, A2 и т.д., а маршруты любого типа будут восприняты как LINE.
+      После загрузки в бортовую программу полетное задание может быть сохранено только в формате <filename moreinfo="none">*.fpl</filename>.
+</para></sect2></sect1><sect1 id="fplan"><title lang="ru">Панель полетного задания</title><para lang="ru">
+    Для отображения файла полетного задания и управления его исполнением в программе "NavDat" используется специальная панель – панель полетного задания.
+    Сразу после запуска программы эта панель пустая и имеет одну единственную строку.
+    Если вы будете перемещать курсор вправо или вниз до упора, то увидите,
+    что поле панели скроллингуется, прокручивается. Начать работу с полетным
+    заданием можно с его загрузки из файла.
+    <figure float="0"><title>Панель полетного задания</title><mediaobject><imageobject><imagedata fileref="images/fplan" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan.png" format="PNG"/></imageobject></mediaobject></figure>
+  </para><sect2 id="fplan_load"><title lang="ru">Загрузка и просмотр полетного задания</title><figure float="0"><title lang="ru">Диалог открытия файла полетного задания</title><mediaobject><imageobject><imagedata fileref="images/fplan-open" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-open.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      Для загрузки полетного задания, сфокусировавшись на панели полетного задания, нажмите <keycap moreinfo="none">F3</keycap>.
+      Вы увидите традиционное окно файловой системы. Перемещаясь по дереву каталогов, выберите нужный вам файл <filename moreinfo="none">*.fpl</filename>.
+      Также возможна загрузка Geosoft <filename moreinfo="none">*.xyz</filename> файла. Он будет автоматически сконвертирован к формату <filename moreinfo="none">*.fpl</filename>.
+      После загрузки файла полетного задания предыдущее полетное задание будет стерто.
+    </para><para lang="ru">
+      Для добавления нового полетного задания к текущему, сфокусировавшись на панели полетного задания, нажмите <keycap moreinfo="none">Ctrl+F3</keycap>.
+      Все новые записи будут добавлены в конец текущего списка.
+    </para><para lang="ru">
+      После успешной загрузки файла вы увидите в панели полетного задания список записей.
+    </para><warning lang="ru">
+    Загрузка слишком большого полетного задания может привести к перегрузке системных ресурсов. 
+    Чтобы очистить текущее полетное задание, остановите бортовой демон, а затем удалите файл 'current.fpl' из директории записи данных.
+  </warning><para lang="ru">
+      Записи, имеющие тип LINE, отображаются бежевым цветом, REGION – зеленым, POSITION – розовым.
+      Обратите внимание, что на панели видны только заголовки каждой из записей.
+      Списка точек пока не видно.
+      Для заголовков записей типа POSITION и REGION справа указано количество точек в списке.
+      Для записей типа LINE слева стоит маленький треугольник, а справа, кроме количества точек, указаны дополнительные параметры:
+      значения заходного курса в градусах, суммарная длина маршрута и время, которое требуется,
+      чтобы пролететь этот маршрут с текущей скоростью.
+    </para><para lang="ru">
+      Треугольник показывает порядок прохождения маршрутов в списке (сверху вниз или снизу вверх).
+      Он  так же может менять цвета:
+      полностью серый - маршрут не пройден, помеченный зеленым - пройден. Если же треугольник моргает попеременно зеленым и красным, 
+      значит это текущий маршрут. У оператора есть возможность изменить значение данного признака для выделенных маршрутов, нажав <keycap moreinfo="none">Ctrl+D</keycap>, на противоположное.
+      Для того, чтобы раскрыть список точек маршрута нужно установив курсор в соответствующей строке, нажать <keycap moreinfo="none">Enter</keycap>.
+      Теперь вы видите развернутый список точек данного маршрута. Индикаторы точек также меняют цвет по мере прохождения с серого на 
+      моргающий зеленый/красный и на зеленый для пройденных точек.
+      Для того, чтобы снова свернуть список, опять нажмите <keycap moreinfo="none">Enter</keycap>.
+    </para><para lang="ru">
+      Отдельно остановимся на отображаемых параметрах для точек маршрутов и
+      заголовков маршрутов. Для заголовков маршрутов значение курса соответствует
+      направлению первого при прочтении сверху вниз, входного отрезка списка точек.
+    </para><para lang="ru">
+      Для каждой точки параметрами являются:
+    </para><itemizedlist lang="ru"><listitem>
+	значение курса входящего в нее отрезка из предыдущей точки списка (в градусах). Для первой точки списка это
+	значение не актуально, записан 0
+      </listitem><listitem>
+	длина этого отрезка (в км), для первой точки списка - 0
+      </listitem><listitem>
+	время, необходимое, чтобы пролететь это расстояние с текущей скоростью, для первой точки 0
+      </listitem><listitem>
+	*азимут на данную точку из той точки, в которой сейчас самолет
+	находится (в градусах)
+      </listitem><listitem>
+	*расстояние от текущего положения самолета до данной точки (км)
+      </listitem><listitem>
+	*время, необходимое, чтобы это расстояние пролететь с текущей
+	скоростью
+      </listitem></itemizedlist><para lang="ru">
+      Для списка точек записей типа REGION и POSITION отображаются только
+      параметры, помеченные *.
+    </para></sect2><sect2 id="edit"><title lang="ru"> Редактирование полетного задания</title><para lang="ru">
+      В программе "NavDat" предусмотрена возможность редактирования полетного задания.
+      С учетом опыта использования системы, а также понимая опасность
+      ошибки при такого рода операциях, разработчики предусмотрели следующие операции:
+    </para><itemizedlist lang="ru"><listitem><firstterm>изменение заголовка записи.</firstterm>
+	На соответствующем заголовке нажмите <keycap moreinfo="none">Alt+M</keycap> (modify). Появится красная строка редактирования,
+	в которой записаны текущие тип и имя записи. Записи типа LINE соответствует буква L, типам REGION и	
+	POSITION – буквы R и P соответственно. Можете менять тип и имя по своему усмотрению, в соответствиями с форматом полетного
+	задания. Чтобы изменения применить, нажмите <keycap moreinfo="none">Enter</keycap>. Если при редактировании этой строки вы совершите ошибку, 
+	то после нажатия <keycap moreinfo="none">Enter</keycap>	будет указан синтаксис для данной записи, а изменения будут проигнорированы.
+      </listitem><listitem><firstterm>изменение параметров точки.</firstterm>
+	Установите курсор в соответствующую строку, нажмите <keycap moreinfo="none">Alt+M</keycap>. В красной строке редактора появятся текущие имя
+	точки, ее широта и долгота, именно в этом порядке. Отредактируйте имя точки и координаты.
+	Географические координаты точек должны задаваться в формате "DDDMMmmmm", то есть градусы-минуты без 
+	разделителей. Первые цифры (до трех в случае долготы и до двух в случае широты) - градусы, потом две цифры - минуты, 
+	целая часть, потом ровно четыре цифры - дробная часть 	минут. Знак задает полушарие. Значение широты меньше нуля 
+	отвечает южному полушарию, отрицательное значение долготы задает западное полушарие.
+      </listitem><listitem><firstterm>удаление записи/точки.</firstterm>
+	Установите курсор в нужную строку или выделите несколько строк и нажмите <keycap moreinfo="none">Ctrl-Delete</keycap>
+      </listitem><listitem><firstterm>копирование записи/точки.</firstterm>
+	Выделите строчки для копирования или установите курсор в нужную строку и нажмите 
+	<keycap moreinfo="none">Ctrl-Insert</keycap>. После этого поставьте курсор в место, куда надо скопировать и нажмите
+	<keycap moreinfo="none">Shift-Insert</keycap>.
+      </listitem></itemizedlist></sect2><sect2 id="markup-parallel"><title lang="ru">Разметка системы параллельных маршрутов</title><para lang="ru">
+      Эта операция позволяет "заштриховать" регион системой параллельных маршрутов.
+      Для вызова этой процедуры вами сначала должна быть подготовлена запись, соответствующая заданному региону.
+      Установите курсор на строку ее заголовка и нажмите <keycap moreinfo="none">Alt+G</keycap>.
+      В появившейся строке редактирования заполните следующие поля:
+    </para><itemizedlist lang="ru"><listitem>
+	маска имени. Все создаваемые маршруты будут иметь имя, начинающееся с маски,
+	и затем будут стоять цифры соответствующего номера.
+      </listitem><listitem>
+	направление "штриховки". Курс в градусах.
+      </listitem><listitem>
+	расстояние между маршрутами в метрах
+      </listitem><listitem>
+	широта и долгота точки, через которую пройдет центральный маршрут "штриховки".
+	В момент нажатия <keycap moreinfo="none">Alt+G</keycap> эти значения устанавливаются соответствующими точке, 
+	являющейся центром для вершин региона.
+      </listitem></itemizedlist><para lang="ru">
+      Сама разметка производится следующим образом.
+      Через заданную центральную точку проводится ортодромия A, перпендикулярно заданному направлению.
+      Затем в одну и другую сторону от центральной точки вдоль нее отмеряются отрезки,
+      длина которых равна заданному межмаршрутному расстоянию d.
+      Через точки концов этих отрезков проводятся ортодромии, перпендикулярные ортодромии А.
+      Это и будут линии маршрутов. Концами маршрутов будут точки их пересечения с границей размечаемого региона.
+      Направление маршрутов устанавливается встречным для четных и нечетных номеров. 
+    </para><figure float="0"><title lang="ru">Разметка системы параллельных маршрутов</title><mediaobject><imageobject><imagedata fileref="images/fplan-markup" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-markup.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      В результате этой операции в основном списке после записи данного региона появятся записи соответствующих маршрутов.
+    </para><para lang="ru"><caution><title/>
+	Разметка площади маршрутами имеет экономические характеристики.
+	Каждый лишний маршрут – это лишнее летное время.
+	Поэтому советуем по возможности трепетно относиться к этому процессу,
+	а лучше всего, выполнять разметку средствами более умного в этом смысле программного продукта – Geosoft Oasis Montaj.
+      </caution></para></sect2><sect2 id="markup-rkm"><title lang="ru">Разметка системы маршрутов магнитной компенсации</title><para lang="ru">
+      Эта операция позволяет получить систему маршрутов для выполнения магнитной компенсации.
+      Все маршруты будут иметь разное направление и проходить через одну центральную точку.
+      Установите курсор на строку, где вы хотите, чтобы появились эти маршруты, и нажмите <keycap moreinfo="none">Alt+R</keycap>.
+      В появившейся строке редактирования заполните следующие поля:
+    </para><itemizedlist lang="ru"><listitem>
+	маска имени. Все создаваемые маршруты будут иметь имя, начинающееся с маски,
+	и затем будут стоять цифры, соответствующие курсу маршрута в градусах.
+      </listitem><listitem>
+	направление одного из маршрутов - Курс в градусах. Курсы остальных маршрутов будут вычислены автоматически.
+      </listitem><listitem>
+	радиус маршрутов. Длина маршрута будет равна двум радиусам.
+      </listitem><listitem>
+	угол между звеньями одного маршрута.
+      </listitem><listitem>
+	широта и долгота центральной точки.
+	В момент нажатия <keycap moreinfo="none">Alt+R</keycap> эти значения устанавливаются соответствующими текущей позиции.
+      </listitem></itemizedlist><para lang="ru">
+	Если угол между звеньями не равен нулю, результат будет как вариант 1 (<xref linkend="fig-rkm1"/>). 
+	Будет четыре маршрута, направления которых задаются с шагом 90 градусов.
+	В противном случае будет восемь маршрутов через 45 градусов, как показанно в варианте 2  (<xref linkend="fig-rkm2"/>).
+    </para><figure id="fig-rkm1" float="0"><title lang="ru">Разметка системы  маршрутов магнитной компенсации. Вариант 1.</title><mediaobject><imageobject><imagedata fileref="images/fplan-rkm1" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-rkm1.png" format="PNG"/></imageobject></mediaobject></figure><figure id="fig-rkm2" float="0"><title lang="ru">Разметка системы  маршрутов магнитной компенсации. Вариант 2.</title><mediaobject><imageobject><imagedata fileref="images/fplan-rkm2" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/fplan-rkm2.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="sect-fplan-setup"><title lang="ru">Настройка, старт и остановка проводки</title><para lang="ru">
+      Итак, полетное задание создано, отредактировано и проверено.
+      Теперь можно поднимать самолет в воздух и поручать программе выполнение проводки.
+      Осталось только назначить начальную точку в списке, с которой следует начать проводку.
+      Выполняется это следующим образом:
+    </para><itemizedlist lang="ru"><listitem>
+	нажимая <keycap moreinfo="none">Ctrl+Backspace</keycap>,  установите нужное направление прочтения списка маршрутов
+      </listitem><listitem>
+	нажимая <keycap moreinfo="none">Alt-Backspace</keycap> (изменить направления всех маршрутов на противоположные) или <keycap moreinfo="none">Backspace</keycap> 
+	(изменить направление выбранных маршрутов на противоположное)
+	установите порядок точек для каждого маршрута, точки всегда проходятся сверху вниз
+      </listitem><listitem>
+	выберите начальную точку проводки и установите курсор на соответствующую ей строку
+      </listitem><listitem>
+	проверьте все как следует еще раз и нажмите <keycap moreinfo="none">Ctrl+S</keycap>.
+	Монитор проводки примет управление и будет  выполнять проводку в строгом соответствии с заданными направлениями прочтений.
+	Если при нажатии <keycap moreinfo="none">Ctrl+S</keycap>(start) курсор находился на строке заголовка записи маршрута,
+	то проводка начнется с первой точки списка по направлению прочтения.
+      </listitem></itemizedlist><para lang="ru">
+      Если по каким либо причинам вам понадобилось выполнить принудительный заход на маршрут,
+      то, выполнив все точно так же, вместо <keycap moreinfo="none">Ctrl+S</keycap> нажмите <keycap moreinfo="none">Ctrl+L</keycap>(direct start).
+      Это приведет к тому, что программа не станет искать заходную траекторию, а сразу будет вести по выбранному маршруту.
+    </para><para lang="ru">
+      Для остановки проводки следует нажать <keycap moreinfo="none">Ctrl+K</keycap>.
+      Для выполнения этой операции не обязательно, чтобы активной была панель полетного задания.
+    </para></sect2><sect2 id="sect-pos-fix"><title lang="ru">Запись текущей точки</title><para lang="ru">
+      Эта очень важная операция используется во всех навигационных системах мира.
+      Она выполняет регистрацию текущего значения координат.
+      А поскольку программа "NavDat" обслуживает весьма специфический съемочный процесс, то и выполняется довольно замысловатым образом.
+      Для выполнения этой операции нужно нажать <keycap moreinfo="none">Ctrl+F</keycap>. По этой команде будет сделано следующее:
+    </para><figure id="fig-pos-fix" float="0"><title>Position fix</title><mediaobject><imageobject><imagedata fileref="images/pos-fix" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/pos-fix.png" format="PNG"/></imageobject></mediaobject></figure><itemizedlist lang="ru"><listitem>
+	В общем списке задания создается специальная запись с именем FIX.
+	Если такая запись уже существовала, дубликат не создается
+      </listitem><listitem>
+	В список точек заносится точка с текущими координатами и именем, являющимся композицией из даты и времени
+      </listitem><listitem>
+	Если в момент нажатия производилась проводка по маршруту, то в список его точек также 
+	будет вставлена точка с таким же именем, находящаяся на траверсе текущей точки. (<xref linkend="fig-pos-fix"/>)
+      </listitem></itemizedlist></sect2><sect2 id="fplan_hotkeys"><title lang="ru">Управление в панели полетного задания</title><itemizedlist lang="ru"><listitem><keycap moreinfo="none">Стрелки</keycap> перемещение по списку, работают стандартные комбинации для выделения
+	(<keycap moreinfo="none">Shift вверх/вниз</keycap> - перемещение с инверсией выделения, <keycap moreinfo="none">Ctrl вверх/вниз</keycap> - 
+	перемещение с сохранением выделения, <keycap moreinfo="none">Ctrl Пробел</keycap> - инвертировать выделение без перемещения)
+      </listitem><listitem><keycap moreinfo="none">Enter</keycap> Раскрыть/закрыть маршрут
+      </listitem><listitem><keycap moreinfo="none">F3</keycap> загрузить файл полетного задания вместо текущего
+      </listitem><listitem><keycap moreinfo="none">Ctrl+F3</keycap> загрузить файл полетного задания в конец текущего списка
+      </listitem><listitem><keycap moreinfo="none">F2</keycap> сохранить файл полетного задания
+      </listitem><listitem><keycap moreinfo="none">Backspace</keycap> изменить порядок прохождения точек маршрута под курсором 
+      </listitem><listitem><keycap moreinfo="none">Alt-Backspace</keycap> изменить порядок прохождения точек для всех маршрутов
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Backspace</keycap> изменить порядок прохождения маршрутов
+      </listitem><listitem><keycap moreinfo="none">Alt-M</keycap> редактировать строку под курсором, <keycap moreinfo="none">Esc</keycap> - отмена
+      </listitem><listitem><keycap moreinfo="none">Alt-G</keycap> разбивка выделенного региона
+      </listitem><listitem><keycap moreinfo="none">Alt-R</keycap> создание маршрутов магнитной компенсации
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Delete</keycap> удалить выделенное
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Insert</keycap> скопировать выделенное в буфер
+      </listitem><listitem><keycap moreinfo="none">Ctrl-D</keycap> Изменить значение флага 'выполнен' для выбранных маршрутов
+      </listitem><listitem><keycap moreinfo="none">Shift-Insert</keycap> вставить из буфера
+      </listitem><listitem><keycap moreinfo="none">Ctrl-S</keycap> начать заход на выделенный маршрут
+      </listitem><listitem><keycap moreinfo="none">Ctrl-L</keycap> форсировать проводку по маршруту, без захода на него
+      </listitem><listitem><keycap moreinfo="none">Ctrl-K</keycap> остановить проводку, глобальная комбинация (работает из любого окна)
+      </listitem><listitem><keycap moreinfo="none">Ctrl-F</keycap> записать текущую точку, глобальная комбинация (работает из любого окна)
+      </listitem></itemizedlist></sect2></sect1><sect1 id="panorama"><title lang="ru">Навигационная панорама</title><para lang="ru">
+    Панорама – основной индикатор визуального контроля качества исполнения полетного задания.
+    Этот индикатор осуществляет  картографическое отображение навигационной информации.
+  </para><figure id="fig-panorama" float="0"><title lang="ru">Окно панорамы</title><mediaobject><imageobject><imagedata fileref="images/panorama" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/panorama.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    На панораме схематически отображаются элементы полетного задания,
+    ее поведение напрямую связано с операциями в панели полетного задания. (<xref linkend="fig-panorama"/>)
+  </para><para lang="ru">
+    В верхней части индикатора отображается масштаб карты - размер стороны одной клетки в метрах.
+    В нижнем левом углу отображаются следующие параметры: 
+  </para><itemizedlist lang="ru"><listitem>
+      Time - время GPS (чч:мм:сс)
+    </listitem><listitem>
+      Track - текущий путевой угол (град)
+    </listitem><listitem>
+      Lat - широта (градусы-минуты-секунды)
+    </listitem><listitem>
+      Lon - долгота (градусы-минуты-секунды)
+    </listitem><listitem>
+      Alt - высота над эллипсоидом (м)
+    </listitem><listitem>
+      V - путевая скорость (км/ч)
+    </listitem></itemizedlist><para lang="ru">
+    В правом нижнем углу печатаются:
+  </para><itemizedlist lang="ru"><listitem>
+      Route - имя текущего маршрута
+    </listitem><listitem>
+      Dst.Point - имя текущей точки назначения
+    </listitem><listitem>
+      Est.Time - прогнозируемое время полета до конца маршрута в режиме проводки 
+      или до начала маршрута в режиме захода (чч:мм:сс)
+    </listitem><listitem>
+      Est.Dist - расстояние до конца маршрута в режиме проводки 
+      или до начала маршрута в режиме захода (км)
+    </listitem></itemizedlist><para lang="ru">
+    Символическое изображение самолета отвечает текущему положению летательного аппарата. Если его контур отображается пунктиром,
+    значит самолет находится за границей панорамы в том направлении, в котором указывает зеленая стрелка, совмещенная
+    с пунктирным контуром.
+  </para><para lang="ru">
+    В правой части панорамы отображается прогресс-индикатор прохождения маршрута. Голубого цвета кружок отвечает 
+    текущему положению на маршруте, отображаемом желтой линией.
+  </para><para lang="ru">
+    В нижней части помещена шкала индикатора проводки. Оранжевый кружок дублирует текущие показания индикатора пилота. 
+    Голубой квадрат показывает боковое отклонение от линии маршрута, шкала - плюс-минус 100 метров.
+  </para><sect2><title lang="ru">Основные элементы панорамы</title><para lang="ru">
+      Для того, чтобы увидеть отображение элементов полетного задания на панораме, следует загрузить его или создать.
+      Поскольку элементы отображения на панораме однозначно связаны с содержимым полетного задания и операциями над ним,
+      следует рассматривать два этих индикатора совместно. 
+    </para><itemizedlist lang="ru"><listitem>
+	Маршруты на панораме отображаются линиями темно-оранжевого цвета, как и в панели полетного задания. Стрелка на
+	конце маршрута, или на границе панорамы, если конец маршрута не попадает в зону видимости, показывает его направление.
+      </listitem><listitem>
+	Границы регионов изображаются зеленым цветом, как и в панели полетного задания.
+      </listitem><listitem>
+	Маршрут, регион или набор точек, на котором установлен фокус в панели полетного задания, подсвечивается белым. 
+      </listitem><listitem>
+	Точка, на которой установлен фокус в панели полетного задания, отображается белым кружком и подписывается
+	соответствующим именем. 
+      </listitem><listitem>
+	Одиночные точки (POSITION) отображаются розовым цветом и подписываются всегда.
+      </listitem><listitem>
+	Текущий маршрут, на который производится нацеливание или осуществляется его прохождение, показывается толстой светло-оранжевой линией.
+      </listitem><listitem>
+	Маршрут, помеченный в полетном задании, как пройденный, показывается голубой линией.
+      </listitem><listitem>
+	Криволинейный участок заходной траектории отображается пунктиром из маленьких треугольников белого цвета, которые при мелком 
+	масштабе сливаются в линию.
+      </listitem></itemizedlist></sect2><sect2><title lang="ru">Режимы</title><para lang="ru">
+      Навигационная панорама имеет два режима отображения
+    </para><itemizedlist lang="ru"><listitem>
+	Панорама. Самолет неподвижен, направление вверх отвечает текущему путевому углу.
+      </listitem><listitem>
+	Карта. Север наверху, самолет перемещается по карте.
+      </listitem></itemizedlist></sect2><sect2><title lang="ru">Управление панорамой</title><para lang="ru"><itemizedlist><listitem><keycap moreinfo="none">Q, A</keycap> - увеличить/уменьшить масштаб
+	</listitem><listitem><keycap moreinfo="none">M</keycap> - изиенить режим отображения
+	</listitem><listitem><keycap moreinfo="none">Z</keycap> - Поместить самолет в центр
+	</listitem><listitem><keycap moreinfo="none">C</keycap> - Изменить размер карты по размеру окна
+	</listitem><listitem>
+	 Можно использовать стрелки для перемещения карты
+	</listitem></itemizedlist></para></sect2></sect1><sect1 id="pilotpan"><title lang="ru">Пилотский индикатор, параметры проводки и пилотская панель</title><para lang="ru">
+    Во время выполнения полета программа "NavDat" может работать по-разному, в зависимости от фазы проводки,
+    однако, в любом случае, программа отображает управляющую информацию на пилотском индикаторе.
+  </para><sect2 id="pilotpan_arrow"><title lang="ru">Пилотский индикатор</title><para lang="ru">
+      Пилотский индикатор представляет собой указатель, имеющий две стрелки - указатели отклонения по горизонтали и вертикали, - и два светодиода
+      - зеленый и красный, - которые могут загораться попеременно.
+      Во время проводки лампочки на индикаторе моргают по-разному в зависимости от фазы проводки. В любой стадии проводки
+      задача пилота - держать, а точнее, "успокаивать" стрелочный указатель в нуле. При этом следует помнить, 
+      что в режиме проводки ноль соответствует прямолинейному полету, 
+      а в режиме захода - криволинейному, по крайней мере до тех пор, пока не вышли на направление маршрута. 
+    </para><para lang="ru">
+      Стрелочный указатель передает информацию об отклонениях от заданной траектории.
+      Если самолету для следования данной траектории необходимо отклониться вправо, то и указатель положения соответственно 
+      отклонится в зависимости от настройки программы вправо или влево, можно поставить так, как удобно пилоту.
+      Поведение лампочек зависит от того, какая фаза проводки выполняется:      
+    </para><orderedlist numeration="arabic" lang="ru" inheritnum="ignore" continuation="restarts"><listitem>Режим выключенной проводки: горит красный светодиод.</listitem><listitem>Режим полета на точку: горит красный светодиод, моргает зеленый. </listitem><listitem>Режим проводки по маршруту: горит зеленый светодиод.</listitem><listitem>Режим захода на маршрут: в начале заходной траектории зеленый и красный диоды загораются попеременно,
+	красный горит тем меньше, чем ближе к началу маршрута, до тех пор, пока светодиоды не заработают в режиме
+	(3), что означает заход на маршрут.</listitem></orderedlist><para lang="ru">
+       Программа позволяет поменять цвета светодиодов местами.
+    </para><para lang="ru">
+	Параметры пилотского индикатора, связанные с выполнением полетного задания, могут быть проконтролированы на самописце. 
+	<xref linkend="variables_fplan"/> содержит список параметров.
+    </para></sect2><sect2><title lang="ru">Фазы проводки</title><para lang="ru">
+    Всего возможно несколько режимов – фаз проводки.
+    Процесс исполнения полетного задания – это последовательный переход из одной фазы в другую.
+    </para><sect3><title lang="ru">Полет на точку</title><para lang="ru">
+      Этот режим можно охарактеризовать следующим образом.
+      Имеется точка назначения, но никак не определена траектория полета.
+      В этом случае на индикатор пилота выводится угловое расхождение между направлением движения и направлением на заданную точку.
+      Для этого режима масштаб шкалы индикатора устанавливается в градусах.
+      </para></sect3><sect3><title lang="ru">Криволинейная проводка</title><para lang="ru">
+      Это проводка по криволинейной траектории, составленной, как правило, из двух коротких прямолинейных отрезков, 
+      сопряженных дугами окружностей заданного радиуса. При проводке по циркульной кривой на индикатор выводится угловое 
+      расхождение между текущим направлением движения и касательной к заданной окружности.
+      Масштаб шкалы индикатора устанавливается в градусах.
+      </para></sect3><sect3><title lang="ru">Проводка по маршруту</title><para lang="ru">
+      Проводка по маршруту для достижения необходимой точности съемки накладывает ограничения на технику 
+      пилотирования летательного аппарата.
+      В режиме трассовой проводки производится сближение с заданной линией пути, а показателем качества является боковое 
+      уклонение от маршрута. Масштаб шкалы в этом случае устанавливается в метрах.
+      </para></sect3><para lang="ru">
+      Следует отметить, что для достижения уверенной, устойчивой и точной проводки требуется не только измерять и показывать 
+      угловые и линейные отклонения от заданной траектории, но и прогнозировать инерционное поведение летательного аппарата и 
+      замедленную реакцию пилота. Поэтому процесс управления пилотским индикатором основан на сложных расчетах и моделировании 
+      движения в реальном времени.
+    </para></sect2><sect2><title lang="ru">Условия вхождения</title><figure float="0"><title lang="ru">Схематическая иллюстрация параметров задания вхождения</title><mediaobject><imageobject><imagedata fileref="images/cc-provo" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/cc-provo.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      В процессе проводки программа "NavDat" обеспечивает наведение летательного аппарата на входной створ маршрута.
+      Переключение из режима нацеливания в режим трассовой проводки происходит по достижении следующих условий:
+    </para><itemizedlist lang="ru"><listitem>
+	самолет должен находиться ближе, чем расстояние b от начала маршрута
+      </listitem><listitem>
+	направление движения самолета не должно отличаться от направления маршрута больше, чем на угол бета
+      </listitem><listitem>
+	боковое уклонение не должно быть больше c
+      </listitem><listitem>
+	вхождение должно завершиться не дальше расстояния d от начала маршрута.
+      </listitem></itemizedlist><para lang="ru">
+      Таким образом самолет должен лететь внутри четырехугольника СDEF, не уклоняясь от направления маршрута более, чем на угол бета.
+      Отдельно следует сказать о специальной точке B и расстоянии a.
+    </para><para lang="ru">
+      При нацеливании, сначала программа пытается завести самолет на маршрут в точке B.  Это точка предварительного наведения. 
+      Дистанция a называется дистанцией предварительного выноса. Если наведение в точку B  не состоялось по каким-либо причинам, 
+      программа сама несколько приблизит эту точку к началу маршрута, и будет продолжать это приближение до тех пор, пока не достигнет 
+      траверса CD. В этот момент будет принято решение о перезаходе.
+    </para><para lang="ru">
+      Значения этих и некоторых других параметров настраиваются, исходя из представлений о заданной точности и масштабе съемки, 
+      условиях полета, пилотажных свойствах самолета и т.п.
+      Для настройки используется специальная панель (<xref linkend="fig-pilotpan"/>).
+    </para></sect2><sect2 id="pilotpan_params"><title lang="ru">Параметры</title><figure id="fig-pilotpan" float="0"><mediaobject><imageobject><imagedata fileref="images/pilotpan" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/pilotpan.png" format="PNG"/></imageobject></mediaobject><title lang="ru">Внешний вид пилотской панели</title></figure><para lang="ru">
+    Для задания параметров вам следует отредактировать значения соответствующих величин.
+    </para><itemizedlist lang="ru"><listitem>
+	Radius – заданный радиус дуг криволинейной проводки в метрах
+      </listitem><listitem>
+	Prolon – дистанция предварительного выноса (a) в радиусах
+      </listitem><listitem>
+	Width – ширина створа (c) в метрах
+      </listitem><listitem>
+	x0 – минимальная дистанция вхождения (d) в метрах
+      </listitem><listitem>
+	x1 – максимальная дистанция вхождения (b) в метрах
+      </listitem><listitem>
+	angle - 	угол вхождения бета в градусах
+      </listitem><listitem>
+	Line range – масштаб стрелки при трассовой проводке в процентах от радиуса; следует помнить, что стрелка, как правило, 
+	показывает не текущее отклонение, а прогнозируемое с учетом параметров Line dist
+      </listitem><listitem>
+	Line dist 0 и Line dist 1 – две дистанции упреждения в метрах.
+	В режиме трассовой проводки две точки выносятся на эти расстояния вдоль прямой с текущим курсом,
+	и от их отклонения от маршрута зависит положение стрелки.
+      </listitem><listitem>
+	Line dist rd – дистанция упреждения с учетом текущей угловой скорости, в метрах.
+	При ненулевом значении этого параметра Line dist 0 и Line dist 1 отсчитываются от точки,
+	отвечающей этому упреждению в соответствующем направлении.
+	Очень важный параметр, определяется динамическими характеристиками летательного аппарата.
+	Если этот параметр равен нулю, индикатор игнорирует параметры Line dist 0 и Line dist 1
+	и показывает боковое отклонение с учетом Line range.
+      </listitem><listitem>
+	Angle range – масштаб стрелки для угловой проводки и для этапа захода в градусах.
+	По опыту для уверенного захода на маршрут его значение следует установить равным 3°-4°.
+      </listitem><listitem>
+	Max accel – максимально допустимое ускорение (для контроля качества ГНСС данных). По опыту достаточно 10 м/с2.
+      </listitem><listitem>
+	Smoothing – фильтрация, сглаживание скачков. По опыту этот параметр должен быть около 95-97.
+      </listitem><listitem>
+	Altitude* – Требуемая высота полета.
+      </listitem><listitem>
+	Vertical scale* – Шкала вертикального указателя.
+      </listitem><listitem>
+	Arrow Inversion – параметр, переключающий знак индикатора бокового уклонения.
+	Некоторым пилотам удобнее, если уклонение вправо отображается на индикаторе смещением указателя влево.
+      </listitem><listitem>
+	Lamp Inversion – параметр, переключающий цвет индикатора режима проводки.
+      </listitem></itemizedlist><para lang="ru"> 
+    Поля, отмеченные *, используются только для индикаторов типа modern. 
+    Arrow inversion в этом случае действует на оба идикатора (горизонтальный и вертикальный) одинаково.
+  </para></sect2><sect2 id="pilotpan_setup"><title lang="ru">Рекомендации по настройке</title><para lang="ru"> 
+    Настройка параметров проводки дело достаточно тонкое и требует некоторых навыков.  Есть несколько простых рекомендаций по последовательности  настройки.
+  </para><orderedlist lang="ru" inheritnum="ignore" continuation="restarts"><listitem>
+	Установите облегченные условия вхождения. Такие, при которых даже приблизительное попадание на маршрут будет считаться кондиционным.
+      </listitem><listitem>
+	Установите надежный расчетный радиус криволинейной проводки.
+      </listitem><listitem>
+	Установите существенно увеличенный предварительный вынос точки наведения.
+      </listitem><listitem>
+	Масштабы шкалы индикатора пилота тоже установите несколько больше обычных. Для линейной проводки 150 - 200 метров.
+      </listitem><listitem>
+      Для изменения чувствительности стрелки при заходе меняйте Angle range.
+      Чувствительность тем больше, чем меньше этот параметр.
+      </listitem><listitem>
+      Подберите параметры Line dist исходя из баланса скорости сближения с маршрутом и раскачки вдоль маршрута.
+      Чем больше Line dist 0 и 1, тем мягче и медленнее сближение.
+      Упреждение Line dist rd следует устанавливать исходя из времени реакции пилота.
+      </listitem><listitem>
+      Выполняя настроечные полеты в таком режиме, наблюдайте по панораме или по фактическим линиям пути, как выполняется разворот и проводка по трассе. При этом меняйте параметры упреждений и успокоения.
+      </listitem><listitem>
+      Когда пилот привыкнет работать с индикатором в режиме проводки, а оператор настроит параметры упреждения, 
+      можно, располагая фактической информацией о среднем статистическом развороте, установить надежные параметры условий вхождения.
+      Масштабы указателя - это всегда баланс между нагрузкой пилота и качеством проводки. Чем меньше чувствительность стрелки, тем
+      легче пилоту держать ее в нуле, но, при этом, тем больше будут боковые отклонения. 
+      </listitem></orderedlist></sect2></sect1><sect1 id="arrow"><title lang="ru">Приложение пилотский индикатор</title><para lang="ru">
+	Есть приложение, работающее аналогично устройству 'стрелка'. Оно может отображаться на мониторе в кабине пилота, установленном вместо 'стрелки'.
+	Основные особенности работы приложения описаны в <xref linkend="pilotpan"/>.
+	Добавлены дополнительные возможности отображать направление поворота на криволинейной фазе проводки и текущее значение навигационной высоты.
+    </para><figure float="0"><title lang="ru">Индикатор пилота</title><mediaobject><imageobject><imagedata fileref="images/arrow" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrow.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata fileref="images/arrowct" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrowct.png" format="PNG"/></imageobject></mediaobject><mediaobject><imageobject><imagedata fileref="images/arrowcf" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrowcf.png" format="PNG"/></imageobject></mediaobject></figure></sect1><para lang="ru">
+	Данное приложение разработано также под ОС Android, доступно в Google Play. Оно может быть использовано для
+	установки на смартфоне/планшете пилота с коммуникацией по WiFi. В мобильной версии приложение имеет расширенный
+	функционал. Помимо 'стрелки' может отображаться панорама, позволяющая пилоту контролировать свое положение
+ 	относительно начала следующего маршрута (см. <xref linkend="panorama"/>), а также панель состояния приборов
+	(см. <xref linkend="status"/>). В случае работы без оператора пилот может контролировать работоспособность 
+	аппаратуры.
+    </para><figure float="0"><title lang="ru">Индикатор пилота под Андроид</title><mediaobject><imageobject><imagedata fileref="images/arrow-mobile" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/arrow-mobile.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+	Для начала работы надо просто подключиться к локальной сети бортового сервера и задать настройки сети
+	(IP-адрес и порт), см. <xref linkend="dev_fe"/>.
+    </para><sect1 id="jst"><title lang="ru">Таблица спутников</title><figure float="0"><title lang="ru">Таблица спутников</title><mediaobject><imageobject><imagedata fileref="images/jst" format="EPS" scale="50" align="left"/></imageobject><imageobject><imagedata fileref="images/jst.png" format="PNG"/></imageobject></mediaobject></figure><sect2 lang="ru"><title>Небесная полусфера</title><para>
+      На индикаторе отображаются азимут и возвышение для всех спутников, наблюдаемых GPS приемником. Таким образом, индикатор представляет
+      собой своеобразную карту спутников. Азимут отсчитывается от направления вверх по часовой стрелке. Возвышение - от края к центру.
+      Если спутник в счислении не используется, то на индикаторе соответствующий ему значок будет нарисован окружностью, а не кругом.
+      Голубым цветом обозначаются спутники ГЛОНАСС, а синим GPS. Спутник, выделенный в таблице, подсвечивается желтым кружком.
+    </para></sect2><sect2 lang="ru"><title>Карта</title><para>
+      На индикаторе красной точкой отображается текущее положение, линия серого цвета показывает пройденную траекторию. карта всегда 
+      сориентирована так, что север находится вверху. При нажатии правой клавиши мыши на карте появляется меню выбора масштаба карты.
+    </para></sect2><sect2 lang="ru"><title>Панель спутников</title><para>
+      На панели напечатаны строки состояний для всех спутников созвездия. В каждой строке печатается:
+    </para><itemizedlist><listitem>
+	значок использования в счислении
+      </listitem><listitem>
+	номер спутника в созвездии
+      </listitem><listitem>
+	отношение сигнал/шум
+      </listitem><listitem>
+	время использования в счислении
+      </listitem></itemizedlist></sect2><sect2 lang="ru"><title>Управление таблицей спутников</title><itemizedlist><listitem><keycap moreinfo="none">Ctrl+D</keycap> Выбрать устройство для отображения
+      </listitem><listitem><keycap moreinfo="none">Ctrl+T</keycap> Показать/Скрыть таблицу спутников
+      </listitem><listitem><keycap moreinfo="none">Ctrl+S</keycap> Показать/Скрыть панель состояния
+      </listitem><listitem><keycap moreinfo="none">Ctrl+P</keycap> Показать/Скрыть индикатор созвездия
+      </listitem><listitem><keycap moreinfo="none">Ctrl+M</keycap> Показать/Скрыть карту
+      </listitem><listitem><keycap moreinfo="none">F8</keycap> Изменить размер таблицы спутников
+      </listitem></itemizedlist></sect2></sect1><sect1 id="pilot"><title lang="ru">Эмулятор ГНСС</title><para lang="ru"><figure float="0"><title>Окно эмулятора ГНСС</title><mediaobject><imageobject><imagedata fileref="images/pilot" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/pilot.png" format="PNG"/></imageobject></mediaobject></figure>    
+    Имитирует поток данных ГНСС-приемника Javad, позволяет управлять координатами и скоростью самолета.
+    Также при включенном режиме автопилота осуществляет прохождение маршрутов.
+  </para><warning lang="ru">
+    В настройке бортовой программы приемник должен быть настроен как <emphasis role="bold">localhost:4444</emphasis>
+  </warning><para lang="ru">
+    Управление в эмуляторе осуществляется следующим образом.
+  </para><itemizedlist lang="ru"><listitem><keycap moreinfo="none">Стрелки влево/вправо</keycap> - изменение угловой скорости
+      </listitem><listitem><keycap moreinfo="none">Пробел</keycap> - установить угловую скорость в ноль
+      </listitem><listitem><keycap moreinfo="none">Стрелки вверх/вниз</keycap> - изменение линейной скорости
+      </listitem><listitem>
+	Pilot Automatic - флаг включения автоматического управления. 
+      </listitem></itemizedlist><para lang="ru">
+      Если вклчен режим автопилот, программа, при условии включенной проводки, сама пытается
+      удерживать стрелку в нуле, изменяя угловую скорость. При этом, она реагирует на отклонение
+      стрелки от нуля, только если оно составляет более 10% всей шкалы.
+    </para></sect1><sect1 id="samopis"><title lang="ru">Самописец</title><para lang="ru">
+    Самописец предназначен для отображения параметров, измеряемых приборами комплекса, в виде графиков.
+    Общий вид панели самописца следующий.
+  </para><figure float="0"><title lang="ru">Окно самописца</title><mediaobject><imageobject><imagedata fileref="images/samopis" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/samopis.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Окно самописца состоит из двух частей:
+  </para><itemizedlist lang="ru"><listitem>Список переменных (см. <xref linkend="variables"/>) и параметры их отображения</listitem><listitem>Графическая область</listitem></itemizedlist><para lang="ru"> 
+    Список переменных позволяет выбрать переменную для визуализации,
+    он состоит из следующих столбцов: Цвет, Variable (имя переменной), Value (значение), Choose Edge (выравнивание) и Scale (масштаб).
+  </para><sect2><title lang="ru">Настройка</title><para lang="ru">
+    Для каждой переменной можно задать следующие параметры отображения, установив курсор на одну из них:
+    <itemizedlist><listitem><constant>ЦВЕТ</constant> задается с помощью клавиши <keycap moreinfo="none">пробел</keycap>, черный цвет позволяет видеть числовое значение без отображения графика
+      </listitem><listitem><constant>ВЫРАВНИВАНИЕ</constant> в соответствующем столбце нажать <keycap moreinfo="none">Enter</keycap>
+	и выбрать в выпадающем списке одно из значений:
+	<itemizedlist><listitem><constant>OFF</constant> не отрисовывать переменную
+	  </listitem><listitem><constant>CENTER</constant> выравнивание по центру (значение 0 будет по центру окна)
+	  </listitem><listitem><constant>LEFT</constant> выравнивание по левому краю (значение 0 будет на левом краю окна)
+	  </listitem></itemizedlist>
+	</listitem><listitem><constant>МАСШТАБ</constant> в соответствующем столбце нажать <keycap moreinfo="none">Enter</keycap>
+	и задать нужную величину - всю шкалу в единицах соответствующей переменной
+      </listitem></itemizedlist>
+  </para></sect2><sect2 lang="ru"><title>Управление самописцем</title><itemizedlist><listitem><keycap moreinfo="none">F8</keycap> Изменить размер таблицы/графиков; нажимая <keycap moreinfo="none">вверх/вниз</keycap> установите нужный размер
+	графической области, с нажатой клавишей <keycap moreinfo="none">Shift</keycap> размер меняется с большим шагом; в конце нажмите 
+	<keycap moreinfo="none">Enter</keycap>
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> Показать/Скрыть неотображаемые переменные
+      </listitem><listitem><keycap moreinfo="none">Пробел</keycap> Изменить цвет переменной под курсором
+      </listitem><listitem><keycap moreinfo="none">Backspace</keycap> Убрать переменную из списка отображаемых
+      </listitem></itemizedlist></sect2></sect1><sect1 id="spectra"><title lang="ru">Спектры </title><para lang="ru">
+    Программа Спектры предназначена для отображения параметров, измеряемых спектрометрами комплекса, в виде графиков.
+    Общий вид панели спектров следующий.
+  </para><figure float="0"><title lang="ru">Спектры</title><mediaobject><imageobject><imagedata fileref="images/spectra" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/spectra.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Окно спектров состоит из двух частей:
+  </para><itemizedlist lang="ru"><listitem>Зона просмотра спектров</listitem><listitem>Зона просмотра счета в окнах</listitem></itemizedlist><para lang="ru"> 
+     Программа позволяет выбирать интервал отображения, время накопления, разрешение отображаемых спектров, включать/выключать визуализацию того или иного спектра, ставить маркеры, выбирать до десяти окон для контроля счета и задавать шкалу для их графиков, наблюдать суммарный спектр. Можно использовать курсор для выбора каналов, он подписан номером канала и текущим значением вертикальной шкалы, которое выбирается автоматически. Состояние каждого спектра отображается в строке соответствующего цвета:
+    <itemizedlist><listitem>
+	"on" - спектр получен и отображается
+      </listitem><listitem>
+	"off" - спектр получен, но не отображается (не учитывается при отображении окон счета)
+      </listitem><listitem>
+	"no data" - спектр не получен (не зависит от режима визуализации) 
+      </listitem></itemizedlist>
+Каждый график счета озоглавлен строками "левая граница - правая граница" и "суммарный счет окна для текущего отсчета/текущий масштаб".
+Для спектров некоторых устройств (GRS410, ГСА2000) отображается режим работы алгоритма стабилизации (L(свет), T (торий), U (уран), K (калий), A (анализ), 0 (детектор не подключен)).
+  </para><sect2><title lang="ru">Управление визуализацией спектров</title><para lang="ru">
+    Возможны следующие настройки отображения:
+    <itemizedlist><listitem><constant>Выбрать спектр</constant>: нажать <keycap moreinfo="none">номер спектра</keycap> (1,2,3,...,0(10), Alt 1(11),...,Alt Ctrl 1(21),...);
+	выделенный спектр помечается '*'
+      </listitem><listitem><constant>Включить/выключить спектр</constant>: нажать <keycap moreinfo="none">Ввод</keycap> для включения/отключения визуализации всех выбранных спектров
+      </listitem><listitem><constant>Изменить цвет спектра</constant>: нажать <keycap moreinfo="none">Пробел</keycap> для изменения цвета всех выбранных спектров
+      </listitem><listitem><constant>Время накопления</constant>: нажать <keycap moreinfo="none">T</keycap> для переключениями между 1, 20 или 100 отсчетов
+      </listitem><listitem><constant>Разрешение спектров</constant>: нажать <keycap moreinfo="none">R</keycap> для переключения между 1, 2 или 4 каналов на точку; например, спектры на 1024 канала могут просматриваться в режиме 512 (суммирование по 2) или 256 каналов (суммирование по 4) 
+      </listitem><listitem><constant>Левая граница</constant>: нажать <keycap moreinfo="none">,</keycap> для уменьшения или <keycap moreinfo="none">Alt+,</keycap> для увеличения номера канала, приписанного к левой границе зоны просмотра; нажать <keycap moreinfo="none">Ctrl</keycap> для ускорения
+      </listitem><listitem><constant>Правая граница</constant>: нажать <keycap moreinfo="none">.</keycap> для увеличения или <keycap moreinfo="none">Alt+.</keycap> для уменьшения номера канала, приписанного к правой границе зоны просмотра; нажать <keycap moreinfo="none">Ctrl</keycap> для ускорения
+      </listitem><listitem><constant>Просматривать все каналы</constant>: нажать <keycap moreinfo="none">Ctrl+Z</keycap>
+      </listitem><listitem><constant>Просматривать только выделенные каналы</constant>: нажать <keycap moreinfo="none">Ctrl+V</keycap>
+      </listitem><listitem><constant>Скрыть/показать зону просмотра окон счета</constant>: нажать <keycap moreinfo="none">Ctrl+H</keycap>
+      </listitem><listitem><constant>Двигать границу зоны просмотра окон счета</constant>: нажать <keycap moreinfo="none">Вверх</keycap> или <keycap moreinfo="none">Вниз</keycap>, использовать <keycap moreinfo="none">Ctrl</keycap> для ускорения
+      </listitem><listitem><constant>Выделить/снять выделение окна счета</constant>: нажать <keycap moreinfo="none">индекс окна</keycap> (a,b,c,...)
+      </listitem><listitem><constant>Добавить/удалить окно счета</constant>: нажать <keycap moreinfo="none">Ctrl+Insert</keycap> для добавления выделенной зоны или <keycap moreinfo="none">Ctrl+Delete</keycap> для удаления выделенных окон и/или всего, что вошло в выделенную зону
+      </listitem><listitem><constant>Добавить/удалить маркер</constant>: нажать <keycap moreinfo="none">Ctrl+Insert</keycap> для добавления или <keycap moreinfo="none">Ctrl+Delete</keycap> для удаления маркера (если нет выделенной зоны)
+      </listitem><listitem><constant>Изменить масштаб графика окна счета</constant>: нажать <keycap moreinfo="none">+</keycap>/<keycap moreinfo="none">-</keycap> для увеличения/уменьшения масштаба выделенных графиков
+      </listitem></itemizedlist>
+  </para><para lang="ru">
+	Суммарный спектр (sum) отображает сумму всех визуализируемых и включенных спектров. Он также может быть включен/выключен.
+  </para></sect2><sect2><title lang="ru">Горячие клавиши</title><para lang="ru">
+    Доступны следующие клавиши:
+    <itemizedlist><listitem><keycap moreinfo="none">F1</keycap> - вызов справки
+      </listitem><listitem><keycap moreinfo="none">1</keycap>, <keycap moreinfo="none">2</keycap>, <keycap moreinfo="none">3</keycap>, ..., <keycap moreinfo="none">0</keycap> - выделение/снятие выделения соответствующего спектра
+			от 1 до 10
+      </listitem><listitem><keycap moreinfo="none">Alt+1</keycap>, <keycap moreinfo="none">Alt+2</keycap>, <keycap moreinfo="none">Alt+3</keycap>, ..., <keycap moreinfo="none">Alt+0</keycap> - 
+		выделение/снятие выделения соответствующего спектра от 11 до 20
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Alt+1</keycap>, <keycap moreinfo="none">Ctrl+Alt+2</keycap>, <keycap moreinfo="none">Ctrl+Alt+3</keycap>, ..., <keycap moreinfo="none">Ctrl+Alt+0</keycap> - 
+		выделение/снятие выделения соответствующего спектра от 21 до 30
+      </listitem><listitem><keycap moreinfo="none">Ввод</keycap> - включение/выключение визуализации всех выделенных спектров
+      </listitem><listitem><keycap moreinfo="none">Пробел</keycap> - изменение цвета всех выделенных спектров
+      </listitem><listitem><keycap moreinfo="none">a</keycap>, <keycap moreinfo="none">b</keycap>, <keycap moreinfo="none">c</keycap>, ... - выделение/снятие выделения с соответствующего окна счета
+      </listitem><listitem><keycap moreinfo="none">Влево</keycap>, <keycap moreinfo="none">Вправо</keycap>, <keycap moreinfo="none">Ctrl+Влево</keycap>, <keycap moreinfo="none">Ctrl+Вправо</keycap>,  <keycap moreinfo="none">Home</keycap>, <keycap moreinfo="none">End</keycap>  - движение курсора на 1 канал, на 20 каналов или до границы зоны просмотра
+      </listitem><listitem><keycap moreinfo="none">Shift+Влево</keycap>, <keycap moreinfo="none">Shift+Вправо</keycap>, <keycap moreinfo="none">Shift+Ctrl+Влево</keycap>, <keycap moreinfo="none">Shift+Ctrl+Вправо</keycap>,  <keycap moreinfo="none">Shift+Home</keycap>, <keycap moreinfo="none">Shift+End</keycap>  - движение курсора с выделением на 1 канал, на 20 каналов или до границы зоны просмотра 
+      </listitem><listitem><keycap moreinfo="none">Вверх</keycap>, <keycap moreinfo="none">Вниз</keycap>, <keycap moreinfo="none">Ctrl+Вверх</keycap>, <keycap moreinfo="none">Ctrl+Вниз</keycap> - движение горизонтального разделителя на 1 или на 20 точек
+      </listitem><listitem><keycap moreinfo="none">','</keycap>, <keycap moreinfo="none">Ctrl+','</keycap> - уменьшить левую границу на 1 или на 20
+      </listitem><listitem><keycap moreinfo="none">Alt+','</keycap>, <keycap moreinfo="none">Alt+Ctrl+','</keycap> - увеличить левую границу на 1 или на 20
+      </listitem><listitem><keycap moreinfo="none">'.'</keycap>, <keycap moreinfo="none">Ctrl+'.'</keycap> - увеличить правую границу на 1 или на 20
+      </listitem><listitem><keycap moreinfo="none">Alt+'.'</keycap>, <keycap moreinfo="none">Alt+Ctrl+'.'</keycap> - уменьшить правую границу на 1 или на 20
+      </listitem><listitem><keycap moreinfo="none">+</keycap>, <keycap moreinfo="none">-</keycap> - увеличить/уменьшить масштаб выделенных окон счета
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Insert</keycap> - добавить маркер в текущей позиции курсора или добавить окно счета для текущего выделения
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Delete</keycap> - удалить маркер в текущей позиции курсора, удалить выделенные окна счета и/или все маркеры и окна счета внутри выделения
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> - скрыть/показать зону графиков окон счета
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Z</keycap> - просматривать все каналы спектров
+      </listitem><listitem><keycap moreinfo="none">Ctrl+V</keycap> - просматривать только выделенные каналы спектров
+      </listitem><listitem><keycap moreinfo="none">T</keycap> - переключать время накопления спектров: 1/20/100 отсчетов
+      </listitem><listitem><keycap moreinfo="none">R</keycap> - переключать разрешение при отображении спектров: каждый канал/просуммированные парами/просуммированные четверками
+      </listitem></itemizedlist>
+  </para></sect2></sect1><sect1 id="em4h_control"><title>EM4H </title><para lang="ru">
+    Эта программа позволяет контролировать параметры аэроэлектроразведочной системы EM4H и управлять ее работой.
+  </para><figure id="em4h-panel" float="0"><title>EM4H</title><mediaobject><imageobject><imagedata fileref="images/em4h" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/em4h.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+    Окно программы состоит из трех частей:
+  </para><itemizedlist lang="ru"><listitem>Управление возбуждением</listitem><listitem>Управление компенсацией</listitem><listitem>Цифровая панель</listitem></itemizedlist><para lang="ru"> 
+     Программа позволяет включать/выключать частоты возбуждения, выполнять компенсацию влияния летательного аппарата, 
+     просматривать в различных режимах значения измеряемых параметров и выводить их в панель самописца.
+  </para><sect2><title lang="ru">Управление возбуждением</title><para lang="ru">
+    Возможны следующие операции:
+    <itemizedlist><listitem><constant>Включить/выключить частоту</constant>: нажать <keycap moreinfo="none">F*</keycap>. * соответствует номеру частоты:
+	    <itemizedlist><listitem>
+		    F0 - 130 Гц, 0-я рабочая частота возбуждения в основной петле
+		</listitem><listitem>
+		    F1 - 520 Гц, 1-я рабочая частота возбуждения в основной петле
+		</listitem><listitem>
+		    F2 - 2080 Гц, 2-я рабочая частота возбуждения в основной петле
+		</listitem><listitem>
+		    F3 - 8320 Гц, 3-я рабочая частота возбуждения в основной петле
+		</listitem><listitem>
+		    FCO - 667 Гц, рабочая частота возбуждения в петле компенсатора
+		</listitem><listitem>
+		    FC1 - 833 Гц, рабочая частота возбуждения в дополнительной петле компенсатора (только в варианте установки на Ми-8)
+		</listitem></itemizedlist>
+      </listitem><listitem><constant>Включить все частоты</constant>: нажать <keycap moreinfo="none">All on</keycap> чтобы включить возбуждение на всех частотах
+      </listitem><listitem><constant>Выключить все частоты</constant>: нажать <keycap moreinfo="none">All off</keycap> чтобы выключить возбуждение на всех частотах
+      </listitem></itemizedlist>
+  </para><para lang="ru">
+	Следует иметь ввиду, что состояние кнопок включения/выключения зависит от данных, которые получены. 
+	В частности, кнопка будет отображаться, как нажатая, только когда программа получит подтверждение от приброра, что соответствующая частота включена.
+	При этом один из индикаторов на кнопке (правый) загорится зеленым. Второй индикатор загорится синим только после того, как амплитуда напряжения или тока 
+	в петле генератора на соответствующей частоте превысит минимально допустимое значение.
+	Если хотя бы один индикатор красный - система не работает.
+  </para></sect2><sect2><title lang="ru">Управление компенсацией</title><para lang="ru">
+    Возможны следующие операции:
+    <itemizedlist><listitem><constant>Включить/выключить отбор</constant>: нажать <keycap moreinfo="none">Sample</keycap>, чтобы начать/остановить отбор данных для компенсации.
+      </listitem><listitem><constant>Очистить</constant>: нажать <keycap moreinfo="none">Clear</keycap>, чтобы сбросить все отобранные данные и начать отбор заново.
+      </listitem><listitem><constant>Компенсация</constant>: нажать <keycap moreinfo="none">Fix</keycap>, чтобы использовать текущий набор данных для вычисления параметров компенсации.
+      </listitem></itemizedlist>
+  </para><para lang="ru">
+    Ниже представлены счетчики:
+    <itemizedlist><listitem><constant>Количество данных, поступивших на вход процедуры компенсации</constant>: <keycap moreinfo="none">total</keycap>.
+      </listitem><listitem><constant>Количество отбракованных данных</constant>: <keycap moreinfo="none">rejected</keycap>.
+      </listitem><listitem><constant>Количество данных, учтенных в текущих параметрах компенсации</constant>: <keycap moreinfo="none">used</keycap>.
+      </listitem></itemizedlist>
+  </para><para lang="ru">
+	Процесс компенсации представляется следующим образом: на значительной высоте
+	полета, где влиянием земли можно пренебречь (600-700м), выполняется накопление
+	данных для компенсации. Для этого следует:
+    <itemizedlist><listitem>
+		Очистить выборку, нажав <keycap moreinfo="none">Clear</keycap>. Все счетчики обнуляются.
+      </listitem><listitem>
+		Запустить отбор, нажав <keycap moreinfo="none">Sample</keycap>. После этого начнет менятся счетчик <keycap moreinfo="none">total</keycap> и, возможно, <keycap moreinfo="none">rejected</keycap>.
+      </listitem><listitem>
+	Выполнить серию качаний гондолы по тангажу и крену так, чтобы гондола
+	побывала в различных точках поля относительно самолета. Выполнение этой
+	операции требует от оператора некоторого опыта и согласованных действий
+	пилота. Операция накопления обычно занимает несколько минут.
+      </listitem><listitem>
+	После того, как данные контрольной выборки будут накоплены, и счетчик
+	накопленных значений <keycap moreinfo="none">total</keycap> будет на разумное число отсчетов превосходить счетчик <keycap moreinfo="none">rejected</keycap>, 
+	следует зафиксировать выборку, нажав <keycap moreinfo="none">Fix</keycap>. При этом счетчик данных, использованных для вычисления параметров компенсации
+	показывается в поле <keycap moreinfo="none">used</keycap>.
+      </listitem><listitem>
+		Если качество компенсации удовлетворяет, можно остановить отбор, нажав <keycap moreinfo="none">Sample</keycap> еще раз. 
+		Счетчики <keycap moreinfo="none">total</keycap> и <keycap moreinfo="none">rejected</keycap> перестанут менятся.
+      </listitem></itemizedlist>
+  </para><para lang="ru">
+	Следует отметить, что на борту летательного аппарата режим компенсации необходим только для того, 
+	чтобы оператор убедился в работоспособности аппаратуры в наиболее сложном режиме. 
+	Накопление и обнуление счетчиков никакого влияния на записываемые данные не оказывает.
+  </para><para lang="ru">
+	Программа "NavDat" сохраняет последние вычисленные параметры компенсации в своей системной директории.
+	При очередном запуске "NavDat", если не менялся тип летательного аппарата в настройках устройства EM4H (см. <xref linkend="dev_em4h"/>),  
+	параметры будут автоматически загружены. В этом случае счетчики <keycap moreinfo="none">total</keycap> и <keycap moreinfo="none">rejected</keycap> 
+	будут нулевые, а <keycap moreinfo="none">used</keycap>  - отличен от нуля.
+  </para></sect2><sect2><title lang="ru">Работа с цифровой панелью</title><para lang="ru">
+	Цифровая панель позволяет контролировать все измерения системы в виде чисел.
+	Она отображает три матрицы:
+    <itemizedlist><listitem><keycap moreinfo="none">operating frequencies</keycap> - матрица сигналов на рабочих частотах F*.
+      </listitem><listitem><keycap moreinfo="none">left piloting</keycap> - матрица контрольных сигналов (левое пилотирование) на частотах F*-6 Гц.
+      </listitem><listitem><keycap moreinfo="none">right piloting</keycap> - матрица контрольных сигналов (правое пилотирование) на частотах F*+6 Гц.
+      </listitem></itemizedlist>
+	Каждая частота представлена парой столбцов (выделены одним цветом), показывающих либо синфазную и квадратурную компоненты {Re F*, Im F*},
+	либо амплитуду и фазу сигнала: {Amp F*, Ph F*}.	По строкам различаются мерители:
+    <itemizedlist><listitem><keycap moreinfo="none">X, Y, Z</keycap> - оси чувствительности приемника EM4H.
+      </listitem><listitem><keycap moreinfo="none">U</keycap> - напряжение на основной петле.
+      </listitem><listitem><keycap moreinfo="none">I</keycap> - ток в основной петле (для установки на Ан-2 или Ми-8) для частот F0-F3 и в петлях компенсаторов для, соответственно, FC0 и FC1.
+	   При установке в варианте Ан-3 на частотах F0-F3 в этом канале измеряется сигнал дополнительной катушки компенсации, установленной на стингере.
+      </listitem></itemizedlist>
+	В случае, когда какой-либо АЦП в зашкале, соответствующие поля матриц будут окрашены красным, как канал I в приведенном примере (см. <xref linkend="em4h-panel"/>).
+  </para><para lang="ru">
+	Два флага, расположенные в верхней части панели, позволяют выбрать черыре варианта отображения:		
+    <itemizedlist><listitem><keycap moreinfo="none">compensated</keycap> - устанавливается по <keycap moreinfo="none">Alt+C</keycap>. 
+      </listitem></itemizedlist>
+	Если этот флаг установлен, отображаются скомпенсированные данные.
+	При этом все сигналы матрицы <keycap moreinfo="none">operating frequencies</keycap> нормируются на единицу на момент нажатия <keycap moreinfo="none">Fix</keycap> или <keycap moreinfo="none">Clear</keycap>.
+	В дальнейшем коэффициенты нормировки не меняются до очередного нажатия одной из этих кнопок. Если текущих параметров компенсации нет 
+	(счетчик <keycap moreinfo="none">used</keycap> = 0), выполняется только нормировка. Параметры X, Y, Z нормируются как вектор, т.е. X²+Y²+Z² = 1, 
+	а параметры U и I - как скаляры.
+	При этом ноль фазы в приемнике отвечает фазе сигнала возбуждения (фазе большой полуоси эллипса поляризации на момент нормировки).
+	Фаза в каналах U и I до нуля не доворачивается.
+	Отображение матриц пилотирования также меняется - показывается результат применения цифрового фильтра, но нормировка не выполняется.	
+  </para><para lang="ru">
+	Если этот флаг не установлен, отображаются данные, полученные непосредственно с прибора. 
+	Значение компонент соответствует единицам 16-ти разрядного АЦП.	
+  </para><para lang="ru"><itemizedlist><listitem><keycap moreinfo="none">polar form</keycap>  - устанавливается по <keycap moreinfo="none">Alt+M</keycap>. 
+      </listitem></itemizedlist>
+	Если этот флаг установлен, отображаются амплитуды и фазы сигналов {Amp F*, Ph F*}. В случае установленного флага <keycap moreinfo="none">compensated</keycap> и 
+	отсутствия параметров компенсации (счетчик <keycap moreinfo="none">used</keycap> = 0)
+	фаза сигналов приемника соответствует фазе большой полуоси эллипса поляризации на момент нажатия <keycap moreinfo="none">Clear</keycap> или на момент начала работы программы.
+	В случае не установленного флага <keycap moreinfo="none">compensated</keycap> фаза никак не изменяется.
+  </para><para lang="ru">
+	Если этот флаг не установлен, данные отображаются в формате комплексного числа: Re F* - синфазная компонента, Im F* - квадратурная. 
+	Важно помнить, что при снятом флаге <keycap moreinfo="none">compensated</keycap> синфазная компонента соответствует нулю фазы данного мерителя, а не поля возбуждения.
+  </para><para lang="ru">
+	Панель позволяет добавить любой из параметров в любом из форматов, определяемых флагами <keycap moreinfo="none">compensated</keycap> и <keycap moreinfo="none">polar form</keycap>,
+	в качестве переменной самописца (см. <xref linkend="variables_em4h"/>). Для этого следует выделить нужные параметры и нажать <keycap moreinfo="none">Ctrl+Insert</keycap>: 
+	они появятся в списке переменных самописца.
+	При выделении нескольких переменных в пределах одной матрицы можно пользоваться стрелками с нажатой клавишей <keycap moreinfo="none">Shift</keycap>.
+	Также можно, удерживая <keycap moreinfo="none">Ctrl</keycap>, перемещать курсор, нажимая пробел для выделения очередного параметра.
+	Переменная, добавленная в самописец, помечается символом "•".
+	Удалить переменную из списка самописца можно выделив ее в соответствующей матрице и нажав  <keycap moreinfo="none">Ctrl+Delete</keycap>.
+  </para><para lang="ru">
+	Программа позволяет скрыть матрицы сигналов пилотирования (<keycap moreinfo="none">Ctrl+P</keycap>) или всю цифровую панель (<keycap moreinfo="none">Ctrl+H</keycap>).
+  </para><figure float="0"><title lang="ru">EM4H - компактный вид</title><mediaobject><imageobject><imagedata fileref="images/em4h-compact" format="EPS" scale="30" align="left"/></imageobject><imageobject><imagedata fileref="images/em4h-compact.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2><title lang="ru">Горячие клавиши</title><para lang="ru">
+    Доступны следующие клавиши:
+    <itemizedlist><listitem><keycap moreinfo="none">F1</keycap> - вызов справки
+      </listitem><listitem><keycap moreinfo="none">Tab</keycap> - переключение между элементами (кнопки, флаги, матрицы)
+      </listitem><listitem><keycap moreinfo="none">Ctrl+Tab</keycap> - переключение между частями окна (управление возбуждением, управление компенсацией, цифровая панель)
+      </listitem><listitem><keycap moreinfo="none">Alt+C</keycap> - включить/выключить режим просмотра скомпенсированных значений в цифровой панели (флаг <keycap moreinfo="none">compensated</keycap>)
+      </listitem><listitem><keycap moreinfo="none">Alt+M</keycap> - переключение режима просмотра значений: синфазные-квадратурные компоненты или амплитуда-фаза (флаг <keycap moreinfo="none">polar form</keycap>)
+      </listitem><listitem><keycap moreinfo="none">Ctrl+P</keycap> - скрыть/показать матрицы пилотирования
+      </listitem><listitem><keycap moreinfo="none">Ctrl+H</keycap> - скрыть/показать цифровую панель
+      </listitem><listitem><keycap moreinfo="none">Ctrl+T</keycap> - скрыть/показать панель управления возбуждением/компенсацией
+      </listitem></itemizedlist>
+  </para></sect2></sect1><sect1 id="tvisor"><title lang="ru">Панель Тепловизор</title><sect2><title lang="ru">Параметры изображения</title><para lang="ru">
+      При работе с тепловизором можно видеть
+      снимаемое изображение в реальном времени.
+      Для этого предназначена панель тепловизора.
+    </para><figure float="0"><title lang="ru">Изображение и параметры тепловизора</title><mediaobject><imageobject><imagedata fileref="images/tvisor" format="EPS" scale="50"/></imageobject><imageobject><imagedata fileref="images/tvisor.png" format="PNG"/></imageobject></mediaobject></figure></sect2><sect2 id="tvisor_hotkeys"><title lang="ru">Управление панелью тепловизора</title><itemizedlist lang="ru"><listitem><keycap moreinfo="none">Ctrl-H</keycap> Показать/скрыть параметры настройки изображения
+      </listitem><listitem><keycap moreinfo="none">Ctrl-L</keycap> Показать/скрыть дополнительные параметры
+      </listitem></itemizedlist><para lang="ru">
+      В верхней строке панели расположены регуляторы, позволяющие изменять параметры выводимого изображения. 
+      Значения этих параметров никак не сказываются на записываемых данных.
+      С точки зрения управления первые три параметра одинаковы (Brightness, Contrast, Zoom).
+      Для изменения значения надо установить курсор на соответствующий параметр,
+      используя клавиши <keycap moreinfo="none">Tab</keycap>,
+      <keycap moreinfo="none">Shift-Tab</keycap> или <keycap moreinfo="none">Alt-&lt;символ с подчеркиванием, соответствующий нужному параметру&gt;</keycap>,
+      например для contrast: <keycap moreinfo="none">Alt-C</keycap>.
+      Параметр Position позволяет выбрать отображаемую часть строки.
+      Включенный Br.Fix означает коррекцию яркости, т.е. среднее значение по строке будет приводиться к нулю, это позволяет не видеть прогрев головки тепловизора.
+      Кнопка Pause позволяет остановить отрисовку изображения.
+    </para><para lang="ru">
+      Отображаемые в строке состояния параметры (слева направо):
+      <itemizedlist><listitem>
+	  лампа PPS, должна моргать 1 раз в секунду, это означает нормальную синхронизацию данных;
+	</listitem><listitem>
+	  N2 — наличие азота, должна стоять галочка;
+	</listitem><listitem>
+	  Missed — количество пропущенных строк изображения; даже если после каких-то манипуляций с проводами это число не 0, оно не должно меняться;
+	</listitem><listitem>
+	  Sens — «чувствительность», приблизительно вычисляемый параметр; при нормальной работе должен составлять величину порядка 0,05; зависит от температуры;
+	</listitem><listitem>
+	  Freq — частота, должна быть около 200 Гц;
+	</listitem><listitem>
+	  RMS — индикатор шума изображения, нормальное значение — от 1 до 2;
+	</listitem><listitem>
+	  Temp — температура головки оптического блока, должна иметь правдоподобное значение;
+	</listitem><listitem>
+	  Ralt — значение радиовысоты; проверяется при включенном приборе.
+	</listitem></itemizedlist>
+    </para></sect2><sect2 id="gyros"><title lang="ru">Окно индикатора системы ориентации</title><figure float="0"><title lang="ru">Система ориентации</title><mediaobject><imageobject><imagedata fileref="images/gyros" format="EPS" scale="30"/></imageobject><imageobject><imagedata fileref="images/gyros.png" format="PNG"/></imageobject></mediaobject></figure><para lang="ru">
+      Программа позволяет управлять визуализацией параметров инерциальной системы ориентации тепловизора.
+      Сфокусировавшись на поле "Arrester" нажмите <keycap moreinfo="none">Enter</keycap>  при этом гироскопический курс установлен равным путевому углу,
+      а крен и тангаж приводятся в соответствие с показаниями акселерометров. 
+      Сразу после этого система вновь будет работать в автономном режиме, и можно визуально контролировать ее показания.
+    </para><para lang="ru">
+      Благодаря описанному выше режиму не требуется продолжительная выставка перед полетом.
+      Однако, программа допускает такую возможность.
+      Для этого предусмотрена кнопка <constant>Gyrocompass</constant>.
+      При ее включении система начинает оценивать измеренные векторы силы тяжести и угловой скорости Земли.
+      Для корректной работы необходима полная неподвижность корпуса тепловизора.
+      При выключении система начинает работать в автономном режиме.
+      Этот режим имеет смысл только для контроля работоспособности чувствительных элементов системы.
+    </para><warning lang="ru"><title/>
+      Управление инерциальной системой ориентации никак не сказывается на записываемых данных.
+    </warning></sect2></sect1><appendix id="hotkeys" role="cvs"><title lang="ru">Горячие клавиши (Доступны из любого контекста)</title><sect2 id="hotkeys_desktop"><title lang="ru">Управление рабочим пространством и окнами</title><itemizedlist lang="ru"><listitem><keycap moreinfo="none">Alt-F1</keycap>
+	Меню приложений
+      </listitem><listitem><keycap moreinfo="none">Alt-Tab</keycap>
+	Переключение между окнами
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-влево</keycap>, 
+	<keycap moreinfo="none">Ctrl-Alt-вправо</keycap>
+	Переместиться на рабочее место влево, вправо.
+      </listitem><listitem><keycap moreinfo="none">Alt-F4</keycap>
+	Закрыть окно/приложение
+      </listitem><listitem><keycap moreinfo="none">Alt-F8</keycap>
+	Изменить размер окна: используйте стрелки для изменения; если нажать Shift, границы будут выравниваться с границами соседних окон; в конце намите Enter
+      </listitem><listitem><keycap moreinfo="none">Alt-F7</keycap>
+	Переместить окно: используйте стрелки для перемещения; если нажать Shift, границы будет выставляться по границам соседних окон; в конце намите Enter
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-S</keycap>
+	Сохранить настройки программ (Положение на экране).
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-R</keycap>
+	Восстановить сохраненное состояние программ "NavDat" и запустить бортовой сервер, если он не был запущен ранее
+      </listitem></itemizedlist></sect2><sect2 id="appendix_hotkeys_nav"><title lang="ru">Навигация</title><itemizedlist lang="ru"><listitem><keycap moreinfo="none">Ctrl-Alt-Q</keycap>
+	Увеличить масштаб панорамы, для всех приложений 'панорама' на текущем рабочем месте
+      </listitem><listitem><keycap moreinfo="none">Ctrl-Alt-A</keycap>
+	Уменьшить масштаб панорамы, для всех приложений 'панорама' на текущем рабочем месте
+      </listitem><listitem><keycap moreinfo="none">Ctrl-K</keycap>
+	Прекратить проводку по маршруту, если таковая осуществлялась(<xref linkend="sect-fplan-setup"/>).
+      </listitem><listitem><keycap moreinfo="none">Ctrl-F</keycap>
+	Запись координат текущей точки(<xref linkend="sect-pos-fix"/>).
+      </listitem></itemizedlist></sect2></appendix><appendix id="variables"><title lang="ru">Переменные самописца</title><sect2 id="variables_sys"><title lang="ru">Системные переменные</title><itemizedlist lang="ru"><listitem>
+      sys::bytes_written - объем записанных данных в текущей сессии (в байтах)
+      </listitem><listitem>
+      sys::write_errors - число ошибок записи
+      </listitem><listitem>
+      sys::write_error - флаг ошибки записи
+      </listitem><listitem>
+      sys::storage_total - объем используемого для записи диска (в байтах)
+      </listitem><listitem>
+      sys::storage_avail - свободный объем используемого для записи диска (в байтах)
+      </listitem></itemizedlist></sect2><sect2 id="variables_fplan"><title lang="ru">Переменные выполнения полетного задания</title><itemizedlist lang="ru"><listitem>
+      fplan::arrow - значение горизонтального указателя пилота в диапазоне от 0 до 100 (50 соответствует нулевому отклонению)
+      </listitem><listitem>
+      fplan::varrow - значение вертикального указателя пилота в диапазоне от 0 до 100 (50 соответствует нулевому отклонению)
+      </listitem><listitem>
+      fplan::lamp - текущее состояние лампы индикатора пилота: 0 - красный, 100 - зеленый (цвета могут быть инвертированы для конкретного указателя)
+      </listitem><listitem>
+      fplan::XTE - боковое уклонение в метрах
+      </listitem></itemizedlist></sect2><sect2 id="variables_pos"><title lang="ru">Переменные навигации (посылка $POS dlg-файла)</title><itemizedlist lang="ru"><listitem>
+      pos::time_ms - время от начала дня в миллисекундах
+      </listitem><listitem>
+      pos::year - текущий год
+      </listitem><listitem>
+      pos::month - текущий месяц
+      </listitem><listitem>
+      pos::day - текущий день
+      </listitem><listitem>
+      pos::siu - число видимых спутников
+      </listitem><listitem>
+      pos::lat - широта в градусах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </listitem><listitem>
+      pos::lon - долгота в градусах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </listitem><listitem>
+      pos::alt - высота в мектрах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </listitem><listitem>
+      pos::lat_r - широта в радианах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </listitem><listitem>
+      pos::lon_r - долгота в радианах для WGS84 или другого геоида, выбранного в приемнике ГНСС
+      </listitem><listitem>
+      pos::track_r - текущий курс в радианах
+      </listitem><listitem>
+      pos::track - текущий курс в градусах
+      </listitem><listitem>
+      pos::hvel - горизонтальная скорость в м/сек
+      </listitem><listitem>
+      pos::pdop - PDOP
+      </listitem><listitem>
+      pos::ralt - навигационная высота в метрах (может быть радиовысота или какая-то другая в зависимости от настроек)
+      </listitem><listitem>
+      pos::ralt_on - флаг навигационной высоты (если 0, используется высота, измеренная ГНСС-приемником, в зависимости от настроек)
+      </listitem></itemizedlist></sect2><sect2 id="variables_gps"><title lang="ru">Переменные ГНСС-приемника Javad/Topcon/Novatel</title><itemizedlist lang="ru"><listitem>
+      gps::Lattitude - географическая широта в градусах
+      </listitem><listitem>
+      gps::Longitude - географическая долгота в градусах
+      </listitem><listitem>
+      gps::Altitude - географическая высота в метрах
+      </listitem><listitem>
+      gps::HorVel - горизонтальная скорость в м/сек
+      </listitem><listitem>
+      gps::TrakG - путевой угол в радианах
+      </listitem><listitem>
+      gps::VisSatNum - число видимых спутников
+      </listitem><listitem>
+      gps::WeekTime - время от начала недели в секундах
+      </listitem><listitem>
+      gps::rectime - GPS время от начала дня в миллисекундах
+      </listitem><listitem>
+      gps::HHMMSS - GPS время в формате HHMMSS
+      </listitem><listitem>
+      gps::NavErrors - число ошибок в потоке данных
+      </listitem><listitem>
+      gps::PDOP - PDOP
+      </listitem><listitem>
+      gps::nodata - флаг данных ГНСС, 1 если нет данных, иначе 0
+      </listitem><listitem>
+      gps::nopos - флаг координат ГНСС, 1 если нет координат, иначе 0
+      </listitem></itemizedlist></sect2><sect2 id="variables_gtmag"><title lang="ru">Переменные ГТ-Маг</title><itemizedlist lang="ru"><listitem>
+      gtmag::current* - ток датчика в миллиамперах, * - номер канала
+      </listitem><listitem>
+      gtmag::signal* - сигнал датчика в милливольтах, * - номер канала
+      </listitem><listitem>
+      gtmag::mag* - значение магнитного поля (нТл), * - номер канала
+      </listitem><listitem>
+      gtmag::dif_4* - значение ненормализованной 4-й разности магнитного поля (нТл), * - номер канала
+      </listitem><listitem>
+      gtmag::pps - счетчик сигналов синхронизации ГНСС приемника (PPS)
+      </listitem><listitem>
+      gtmag::magc - скомпенсированное значение магнитного поля (нТл)
+      </listitem><listitem>
+      gtmag::batt - входное напряжение в милливольтах
+      </listitem><listitem>
+      gtmag::outV - выходное напряжение (питание датчика) в милливольтах
+      </listitem><listitem>
+      gtmag::siu - число видимых спутников
+      </listitem><listitem>
+      gtmag::fx(fy,fz) - компоненты, измеренные феррозондом (нТл)
+      </listitem><listitem>
+      gtmag::magf - значение поля после фильтрации (нТл), для работы с Экватором
+      </listitem><listitem>
+      gtmag::fdif - значение ненормализованной 4-й разности магнитного поля после фильтрации (нТл), для работы с Экватором
+      </listitem><listitem>
+      gtmag::ra - радиовысота в метрах
+      </listitem></itemizedlist></sect2><sect2 id="variables_em4h"><title lang="ru">Переменные EM4H</title><itemizedlist lang="ru"><listitem>
+      em4h::frnum - номер текущего блока данных (меняется от 0 до 6399)
+      </listitem><listitem>
+      em4h::err_cksum - число ошибок контрольных сумм в потоке данных между EM4H и бортовым компьютером
+      </listitem><listitem>
+      em4h::err_cable - число ошибок в потоке данных между приемником и передатчиком EM4H
+      </listitem><listitem>
+      em4h::err_frnum - число пропущенных блоков
+      </listitem><listitem>
+      em4h::Ellipticity_F* - значение эллиптичности (отношения полуосей эллипса поляризации) для частоты F* (* = 0, ... ,3) 
+      </listitem><listitem>
+      em4h::Max* - текущее значение максимума соответствующего АЦП (* = X,Y,Z - приемник, GU напряжение на основной петле, GI - ток в основной петле, 
+		C0I - ток в петле первого компенсатора, C1I - ток в петле второго компенсатора), зашкал - 32768.
+      </listitem><listitem>
+      em4h::Bird_27V - напряжение 27В, измеренное в приемнике
+      </listitem><listitem>
+      em4h::Bird_10V - напряжение 10В, измеренное в приемнике
+      </listitem><listitem>
+      em4h::Bird_1.2V - напряжение 1.2В, измеренное в приемнике
+      </listitem><listitem>
+      em4h::Bird_LogicV - напряжение, отвечающее логической единице в приемнике
+      </listitem><listitem>
+      em4h::Bird_Empty - резервный канал
+      </listitem><listitem>
+      em4h::Bird_BoardID - идентификатор блока электроники приемника
+      </listitem><listitem>
+      em4h::Bird_SensorID - идентификатор датчика
+      </listitem><listitem>
+      em4h::Bird_BoardTC - температура электроники в приемнике (град. C)
+      </listitem><listitem>
+      em4h::Tran_27V - напряжение 27В, измеренное в передатчике
+      </listitem><listitem>
+      em4h::Tran_BirdV - напряжение питания приемника, измеренное в передатчике 
+      </listitem><listitem>
+      em4h::Tran_1.2V - напряжение 1.2В, измеренное в передатчике
+      </listitem><listitem>
+      em4h::Tran_SignalV - амплитуда сигнала приемника (мВ)
+      </listitem><listitem>
+      em4h::Tran_BirdCurrent - ток потребления приемника (мА)
+      </listitem><listitem>
+      em4h::Tran_BoardID - идентификатор электроники передатчика
+      </listitem><listitem>
+      em4h::Tran_RA - значение высоты (м)
+      </listitem><listitem>
+      em4h::Tran_PowerTC - температура силовой электроники передатчика (град. C)
+      </listitem><listitem>
+      em4h::aaa_bbb_ccc_ddd - данные EM4H, выбранные пользователем: 
+				    <itemizedlist><listitem>
+					 aaa - dat (рабочие данные), lpil (сигнал левого) или rpil (правого пилотирования);
+				      </listitem><listitem>
+					 bbb - Re (синфазная), Im (квадратурная компонента), Amp (амплитуда) или Ph (фаза соответствующего сигнала);
+				      </listitem><listitem>
+					 ccc - F*#, * = 0,..,3,C0,C1 - частота, # = X,Y,Z (АЦП приемника), U (напряжение) или I (ток в передатчике);
+				      </listitem><listitem>
+					 ddd - raw (измеренные) или comp (скомпенсированные данные). 
+				      </listitem></itemizedlist>
+	Измерения raw - в единицах АЦП, comp - нормируются на единицу (в среднем).  См. также <xref linkend="em4h_control"/>.
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec"><title lang="ru">Переменные RS-50x</title><itemizedlist lang="ru"><listitem>
+      spec::errors - число ошибок в потоке данных
+      </listitem><listitem>
+      spec::utc_time - время UTC встроенного приемника в секундах
+      </listitem><listitem>
+      spec::roi[*] - интервалы накопления (присланные устройством), *=1,...,10
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec_grs"><title lang="ru">Переменные GRS410</title><itemizedlist lang="ru"><listitem>
+      spec::errors - число ошибок в потоке данных
+      </listitem><listitem>
+      spec::adc[*] - измерения аналоговых каналов, *=0,...,3
+      </listitem></itemizedlist></sect2><sect2 id="variables_spec_gsa"><title lang="ru">Переменные ГСА2000</title><itemizedlist lang="ru"><listitem>
+      spec::errors - число ошибок потока данных
+      </listitem><listitem>
+      spec::hard_errors - контрольный байт устройства (см. инструкцию ГСА2000)
+      </listitem><listitem>
+      spec::func_errors - контрольный байт состояния (см. инструкцию ГСА2000)
+      </listitem><listitem>
+      spec::live_time - живое время в мс
+      </listitem><listitem>
+      spec::stab_code[*] - управляющие коды системы стабилизации (см. инструкцию ГСА2000)
+      </listitem><listitem>
+      spec::peak[*] - положение пиков света в каналах, умноженных на 100
+      </listitem></itemizedlist></sect2><sect2 id="variables_ffra"><title lang="ru">Переменные радиовысотомера Free Flight</title><itemizedlist lang="ru"><listitem>
+      ffra::altitude - высота (м)
+      </listitem><listitem>
+      ffra::errors - число ошибок потока данных согласно контрольной сумме
+      </listitem><listitem>
+      ffra::test - тест флаг (равен 2 во время теста, в нормальном состоянии 0)
+      </listitem><listitem>
+      ffra::status - статус (равен 4 при ошибке статуса, в нормальном состоянии 0)
+      </listitem><listitem>
+      ffra::invalid - флаг выхода (равен 8, если invalid, в нормальном состоянии 0)
+      </listitem><listitem>
+      ffra::strut - флаг опоры (равен 16 если опоры нет, в нормальном состоянии 0)
+      </listitem></itemizedlist></sect2><sect2 id="variables_adc"><title lang="ru">Переменные АЦП</title><itemizedlist lang="ru"><listitem>
+      gtadc/e502::raw* - значения каналов в единицах АЦП, * - номер канала
+      </listitem><listitem>
+      gtadc/e502::имя_канала - переменные, заданные пользователем, см.  <xref linkend="dev_adc"/>
+      </listitem></itemizedlist></sect2></appendix></article>

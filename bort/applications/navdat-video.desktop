@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Tvisor: video
+Name[ru]=Тепловизор: изображение
+Comment=IR Scanner stream
+Comment[ru]=Визуализация данных ИК сканнера
+Exec=navdat-video --new
+Icon=navdat-video
+Terminal=false
+Type=Application
+Categories=Tvisor;
+

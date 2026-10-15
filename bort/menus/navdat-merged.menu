@@ -1,0 +1,11 @@
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd'>
+<Menu>
+    <Name>NavDat</Name>
+    <Menu>
+        <Name>NavDat</Name>
+        <MergeFile>/usr/share/bort/menus/navdat.menu</MergeFile>
+    </Menu>
+</Menu>
+<!-- End Applications -->

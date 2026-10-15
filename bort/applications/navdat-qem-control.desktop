@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=EM4H
+Comment=EM4H pannel
+Comment[ru]=Панель EM4H
+Exec=navdat-qem-control --new
+Icon=navdat-qem-control
+Terminal=false
+Type=Application
+Categories=ER;
