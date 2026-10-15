@@ -21,9 +21,9 @@ cd "$VM_DIR"
 
 case "$(uname -m)" in
     arm64|aarch64) ARCH=arm64; QEMU=qemu-system-aarch64
-                   MACHINE="-machine virt -cpu host"; FW_NAME=edk2-aarch64-code.fd ;;
+                   MACHINE=virt; FW_NAME=edk2-aarch64-code.fd ;;
     *)             ARCH=amd64; QEMU=qemu-system-x86_64
-                   MACHINE="-machine q35 -cpu host"; FW_NAME=edk2-x86_64-code.fd ;;
+                   MACHINE=q35; FW_NAME=edk2-x86_64-code.fd ;;
 esac
 case "$(uname -s)" in
     Darwin) ACCEL=hvf ;;
@@ -41,7 +41,7 @@ prepare() {
     local url=https://cloud-images.ubuntu.com/noble/current
     if [ ! -f "$img" ]; then
         curl -fL -o "$img.part" "$url/$img"
-        curl -fsSL "$url/SHA256SUMS" | grep " \*$img\$" | sed "s/\*$img/$img.part/" | shasum -a 256 -c -
+        curl -fsSL "$url/SHA256SUMS" | grep " \*$img\$" | sed "s/\*$img\$/*$img.part/" | shasum -a 256 -c -
         mv "$img.part" "$img"
     fi
     [ -f id_vm ] || ssh-keygen -q -t ed25519 -N '' -f id_vm
@@ -69,7 +69,7 @@ prepare() {
 start() {
     vssh true 2>/dev/null && return
     prepare
-    $QEMU $MACHINE,accel=$ACCEL -smp 4 -m 4096 \
+    $QEMU -machine $MACHINE,accel=$ACCEL -cpu host -smp 4 -m 4096 \
         -drive if=pflash,format=raw,file=efi-code.fd,readonly=on \
         -drive if=pflash,format=raw,file=efi-vars.fd \
         -drive if=virtio,format=qcow2,file=disk.qcow2 \
@@ -115,6 +115,10 @@ vssh 'set -e; cd navdat-bort; rm -rf dist; packaging/build-debs.sh dist >/dev/nu
 echo "== X session as navdat"
 scp -q "${SCP_OPTS[@]}" "$ROOT/tests/vm/session-check.sh" ubuntu@127.0.0.1:/tmp/
 vssh 'chmod 755 /tmp/session-check.sh; sudo -iu navdat /tmp/session-check.sh'
+echo "== status indicators (passive)"
+scp "${SCP_OPTS[@]}" "$ROOT/tests/vm/indicators-check.sh" ubuntu@127.0.0.1:/tmp/
+vssh 'chmod 755 /tmp/indicators-check.sh; sudo -iu navdat /tmp/indicators-check.sh'
+
 mkdir -p shots
 scp -q "${SCP_OPTS[@]}" 'ubuntu@127.0.0.1:/tmp/shot-*.png' shots/
 echo "screenshots: $VM_DIR/shots"
