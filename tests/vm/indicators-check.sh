@@ -4,7 +4,8 @@
 #  - состояние берётся пассивно у процесса bortd, к приборам никто, кроме
 #    bortd, не подключается и не пишет.
 #
-# Имитация приборов: 127.0.0.1:4101 шлёт данные, :4102 молчит, :4103 не слушает.
+# Имитация приборов: 127.0.0.1:4101 шлёт данные, :4102 молчит (в bortdrc задан
+# именем localhost - проверка разрешения имён), :4103 не слушает.
 # Имитация bortd: процесс с именем bortd подключается к 4101 и 4102 и держит
 # открытым псевдотерминал /tmp/ttyFAKE.
 set -e
@@ -26,7 +27,7 @@ device rs50x
 }
 device rs50x
 {
-    src tcp://127.0.0.1:4102
+    src tcp://localhost:4102
 }
 device novatel
 {
@@ -113,9 +114,9 @@ echo "--- 3. jps убран из bortdrc:"; cat /tmp/ind-3.txt
 echo "--- со стороны приборов [подключений, принято байт]:"; cat /tmp/fake_devices.json; echo
 
 fail() { echo "FAIL: $1"; exit 1; }
-grep -q '"RS61=off RS1=off NV=off MG=off JPS=off"' /tmp/ind-1.txt || fail "bortd stopped: expected all off"
-grep -q '"RS61=ok RS1=stale NV=down MG=ok JPS=down"' /tmp/ind-2.txt || fail "bortd running: wrong states"
-grep -q '"RS61=ok RS1=stale NV=down MG=ok"' /tmp/ind-3.txt || fail "list did not follow bortdrc"
+grep -q '"RS61=off RS4102=off NV=off MG=off JPS=off"' /tmp/ind-1.txt || fail "bortd stopped: expected all off"
+grep -q '"RS61=ok RS4102=stale NV=down MG=ok JPS=down"' /tmp/ind-2.txt || fail "bortd running: wrong states"
+grep -q '"RS61=ok RS4102=stale NV=down MG=ok"' /tmp/ind-3.txt || fail "list did not follow bortdrc"
 python3 -c 'import json,sys; s=json.load(open("/tmp/fake_devices.json")); sys.exit(0 if all(v==[1,0] for v in s.values()) else 1)' \
     || fail "indicators touched the devices"
 if grep -qiE 'stack traceback|attempt to' /tmp/awesome-ind.log; then fail "Lua errors"; fi

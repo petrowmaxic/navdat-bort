@@ -112,14 +112,15 @@ function connection_status.parse_bortdrc(text)
     return devices
 end
 
--- Вывод link-status.sh -> { running=bool, tcp={peer=bytes}, tty={path=bool} }
+-- Вывод link-status.sh -> { running=bool, net={key=bytes}, tty={path=bool} }
+-- (имена хостов из bortdrc сопоставляет с адресами ss сам link-status.sh)
 function connection_status.parse_status(out)
-    local st = { running = false, tcp = {}, tty = {} }
+    local st = { running = false, net = {}, tty = {} }
     for line in out:gmatch("[^\n]+") do
         local pid = line:match("^bortd (%S+)")
         if pid then st.running = pid ~= "none" end
-        local peer, bytes = line:match("^tcp (%S+) (%d+)")
-        if peer then st.tcp[peer] = (st.tcp[peer] or 0) + tonumber(bytes) end
+        local key, bytes = line:match("^net (%S+) (%d+)$")
+        if key then st.net[key] = tonumber(bytes) end
         local dev, open = line:match("^tty (%S+) (%a+)")
         if dev then st.tty[dev] = open == "open" end
     end
@@ -188,7 +189,7 @@ function connection_status.create_widget()
                 state = "off"
                 history[ind.key] = nil
             elseif ind.kind == "net" then
-                local bytes = st.tcp[ind.key]
+                local bytes = st.net[ind.key]
                 local h = history[ind.key]
                 if bytes == nil then
                     state = "down"
@@ -225,7 +226,7 @@ function connection_status.create_widget()
             end
             local cmd = { "sh", helper }
             for _, ind in ipairs(indicators) do
-                if ind.kind == "tty" then table.insert(cmd, ind.key) end
+                table.insert(cmd, ind.kind .. ":" .. ind.key)
             end
             awful.spawn.easy_async(cmd, function(stdout)
                 update(connection_status.parse_status(stdout))
