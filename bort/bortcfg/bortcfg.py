@@ -46,11 +46,21 @@ serial_stops = [1,2]
 
 class Source:
     """TODO: handle all other sources as well"""
-    (BROKEN, TCP, SERIAL, RFC2217) = range(4)
+    (BROKEN, TCP, SERIAL, RFC2217, LOCAL) = range(5)
+    DEFAULT_LOCAL = '/tmp/.bort-0'
 
     def __init__(self, src = ''):
         attrs = src.split('://', 1)
         self.type = self.BROKEN
+        self.local_path = self.DEFAULT_LOCAL
+        # фронтенд bortd на локальном сокете: «src bind unix /tmp/.bort-0»
+        # (клиенты на этом компьютере подключаются к @/bortd/$USER)
+        words = src.split()
+        if len(words) >= 2 and words[0] == 'bind' and words[1] == 'unix':
+            self.type = self.LOCAL
+            if len(words) > 2:
+                self.local_path = words[2]
+            attrs = []
 
         self.hostname = ''
         self.port = -1
@@ -60,9 +70,11 @@ class Source:
         self.serial_parity = 'n'
         self.serial_stop_bits = 1
         try:
-            if len(attrs) != 2:
+            if self.type == self.LOCAL:
+                pass
+            elif len(attrs) != 2:
                 raise ValueError
-            if attrs[0] == 'tcp':
+            elif attrs[0] == 'tcp':
                 options = attrs[1].split(':', 1)
                 self.parse_tcp(options)
             elif attrs[0] == 'serial':
@@ -141,7 +153,14 @@ class Source:
             return 'serial://%s,' % (self.serial_device) + fmt_serial()
         if self.type == self.RFC2217:
             return 'rfc2217://' + fmt_tcp() + '/' + fmt_serial()
+        if self.type == self.LOCAL:
+            return 'bind unix %s' % self.local_path
         return _('No source selected')
+
+    def pretty(self):
+        if self.type == self.LOCAL:
+            return _('Local socket (clients on this computer)')
+        return str(self)
 
     def __repr__(self):
         return '<class %s: %s>' % (self.__class__.__name__, str(self))
@@ -284,15 +303,20 @@ class BindDevice(object):
     def load_from_config(self, dlg, cfg):
         self.fields = {}
         if self.have_source:
-            key = cfg.get_key('bind')
+            # bortd слушает либо локальный сокет («src bind unix ...»), либо
+            # TCP («bind tcp://...»); если есть bind, локального сокета нет
             src = Source('')
-            if 0 != len(key):
+            if cfg.get_key('bind'):
                 src = Source(cfg.exclusive('bind'))
+            elif cfg.get_key('src'):
+                src = Source(cfg.exclusive('src'))
             self.liststore = Gtk.ListStore(str, int)
             dlg.xml.combobox_source_type.set_model(self.liststore)
             dlg.xml.combobox_source_type.connect('changed', lambda w: self.on_type_combo_changed(w,dlg))
 
-            sources = ((Source.TCP, _("TCP/IP")), (Source.SERIAL, _("Serial Port")), (Source.RFC2217, _("Serial port over TCP/IP (RFC2217)")))
+            sources = ((Source.LOCAL, _("Local socket (clients on this computer)")),
+                       (Source.TCP, _("TCP/IP")), (Source.SERIAL, _("Serial Port")),
+                       (Source.RFC2217, _("Serial port over TCP/IP (RFC2217)")))
 
             for (t, n) in sources:
                 if hasattr(self, 'sources_allowed'):
@@ -407,7 +431,15 @@ class BindDevice(object):
                 get_serial_settings()
 
             src.type = type
-            cfg.set('bind', str(self.fields['src']))
+            # только одно описание фронтенда: при «bind» bortd не открывает
+            # локальный сокет, и клиенты на этом компьютере теряют bortd
+            if type == Source.LOCAL:
+                cfg.remove('bind')
+                cfg.set('src', str(src))
+            else:
+                cfg.children = [i for i in cfg.children
+                                if not (i.name == 'src' and Source(i.value or '').type == Source.LOCAL)]
+                cfg.set('bind', str(src))
 
     @staticmethod
     def save_hook(cfg, dev):
@@ -445,7 +477,7 @@ class ADIS16365Device(BaseDevice):
 class FEDevice(BindDevice):
     name = 'fe'
     pretty_name = _('On-Board Server')
-    sources_allowed = (Source.TCP,)
+    sources_allowed = (Source.LOCAL, Source.TCP)
 
 
 class JPSDevice(BaseDevice):
@@ -1550,17 +1582,12 @@ class BortConfigWindow:
             iter = self.liststore.append()
 
         def pretty_src(cfg):
-            src = cfg.get_key('src')
-            if 0!= len(src):    
-                source = Source(src[0].value)
-                return '%s' % str(source)
-            else:
-                src = cfg.get_key('bind')
-                if 0!= len(src):    
-                    source = Source(src[0].value)
-                    return '%s' % str(source)
-                else:
-                    return _('No source selected')
+            # как в bortd: «bind» главнее «src»
+            for key in ('bind', 'src'):
+                found = cfg.get_key(key)
+                if found:
+                    return Source(found[0].value or '').pretty()
+            return _('No source selected')
 
         self.liststore.set(iter, COLUMN_DEVICE,
                         '<b>%s</b>\n<small><i>%s</i></small>' % (dev.pretty_name, pretty_src(cfg)),

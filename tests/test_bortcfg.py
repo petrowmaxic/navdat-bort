@@ -142,6 +142,30 @@ class GuiTest(unittest.TestCase):
         self.assertEqual(len(saved.get_key('device')), len(bortcfg.devices) + 1)
         window.window.destroy()
 
+    def test_fe_local_socket(self):
+        """FE со штатным «src bind unix»: OK в диалоге не должен добавлять
+        «bind tcp», иначе bortd закрывает локальный сокет для клиентов."""
+        fe = bortrc.Config('device', 'fe')
+        fe.set('src', 'bind unix /tmp/.bort-0')
+        dlg = bortcfg.ConfigureDialog(fe)
+        dlg.model.save_to_config(dlg, fe)
+        dlg.xml.configure_dialog.destroy()
+        self.assertEqual(fe.get_key('bind'), [])
+        self.assertEqual(fe.exclusive('src'), 'bind unix /tmp/.bort-0')
+
+        # явный выбор TCP заменяет локальный сокет, а не добавляется к нему
+        dlg = bortcfg.ConfigureDialog(fe)
+        combo = dlg.xml.combobox_source_type
+        for row in combo.get_model():
+            if row[1] == bortcfg.Source.TCP:
+                combo.set_active_iter(row.iter)
+        dlg.xml.entry_host.set_text('0.0.0.0')
+        dlg.xml.entry_port.set_text('5000')
+        dlg.model.save_to_config(dlg, fe)
+        dlg.xml.configure_dialog.destroy()
+        self.assertEqual(fe.exclusive('bind'), 'tcp://0.0.0.0:5000')
+        self.assertEqual(fe.get_key('src'), [])
+
     def test_window_from_connected_proxy(self):
         """Окно из апплета: proxy уже подключён и получил список переменных."""
         proxy = bortd.BortProxy()
