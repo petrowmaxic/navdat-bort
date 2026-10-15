@@ -49,11 +49,22 @@ done
 fox=$(ls "$SRC"/libfox-gt_*_amd64.deb | head -n1)
 dpkg-deb -x "$fox" "$WORK/x"
 
-# только сами библиотеки, без плагинов Qt и документации
+# только сами библиотеки, без плагинов Qt и документации. Ссылки копируются
+# только относительные: в libpng12-0 есть ещё /usr/lib/...so.0 -> /lib/...,
+# которая в /opt/navdat/lib указывала бы в никуда.
 find "$WORK/x" \( -name 'libQtCore.so.4*' -o -name 'libQtGui.so.4*' \
     -o -name 'libQtNetwork.so.4*' -o -name 'libQtOpenGL.so.4*' -o -name 'libQtSvg.so.4*' \
     -o -name 'libqwt.so.6*' -o -name 'libpng12.so.0*' -o -name 'libaudio.so.2*' \
-    -o -name 'libFOX-gt-1.6.so.0*' \) \( -type f -o -type l \) -exec cp -P {} "$LIB/" \;
+    -o -name 'libFOX-gt-1.6.so.0*' \) \( -type f -o -type l \) | while read -r f; do
+    if [ -L "$f" ]; then
+        case "$(readlink "$f")" in /*|*/*) continue ;; esac
+    fi
+    cp -P "$f" "$LIB/"
+done
+# каждая ссылка должна вести на файл внутри /opt/navdat/lib
+for l in "$LIB"/*; do
+    [ -e "$l" ] || { echo "dangling link: $l" >&2; exit 1; }
+done
 
 cat > "$WORK/$P/DEBIAN/control" <<EOF
 Package: $P
