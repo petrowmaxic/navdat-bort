@@ -52,7 +52,8 @@ EOF
 cp .bort/bortdrc /tmp/bortdrc.orig
 {
     echo "sys::datadir $HOME/data/"
-    echo "device fe"; echo "{"; echo "    bind tcp://127.0.0.1:5000"; echo "}"
+    # fe как в штатном конфиге navdat-user: клиенты ходят на сокет @/bortd/$USER
+    echo "device fe"; echo "{"; echo "    src bind unix /tmp/.bort-0"; echo "}"
     port=5901
     for t in jps novatel arrow em4h gtmag geoscan rs50x grs410 gsa2000 parsek-adc \
              gtadc d5000adc ffra smra equator sp4 tvisor tvnew mp719 adis16365 amaster; do
