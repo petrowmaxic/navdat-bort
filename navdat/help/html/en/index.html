@@ -517,40 +517,7 @@
           </div>
         </div>
         <p xml:lang="en" lang="en">
-    "NavDat" is delivered as a software package from <a class="ulink" href="http://geotechnologies-rus.com/en/main_en.html" target="_top">Geotechnologies</a>
-	server. The package is created to be used on GNU/Linux system
-    <a class="ulink" href="http://ubuntu.com" target="_top">Ubuntu 16.04.3 LTS</a>.
-    First, you should install 64-bit Ubuntu Operating System, installation guide could be found here:
-    <a class="ulink" href="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop" target="_top">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</a>.
-  Second, start <a class="ulink" href="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux" target="_top">Terminal</a> and run the following commands:
-  </p>
-        <div class="example">
-          <a id="idm45014161309520"></a>
-          <p class="title">
-            <strong>Example 1. </strong>
-          </p>
-          <div class="example-contents">
-            <pre class="programlisting">
-		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
-	</pre>
-            <pre class="programlisting">
-		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
-		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
-		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
-		EOF
-	</pre>
-            <pre class="programlisting">
-		sudo apt-get update
-	</pre>
-            <pre class="programlisting">
-		sudo apt-get install navdat-user
-	</pre>
-          </div>
-        </div>
-        <br class="example-break" />
-        <p xml:lang="en" lang="en">
-    Your user_name and password are provided by <a class="ulink" href="http://geotechnologies-rus.com/en/main_en.html" target="_top">Geotechnologies</a>.
-    After the System reboot a new account "NavDat session user" will appear. Its password is set by the administrator during installation.
+    "NavDat" is installed on Ubuntu 24.04 or newer (x86-64) with the navdat-install.sh installer from https://github.com/petrowmaxic/navdat-bort, either online or without network access from an offline bundle. The installer creates the "navdat" operator account and asks for its password.
     It is strongly recommended to use this account to work with "NavDat" only. 
   </p>
         <p xml:lang="en" lang="en">

@@ -530,40 +530,7 @@
           </div>
         </div>
         <p xml:lang="ru" lang="ru">
-    "NavDat" поставляется заказчику в виде программного пакета на сервере <a class="ulink" href="http://geotechnologies-rus.com/ru/main_ru.html" target="_top">Геотехнологии</a>. Пакет создан для работы на GNU/Linux системе
-    <a class="ulink" href="http://ubuntu.com." target="_top">Ubuntu 16.04.3 LTS</a>.
-    Для начала требуется установить 64-битную версию операционной системы, инструкцию по установке Ubuntu можно найти
-    по адресу: 
-    <a class="ulink" href="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop" target="_top">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</a>.
-    Далее следует запустить <a class="ulink" href="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux" target="_top">терминал</a>,  выполнить следующие команды:
-  </p>
-        <div class="example">
-          <a id="idm45843727648208"></a>
-          <p class="title">
-            <strong>Пример 1. </strong>
-          </p>
-          <div class="example-contents">
-            <pre class="programlisting">
-		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
-	</pre>
-            <pre class="programlisting">
-		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
-		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
-		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
-		EOF
-	</pre>
-            <pre class="programlisting">
-		sudo apt-get update
-	</pre>
-            <pre class="programlisting">
-		sudo apt-get install navdat-user
-	</pre>
-          </div>
-        </div>
-        <br class="example-break" />
-        <p xml:lang="ru" lang="ru">
-    Имя пользователя user_name и пароль password предоставляются компанией <a class="ulink" href="http://geotechnologies-rus.com/ru/main_ru.html" target="_top">Геотехнологии</a>.
-    После перезагрузки будет автоматически создана учетная запись "NavDat session user". Пароль для неё задаёт администратор при установке.
+    "NavDat" устанавливается на Ubuntu 24.04 или новее (x86-64) мастером установки navdat-install.sh из репозитория https://github.com/petrowmaxic/navdat-bort: с интернетом или без него, из офлайн-комплекта. Мастер создаёт учётную запись оператора "navdat" и спрашивает для неё пароль.
     Далее из этой записи будет осуществляться взаимодействие с бортовой программой "NavDat".
     Эту запись следует использовать исключительно для работы с "NavDat".
   </p>

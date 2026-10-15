@@ -134,7 +134,7 @@
     <property name="border_width">5</property>
     <property name="type_hint">normal</property>
     <property name="comments" translatable="yes"> </property>
-    <property name="website">http://gp.gtcomp.ru</property>
+    <property name="website">https://github.com/petrowmaxic/navdat-bort</property>
     <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
     <signal name="response" handler="on_applet_about_response" swapped="no" />
     <child internal-child="vbox">

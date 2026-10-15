@@ -110,12 +110,14 @@ gh repo create petrowmaxic/navdat-bort-private --private --add-readme
 ```
 
 ```bash
-cd bortNFVSEGEI/bortNFVSEGEI && shasum -a 256 *.deb > SHA256SUMS
+cd bortNFVSEGEI/bortNFVSEGEI && shasum -a 256 navdat-bortd_*.deb navdat-clients-*.deb navdat-full_*.deb libfox-gt_*.deb > SHA256SUMS
 ```
 
 ```bash
-gh release create navdat-0.2.12 --repo petrowmaxic/navdat-bort-private --title "NavDat 0.2.12" --notes "Оригинальные пакеты для navdat-install.sh" *.deb SHA256SUMS
+gh release create navdat-0.2.12 --repo petrowmaxic/navdat-bort-private --title "NavDat 0.2.12" --notes "Оригинальные пакеты для navdat-install.sh" navdat-bortd_*.deb navdat-clients-*.deb navdat-full_*.deb libfox-gt_*.deb SHA256SUMS
 ```
+
+В релиз кладутся только нужные мастеру пакеты. Оригинальные `navdat-user` (в нём зашит стандартный пароль оператора), `navdat-help` и `awesome` не нужны: вместо них ставятся пакеты из этого репозитория.
 
 Ключ доступа для ноутбуков: GitHub → Settings → Developer settings →
 Personal access tokens → Fine-grained tokens → Generate new token.

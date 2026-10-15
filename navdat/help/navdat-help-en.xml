@@ -25,26 +25,7 @@
   </para><para lang="en">
     Hardware platform for "NavDat" is <ulink url="http://en.wikipedia.org/wiki/IA-64">IA-64</ulink> compatible computer with Operating System <ulink url="http://www.gnu.org">GNU/Linux</ulink>.
   </para></sect1><sect1 id="installation"><title lang="en">Program installation</title><para lang="en">
-    "NavDat" is delivered as a software package from <ulink url="http://geotechnologies-rus.com/en/main_en.html">Geotechnologies</ulink>
-	server. The package is created to be used on GNU/Linux system
-    <ulink url="http://ubuntu.com">Ubuntu 16.04.3 LTS</ulink>.
-    First, you should install 64-bit Ubuntu Operating System, installation guide could be found here:
-    <ulink url="http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop">http://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop</ulink>.
-  Second, start <ulink url="https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-xenial-xerus-16-04-linux">Terminal</ulink> and run the following commands:
-  </para><example><programlisting format="linespecific">
-		wget -qO - https://dist.gtcomp.ru/key.gpg | sudo apt-key add -
-	</programlisting><programlisting format="linespecific">
-		sudo tee /etc/apt/sources.list.d/navdat.list &lt;&lt;EOF
-		deb https://dist.gtcomp.ru/navdat-xenial-common stable/
-		deb https://user_name:password@dist.gtcomp.ru/navdat-xenial-user_name stable/
-		EOF
-	</programlisting><programlisting format="linespecific">
-		sudo apt-get update
-	</programlisting><programlisting format="linespecific">
-		sudo apt-get install navdat-user
-	</programlisting></example><para lang="en">
-    Your user_name and password are provided by <ulink url="http://geotechnologies-rus.com/en/main_en.html">Geotechnologies</ulink>.
-    After the System reboot a new account "NavDat session user" will appear. Its password is set by the administrator during installation.
+    "NavDat" is installed on Ubuntu 24.04 or newer (x86-64) with the navdat-install.sh installer from https://github.com/petrowmaxic/navdat-bort, either online or without network access from an offline bundle. The installer creates the "navdat" operator account and asks for its password.
     It is strongly recommended to use this account to work with "NavDat" only. 
   </para><para lang="en">
     Some recommendations:
