@@ -239,7 +239,9 @@ esac
 export NAVDAT_GH_TOKEN=$GH_TOKEN NAVDAT_PASSWORD=$OP_PASSWORD NAVDAT_AUTOLOGIN=$AUTOLOGIN
 export NAVDAT_PUBLIC_REPO=$PUBLIC_REPO NAVDAT_REF NAVDAT_PRIVATE_REPO=$PRIVATE_REPO \
        NAVDAT_RELEASE_TAG=$RELEASE_TAG NAVDAT_GITHUB_API=$GITHUB_API NAVDAT_SOURCE_URL=$SOURCE_URL
-export NAVDAT_PROGRESS=$(mktemp)
+# не в /tmp: fs.protected_regular запрещает root дописывать чужие файлы
+# в каталогах со sticky-битом
+export NAVDAT_PROGRESS=$(mktemp -p "${XDG_RUNTIME_DIR:-$HOME}" .navdat-progress.XXXXXX)
 SELF=$(readlink -f "$0")
 
 run_root() {  # запускает второй этап; пароль sudo спрашивается до трёх раз
