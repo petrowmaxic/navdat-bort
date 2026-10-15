@@ -9,6 +9,12 @@
 #                              мастер установки на ЧИСТОЙ ВМ (отдельный VM_DIR):
 #                              имитация GitHub, ответы как у человека, перезагрузка,
 #                              проверка автовхода в сеанс Navdat Awesome
+#   VM_ARCH=amd64 NAVDAT_DEBS=<каталог> tests/vm/run.sh bundle
+#                              собрать офлайн-комплект в ВМ с интернетом,
+#                              архив -> $VM_DIR/bundle/
+#   VM_ARCH=amd64 NAVDAT_BUNDLE_TAR=<архив> tests/vm/run.sh offline-install
+#                              ЧИСТАЯ ВМ без интернета (отдельный VM_DIR): комплект
+#                              как с флешки, мастер, перезагрузка, проверка автовхода
 #   tests/vm/run.sh gui        запустить ВМ с окном на экране (посмотреть и
 #                              понажимать); также доступна по VNC 127.0.0.1:5901
 #   tests/vm/run.sh ssh [cmd]  зайти в ВМ
@@ -96,7 +102,7 @@ start() {
     local qemu_args=(-machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 ${fw[@]+"${fw[@]}"}
         -drive if=virtio,format=qcow2,file=disk.qcow2
         -drive if=virtio,format=raw,file=seed.iso,readonly=on
-        -netdev user,id=n0,hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0
+        -netdev user,id=n0${VM_OFFLINE:+,restrict=on},hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0
         "${DISPLAY_OPTS[@]}" -serial file:serial.log -monitor none)
     if [ "${DAEMON:-yes}" = yes ]; then
         $QEMU "${qemu_args[@]}" -daemonize -pidfile qemu.pid
@@ -112,6 +118,40 @@ start() {
 
 case "${1:-run}" in
     ssh)  shift; start; vssh "$@"; exit ;;
+    bundle)
+        [ -n "$NAVDAT_DEBS" ] || { echo "bundle needs NAVDAT_DEBS" >&2; exit 1; }
+        start
+        echo "== sync sources and proprietary packages"
+        rsync -a --delete --exclude .git --exclude '*.deb' --exclude dist --exclude .DS_Store \
+            -e "ssh ${SSH_OPTS[*]}" "$ROOT/" ubuntu@127.0.0.1:navdat-bort/
+        rsync -a --delete --include '*.deb' --exclude '*' -e "ssh ${SSH_OPTS[*]}" \
+            "$NAVDAT_DEBS/" ubuntu@127.0.0.1:navdat-debs/
+        echo "== build offline bundle"
+        vssh 'cd navdat-bort && rm -rf ~/bundle-out && sudo install/build-offline-bundle.sh ~/navdat-debs ~/bundle-out'
+        mkdir -p bundle
+        scp "${SCP_OPTS[@]}" 'ubuntu@127.0.0.1:bundle-out/*.tar' bundle/
+        ls -la bundle
+        exit ;;
+    offline-install)
+        [ -n "${NAVDAT_BUNDLE_TAR:-}" ] || { echo "offline-install needs NAVDAT_BUNDLE_TAR" >&2; exit 1; }
+        VM_OFFLINE=1
+        start
+        echo "== internet must be unreachable"
+        if vssh 'curl -sS -m 10 -o /dev/null http://archive.ubuntu.com/' 2>/dev/null; then
+            echo "FAIL: VM has internet access" >&2; exit 1
+        fi
+        echo "ok: no internet"
+        echo "== copy bundle (as from a USB stick)"
+        scp "${SCP_OPTS[@]}" "$NAVDAT_BUNDLE_TAR" "$ROOT/tests/vm/install-check.sh" ubuntu@127.0.0.1:/tmp/
+        echo "== run installer from bundle"
+        vssh "bash /tmp/install-check.sh offline /tmp/$(basename "$NAVDAT_BUNDLE_TAR")"
+        echo "== reboot"
+        vssh 'sudo systemctl reboot' || true
+        sleep 20
+        for _ in $(seq 1 120); do vssh true 2>/dev/null && break; sleep 5; done
+        echo "== verify after reboot"
+        vssh 'bash /tmp/install-check.sh verify'
+        exit ;;
     gui)
         if vssh true 2>/dev/null; then
             echo "VM is already running headless; stop it first: $0 stop" >&2; exit 1

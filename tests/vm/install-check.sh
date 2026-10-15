@@ -61,15 +61,47 @@ EOF
     cat /etc/lightdm/lightdm.conf.d/50-navdat.conf
     echo "OK: installer finished"
     ;;
+offline)
+    set -e
+    TAR=${2:?usage: install-check.sh offline <bundle.tar>}
+    if ! id laptop >/dev/null 2>&1; then
+        sudo useradd -m -s /bin/bash -G sudo laptop
+        echo "laptop:$LAPTOP_PW" | sudo chpasswd
+    fi
+    # комплект «с флешки» в Загрузки пользователя ноутбука
+    sudo -u laptop mkdir -p /home/laptop/Downloads
+    sudo tar -xf "$TAR" -C /home/laptop/Downloads
+    sudo chown -R laptop:laptop /home/laptop/Downloads
+    DIR=$(ls -d /home/laptop/Downloads/navdat-offline-*)
+    echo "bundle: $DIR ($(sudo du -sh "$DIR" | cut -f1), $(ls "$DIR"/repo/*.deb | wc -l) packages)"
+    set +e
+    printf '%s\n%s\n%s\n%s\n' "$NAVDAT_PW" "$NAVDAT_PW" "д" "$LAPTOP_PW" | \
+        sudo -iu laptop env NAVDAT_UI=text NAVDAT_REBOOT=no bash "$DIR/navdat-install.sh"
+    rc=$?
+    set -e
+    LOG=/home/laptop/navdat-install.log
+    echo "--- installer exit code: $rc"
+    echo "--- log (tail)"; sudo tail -15 "$LOG"
+    [ $rc = 0 ] || { echo "FAIL: offline installer failed"; exit 1; }
+    sudo grep -q "offline bundle" "$LOG" || { echo "FAIL: installer did not use the bundle"; exit 1; }
+    if sudo grep -qF -e "$NAVDAT_PW" -e "$LAPTOP_PW" "$LOG"; then
+        echo "FAIL: secrets leaked into the log"; exit 1
+    fi
+    echo "--- installed"; dpkg -l 'navdat-*' | awk '/^ii/ {print $2, $3}'
+    sudo passwd -S navdat
+    echo "OK: offline installer finished"
+    ;;
 verify)
     for _ in $(seq 1 60); do pgrep -u navdat -x awesome >/dev/null && break; sleep 5; done
     echo "--- display manager: $(cat /etc/X11/default-display-manager), lightdm $(systemctl is-active lightdm)"
     loginctl list-sessions --no-legend
     echo "--- navdat processes"; ps -u navdat -o comm= | sort -u | tr '\n' ' '; echo
     pgrep -u navdat -x awesome >/dev/null || { echo "FAIL: navdat session did not start"; exit 1; }
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq imagemagick >/dev/null 2>&1
-    sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 import -window root /tmp/shot-install.png \
-        && echo "screenshot ok"
+    # скриншот только если есть интернет для imagemagick
+    if sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq imagemagick >/dev/null 2>&1; then
+        sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 import -window root /tmp/shot-install.png \
+            && echo "screenshot ok"
+    fi
     echo "OK: autologin into Navdat Awesome after reboot"
     ;;
 *)
