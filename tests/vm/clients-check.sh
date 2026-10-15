@@ -39,7 +39,23 @@ if len(sys.argv) > 1 and sys.argv[1] == "stop":
     c.stop(); c.sync()
 EOF
 
-echo "--- 2. bortd (демо-режим)"
+# все типы приборов, чтобы bortd создал их переменные и клиенты нашли
+# свои устройства; источники - закрытые порты, к приборам никто не ходит
+cp .bort/bortdrc /tmp/bortdrc.orig
+{
+    echo "sys::datadir $HOME/data/"
+    echo "device fe"; echo "{"; echo "    bind tcp://127.0.0.1:5000"; echo "}"
+    port=5901
+    for t in jps novatel arrow em4h gtmag geoscan rs50x grs410 gsa2000 parsek-adc \
+             gtadc d5000adc ffra smra equator sp4 tvisor tvnew mp719 adis16365 amaster; do
+        echo "device $t"; echo "{"; echo "    src tcp://127.0.0.1:$port"; echo "}"
+        port=$((port+1))
+    done
+    echo "device fplan"
+} > .bort/bortdrc
+trap 'cp /tmp/bortdrc.orig "$HOME/.bort/bortdrc"' EXIT
+
+echo "--- 2. bortd (демо-режим, все типы приборов)"
 if ! bortd -d -D > /tmp/bortd.log 2>&1; then
     echo "FAIL: bortd -d -D exited with error"; cat /tmp/bortd.log; exit 1
 fi
