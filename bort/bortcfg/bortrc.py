@@ -14,7 +14,8 @@ class Config:
     def __str__(self, indent = 0):
         do_indent = lambda x: '%*s%s' % (4 * indent, '', x)
         if self.name:
-            if self.value:
+            # 0 и 0.0 - настоящие значения, а не их отсутствие
+            if self.value is not None and self.value != '':
                 ret = [do_indent('%s %s' % (self.name, self.value))]
             else:
                 ret = [do_indent(self.name)]
@@ -62,21 +63,25 @@ def load_config(path = BORTDRC):
         lines = fp.readlines()
     stack = [Config()]
 
-    for line in lines:
+    for num, line in enumerate(lines, 1):
         line = line.strip()
         if line.startswith('#') or line == '':
             continue
         elif line == '{':
+            if not stack[-1].children:
+                raise Error('%s:%d: "{" without a key before it' % (path, num))
             stack.append(stack[-1].children[-1])
         elif line == '}':
-            if len(stack) == 0:
-                raise Error
+            if len(stack) <= 1:
+                raise Error('%s:%d: unmatched "}"' % (path, num))
             stack.pop()
         else:
             args = line.split(None, 1)
             cfg = Config(*args)
             stack[-1].children.append(cfg)
 
+    if len(stack) != 1:
+        raise Error('%s: unclosed "{"' % path)
     return stack[0]
 
 def write_config(cfg, path = BORTDRC):

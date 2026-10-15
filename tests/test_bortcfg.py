@@ -80,6 +80,27 @@ class ConfigTest(unittest.TestCase):
         self.assertEqual([i.value for i in again.get_key('device')[0].get_key('init')],
                          ['a', 'b'])
 
+    def test_zero_values_are_written(self):
+        path = os.path.join(HOME, 'zeros')
+        cfg = bortrc.Config()
+        dev = bortrc.Config('device', 'gsa2000')
+        dev.set('nostab', 0)
+        dev.set('dx', 0.0)
+        cfg.children.append(dev)
+        bortrc.write_config(cfg, path)
+        again = bortrc.load_config(path).get_key('device')[0]
+        self.assertEqual(again.exclusive('nostab'), '0')
+        self.assertEqual(again.exclusive('dx'), '0.0')
+
+    def test_malformed_config_is_rejected(self):
+        for text in ('}\n', '{\n', 'device jps\n{\n', 'device jps\n}\n}\n'):
+            with self.subTest(text=text):
+                path = os.path.join(HOME, 'broken')
+                with open(path, 'w') as fp:
+                    fp.write(text)
+                with self.assertRaises(bortrc.Error):
+                    bortrc.load_config(path)
+
     def test_source_parse(self):
         self.assertEqual(str(bortcfg.Source('tcp://host:4001')), 'tcp://host:4001')
         self.assertEqual(str(bortcfg.Source('serial:///dev/ttyS0,9600,8,n,1')),

@@ -1507,6 +1507,13 @@ class BortConfigWindow:
         chooser.destroy()
 
     def on_button_save_clicked(self, button):
+        if self.config_error:
+            dlg = message_dialog(self.window, Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE,
+                                 _("Configuration file is damaged, saving is disabled"))
+            dlg.format_secondary_text(self.config_error)
+            dlg.run()
+            dlg.destroy()
+            return
         self.cfg.set('sys::datadir', self.label_datadir.get_text())
 
         by_name = {}
@@ -1557,11 +1564,22 @@ class BortConfigWindow:
 
     def read_config(self):
         self.liststore.clear()
+        self.config_error = None
 
         try:
             self.cfg = bortrc.load_config()
-        except:
+        except FileNotFoundError:
             self.cfg = bortrc.Config()
+        except (OSError, UnicodeDecodeError, bortrc.Error) as e:
+            # не подменяем испорченный конфиг пустым: иначе Save затрёт
+            # настройки всех приборов
+            self.config_error = str(e)
+            self.cfg = bortrc.Config()
+            dlg = message_dialog(None, Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE,
+                                 _("Configuration file is damaged, saving is disabled"))
+            dlg.format_secondary_text(self.config_error)
+            dlg.run()
+            dlg.destroy()
 
         datadir = self.cfg.exclusive('sys::datadir', '~/data')
         datadir = os.path.expanduser(datadir)
