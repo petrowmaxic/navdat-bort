@@ -71,6 +71,11 @@ bash navdat-install.sh
 
 ### Без интернета: офлайн-комплект
 
+Готовый комплект для Ubuntu 24.04 x86-64 лежит в приватном релизе
+[`offline-24.04`](https://github.com/petrowmaxic/navdat-bort-private/releases/tag/offline-24.04);
+скачивать его нужно там, где есть интернет, учётной записью с доступом к
+`navdat-bort-private`.
+
 Для работы в поле, где интернета нет, администратор заранее собирает
 офлайн-комплект: архив примерно 550 МБ, в нём около 1200 пакетов. Внутри мастер, все пакеты
 NavDat (включая закрытые) и **все** нужные пакеты Ubuntu с полным деревом
@@ -102,8 +107,15 @@ bash navdat-offline-24.04-amd64/navdat-install.sh
 ### Администратору (один раз)
 
 Закрытые пакеты NavDat 0.2.12 хранятся в приватном репозитории
-`petrowmaxic/navdat-bort-private`, в релизе `navdat-0.2.12`. Создать его из
-каталога с оригинальными deb (`bortNFVSEGEI/bortNFVSEGEI`):
+`petrowmaxic/navdat-bort-private`:
+
+- релиз [`navdat-0.2.12`](https://github.com/petrowmaxic/navdat-bort-private/releases/tag/navdat-0.2.12)
+  содержит оригинальные закрытые пакеты для онлайн-мастера;
+- релиз [`offline-24.04`](https://github.com/petrowmaxic/navdat-bort-private/releases/tag/offline-24.04)
+  содержит офлайн-комплект.
+
+Оба релиза уже созданы (15.10.2026). Если понадобится создать их заново,
+из каталога с оригинальными deb (`bortNFVSEGEI/bortNFVSEGEI`):
 
 ```bash
 gh repo create petrowmaxic/navdat-bort-private --private --add-readme
