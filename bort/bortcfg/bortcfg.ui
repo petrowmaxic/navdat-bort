@@ -300,9 +300,11 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">/foo/bar/</property>
-                                        <accessibility>
-                                          <atkproperty name="AtkObject::accessible-name">/foo/bar/</atkproperty>
-                                        </accessibility>
+                                        <child internal-child="accessible">
+                                          <object class="AtkObject" id="label_datadir-atkobject">
+                                            <property name="AtkObject::accessible-name">/foo/bar/</property>
+                                          </object>
+                                        </child>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -620,9 +622,11 @@
                                         <property name="can_focus">False</property>
                                         <property name="label">Restart</property>
                                         <property name="use_underline">True</property>
-                                        <accessibility>
-                                          <atkproperty name="AtkObject::accessible-name" translatable="yes">Restart</atkproperty>
-                                        </accessibility>
+                                        <child internal-child="accessible">
+                                          <object class="AtkObject" id="label8-atkobject">
+                                            <property name="AtkObject::accessible-name" translatable="yes">Restart</property>
+                                          </object>
+                                        </child>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>

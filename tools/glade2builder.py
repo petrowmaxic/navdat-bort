@@ -57,6 +57,20 @@ class Converter:
             self.extra_objects.append(obj)
             adj.text = adj_id
 
+        # <accessibility><atkproperty> -> <child internal-child="accessible">
+        for acc in w.findall('accessibility'):
+            w.remove(acc)
+            props = acc.findall('atkproperty')
+            if props:
+                child = ET.SubElement(w, 'child', {'internal-child': 'accessible'})
+                obj = ET.SubElement(child, 'object',
+                                    {'class': 'AtkObject', 'id': '%s-atkobject' % wid})
+                for p in props:
+                    attrs = {'name': p.get('name')}
+                    if p.get('translatable'):
+                        attrs['translatable'] = p.get('translatable')
+                    ET.SubElement(obj, 'property', attrs).text = p.text
+
         action_widgets = []
         for child in w.findall('child'):
             inner = child.find('widget')
