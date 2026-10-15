@@ -86,7 +86,7 @@ start() {
     local fw=()
     [ -n "$FW_NAME" ] && fw=(-drive if=pflash,format=raw,file=efi-code.fd,readonly=on
                              -drive if=pflash,format=raw,file=efi-vars.fd)
-    $QEMU -machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 "${fw[@]}" \
+    $QEMU -machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 ${fw[@]+"${fw[@]}"} \
         -drive if=virtio,format=qcow2,file=disk.qcow2 \
         -drive if=virtio,format=raw,file=seed.iso,readonly=on \
         -netdev user,id=n0,hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0 \
