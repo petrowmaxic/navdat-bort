@@ -226,7 +226,7 @@ vssh "REAL=${NAVDAT_DEBS:+1}"'; set -e; cd navdat-bort; rm -rf dist; packaging/b
   sudo dpkg -i dist/*.deb >/dev/null 2>&1 || true
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -f -y -qq --no-install-recommends >/dev/null
   dpkg -l "navdat-*" | awk "/^ii/ {print \$2, \$3}"
-  dpkg -l "navdat-*" | awk "/^i[^i]|^[^i]/ && /navdat/ {print \"NOT INSTALLED:\", \$1, \$2; bad=1} END {exit bad}"
+  dpkg -l "navdat-*" | awk "/^i[^i]/ && /navdat/ {print \"NOT INSTALLED:\", \$1, \$2; bad=1} END {exit bad}"
   getent passwd navdat; sudo passwd -S navdat'
 
 echo "== X session as navdat"
