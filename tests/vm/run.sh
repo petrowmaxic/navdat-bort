@@ -150,6 +150,8 @@ case "${1:-run}" in
         sleep 20
         for _ in $(seq 1 120); do vssh true 2>/dev/null && break; sleep 5; done
         echo "== verify after reboot"
+        # /tmp очищается при перезагрузке
+        scp "${SCP_OPTS[@]}" "$ROOT/tests/vm/install-check.sh" ubuntu@127.0.0.1:/tmp/
         vssh 'bash /tmp/install-check.sh verify'
         exit ;;
     gui)
