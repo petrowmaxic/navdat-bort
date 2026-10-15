@@ -101,9 +101,14 @@ if [ "$ROLE" = root ]; then
     GH_TOKEN=$NAVDAT_GH_TOKEN
 
     gh_api() {
-        local path=$1; shift
         curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
-             -H "X-GitHub-Api-Version: 2022-11-28" "$@" "$GITHUB_API$path"
+             -H "X-GitHub-Api-Version: 2022-11-28" "$GITHUB_API$1"
+    }
+    # файл релиза: ровно один Accept, иначе API отдаёт JSON или 415;
+    # curl не пересылает Authorization на другой хост при редиректе (S3)
+    gh_download() {   # <url файла> <куда>
+        curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
+             -H "X-GitHub-Api-Version: 2022-11-28" -o "$2" "$1"
     }
 
     step "Подготовка системы"
@@ -125,9 +130,7 @@ EOF
     [ -s "$WORK/assets.txt" ] || die "В релизе $RELEASE_TAG нет файлов."
     while read -r url name; do
         say "  $name"
-        # curl не пересылает Authorization на другой хост при редиректе (S3)
-        gh_api "${url#"$GITHUB_API"}" -H "Accept: application/octet-stream" \
-            -o "$WORK/debs/$name" 2>>"$LOG" || die "Не удалось скачать $name."
+        gh_download "$url" "$WORK/debs/$name" 2>>"$LOG" || die "Не удалось скачать $name."
     done < "$WORK/assets.txt"
     unset GH_TOKEN NAVDAT_GH_TOKEN
     [ -f "$WORK/debs/SHA256SUMS" ] || die "В релизе нет SHA256SUMS."
