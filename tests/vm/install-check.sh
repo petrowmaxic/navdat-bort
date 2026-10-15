@@ -72,8 +72,9 @@ offline)
     sudo -u laptop mkdir -p /home/laptop/Downloads
     sudo tar -xf "$TAR" -C /home/laptop/Downloads
     sudo chown -R laptop:laptop /home/laptop/Downloads
-    DIR=$(ls -d /home/laptop/Downloads/navdat-offline-*)
-    echo "bundle: $DIR ($(sudo du -sh "$DIR" | cut -f1), $(ls "$DIR"/repo/*.deb | wc -l) packages)"
+    # домашний каталог laptop закрыт для ubuntu (750), поэтому через sudo
+    DIR=$(sudo sh -c 'ls -d /home/laptop/Downloads/navdat-offline-*')
+    echo "bundle: $DIR ($(sudo du -sh "$DIR" | cut -f1), $(sudo sh -c "ls $DIR/repo/*.deb" | wc -l) packages)"
     set +e
     printf '%s\n%s\n%s\n%s\n' "$NAVDAT_PW" "$NAVDAT_PW" "д" "$LAPTOP_PW" | \
         sudo -iu laptop env NAVDAT_UI=text NAVDAT_REBOOT=no bash "$DIR/navdat-install.sh"
