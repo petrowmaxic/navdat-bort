@@ -9,6 +9,8 @@
 #                              мастер установки на ЧИСТОЙ ВМ (отдельный VM_DIR):
 #                              имитация GitHub, ответы как у человека, перезагрузка,
 #                              проверка автовхода в сеанс Navdat Awesome
+#   tests/vm/run.sh gui        запустить ВМ с окном на экране (посмотреть и
+#                              понажимать); также доступна по VNC 127.0.0.1:5901
 #   tests/vm/run.sh ssh [cmd]  зайти в ВМ
 #   tests/vm/run.sh stop       выключить ВМ
 #
@@ -84,17 +86,25 @@ prepare() {
     fi
 }
 
+DISPLAY_OPTS=(-display none)
 start() {
     vssh true 2>/dev/null && return
     prepare
     local fw=()
     [ -n "$FW_NAME" ] && fw=(-drive if=pflash,format=raw,file=efi-code.fd,readonly=on
                              -drive if=pflash,format=raw,file=efi-vars.fd)
-    $QEMU -machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 ${fw[@]+"${fw[@]}"} \
-        -drive if=virtio,format=qcow2,file=disk.qcow2 \
-        -drive if=virtio,format=raw,file=seed.iso,readonly=on \
-        -netdev user,id=n0,hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0 \
-        -display none -serial file:serial.log -monitor none -daemonize -pidfile qemu.pid
+    local qemu_args=(-machine $MACHINE -accel $ACCEL -cpu $CPU -smp 4 -m 4096 ${fw[@]+"${fw[@]}"}
+        -drive if=virtio,format=qcow2,file=disk.qcow2
+        -drive if=virtio,format=raw,file=seed.iso,readonly=on
+        -netdev user,id=n0,hostfwd=tcp:127.0.0.1:$PORT-:22 -device virtio-net-pci,netdev=n0
+        "${DISPLAY_OPTS[@]}" -serial file:serial.log -monitor none)
+    if [ "${DAEMON:-yes}" = yes ]; then
+        $QEMU "${qemu_args[@]}" -daemonize -pidfile qemu.pid
+    else
+        nohup $QEMU "${qemu_args[@]}" > qemu-gui.log 2>&1 &
+        echo $! > qemu.pid
+        disown
+    fi
     echo "waiting for VM..."
     for _ in $(seq 1 360); do vssh 'cloud-init status --wait >/dev/null' 2>/dev/null && return; sleep 5; done
     echo "VM did not come up, see $VM_DIR/serial.log" >&2; exit 1
@@ -102,6 +112,19 @@ start() {
 
 case "${1:-run}" in
     ssh)  shift; start; vssh "$@"; exit ;;
+    gui)
+        if vssh true 2>/dev/null; then
+            echo "VM is already running headless; stop it first: $0 stop" >&2; exit 1
+        fi
+        case "$(uname -s)" in
+            Darwin) DISPLAY_OPTS=(-display cocoa -vnc 127.0.0.1:1) ;;
+            *)      DISPLAY_OPTS=(-display gtk -vnc 127.0.0.1:1) ;;
+        esac
+        # с окном QEMU не может уйти в фон сам
+        DAEMON=no
+        start
+        echo "VM window is open (also vnc://127.0.0.1:5901)"
+        exit ;;
     stop) [ -f qemu.pid ] && kill "$(cat qemu.pid)" && rm -f qemu.pid; exit ;;
     run)  ;;
     install)
