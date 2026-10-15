@@ -1,15 +1,8 @@
-import gtk
-import gobject
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib, Gtk
 
-import dbus
-import dbus.glib
-
-import os
-import os.path
-
-import re
-
-from lookup import SerialLookup
+from .lookup import SerialLookup
 
 class SerialSelector:
     def __init__(self, combobox, devname=None):
@@ -21,7 +14,7 @@ class SerialSelector:
         if devname:
             self.extra.add(devname)
 
-        renderer = gtk.CellRendererText()
+        renderer = Gtk.CellRendererText()
         self.combobox.pack_start(renderer, True)
         self.combobox.add_attribute(renderer, "text", 0);
         self.old_devices = []
@@ -29,7 +22,7 @@ class SerialSelector:
 
         self.combobox.connect("changed", self.devname_changed)
         self.combobox.connect("destroy", self.on_combo_destroy)
-        self.timer_id = gobject.timeout_add_seconds(2, self.on_timeout)
+        self.timer_id = GLib.timeout_add_seconds(2, self.on_timeout)
 
     def set_devname(self, devname):
         self.devname = devname
@@ -39,7 +32,7 @@ class SerialSelector:
 
     def on_combo_destroy(self, w):
         if self.timer_id is not None:
-            gobject.source_remove(self.timer_id)
+            GLib.source_remove(self.timer_id)
             self.timer_id = None
 
     def on_timeout(self):
@@ -65,7 +58,7 @@ class SerialSelector:
         if not force and devs == self.old_devices:
             return
 
-        model = gtk.TreeStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        model = Gtk.TreeStore(str, str)
         for dev in devs:
             piter = model.append(None)
             model.set(piter, 0, dev.pretty_name(), 1, dev.devname)
@@ -85,23 +78,23 @@ class SerialSelector:
                 devices[dev.by_id] = iter
 
         for i in self.extra:
-            if devices.has_key(i):
+            if i is None or i in devices:
                 continue
             iter = model.append(None)
             model.set(iter, 0, "%s: (not connected)" % i, 1, i)
             devices[i] = iter
 
         self.combobox.set_model(model)
-        if devices.has_key(self.devname):
+        if self.devname in devices:
             self.combobox.set_active_iter(devices[self.devname])
         self.old_devices = devs
 
 if __name__ == "__main__":
-    window = gtk.Window()
-    combo = gtk.ComboBox()
+    window = Gtk.Window()
+    combo = Gtk.ComboBox()
     window.add(combo)
     window.show_all()
 
     selector = SerialSelector(combo, '/dev/serial/by-path/pci-0000:00:1d.1-usb-0:1:1.0-port0')
-    window.connect('destroy', gtk.main_quit)
-    gtk.main()
+    window.connect('destroy', Gtk.main_quit)
+    Gtk.main()

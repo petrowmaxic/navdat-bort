@@ -1,4 +1,4 @@
-from dev import SerialDevice
+from .dev import SerialDevice
 
 import os
 import re

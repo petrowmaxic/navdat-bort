@@ -1,10 +1,7 @@
 import os
 import os.path
 
-try:
-    from lookup_dbus import SerialLookupDBus as SerialLookupBase
-except:
-    from lookup_unix import SerialLookupUnix as SerialLookupBase
+from .lookup_unix import SerialLookupUnix as SerialLookupBase
 
 def readlinks(basedir):
     ret = {}
@@ -47,6 +44,6 @@ class SerialLookup(SerialLookupBase):
 if __name__ == "__main__":
     lookup = SerialLookup()
     for i in lookup.lookup():
-        print i, i.by_id, i.by_path
+        print(i, i.by_id, i.by_path)
 
 

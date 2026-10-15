@@ -36,7 +36,7 @@ class Config:
         return keys[0].value
 
     def get_key(self, name):
-        return filter(lambda i: i.name == name, self.children)
+        return [i for i in self.children if i.name == name]
 
     def set(self, name, value):
         keys = self.get_key(name)
@@ -58,7 +58,7 @@ class Config:
 def load_config(path = BORTDRC):
     path = os.path.expanduser(path)
 
-    fp = open(path, 'r')
+    fp = open(path, 'r', encoding='utf-8')
     stack = [Config()]
 
     for line in fp.readlines():
@@ -89,7 +89,8 @@ def write_config(cfg, path = BORTDRC):
         os.rename(path, path + '~')
     except os.error:
         pass
-    open(path, 'w').write(str(cfg) + '\n')
+    with open(path, 'w', encoding='utf-8') as fp:
+        fp.write(str(cfg) + '\n')
 
 
 

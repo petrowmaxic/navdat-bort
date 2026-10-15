@@ -1,12 +1,18 @@
 import gettext
+import locale
 
 try:
     from config import PACKAGE, PACKAGE_LOCALE_DIR
 
     gettext.bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR)
-    gettext.bind_textdomain_codeset(PACKAGE, "UTF-8")
     gettext.textdomain(PACKAGE)
+    try:
+        # GtkBuilder translates through the C library
+        locale.bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR)
+        locale.textdomain(PACKAGE)
+    except AttributeError:
+        pass
 
-    _ = lambda x: gettext.gettext(x)
-except:
+    _ = gettext.gettext
+except Exception:
     _ = lambda x: x

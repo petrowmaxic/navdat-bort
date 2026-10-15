@@ -1,7 +1,7 @@
 import sys
 
 if len(sys.argv) != 2 or sys.argv[1] not in ('save', 'restore'):
-    print >> sys.stderr, "Usage: %s <save|restore>" % sys.argv[0]
+    print("Usage: %s <save|restore>" % sys.argv[0], file=sys.stderr)
     sys.exit(1)
 
 import bortcfg

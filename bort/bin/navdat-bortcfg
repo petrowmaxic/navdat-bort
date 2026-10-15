@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /usr/share/bort/bortcfg
+exec python3 bortcfg.py "$@"

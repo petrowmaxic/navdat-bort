@@ -1,1 +1,1 @@
-from selector import SerialSelector
+from .selector import SerialSelector
