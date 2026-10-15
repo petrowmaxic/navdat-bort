@@ -37,8 +37,11 @@ NAVDAT_COMPAT_CACHE="$WORK/compat-cache" "$ROOT/packaging/repack-proprietary.sh"
 echo "== Ubuntu dependencies (full tree)"
 mkdir -p "$WORK/archives/partial" "$WORK/state"
 : > "$WORK/state/status"
-# apt считает систему пустой и скачивает всё дерево зависимостей
-apt-get install -y -q --download-only --no-install-recommends \
+# apt считает систему пустой и скачивает всё дерево зависимостей.
+# Рекомендуемые пакеты тоже: обычная установка их ставит, и без них,
+# например, не будет видеодрайверов X (xserver-xorg-video-all) и
+# accountsservice — найдено проверкой на ВМ без интернета.
+apt-get install -y -q --download-only \
     -o Dir::State::status="$WORK/state/status" \
     -o Dir::Cache::archives="$WORK/archives" \
     -o Debug::NoLocking=1 \
